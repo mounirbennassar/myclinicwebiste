@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>My Clinic — Editorial</title>
 <link rel="icon" type="image/png" href="/favclinic.png">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -1161,17 +1161,18 @@
     .hero {
       height: auto;
       min-height: 0;
-      padding: 0 10px;
+      padding: 0;
       background: transparent;
+      width: 100%;
     }
     .hero-slides {
-      border-radius: 22px;
+      border-radius: 0;
       overflow: hidden;
-      box-shadow: 0 18px 40px -22px rgba(0, 29, 56, 0.55);
       position: relative;
       inset: auto;
-      aspect-ratio: 4 / 5;
-      max-height: 64svh;
+      aspect-ratio: 9 / 14;
+      max-height: 78svh;
+      width: 100%;
     }
     .hero-slide .bg { background-position: 62% center; transform: scale(1.04); }
     .hero-slide .veil {
@@ -1226,29 +1227,37 @@
     .hero-counter { display: none; }
     .hero-quote { display: none; }
     #heroSearchForm {
-      margin: 14px 10px 0 !important;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      padding: 6px;
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.98);
-      box-shadow: 0 14px 30px -14px rgba(0, 29, 56, 0.28);
-      border: 1px solid rgba(10, 42, 82, 0.08);
+      margin: 18px 16px 0 !important;
+      grid-template-columns: 1fr;
+      padding: 10px;
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: 0 18px 44px -18px rgba(0, 29, 56, 0.28), 0 4px 12px -4px rgba(0,29,56,0.08);
+      border: 1px solid rgba(10, 42, 82, 0.06);
+      gap: 2px;
     }
-    .search-card .field { padding: 11px 12px; border-radius: 12px; }
-    .search-card .field:nth-child(1) { border-right: 1px solid var(--line-cool); }
-    .search-card .field:nth-child(2) { border-bottom: 0; }
-    .search-card .field:nth-child(3) {
-      grid-column: 1 / -1;
-      border-right: 0;
+    .search-card .field {
+      padding: 14px 16px;
+      border-right: 0 !important;
+      border-radius: 14px;
       border-bottom: 1px solid var(--line-cool);
-      border-top: 1px solid var(--line-cool);
     }
-    .search-card .field .val { font-size: 13px; }
+    .search-card .field:nth-child(3) {
+      grid-column: auto;
+      border-top: 0;
+      border-bottom: 1px solid var(--line-cool);
+    }
+    .search-card .field:last-of-type { border-bottom: 0; }
+    .search-card .field label { font-size: 10px; letter-spacing: 0.14em; }
+    .search-card .field .val { font-size: 15px; font-weight: 500; }
     .search-card button.go {
-      grid-column: 1 / -1;
-      margin-top: 4px;
-      padding: 12px 20px;
-      border-radius: 12px;
+      grid-column: auto;
+      margin: 8px 0 0;
+      padding: 15px 22px;
+      border-radius: 14px;
+      width: 100%;
+      justify-content: center;
+      font-size: 14.5px;
     }
     /* small-screen sticky CTA — consolidated below in the ≤700px block */
   }
