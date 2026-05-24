@@ -2,642 +2,475 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>My Clinic — Home Healthcare Services</title>
+<title>My Clinic — Home Healthcare</title>
 <link rel="icon" type="image/png" href="/favclinic.png">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/shared.css">
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <style>
   :root {
     --serif: 'Newsreader', Georgia, serif;
-    --sans: 'Gotham', 'Gotham SSm', 'Gotham A', 'Montserrat', system-ui, -apple-system, sans-serif;
+    --sans: 'Gotham', 'Gotham SSm', 'Gotham A', 'Montserrat', system-ui, sans-serif;
     --ar: 'Almarai', system-ui, sans-serif;
-    
-    /* Premium shadows */
-    --shadow-sm: 0 2px 8px rgba(11,31,61,.04), 0 1px 2px rgba(11,31,61,.02);
-    --shadow-md: 0 12px 36px -8px rgba(11,31,61,.12), 0 4px 12px -2px rgba(11,31,61,.04);
-    --shadow-lg: 0 32px 64px -16px rgba(11,31,61,.22), 0 16px 32px -12px rgba(11,31,61,.08);
-    
-    --radius-sm: 8px;
-    --radius-md: 16px;
-    --radius-lg: 24px;
-    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --paper: #F4F6F9;
+    --paper-2: #E9EDF3;
+    --cream: #F7F9FC;
+    --line-cool: #DFE3EA;
+    --ok: #1F8A5B;
+    --accent: #C24F2F;
   }
 
-  body { font-family: var(--sans); background: var(--cream); color: var(--ink); font-size: 16px; line-height: 1.6; letter-spacing: -0.005em; -webkit-font-smoothing: antialiased; }
+  body { font-family: var(--sans); background: #fff; color: var(--ink); font-size: 16px; line-height: 1.55; letter-spacing: -0.005em; }
   .wrap { max-width: 1320px; margin: 0 auto; padding: 0 40px; }
   .ar { font-family: var(--ar); }
 
-  /* Announcement strip */
-  .ribbon { background: var(--navy-deep); color: #fff; font-size: 13px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  /* RIBBON */
+  .ribbon { background: var(--navy-ink); color: rgba(255,255,255,.78); font-size: 12.5px; padding: 9px 0; letter-spacing: 0.01em; }
   .ribbon .wrap { display: flex; justify-content: space-between; align-items: center; }
-  .ribbon-left { display: flex; gap: 24px; align-items: center; color: rgba(255,255,255,.78); }
+  .ribbon-left, .ribbon-right { display: flex; gap: 20px; align-items: center; }
   .ribbon-left b { color: #fff; font-weight: 500; }
-  .ribbon-right { display: flex; gap: 20px; align-items: center; color: rgba(255,255,255,.78); }
-  .ribbon a { transition: color 0.2s ease; }
-  .ribbon a:hover { color: #fff; text-decoration: underline; }
-  .dot { width: 6px; height: 6px; background: #fff; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #fff; }
+  .ribbon-left .dot { width: 6px; height: 6px; background: #21c47a; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 3px rgba(33,196,122,.22); animation: pulse 2.2s infinite ease-out; margin-right: 6px; vertical-align: middle; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 3px rgba(33,196,122,.22);} 50% { box-shadow: 0 0 0 8px rgba(33,196,122,0);} }
+  .ribbon-right a { transition: color .2s; }
+  .ribbon-right a:hover { color: #fff; }
 
-  /* Nav */
-  .nav { position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 1px solid rgba(11,31,61,.08); box-shadow: 0 12px 36px rgba(11,31,61,.05); transition: padding 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; }
-  .nav .wrap { display: grid; grid-template-columns: minmax(220px, 1fr) auto minmax(210px, 1fr); align-items: center; padding: 22px 40px; transition: padding 0.3s ease; }
-  .nav.scrolled { background: #fff; box-shadow: 0 10px 30px rgba(11,31,61,0.07); }
+  /* NAV */
+  .nav { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.92); backdrop-filter: blur(16px) saturate(1.2); border-bottom: 1px solid transparent; transition: padding .25s, background .25s, border-color .25s; }
+  .nav.scrolled { background: rgba(255,255,255,.98); border-bottom-color: var(--line); box-shadow: 0 10px 30px rgba(11,31,61,.04); }
+  .nav .wrap { display: grid; grid-template-columns: minmax(220px, 1fr) auto minmax(210px, 1fr); align-items: center; padding: 22px 40px; }
   .nav.scrolled .wrap { padding: 14px 40px; }
-  
-  .logo { display: flex; align-items: center; gap: 14px; cursor: pointer; }
-  .logo-mark { width: 36px; height: 36px; transition: transform 0.3s ease; }
-  .logo:hover .logo-mark { transform: rotate(15deg) scale(1.05); }
-  .logo-txt { line-height: 1.1; }
-  .logo-txt .en { font-family: var(--serif); font-size: 23px; font-weight: 500; letter-spacing: -0.02em; color: var(--navy); }
-  .logo-txt .ar { font-size: 11px; color: var(--mute); letter-spacing: 0.05em; margin-top: 3px; font-weight: 500; }
-  
-  .nav-links { display: flex; gap: 36px; justify-content: center; }
-  .nav-links a { font-size: 14px; color: var(--ink-2); font-weight: 500; position: relative; padding: 8px 0; transition: color 0.25s ease; }
-  .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background: var(--navy); transition: width 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), left 0.25s cubic-bezier(0.25, 0.8, 0.25, 1); }
-  .nav-links a:hover { color: var(--navy); }
-  .nav-links a:hover::after { width: 100%; left: 0; }
-  .nav-links a.active { color: var(--navy); }
-  .nav-links a.active::after { width: 100%; left: 0; }
-  
+  .logo { display: flex; align-items: center; cursor: pointer; }
+  .nav-links { display: flex; gap: 32px; justify-content: center; }
+  .nav-links a { font-size: 14px; color: var(--ink-2); font-weight: 500; position: relative; padding: 8px 0; transition: color .2s; }
+  .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background: var(--navy); transition: width .25s, left .25s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--navy); }
+  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; left: 0; }
   .nav-right { display: flex; gap: 14px; justify-content: flex-end; align-items: center; }
-  
-  .btn { font-size: 14px; font-weight: 600; padding: 11px 24px; border-radius: 999px; transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease; border: 1px solid transparent; display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; }
-  .btn.primary { background: var(--navy); color: #fff; box-shadow: 0 4px 14px rgba(0, 56, 104, 0.15); }
-  .btn.primary:hover { background: var(--navy-deep); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0, 56, 104, 0.2); }
-  
-  .lang-pill { font-size: 12px; color: var(--mute); padding: 4px; border-radius: 999px; background: #f4f7fb; border: 1px solid rgba(11,31,61,.1); display: inline-flex; align-items: center; gap: 3px; box-shadow: inset 0 1px 0 rgba(255,255,255,.75); }
-  .lang-pill::before { content: ''; width: 16px; height: 16px; margin: 0 5px 0 6px; background: currentColor; opacity: .68; -webkit-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.93 9h-3.02a15.7 15.7 0 0 0-1.16-5.04A8.03 8.03 0 0 1 18.93 11ZM12 4.04c.83 1.2 1.62 3.38 1.86 6.96H10.14C10.38 7.42 11.17 5.24 12 4.04ZM4.26 13h3.79c.12 1.91.43 3.65.9 5.05A8.02 8.02 0 0 1 4.26 13Zm3.79-2H4.26a8.02 8.02 0 0 1 4.69-5.05A17.1 17.1 0 0 0 8.05 11ZM12 19.96c-.83-1.2-1.62-3.38-1.86-6.96h3.72c-.24 3.58-1.03 5.76-1.86 6.96Zm3.05-1.91c.47-1.4.78-3.14.9-5.05h3.79a8.02 8.02 0 0 1-4.69 5.05ZM15.95 11a17.1 17.1 0 0 0-.9-5.05A8.02 8.02 0 0 1 19.74 11h-3.79Z'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.93 9h-3.02a15.7 15.7 0 0 0-1.16-5.04A8.03 8.03 0 0 1 18.93 11ZM12 4.04c.83 1.2 1.62 3.38 1.86 6.96H10.14C10.38 7.42 11.17 5.24 12 4.04ZM4.26 13h3.79c.12 1.91.43 3.65.9 5.05A8.02 8.02 0 0 1 4.26 13Zm3.79-2H4.26a8.02 8.02 0 0 1 4.69-5.05A17.1 17.1 0 0 0 8.05 11ZM12 19.96c-.83-1.2-1.62-3.38-1.86-6.96h3.72c-.24 3.58-1.03 5.76-1.86 6.96Zm3.05-1.91c.47-1.4.78-3.14.9-5.05h3.79a8.02 8.02 0 0 1-4.69 5.05ZM15.95 11a17.1 17.1 0 0 0-.9-5.05A8.02 8.02 0 0 1 19.74 11h-3.79Z'/%3E%3C/svg%3E") center / contain no-repeat; }
-  .lang-pill button { min-width: 42px; border: 0; background: transparent; color: var(--mute); padding: 9px 10px; border-radius: 999px; font: inherit; font-weight: 600; cursor: pointer; transition: color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease; }
-  .lang-pill button:hover { color: var(--navy); }
-  .lang-pill button.active { color: var(--navy); background: #fff; box-shadow: 0 3px 12px rgba(11,31,61,.1); }
 
-  /* Subpage Hero */
-  .subpage-hero {
-    background: var(--navy-ink);
-    color: #fff;
-    padding: 120px 0 130px;
-    position: relative;
-    overflow: hidden;
-  }
-  .subpage-hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url('https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=2000&q=80');
-    background-size: cover;
-    background-position: center 38%;
-    opacity: 0.22;
-    z-index: 1;
-  }
-  .subpage-hero::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(0, 29, 56, 0.96) 0%, rgba(0, 56, 104, 0.88) 100%);
-    z-index: 1;
-  }
-  .subpage-hero-inner {
-    position: relative;
-    z-index: 2;
-    max-width: 860px;
-    margin: 0;
-  }
-  .subpage-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 11px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: #fff;
-    opacity: 0.85;
-    font-weight: 600;
-    margin-bottom: 24px;
-  }
-  .subpage-title {
-    font-family: var(--serif);
-    font-size: 56px;
-    line-height: 1.15;
-    font-weight: 400;
-    margin: 0 0 20px;
-    letter-spacing: -0.02em;
-  }
-  .subpage-title em {
-    font-style: italic;
-    color: rgba(255,255,255,0.92);
-    font-weight: 300;
-  }
-  .subpage-desc {
-    font-size: 20px;
-    line-height: 1.65;
-    color: rgba(255,255,255,0.82);
-    font-weight: 300;
-    margin: 0 0 40px;
-  }
-  .hero-buttons {
-    display: flex;
-    gap: 16px;
-  }
-  .btn.white {
-    background: #fff;
-    color: var(--navy);
-  }
-  .btn.white:hover {
-    background: #e2eaf4;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(255,255,255,0.15);
-  }
-  .btn.outline {
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.4);
-    color: #fff;
-  }
-  .btn.outline:hover {
-    border-color: #fff;
-    background: rgba(255,255,255,0.06);
-    transform: translateY(-1px);
-  }
+  .btn { font-family: inherit; font-size: 14px; font-weight: 600; padding: 12px 22px; border-radius: 999px; transition: transform .2s, background .2s, box-shadow .2s; letter-spacing: 0.005em; display: inline-flex; align-items: center; justify-content: center; gap: 8px; white-space: nowrap; border: 1px solid transparent; cursor: pointer; }
+  .btn.primary { background: var(--navy); color: #fff; box-shadow: 0 6px 18px rgba(0, 56, 104, 0.18); }
+  .btn.primary:hover { background: var(--navy-deep); transform: translateY(-1px); box-shadow: 0 10px 26px rgba(0, 56, 104, 0.28); }
+  .btn.ghost { color: var(--ink); background: rgba(11,31,61,.05); }
+  .btn.ghost:hover { background: rgba(11,31,61,.09); }
+  .btn.outline { color: #fff; border: 1px solid rgba(255,255,255,.32); }
+  .btn.outline:hover { background: rgba(255,255,255,.1); border-color: #fff; }
+  .btn.white { background: #fff; color: var(--navy-ink); }
+  .btn.white:hover { background: var(--cream); transform: translateY(-1px); box-shadow: 0 10px 26px rgba(0,0,0,.18); }
+  .btn.wa { background: #21c47a; color: #fff; }
+  .btn.wa:hover { background: #1aa867; transform: translateY(-1px); }
 
-  /* Main content container */
-  .homecare-container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 90px 40px 120px;
-  }
+  .lang-pill { display: inline-flex; align-items: center; padding: 3px; background: rgba(11,31,61,.05); border: 1px solid rgba(11,31,61,.08); border-radius: 999px; gap: 2px; }
+  .lang-pill button { font: inherit; border: 0; background: transparent; padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; color: var(--mute); cursor: pointer; transition: all .2s; }
+  .lang-pill button.active { background: var(--navy); color: #fff; box-shadow: 0 2px 6px rgba(0, 56, 104, 0.22); }
+  .lang-pill button:not(.active):hover { color: var(--navy); }
 
-  /* Section Header */
-  .section-title-wrap {
-    text-align: center;
-    margin-bottom: 64px;
-  }
-  .section-eyebrow {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--navy);
-    margin-bottom: 12px;
-    display: block;
-  }
-  .section-header-title {
-    font-family: var(--serif);
-    font-size: 38px;
-    color: var(--navy-ink);
-    margin: 0 auto 16px;
-    font-weight: 400;
-    max-width: 720px;
-  }
+  /* Mobile menu toggle (hidden on desktop) */
+  .menu-toggle, .mobile-menu { display: none; }
+  .menu-toggle { width: 42px; height: 42px; border-radius: 999px; border: 1px solid rgba(11,31,61,.1); background: #fff; align-items: center; justify-content: center; flex-direction: column; gap: 4px; cursor: pointer; transition: all .25s; }
+  .menu-toggle span { width: 18px; height: 2px; background: var(--navy); border-radius: 2px; transition: all .25s; }
+  .menu-toggle[aria-expanded="true"] { background: var(--navy); border-color: var(--navy); }
+  .menu-toggle[aria-expanded="true"] span { background: #fff; }
+  .menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; width: 0; }
+  .menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
-  /* Services Grid styling */
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-    margin-bottom: 100px;
-  }
-  .service-card {
-    background: #fff;
-    border: 1px solid var(--line-cool);
-    border-radius: var(--radius-md);
-    padding: 40px;
-    box-shadow: var(--shadow-sm);
-    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.4s ease, box-shadow 0.4s ease;
-    display: flex;
-    flex-direction: column;
-  }
-  .service-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--navy);
-    box-shadow: var(--shadow-lg);
-  }
-  .service-icon-box {
-    width: 56px;
-    height: 56px;
-    border-radius: 12px;
-    background: var(--cream-soft);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--navy);
-    margin-bottom: 24px;
-    border: 1px solid rgba(14,58,111,.06);
-  }
-  .service-card h3 {
-    font-family: var(--serif);
-    font-size: 23px;
-    color: var(--navy-ink);
-    margin: 0 0 12px;
-    font-weight: 500;
-  }
-  .service-card p {
-    font-size: 15px;
-    color: var(--mute);
-    line-height: 1.65;
-    margin: 0;
-  }
+  .mobile-menu { position: fixed; inset: 64px 0 0 0; background: #fff; transform: translateY(-12px); opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; z-index: 49; overflow-y: auto; }
+  .mobile-menu.open { opacity: 1; transform: none; pointer-events: auto; }
+  .mobile-menu-inner { padding: 24px 22px 32px; }
+  .mobile-links { display: flex; flex-direction: column; }
+  .mobile-links a { display: flex; justify-content: space-between; align-items: center; padding: 16px 2px; font-size: 18px; font-weight: 600; color: var(--navy-ink); border-bottom: 1px solid var(--line); }
+  .mobile-links a span { font-size: 11px; color: var(--mute); font-weight: 500; letter-spacing: .12em; }
+  .mobile-menu-actions { margin-top: 22px; display: flex; flex-direction: column; gap: 10px; }
+  .mobile-menu-actions a { width: 100%; padding: 14px 22px; font-size: 14px; }
+  .mobile-call { padding: 14px 22px; border: 1px solid var(--line); border-radius: 999px; text-align: center; font-weight: 600; color: var(--navy-ink); }
 
-  /* How It Works Workflow section */
-  .workflow-section {
-    background: #fff;
-    border: 1px solid var(--line-cool);
-    border-radius: var(--radius-lg);
-    padding: 64px;
-    box-shadow: var(--shadow-sm);
-    margin-bottom: 100px;
-  }
-  .workflow-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-    position: relative;
-  }
-  .workflow-grid::before {
-    content: '';
-    position: absolute;
-    top: 28px;
-    left: 10%;
-    right: 10%;
-    height: 2px;
-    background: linear-gradient(90deg, var(--line-cool) 0%, var(--navy) 50%, var(--line-cool) 100%);
-    z-index: 1;
-  }
-  .workflow-step {
-    text-align: center;
-    position: relative;
-    z-index: 2;
-  }
-  .step-num {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: #fff;
-    border: 2px solid var(--navy);
-    color: var(--navy);
-    font-size: 18px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 24px;
-    box-shadow: 0 0 0 6px #fff;
-    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-  }
-  .workflow-step:hover .step-num {
-    transform: scale(1.1);
-    background: var(--navy);
-    color: #fff;
-  }
-  .workflow-step h4 {
-    font-family: var(--serif);
-    font-size: 21px;
-    color: var(--navy-ink);
-    margin: 0 0 8px;
-    font-weight: 500;
-  }
-  .workflow-step p {
-    font-size: 14.5px;
-    color: var(--mute);
-    line-height: 1.6;
-    margin: 0;
-  }
+  /* HERO */
+  .hero { padding-top: 64px; background: var(--paper); position: relative; }
+  .hero .wrap { max-width: 1440px; padding: 0 40px; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: end; min-height: 680px; padding-bottom: 64px; }
 
-  /* Specialists section */
-  .specialists-section {
-    border-top: 1px solid var(--line-cool);
-    padding: 90px 0 20px;
-  }
-  .doctors-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-    margin-top: 48px;
-  }
-  .doc-card {
-    background: #ffffff;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--line-cool);
-    box-shadow: var(--shadow-sm);
-    overflow: hidden;
-    display: flex;
-    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.4s ease;
-  }
-  .doc-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--navy);
-  }
-  .doc-img-wrapper {
-    width: 200px;
-    position: relative;
-    background: var(--navy-ink);
-    overflow: hidden;
-  }
-  .doc-img-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
-  }
-  .doc-card:hover .doc-img-wrapper img {
-    transform: scale(1.05);
-  }
-  .experience-badge {
-    position: absolute;
-    bottom: 12px;
-    left: 12px;
-    background: rgba(255, 255, 255, 0.95);
-    color: var(--navy-deep);
-    font-size: 11px;
-    font-weight: 600;
-    padding: 4px 10px;
-    border-radius: 4px;
-    backdrop-filter: blur(4px);
-    border: 1px solid rgba(11,31,61,0.08);
-  }
-  .doc-body {
-    padding: 24px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  .doc-body h4 {
-    font-family: var(--serif);
-    font-size: 22px;
-    font-weight: 500;
-    color: var(--navy-ink);
-    margin: 0 0 4px;
-  }
-  .doc-title-row {
-    font-size: 13.5px;
-    color: var(--navy);
-    font-weight: 600;
-    margin-bottom: 12px;
-  }
-  .doc-rating-row {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13.5px;
-    color: var(--mute);
-    margin-bottom: 16px;
-  }
-  .star-badge {
-    background: #fffdf5;
-    border: 1px solid #fceca1;
-    color: #b25e00;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-weight: 700;
-    font-size: 12px;
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-  }
-  .doc-homecare-badge {
-    font-size: 12px;
-    color: var(--navy);
-    font-weight: 600;
-    background: var(--cream-soft);
-    border: 1px solid rgba(14,58,111,0.15);
-    padding: 2px 8px;
-    border-radius: 4px;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    margin-bottom: 20px;
-    align-self: flex-start;
-  }
-  .doc-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: auto;
-  }
-  .doc-actions a {
-    flex: 1;
-    text-align: center;
-    padding: 8px 12px;
-    font-size: 12.5px;
-    font-weight: 600;
-    border-radius: 999px;
-    text-decoration: none;
-    transition: var(--transition);
-  }
-  .doc-actions .profile-btn {
-    background: #ffffff;
-    color: var(--navy);
-    border: 1px solid var(--line-cool);
-  }
-  .doc-actions .profile-btn:hover {
-    background: var(--cream-soft);
-    border-color: var(--navy);
-  }
-  .doc-actions .book-btn {
-    background: var(--navy);
-    color: #fff;
-  }
-  .doc-actions .book-btn:hover {
-    background: var(--navy-deep);
-  }
+  .h-eyebrow { display: inline-flex; align-items: center; gap: 12px; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--navy); margin-bottom: 28px; }
+  .h-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--navy); }
+  .h-title { font-family: var(--sans); font-weight: 600; font-size: 88px; line-height: 0.96; letter-spacing: -0.035em; color: var(--navy-ink); margin: 0 0 28px; }
+  .h-title em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--navy); letter-spacing: -0.02em; }
+  .h-sub { font-size: 19px; line-height: 1.55; color: var(--ink-2); max-width: 540px; font-weight: 400; margin: 0 0 12px; }
+  .h-ar { font-family: var(--ar); font-size: 14.5px; direction: rtl; color: var(--mute); margin: 0 0 36px; line-height: 1.7; max-width: 460px; }
 
-  /* FAQ Accordion Styling */
-  .faq-section {
-    border-top: 1px solid var(--line-cool);
-    padding: 90px 0 20px;
-    margin-bottom: 40px;
-  }
-  .faq-list {
-    max-width: 800px;
-    margin: 48px auto 0;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  .faq-item {
-    background: #fff;
-    border: 1px solid var(--line-cool);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  }
-  .faq-item.active {
-    border-color: var(--navy);
-    box-shadow: var(--shadow-md);
-  }
-  .faq-trigger {
-    width: 100%;
-    padding: 24px 32px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: none;
-    border: 0;
-    text-align: left;
-    font-family: var(--serif);
-    font-size: 20px;
-    font-weight: 500;
-    color: var(--navy-ink);
-    cursor: pointer;
-  }
-  .faq-chevron {
-    width: 20px;
-    height: 20px;
-    color: var(--navy);
-    transition: transform 0.3s ease;
-  }
-  .faq-item.active .faq-chevron {
-    transform: rotate(180deg);
-  }
-  .faq-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  }
-  .faq-content-inner {
-    padding: 0 32px 28px;
-    font-size: 15px;
-    color: var(--mute);
-    line-height: 1.65;
-  }
+  .h-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 44px; }
+  .h-ctas .btn { padding: 16px 28px; font-size: 14px; }
 
-  /* Wide CTA Banner styling */
-  .wide-cta-banner {
-    background: linear-gradient(135deg, var(--navy-ink) 0%, var(--navy-deep) 100%);
-    color: #fff;
-    border-radius: var(--radius-md);
-    padding: 64px;
-    box-shadow: var(--shadow-lg);
-    text-align: center;
-    margin: 80px 0 90px;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.08);
-  }
-  .wide-cta-banner::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 80% 20%, rgba(0, 56, 104, 0.4) 0%, transparent 60%);
-    pointer-events: none;
-  }
-  .wide-cta-banner h3 {
-    font-family: var(--serif);
-    font-size: 40px;
-    font-weight: 400;
-    margin: 0 0 16px;
-    letter-spacing: -0.015em;
-  }
-  .wide-cta-banner p {
-    font-size: 16.5px;
-    color: rgba(255,255,255,0.8);
-    max-width: 720px;
-    margin: 0 auto 36px;
-    line-height: 1.65;
-  }
-  .wide-cta-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
-  .btn.whatsapp-wide {
-    background: #10B981;
-    color: #fff;
-  }
-  .btn.whatsapp-wide:hover {
-    background: #059669;
-    box-shadow: 0 6px 20px rgba(16,185,129,0.25);
-    transform: translateY(-1px);
-  }
-  .btn.primary-wide {
-    background: #fff;
-    color: var(--navy);
-  }
-  .btn.primary-wide:hover {
-    background: #e1e8f1;
-    box-shadow: 0 6px 20px rgba(255,255,255,0.15);
-    transform: translateY(-1px);
-  }
+  .h-trust { display: flex; gap: 36px; align-items: center; padding-top: 30px; border-top: 1px solid var(--line); flex-wrap: wrap; }
+  .h-trust .stat .n { font-weight: 700; font-size: 30px; letter-spacing: -0.025em; color: var(--navy-ink); line-height: 1; display: block; }
+  .h-trust .stat .n sup { font-size: 14px; color: var(--navy); vertical-align: top; margin-left: 2px; font-weight: 600; }
+  .h-trust .stat .l { font-size: 11px; color: var(--mute); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; margin-top: 6px; }
 
-  /* Sticky CTA */
-  .sticky-cta { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); z-index: 40; background: var(--navy-deep); color: #fff; padding: 12px 28px; border-radius: 999px; box-shadow: 0 20px 48px -10px rgba(0, 29, 56, 0.35); display: flex; align-items: center; gap: 24px; border: 1px solid rgba(255,255,255,0.08); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none; }
-  .sticky-cta.active { transform: translateX(-50%) translateY(0); pointer-events: auto; }
-  @media (max-width: 768px) {
-    .sticky-cta { width: calc(100% - 32px); justify-content: space-between; padding: 14px 20px; bottom: 16px; font-size: 13px; gap: 12px; }
-  }
-  .sticky-cta .text { font-size: 13.5px; color: rgba(255,255,255,.75); font-weight: 500; }
-  .sticky-cta a { font-size: 13.5px; font-weight: 600; padding: 9px 18px; background: #fff; color: var(--navy) !important; border-radius: 999px; white-space: nowrap; transition: background-color 0.2s ease, transform 0.2s ease; }
-  .sticky-cta a:hover { background: #e1e8f1; transform: translateY(-0.5px); }
+  /* Hero portrait */
+  .h-portrait { position: relative; aspect-ratio: 4/5; border-radius: 6px; overflow: hidden; background: var(--paper-2); }
+  .h-portrait img { width: 100%; height: 100%; object-fit: cover; }
+  .h-portrait::after { content:''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(0,29,56,.6) 100%); }
 
-  /* Footer styles */
-  footer { background: #fff; border-top: 1px solid var(--line); padding: 100px 0 40px; }
-  .foot-grid { display: grid; grid-template-columns: 1.5fr repeat(4, 1fr); gap: 48px; margin-bottom: 80px; }
-  @media (max-width: 1024px) {
-    .foot-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .live-card { position: absolute; left: -36px; bottom: 110px; background: #fff; border-radius: 16px; padding: 14px 18px; display: flex; align-items: center; gap: 14px; box-shadow: 0 24px 60px -20px rgba(11,31,61,.35), 0 8px 24px -12px rgba(11,31,61,.12); min-width: 280px; z-index: 3; }
+  .live-card .av { display: flex; }
+  .live-card .av img { width: 32px; height: 32px; border-radius: 50%; border: 2px solid #fff; object-fit: cover; margin-left: -8px; }
+  .live-card .av img:first-child { margin-left: 0; }
+  .live-card .av .more { width: 32px; height: 32px; border-radius: 50%; background: var(--navy-ink); color: #fff; display: grid; place-items: center; font-size: 10px; font-weight: 700; margin-left: -8px; border: 2px solid #fff; }
+  .live-card .t .l1 { font-weight: 600; font-size: 13px; color: var(--ink); }
+  .live-card .t .l2 { font-size: 11.5px; color: var(--mute); margin-top: 2px; }
+  .live-card .t .l1 b { color: var(--ok); font-weight: 700; }
+
+  .p-cap { position: absolute; left: 24px; right: 24px; bottom: 22px; color: #fff; z-index: 2; }
+  .p-cap .l { font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.85; font-weight: 700; }
+  .p-cap .q { font-family: var(--serif); font-style: italic; font-size: 18px; line-height: 1.35; margin-top: 8px; max-width: 340px; }
+
+  /* Booking strip */
+  .booking-strip { background: #fff; border-radius: 6px; padding: 8px; display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 1px; box-shadow: 0 30px 80px -30px rgba(11,31,61,.3), 0 0 0 1px rgba(11,31,61,.05); margin: -40px auto 0; max-width: 1240px; position: relative; z-index: 6; }
+  .booking-strip .field { padding: 16px 24px; display: flex; flex-direction: column; gap: 6px; position: relative; cursor: pointer; transition: background .2s; border-radius: 4px; }
+  .booking-strip .field:hover { background: var(--paper); }
+  .booking-strip .field + .field::before { content:''; position: absolute; left: 0; top: 14px; bottom: 14px; width: 1px; background: var(--line-cool); }
+  .booking-strip .field .l { font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute); }
+  .booking-strip .field .v { font-size: 15px; color: var(--ink); display: flex; align-items: center; gap: 8px; font-weight: 500; }
+  .booking-strip .field .v svg { width: 14px; height: 14px; opacity: 0.55; }
+  .booking-strip .go { background: var(--navy); color: #fff; padding: 0 32px; border-radius: 4px; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 10px; transition: background .2s; border: 0; cursor: pointer; min-height: 56px; }
+  .booking-strip .go:hover { background: var(--navy-deep); }
+
+  /* TRUST */
+  .trust { background: var(--paper); padding: 88px 0 0; }
+  .trust-row { display: flex; justify-content: space-between; align-items: center; padding: 28px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); flex-wrap: wrap; gap: 24px; }
+  .trust-row .label { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mute); font-weight: 700; }
+  .trust-row .logos { display: flex; gap: 40px; align-items: center; flex-wrap: wrap; }
+  .trust-row .logos span { font-weight: 600; font-size: 14px; color: var(--ink-2); letter-spacing: 0.02em; opacity: 0.55; transition: opacity .2s; }
+  .trust-row .logos span:hover { opacity: 1; }
+  .trust-row .logos .ser { font-family: var(--serif); font-style: italic; font-size: 19px; }
+
+  /* SECTION HEADER */
+  section.block { padding: 130px 0; }
+  .s-head { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; margin-bottom: 72px; }
+  .s-eye { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--navy); margin-bottom: 18px; display: inline-flex; align-items: center; gap: 10px; }
+  .s-eye::before { content: ''; width: 24px; height: 1px; background: var(--navy); }
+  .s-title { font-family: var(--sans); font-weight: 600; font-size: 60px; line-height: 1.02; letter-spacing: -0.03em; color: var(--navy-ink); margin: 0; }
+  .s-title em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--navy); }
+  .s-desc { font-size: 17px; line-height: 1.55; color: var(--ink-2); max-width: 460px; margin: 0; }
+
+  /* SERVICES — interactive split */
+  .services { background: var(--paper); }
+  .svc-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 56px; align-items: stretch; min-height: 600px; }
+  .svc-menu { display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--line); }
+  .svc-item { padding: 28px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 30px 1fr auto; align-items: center; gap: 24px; cursor: pointer; transition: padding .25s; }
+  .svc-item:hover, .svc-item.active { padding-left: 8px; }
+  .svc-num { font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--mute); font-weight: 400; }
+  .svc-item.active .svc-num { color: var(--navy); }
+  .svc-name { font-weight: 600; font-size: 24px; letter-spacing: -0.02em; color: var(--ink-2); transition: color .2s; }
+  .svc-item.active .svc-name, .svc-item:hover .svc-name { color: var(--navy-ink); }
+  .svc-name .ar-sub { display: block; font-family: var(--ar); font-size: 12px; color: var(--mute); font-weight: 500; margin-top: 4px; direction: rtl; }
+  .svc-arrow { color: var(--mute); transition: transform .25s, color .25s; }
+  .svc-item.active .svc-arrow { color: var(--navy); transform: translateX(4px); }
+
+  .svc-detail { background: var(--navy-ink); color: #fff; border-radius: 8px; padding: 0; overflow: hidden; position: relative; min-height: 600px; }
+  .svc-panel { position: absolute; inset: 0; padding: 48px; display: flex; flex-direction: column; opacity: 0; pointer-events: none; transition: opacity .35s; }
+  .svc-panel.active { opacity: 1; pointer-events: auto; }
+  .svc-panel .top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 22px; gap: 16px; }
+  .svc-panel .num { font-family: var(--serif); font-style: italic; font-size: 14px; color: rgba(255,255,255,.55); }
+  .svc-panel .tag { font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,.7); padding: 6px 12px; border: 1px solid rgba(255,255,255,.2); border-radius: 999px; font-weight: 700; }
+  .svc-panel h3 { font-family: var(--sans); font-weight: 600; font-size: 42px; letter-spacing: -0.025em; line-height: 1.05; margin: 0 0 18px; max-width: 440px; }
+  .svc-panel h3 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: rgba(255,255,255,.75); }
+  .svc-panel .desc { font-size: 15px; color: rgba(255,255,255,.72); line-height: 1.65; max-width: 460px; margin: 0 0 24px; }
+  .svc-panel .inc { list-style: none; padding: 0; margin: 0 0 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
+  .svc-panel .inc li { display: flex; align-items: center; gap: 10px; font-size: 13.5px; color: rgba(255,255,255,.88); }
+  .svc-panel .inc li svg { color: #21c47a; flex-shrink: 0; }
+  .svc-panel .img-strip { margin-top: auto; display: grid; grid-template-columns: 1.4fr 1fr; gap: 12px; }
+  .svc-panel .img-strip > div { aspect-ratio: 16/10; border-radius: 4px; background-size: cover; background-position: center; }
+  .svc-panel .foot { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 28px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.12); gap: 16px; flex-wrap: wrap; }
+  .svc-panel .price { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,.55); font-weight: 700; }
+  .svc-panel .price b { display: block; font-family: var(--sans); font-weight: 700; font-size: 30px; color: #fff; letter-spacing: -0.025em; text-transform: none; margin-top: 4px; }
+  .svc-panel .price b span { font-size: 14px; color: rgba(255,255,255,.55); font-weight: 500; margin-left: 4px; }
+
+  /* PROCESS */
+  .process { background: var(--navy-ink); color: #fff; padding: 130px 0; }
+  .process .s-eye { color: rgba(255,255,255,.85); }
+  .process .s-eye::before { background: rgba(255,255,255,.45); }
+  .process .s-title { color: #fff; }
+  .process .s-title em { color: rgba(255,255,255,.65); }
+  .process .s-desc { color: rgba(255,255,255,.72); }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 8px; position: relative; }
+  .steps::before { content:''; position: absolute; top: 38px; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.25) 20%, rgba(255,255,255,.25) 80%, transparent 100%); }
+  .step { position: relative; }
+  .step .num { width: 76px; height: 76px; border-radius: 50%; background: var(--navy-ink); border: 1px solid rgba(255,255,255,.2); display: grid; place-items: center; font-family: var(--serif); font-style: italic; font-size: 30px; color: #fff; margin-bottom: 30px; position: relative; z-index: 2; }
+  .step h4 { font-family: var(--sans); font-weight: 600; font-size: 26px; letter-spacing: -0.02em; margin: 0 0 12px; line-height: 1.15; }
+  .step h4 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: rgba(255,255,255,.6); }
+  .step p { font-size: 15px; color: rgba(255,255,255,.72); margin: 0 0 22px; line-height: 1.6; max-width: 320px; }
+  .step .meta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: rgba(255,255,255,.55); letter-spacing: 0.04em; }
+  .step .meta svg { color: #21c47a; }
+
+  /* COVERAGE */
+  .coverage { background: var(--paper); }
+  .cov-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 64px; align-items: start; }
+  .cov-cities { display: flex; flex-direction: column; }
+  .cov-city { padding: 26px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 20px; }
+  .cov-city:first-child { border-top: 1px solid var(--line); }
+  .cov-city .name { font-family: var(--sans); font-weight: 600; font-size: 26px; letter-spacing: -0.02em; color: var(--navy-ink); }
+  .cov-city .name .ar { display: block; font-size: 13px; color: var(--mute); margin-top: 4px; direction: rtl; font-weight: 500; font-family: var(--ar); }
+  .cov-city .b { font-size: 13px; color: var(--mute); letter-spacing: 0.04em; }
+  .cov-city .b b { color: var(--navy); font-weight: 700; }
+
+  .cov-map { background: linear-gradient(160deg, #DEE6F0 0%, #BFCEDF 100%); border-radius: 8px; aspect-ratio: 4/3.4; position: relative; overflow: hidden; }
+  .cov-map::before { content:''; position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 28% 38%, rgba(255,255,255,.4) 0%, transparent 35%),
+      radial-gradient(circle at 72% 62%, rgba(255,255,255,.3) 0%, transparent 30%),
+      linear-gradient(45deg, transparent 48%, rgba(11,31,61,.06) 49%, rgba(11,31,61,.06) 50%, transparent 51%),
+      linear-gradient(135deg, transparent 48%, rgba(11,31,61,.04) 49%, rgba(11,31,61,.04) 50%, transparent 51%);
   }
-  @media (max-width: 600px) {
-    .foot-grid { grid-template-columns: 1fr; gap: 32px; }
-  }
-  footer .logo { margin-bottom: 24px; }
-  footer .lede { color: var(--mute); font-size: 14.5px; line-height: 1.6; margin: 0 0 24px; max-width: 320px; }
-  footer .contact { font-size: 15px; color: var(--ink-2); line-height: 1.5; }
-  footer .contact strong { font-size: 19px; color: var(--navy); display: inline-block; margin-bottom: 4px; }
-  footer h5 { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); margin: 0 0 20px; font-weight: 700; }
-  footer ul { list-style: none; padding: 0; margin: 0; }
-  footer ul li { margin-bottom: 12px; font-size: 14.5px; }
-  footer ul li a { color: var(--mute); transition: color 0.2s ease; }
+  .pin { position: absolute; transform: translate(-50%, -100%); display: flex; flex-direction: column; align-items: center; }
+  .pin .dot { width: 14px; height: 14px; background: var(--navy-ink); border: 3px solid #fff; border-radius: 50%; box-shadow: 0 4px 10px rgba(11,31,61,.3); position: relative; z-index: 2; }
+  .pin .ring { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 14px; height: 14px; border-radius: 50%; background: var(--navy-ink); opacity: 0.35; animation: ping 2.4s infinite; }
+  @keyframes ping { 0% { transform: translateX(-50%) scale(1); opacity: 0.4; } 100% { transform: translateX(-50%) scale(4); opacity: 0; } }
+  .pin .lbl { background: #fff; padding: 6px 12px; border-radius: 4px; font-size: 11.5px; font-weight: 600; color: var(--navy-ink); white-space: nowrap; box-shadow: 0 4px 12px rgba(11,31,61,.12); letter-spacing: 0.01em; margin-top: 8px; }
+
+  /* PLANS */
+  .plans { background: var(--cream); }
+  .plan-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .plan { background: #fff; border-radius: 10px; padding: 36px 32px; display: flex; flex-direction: column; transition: transform .3s, box-shadow .3s; border: 1px solid var(--line); }
+  .plan:hover { transform: translateY(-4px); box-shadow: 0 30px 60px -20px rgba(11,31,61,.18); }
+  .plan.feat { background: var(--navy-ink); color: #fff; position: relative; border-color: var(--navy-ink); }
+  .plan.feat::before { content: 'Most chosen'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--navy); color: #fff; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; padding: 6px 14px; border-radius: 999px; box-shadow: 0 6px 18px rgba(0, 56, 104, 0.3); }
+  .plan .tag { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); font-weight: 700; margin-bottom: 8px; }
+  .plan.feat .tag { color: rgba(255,255,255,.65); }
+  .plan h3 { font-family: var(--sans); font-weight: 600; font-size: 28px; letter-spacing: -0.02em; margin: 0 0 12px; color: var(--navy-ink); }
+  .plan.feat h3 { color: #fff; }
+  .plan h3 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--navy); }
+  .plan.feat h3 em { color: rgba(255,255,255,.7); }
+  .plan .blurb { font-size: 14px; color: var(--mute); line-height: 1.6; margin: 0 0 28px; min-height: 44px; }
+  .plan.feat .blurb { color: rgba(255,255,255,.7); }
+  .plan .price-row { display: flex; align-items: baseline; gap: 6px; padding: 22px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 24px; }
+  .plan.feat .price-row { border-color: rgba(255,255,255,.12); }
+  .plan .p-from { font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mute); font-weight: 700; margin-right: 4px; }
+  .plan.feat .p-from { color: rgba(255,255,255,.55); }
+  .plan .p-amt { font-weight: 700; font-size: 38px; letter-spacing: -0.025em; color: var(--navy-ink); line-height: 1; }
+  .plan.feat .p-amt { color: #fff; }
+  .plan .p-cur { font-size: 13px; color: var(--mute); font-weight: 600; }
+  .plan.feat .p-cur { color: rgba(255,255,255,.65); }
+  .plan .p-per { font-size: 13px; color: var(--mute); margin-left: auto; }
+  .plan.feat .p-per { color: rgba(255,255,255,.55); }
+  .plan ul { list-style: none; padding: 0; margin: 0 0 28px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+  .plan ul li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--ink-2); }
+  .plan.feat ul li { color: rgba(255,255,255,.88); }
+  .plan ul li svg { color: var(--navy); flex-shrink: 0; margin-top: 2px; }
+  .plan.feat ul li svg { color: #21c47a; }
+  .plan .cta { width: 100%; padding: 14px 22px; border-radius: 999px; background: var(--paper); color: var(--navy-ink); font-weight: 600; font-size: 14px; text-align: center; transition: all .2s; border: 1px solid var(--line); }
+  .plan:hover .cta { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .plan.feat .cta { background: #fff; color: var(--navy-ink); border-color: #fff; }
+  .plan.feat:hover .cta { background: var(--cream); }
+
+  /* TEAM */
+  .team { background: var(--paper); }
+  .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .doc { background: #fff; border-radius: 8px; overflow: hidden; transition: transform .3s, box-shadow .3s; cursor: pointer; }
+  .doc:hover { transform: translateY(-4px); box-shadow: 0 30px 60px -20px rgba(11,31,61,.2); }
+  .doc .photo { aspect-ratio: 4/5; background: var(--paper-2); position: relative; overflow: hidden; }
+  .doc .photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
+  .doc:hover .photo img { transform: scale(1.04); }
+  .doc .photo .yrs { position: absolute; bottom: 12px; left: 12px; background: rgba(255,255,255,.95); backdrop-filter: blur(6px); padding: 5px 10px; font-size: 11px; font-weight: 700; color: var(--navy-ink); border-radius: 4px; letter-spacing: 0.02em; }
+  .doc .body { padding: 22px; }
+  .doc .body h4 { font-family: var(--sans); font-weight: 600; font-size: 18px; letter-spacing: -0.015em; color: var(--navy-ink); margin: 0 0 4px; }
+  .doc .body .t { font-size: 12.5px; color: var(--navy); font-weight: 600; margin-bottom: 14px; }
+  .doc .body .meta { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; border-top: 1px solid var(--line); font-size: 12px; color: var(--mute); }
+  .doc .body .meta .star { color: var(--navy-ink); font-weight: 700; display: inline-flex; align-items: center; gap: 4px; }
+  .doc .body .meta .star::before { content: '★'; color: #E3A800; }
+
+  /* STORIES */
+  .stories { background: #fff; }
+  .story-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .story { padding: 36px; background: var(--paper); border-radius: 8px; display: flex; flex-direction: column; transition: transform .3s, box-shadow .3s; border: 1px solid var(--line); }
+  .story:hover { transform: translateY(-3px); box-shadow: 0 20px 40px -16px rgba(11,31,61,.12); }
+  .story .stars { color: #E3A800; font-size: 16px; letter-spacing: 2px; margin-bottom: 18px; }
+  .story .q { font-family: var(--serif); font-style: italic; font-size: 22px; line-height: 1.45; letter-spacing: -0.012em; color: var(--navy-ink); margin: 0 0 24px; flex: 1; }
+  .story .who { display: flex; align-items: center; gap: 12px; padding-top: 20px; border-top: 1px solid var(--line); }
+  .story .who .av-fb { width: 44px; height: 44px; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 15px; letter-spacing: 0.02em; }
+  .story .who .n { font-weight: 600; font-size: 14px; color: var(--navy-ink); }
+  .story .who .meta { font-size: 11.5px; color: var(--mute); margin-top: 2px; }
+
+  /* FAQ */
+  .faq { background: var(--paper); }
+  .faq-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 64px; align-items: start; }
+  .faq-side h2 { font-family: var(--sans); font-weight: 600; font-size: 52px; line-height: 1.02; letter-spacing: -0.03em; color: var(--navy-ink); margin: 0 0 22px; }
+  .faq-side h2 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--navy); }
+  .faq-side p { font-size: 16px; color: var(--ink-2); line-height: 1.55; margin: 0 0 28px; max-width: 380px; }
+  .faq-side .help { padding: 24px; background: #fff; border-radius: 8px; border: 1px solid var(--line); }
+  .faq-side .help .lab { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); font-weight: 700; margin-bottom: 8px; }
+  .faq-side .help .num { font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: var(--navy-ink); margin-bottom: 10px; }
+  .faq-side .help .lin { font-size: 13px; color: var(--mute); display: flex; flex-direction: column; gap: 4px; }
+  .faq-side .help .lin a { color: var(--navy); font-weight: 600; }
+
+  .faq-list { display: flex; flex-direction: column; }
+  .qa { border-bottom: 1px solid var(--line); }
+  .qa:first-child { border-top: 1px solid var(--line); }
+  .qa-q { padding: 26px 0; width: 100%; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px; cursor: pointer; text-align: left; background: transparent; border: 0; transition: padding .25s; }
+  .qa:hover .qa-q { padding-left: 4px; }
+  .qa-q .t { font-weight: 600; font-size: 18px; letter-spacing: -0.012em; color: var(--navy-ink); }
+  .qa-q .ic { width: 34px; height: 34px; border-radius: 50%; background: rgba(11,31,61,.05); display: grid; place-items: center; transition: all .25s; color: var(--navy); }
+  .qa.open .qa-q .ic { background: var(--navy); color: #fff; transform: rotate(45deg); }
+  .qa-a { max-height: 0; overflow: hidden; transition: max-height .35s cubic-bezier(0.22,1,0.36,1); }
+  .qa-a .inner { padding: 0 80px 26px 0; font-size: 15px; color: var(--ink-2); line-height: 1.65; }
+
+  /* FINAL CTA */
+  .final { padding: 130px 0; background: #fff; }
+  .final-card { display: grid; grid-template-columns: 1fr 1fr; min-height: 540px; border-radius: 8px; overflow: hidden; background: var(--navy-ink); color: #fff; position: relative; box-shadow: 0 40px 80px -30px rgba(11,31,61,.4); }
+  .final-card .img { background-size: cover; background-position: center; position: relative; }
+  .final-card .img::after { content:''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 55%, var(--navy-ink) 100%); }
+  .final-card .body { padding: 72px; display: flex; flex-direction: column; justify-content: center; }
+  .final-card .body .eye { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,.65); font-weight: 700; margin-bottom: 22px; display: inline-flex; align-items: center; gap: 10px; }
+  .final-card .body .eye::before { content:''; width: 24px; height: 1px; background: rgba(255,255,255,.4); }
+  .final-card .body h2 { font-family: var(--sans); font-weight: 600; font-size: 56px; letter-spacing: -0.03em; line-height: 1.02; margin: 0 0 22px; max-width: 480px; }
+  .final-card .body h2 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: rgba(255,255,255,.7); }
+  .final-card .body p { font-size: 17px; line-height: 1.55; color: rgba(255,255,255,.72); max-width: 440px; margin: 0 0 36px; }
+  .final-card .body .ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .final-card .body .ctas .btn { padding: 16px 28px; font-size: 14px; }
+  .final-card .body .signoff { margin-top: 36px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.15); display: flex; gap: 32px; font-size: 12.5px; color: rgba(255,255,255,.65); flex-wrap: wrap; }
+  .final-card .body .signoff b { color: #fff; display: block; font-weight: 600; margin-top: 4px; font-size: 14px; }
+
+  /* FOOTER */
+  footer { background: #fff; border-top: 1px solid var(--line); padding: 96px 0 36px; }
+  .foot-grid { display: grid; grid-template-columns: 1.5fr repeat(4, 1fr); gap: 48px; margin-bottom: 72px; }
+  footer .logo { margin-bottom: 22px; }
+  footer .lede { color: var(--mute); font-size: 14px; line-height: 1.65; margin: 0 0 22px; max-width: 320px; }
+  footer .contact b { font-weight: 700; font-size: 22px; color: var(--navy-ink); letter-spacing: -0.015em; display: block; margin-bottom: 4px; }
+  footer .contact { font-size: 13.5px; color: var(--mute); }
+  footer h5 { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--navy-ink); margin: 0 0 18px; font-weight: 700; }
+  footer ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  footer ul li, footer ul li a { font-size: 13.5px; color: var(--mute); transition: color .2s; }
   footer ul li a:hover { color: var(--navy); }
-  
-  .foot-bottom { border-top: 1px solid var(--line-cool); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; color: var(--mute); font-size: 13.5px; }
-  @media (max-width: 768px) {
-    .foot-bottom { flex-direction: column; gap: 16px; text-align: center; }
-  }
-  .foot-bottom .socials { display: flex; gap: 20px; }
-  .foot-bottom .socials a { transition: color 0.2s ease; }
+  .foot-bottom { border-top: 1px solid var(--line); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; color: var(--mute); font-size: 12.5px; flex-wrap: wrap; gap: 16px; }
+  .foot-bottom .socials { display: flex; gap: 18px; }
   .foot-bottom .socials a:hover { color: var(--navy); }
 
-  /* Responsive Breakpoints */
-  @media (max-width: 900px) {
-    .services-grid { grid-template-columns: 1fr; }
-    .doctors-grid { grid-template-columns: 1fr; }
-    .workflow-grid { grid-template-columns: 1fr; gap: 48px; }
-    .workflow-grid::before { display: none; }
+  /* STICKY CTA */
+  .sticky-cta { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(140%); background: var(--navy-ink); color: #fff; padding: 12px 14px 12px 22px; border-radius: 999px; display: flex; align-items: center; gap: 18px; z-index: 40; box-shadow: 0 24px 60px -20px rgba(11,31,61,.5); transition: transform .5s cubic-bezier(0.16,1,0.3,1); max-width: calc(100% - 32px); }
+  .sticky-cta.show { transform: translateX(-50%) translateY(0); }
+  .sticky-cta .t { font-size: 13px; color: rgba(255,255,255,.85); }
+  .sticky-cta .t b { color: #fff; font-weight: 600; }
+  .sticky-cta .b { background: #fff; color: var(--navy-ink); font-weight: 600; font-size: 13px; padding: 9px 18px; border-radius: 999px; transition: background .2s; }
+  .sticky-cta .b:hover { background: var(--cream); }
+
+  .fade { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s ease; }
+  .fade.in { opacity: 1; transform: none; }
+
+  /* RTL adjustments */
+  body.lang-ar .h-eyebrow::before,
+  body.lang-ar .s-eye::before { display: none; }
+  body.lang-ar .h-title em,
+  body.lang-ar .s-title em,
+  body.lang-ar .step h4 em,
+  body.lang-ar .svc-panel h3 em,
+  body.lang-ar .plan h3 em,
+  body.lang-ar .faq-side h2 em,
+  body.lang-ar .final-card .body h2 em { font-family: var(--ar) !important; font-style: normal; }
+
+  /* RESPONSIVE */
+  @media (max-width: 1100px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; min-height: auto; padding-bottom: 56px; }
+    .h-title { font-size: 64px; }
+    .booking-strip { grid-template-columns: 1fr; }
+    .booking-strip .field + .field::before { display: none; }
+    .booking-strip .field { border-bottom: 1px solid var(--line-cool); }
+    .booking-strip .go { padding: 18px; justify-content: center; width: 100%; }
+    .svc-grid, .cov-grid, .faq-grid { grid-template-columns: 1fr; gap: 32px; }
+    .final-card { grid-template-columns: 1fr; }
+    .final-card .img { aspect-ratio: 16/9; }
+    .plan-grid { grid-template-columns: 1fr; gap: 18px; }
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
+    .story-grid { grid-template-columns: 1fr; }
+    .s-head { grid-template-columns: 1fr; gap: 24px; margin-bottom: 48px; }
+    .s-title { font-size: 44px; }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+    .final-card .body { padding: 48px; }
+    .final-card .body h2 { font-size: 44px; }
+    section.block { padding: 88px 0; }
+    .process .steps::before { display: none; }
+    .steps { grid-template-columns: 1fr; gap: 40px; }
   }
-  @media (max-width: 768px) {
-    .homecare-container { padding: 40px 20px 80px; }
-    .subpage-title { font-size: 38px; }
-    .subpage-hero { padding: 80px 0 90px; }
-    .nav .wrap { padding: 18px 24px; grid-template-columns: auto 1fr; }
+
+  @media (max-width: 900px) {
     .nav-links { display: none; }
-    .nav.scrolled .wrap { padding: 12px 24px; }
-    .workflow-section { padding: 32px; }
-    .wide-cta-banner { padding: 40px 24px; }
-    .wide-cta-buttons { flex-direction: column; gap: 12px; }
+    .menu-toggle { display: inline-flex; }
+    .mobile-menu { display: block; }
+    .nav .wrap { grid-template-columns: auto auto auto; padding: 14px 22px; gap: 8px; }
+    .nav.scrolled .wrap { padding: 12px 22px; }
+    .lang-pill button { font-size: 11px; padding: 5px 9px; }
+    .ribbon { display: none; }
+    .wrap { padding-left: 22px; padding-right: 22px; }
+    .h-title { font-size: clamp(40px, 8vw, 56px); }
+    .h-sub { font-size: 16px; }
+    .live-card { left: 12px; bottom: 12px; min-width: auto; padding: 10px 14px; }
+    .h-trust { gap: 24px; }
+    .h-trust .stat .n { font-size: 24px; }
+    .svc-panel { padding: 28px; }
+    .svc-panel h3 { font-size: 30px; }
+    .svc-panel .inc { grid-template-columns: 1fr; }
+    .svc-detail { min-height: 520px; }
+    .step .num { width: 60px; height: 60px; font-size: 24px; margin-bottom: 22px; }
+    .step h4 { font-size: 22px; }
+    .team-grid { grid-template-columns: 1fr 1fr; }
+    .faq-side h2 { font-size: 38px; }
+    .qa-q .t { font-size: 16px; }
+    .qa-a .inner { padding: 0 0 22px; }
+    .final-card .body { padding: 32px; }
+    .final-card .body h2 { font-size: 32px; }
+    .foot-grid { grid-template-columns: 1fr; gap: 36px; }
+    section.block { padding: 64px 0; }
+    .trust { padding-top: 56px; }
+    .trust-row { padding: 22px 0; gap: 16px; }
+    .trust-row .logos { gap: 24px; }
+    .sticky-cta { font-size: 12px; padding: 10px 12px 10px 18px; gap: 10px; }
+    .sticky-cta .b { padding: 8px 14px; font-size: 12px; }
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding-top: 32px; }
+    .hero .wrap { padding: 0 20px; }
+    .h-title { font-size: clamp(34px, 9vw, 44px); }
+    .h-portrait { aspect-ratio: 3/4; }
+    .live-card { left: 10px; bottom: 10px; transform: scale(.92); transform-origin: bottom left; }
+    .svc-panel h3 { font-size: 24px; }
+    .svc-panel .img-strip { grid-template-columns: 1fr; }
+    .svc-panel .img-strip > div:nth-child(2) { display: none; }
+    .step h4 { font-size: 20px; }
+    .team-grid { grid-template-columns: 1fr; }
+    .plan { padding: 28px 22px; }
+    .story { padding: 26px; }
+    .story .q { font-size: 18px; }
+    .final-card .body { padding: 26px; }
+    .final-card .body h2 { font-size: 28px; }
+    .final-card .body p { font-size: 15px; }
+    .booking-strip { margin: -30px 12px 0; padding: 6px; border-radius: 14px; }
+    .booking-strip .field { padding: 12px 14px; }
+    .booking-strip .go { font-size: 13px; min-height: 48px; }
   }
 </style>
 </head>
 <body>
 
-<!-- ribbon -->
+<!-- RIBBON -->
 <div class="ribbon">
   <div class="wrap">
     <div class="ribbon-left">
-      <span><span class="dot"></span> &nbsp;<b>Now open</b> · Sat–Thu 8 AM – 10 PM &nbsp;·&nbsp; Fri 5 PM – 9 PM</span>
-      <span>5 branches · Jeddah, Riyadh</span>
+      <span><span class="dot"></span><b>Booking visits now</b> · Next slot tomorrow 9:30 AM</span>
+      <span style="opacity:.4;">|</span>
+      <span>Jeddah · Riyadh · 5 branches</span>
     </div>
     <div class="ribbon-right">
-      <a href="/index.html#contact">Contact Us</a>
       <a href="#">Careers</a>
+      <a href="/index.html#contact">Contact</a>
       <a href="https://wa.me/966542228111" target="_blank">WhatsApp · 0542228111</a>
-      <a href="tel:920022811"><b>920022811</b></a>
+      <a href="tel:920022811"><b style="color:#fff;">920022811</b></a>
     </div>
   </div>
 </div>
 
-<!-- nav -->
-<nav class="nav">
+<!-- NAV -->
+<nav class="nav" id="nav">
   <div class="wrap">
     <a href="/index.html" class="logo">
       <img class="brand-logo" src="/logo.svg" alt="My Clinic">
@@ -649,189 +482,652 @@
       <a href="/telemedicine.html">Telemedicine</a>
       <a href="/home-healthcare.html" class="active">Home Healthcare</a>
     </div>
+    <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
     <div class="nav-right">
       <div class="lang-pill" role="group" aria-label="Language switcher">
         <button type="button" class="active" aria-pressed="true">EN</button>
         <button type="button" aria-pressed="false">AR</button>
       </div>
-      <a href="/find-a-doctor.html" class="btn primary">Book Now</a>
+      <a href="#booking" class="btn primary">Book a Visit
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <div class="mobile-links">
+        <a href="/find-a-doctor.html">Find a Doctor <span>01</span></a>
+        <a href="/specialties.html">Specialties <span>02</span></a>
+        <a href="/programs.html">Programs <span>03</span></a>
+        <a href="/telemedicine.html">Telemedicine <span>04</span></a>
+        <a href="/home-healthcare.html">Home Healthcare <span>05</span></a>
+      </div>
+      <div class="mobile-menu-actions">
+        <a class="mobile-call" href="tel:920022811">Call 920022811</a>
+        <a class="btn primary" href="#booking">Request a home visit</a>
+      </div>
     </div>
   </div>
 </nav>
 
 <main>
-  <!-- Hero Section -->
-  <header class="subpage-hero">
+
+  <!-- HERO -->
+  <section class="hero">
     <div class="wrap">
-      <div class="subpage-hero-inner">
-        <div class="subpage-eyebrow">Medical Care At Doorstep</div>
-        <h1 class="subpage-title">Hospital-grade care, <em>at your home.</em></h1>
-        <p class="subpage-desc">Experience professional, compassionate clinical attention without traveling. From expert doctor home visits and nursing care to physical therapy and rapid laboratory sampling, our fully certified mobile clinical teams bring the hospital directly to you.</p>
-        <div class="hero-buttons">
-          <a href="https://wa.me/966542228111?text=Hi%2C%20I'm%20inquiring%20about%20booking%20a%20Home%20Healthcare%20visit." target="_blank" class="btn white">Request Home Visit</a>
-          <a href="#services" class="btn outline">Explore Home Services</a>
+      <div class="hero-grid">
+        <div class="hero-l fade in">
+          <div class="h-eyebrow">Home Healthcare · الرعاية المنزلية</div>
+          <h1 class="h-title">Care that<br><em>comes home</em> to you.</h1>
+          <p class="h-sub">Hospital-grade physicians, nurses, and physiotherapists arrive at your door — fully equipped, SCFHS-licensed, and on your schedule. No commute. No waiting room. Just better care.</p>
+          <p class="h-ar ar">رعاية طبية على مستوى المستشفيات، تصل إلى بابك. أطباء وممرضون وأخصائيو علاج طبيعي معتمدون من الهيئة السعودية.</p>
+
+          <div class="h-ctas">
+            <a href="#booking" class="btn primary">
+              Request a home visit
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a href="https://wa.me/966542228111" target="_blank" class="btn wa">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24z"/></svg>
+              WhatsApp us
+            </a>
+          </div>
+
+          <div class="h-trust">
+            <div class="stat"><span class="n">52K<sup>+</sup></span><div class="l">Home visits / year</div></div>
+            <div class="stat"><span class="n">98<sup>%</sup></span><div class="l">Patient satisfaction</div></div>
+            <div class="stat"><span class="n">&lt; 4 hrs</span><div class="l">Avg. response time</div></div>
+            <div class="stat"><span class="n">CBAHI</span><div class="l">SCFHS licensed</div></div>
+          </div>
+        </div>
+
+        <div class="hero-r">
+          <div class="h-portrait">
+            <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=900&q=80" alt="Home care visit" onerror="this.style.display='none'">
+            <div class="p-cap">
+              <div class="l">Visit · No. 04 today</div>
+              <div class="q">"Dr. Lina arrived within the hour. Calm, kind, and completely thorough."</div>
+            </div>
+          </div>
+          <div class="live-card">
+            <div class="av">
+              <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=120&q=60" alt="">
+              <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=120&q=60" alt="">
+              <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=120&q=60" alt="">
+              <div class="more">+12</div>
+            </div>
+            <div class="t">
+              <div class="l1"><b>● Live</b> &nbsp; 12 teams on rounds</div>
+              <div class="l2">Jeddah · Riyadh — updating now</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Booking strip -->
+      <form id="booking" class="booking-strip" onsubmit="event.preventDefault(); window.location='https://wa.me/966542228111?text=Hi%2C%20I%27d%20like%20to%20book%20a%20home%20visit.';">
+        <div class="field">
+          <span class="l">Service</span>
+          <span class="v">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            Physician home visit
+          </span>
+        </div>
+        <div class="field">
+          <span class="l">When</span>
+          <span class="v">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            Tomorrow, 9:30 AM
+          </span>
+        </div>
+        <div class="field">
+          <span class="l">City</span>
+          <span class="v">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 7-8 12-8 12s-8-5-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            Jeddah — Al Mohammadiyah
+          </span>
+        </div>
+        <button class="go" type="submit">
+          Find a team
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <div class="trust">
+    <div class="wrap">
+      <div class="trust-row">
+        <span class="label">Trusted by patients · Endorsed by</span>
+        <div class="logos">
+          <span class="ser">Tawuniya</span>
+          <span class="ser">Bupa Arabia</span>
+          <span class="ser">MedGulf</span>
+          <span class="ser">Allianz</span>
+          <span class="ser">AXA Cooperative</span>
+          <span class="ser">CBAHI</span>
         </div>
       </div>
     </div>
-  </header>
-
-  <div class="homecare-container">
-    
-    <!-- Services Grid -->
-    <section id="services">
-      <div class="section-title-wrap">
-        <span class="section-eyebrow">Mobile Care Capabilities</span>
-        <h2 class="section-header-title">Our Comprehensive <em>Home Services</em></h2>
-      </div>
-      
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-icon-box">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          </div>
-          <h3>Physician Home Visits</h3>
-          <p>Schedule general medicine doctors and specialty consultants to visit your home for clinical consults, physical checkups, prescription renewals, and care guidance.</p>
-        </div>
-
-        <div class="service-card">
-          <div class="service-icon-box">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-          </div>
-          <h3>Skilled Nursing Care</h3>
-          <p>Licensed nurses providing standard home nursing including wound dressing, vital signs monitoring, injections, intravenous (IV) therapy, and post-operative recovery support.</p>
-        </div>
-
-        <div class="service-card">
-          <div class="service-icon-box">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.5 22a9 9 0 1 1 9-9h-9v9z"/><path d="M22 10.5A9 9 0 0 0 13.5 2V10.5H22z"/></svg>
-          </div>
-          <h3>Home Physiotherapy</h3>
-          <p>Customized home rehabilitation sessions directed by certified physiotherapists. Ideal for orthopedic recovery, neurological rehab, elderly mobility improvement, and pain relief.</p>
-        </div>
-
-        <div class="service-card">
-          <div class="service-icon-box">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-          </div>
-          <h3>Home Laboratory Sampling</h3>
-          <p>Certified phlebotomists visiting your home to safely collect blood, urine, or other clinical samples. Samples are analyzed at our accredited central labs with digital results uploaded to your portal.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- How It Works Section -->
-    <section class="workflow-section">
-      <div class="section-title-wrap">
-        <span class="section-eyebrow">Patient Journey</span>
-        <h2 class="section-header-title">How To Request <em>Home Care</em></h2>
-      </div>
-
-      <div class="workflow-grid">
-        <div class="workflow-step">
-          <div class="step-num">1</div>
-          <h4>Submit Request</h4>
-          <p>Contact our center by phone, WhatsApp, or the web form to select your desired home service category.</p>
-        </div>
-
-        <div class="workflow-step">
-          <div class="step-num">2</div>
-          <h4>Clinical Triage</h4>
-          <p>Our nurse supervisor reviews your case, confirms details, and matches the correct medical team.</p>
-        </div>
-
-        <div class="workflow-step">
-          <div class="step-num">3</div>
-          <h4>At-Home Care</h4>
-          <p>Our fully equipped mobile medical unit arrives at your home at the scheduled hour to deliver care.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Dynamic Home Care Team Highlights -->
-    <section class="specialists-section">
-      <div class="section-title-wrap">
-        <span class="section-eyebrow">Home Care Experts</span>
-        <h2 class="section-header-title">Meet Our <em>Mobile Care</em> Team</h2>
-        <p style="color: var(--mute); max-width: 600px; margin: 8px auto 0; font-size: 15px;">Meet some of our accredited doctors and physical therapists who deliver care at home.</p>
-      </div>
-
-      <div class="doctors-grid" id="homeCareDoctorsGrid">
-        <!-- Dynically loaded from JS doctors array -->
-      </div>
-    </section>
-
-    <!-- Interactive FAQ Section -->
-    <section class="faq-section">
-      <div class="section-title-wrap">
-        <span class="section-eyebrow">FAQ</span>
-        <h2 class="section-header-title">Frequently Asked <em>Home Care Questions</em></h2>
-      </div>
-
-      <div class="faq-list">
-        <div class="faq-item">
-          <button class="faq-trigger">
-            <span>What geographic areas do your home care teams cover?</span>
-            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="faq-content">
-            <div class="faq-content-inner">
-              Our mobile units operate out of our Jeddah and Riyadh branches, providing complete coverage across the municipal city limits of both Jeddah and Riyadh. We can coordinate care for nearby outlying suburbs upon special review.
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-trigger">
-            <span>Are home healthcare services covered by insurance?</span>
-            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="faq-content">
-            <div class="faq-content-inner">
-              Insurance coverage varies. Certain home nursing, physician, and physiotherapy care plans are covered under premium networks or post-surgical recovery policies. Our billing coordinators will verify pre-authorization requirements with your provider.
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-trigger">
-            <span>Can home care treat urgent or emergency medical events?</span>
-            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="faq-content">
-            <div class="faq-content-inner">
-              No. Our home healthcare services are structured solely for scheduled, non-emergency clinical visits, chronic disease follow-ups, and rehabilitation plans. For acute emergencies, call Red Crescent (997) or visit the nearest emergency department.
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-trigger">
-            <span>Are your visiting home care staff fully accredited?</span>
-            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="faq-content">
-            <div class="faq-content-inner">
-              Yes, all visiting physicians, registered nurses, and physical therapists are licensed by the Saudi Commission for Health Specialties (SCFHS), fully certified by My Clinic, and follow international standards verified by CBAHI guidelines.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Bottom CTA Banner -->
-    <div class="wide-cta-banner">
-      <h3>Ready to Arrange Clinical Care at Home?</h3>
-      <p>Schedule a professional medical team or certified physiotherapist to visit you. Coordinate nursing plans, arrange post-surgery dressings, or order comfortable home lab tests today.</p>
-      <div class="wide-cta-buttons">
-        <a href="https://wa.me/966542228111?text=Hi%2C%20I'd%20like%20to%20book%20a%20Home%20Healthcare%20service." target="_blank" class="btn primary-wide">Schedule Home Visit</a>
-        <a href="tel:920022811" class="btn outline">Call 920022811</a>
-      </div>
-    </div>
-
   </div>
+
+  <!-- SERVICES -->
+  <section class="block services">
+    <div class="wrap">
+      <div class="s-head fade">
+        <div>
+          <span class="s-eye">What we bring home</span>
+          <h2 class="s-title">A full clinic,<br><em>without the clinic.</em></h2>
+        </div>
+        <p class="s-desc">Four core service lines. Each delivered by a credentialed clinical team with hospital-grade equipment and digital records — same standard of care, in your own room.</p>
+      </div>
+
+      <div class="svc-grid">
+        <div class="svc-menu" id="svcMenu">
+          <div class="svc-item active" data-svc="0">
+            <span class="svc-num">01</span>
+            <span class="svc-name">Physician Home Visits<span class="ar-sub">زيارات الطبيب المنزلية</span></span>
+            <svg class="svc-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </div>
+          <div class="svc-item" data-svc="1">
+            <span class="svc-num">02</span>
+            <span class="svc-name">Skilled Nursing<span class="ar-sub">التمريض المنزلي</span></span>
+            <svg class="svc-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </div>
+          <div class="svc-item" data-svc="2">
+            <span class="svc-num">03</span>
+            <span class="svc-name">Home Physiotherapy<span class="ar-sub">العلاج الطبيعي</span></span>
+            <svg class="svc-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </div>
+          <div class="svc-item" data-svc="3">
+            <span class="svc-num">04</span>
+            <span class="svc-name">Lab Sampling at Home<span class="ar-sub">سحب العينات المنزلي</span></span>
+            <svg class="svc-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </div>
+        </div>
+
+        <div class="svc-detail" id="svcDetail">
+          <div class="svc-panel active">
+            <div class="top">
+              <span class="num">01 — Physician visit</span>
+              <span class="tag">45–60 min</span>
+            </div>
+            <h3>Consultants and GPs at <em>your bedside.</em></h3>
+            <p class="desc">Full clinical assessment, exam, prescription, and follow-up — delivered with the same chart, history, and lab access as our hospitals. Routine, chronic, post-op, geriatric and pediatric.</p>
+            <ul class="inc">
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Full physical exam &amp; vitals</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>E-prescription on the spot</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Referral coordination</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Records to your patient portal</li>
+            </ul>
+            <div class="img-strip">
+              <div style="background-image:url('https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&w=900&q=70');"></div>
+              <div style="background-image:url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=70');"></div>
+            </div>
+            <div class="foot">
+              <div class="price">From<b>450 <span>SAR / visit</span></b></div>
+              <a href="#booking" class="btn white">Book physician visit</a>
+            </div>
+          </div>
+
+          <div class="svc-panel">
+            <div class="top">
+              <span class="num">02 — Skilled nursing</span>
+              <span class="tag">Hourly &amp; daily plans</span>
+            </div>
+            <h3>Licensed nurses for<br><em>everyday care &amp; recovery.</em></h3>
+            <p class="desc">Wound dressing, IV therapy, injections, vitals monitoring, post-operative recovery, and chronic-care nursing. Available hourly or on multi-day plans for sustained care.</p>
+            <ul class="inc">
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>IV therapy &amp; medication</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Wound &amp; surgical care</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Catheter &amp; tube management</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Vital signs monitoring</li>
+            </ul>
+            <div class="img-strip">
+              <div style="background-image:url('https://images.unsplash.com/photo-1631815589968-fdb09a223b1e?auto=format&fit=crop&w=900&q=70');"></div>
+              <div style="background-image:url('https://images.unsplash.com/photo-1584516150909-c43483ee7932?auto=format&fit=crop&w=600&q=70');"></div>
+            </div>
+            <div class="foot">
+              <div class="price">From<b>180 <span>SAR / hour</span></b></div>
+              <a href="#booking" class="btn white">Book a nurse</a>
+            </div>
+          </div>
+
+          <div class="svc-panel">
+            <div class="top">
+              <span class="num">03 — Physiotherapy</span>
+              <span class="tag">60 min sessions</span>
+            </div>
+            <h3>Rehab built around<br><em>your body, your room.</em></h3>
+            <p class="desc">Certified physiotherapists deliver structured plans for orthopedic recovery, post-stroke rehab, sports injuries, geriatric mobility, and chronic pain — using the same protocols as our clinics.</p>
+            <ul class="inc">
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Orthopedic &amp; post-op</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Neurological rehab</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Geriatric mobility</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Sports injury recovery</li>
+            </ul>
+            <div class="img-strip">
+              <div style="background-image:url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=900&q=70');"></div>
+              <div style="background-image:url('https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=600&q=70');"></div>
+            </div>
+            <div class="foot">
+              <div class="price">From<b>250 <span>SAR / session</span></b></div>
+              <a href="#booking" class="btn white">Book a physiotherapist</a>
+            </div>
+          </div>
+
+          <div class="svc-panel">
+            <div class="top">
+              <span class="num">04 — Lab sampling</span>
+              <span class="tag">15 min · results in 24h</span>
+            </div>
+            <h3>Bloods, urines, swabs —<br><em>collected at home.</em></h3>
+            <p class="desc">Certified phlebotomists collect samples safely at home. Specimens go to our CAP-accredited central lab, and results land in your portal within 24 hours — usually faster.</p>
+            <ul class="inc">
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Blood &amp; metabolic panels</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Diabetes &amp; lipid panels</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Hormone &amp; thyroid panels</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Digital report in portal</li>
+            </ul>
+            <div class="img-strip">
+              <div style="background-image:url('https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=900&q=70');"></div>
+              <div style="background-image:url('https://images.unsplash.com/photo-1606206522398-de43eba23a6f?auto=format&fit=crop&w=600&q=70');"></div>
+            </div>
+            <div class="foot">
+              <div class="price">From<b>120 <span>SAR / visit</span></b></div>
+              <a href="#booking" class="btn white">Book lab visit</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="block process">
+    <div class="wrap">
+      <div class="s-head fade">
+        <div>
+          <span class="s-eye">How it works</span>
+          <h2 class="s-title">From request to<br><em>at-home care</em> — in hours.</h2>
+        </div>
+        <p class="s-desc">A real human triage, not a chatbot. Our nurse supervisors review every request and match the right clinical team — so the visit fits your case, not the other way around.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="num">i</div>
+          <h4>Tell us what<br>you <em>need.</em></h4>
+          <p>Call, WhatsApp, or use the form. Briefly describe the patient, the situation, and the kind of care needed.</p>
+          <div class="meta">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+            <span>2-minute intake</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">ii</div>
+          <h4>We triage<br>and <em>match.</em></h4>
+          <p>A senior nurse reviews your case, confirms what's clinically appropriate, and assigns a credentialed team.</p>
+          <div class="meta">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+            <span>Within 30 minutes</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">iii</div>
+          <h4>Care arrives<br>at <em>your door.</em></h4>
+          <p>A fully equipped mobile unit arrives at the agreed hour. Records sync to your portal automatically afterwards.</p>
+          <div class="meta">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+            <span>Same day, on average</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COVERAGE -->
+  <section class="block coverage">
+    <div class="wrap">
+      <div class="s-head fade">
+        <div>
+          <span class="s-eye">Coverage</span>
+          <h2 class="s-title">Where our mobile<br>teams <em>can reach you.</em></h2>
+        </div>
+        <p class="s-desc">Five operating branches, two cities, full municipal coverage. Outer suburbs can be coordinated with advance review.</p>
+      </div>
+
+      <div class="cov-grid">
+        <div class="cov-cities">
+          <div class="cov-city">
+            <div class="name">Jeddah <span class="ar">جدة</span></div>
+            <div class="b"><b>4</b> branches · ~45 min avg</div>
+          </div>
+          <div class="cov-city">
+            <div class="name">Riyadh <span class="ar">الرياض</span></div>
+            <div class="b"><b>1</b> branch · ~50 min avg</div>
+          </div>
+          <div class="cov-city">
+            <div class="name">Outer suburbs <span class="ar">الضواحي</span></div>
+            <div class="b">By advance arrangement</div>
+          </div>
+          <div class="cov-city">
+            <div class="name">Other cities <span class="ar">مدن أخرى</span></div>
+            <div class="b" style="color: var(--navy); font-weight: 600;">Coming 2026</div>
+          </div>
+          <a href="/index.html#contact" class="btn ghost" style="margin-top: 28px; align-self: flex-start; padding: 14px 22px;">
+            See all 5 branch addresses
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+
+        <div class="cov-map">
+          <div class="pin" style="left:32%; top:38%;">
+            <div class="dot"></div><div class="ring"></div>
+            <div class="lbl">Jeddah · 4 branches</div>
+          </div>
+          <div class="pin" style="left:68%; top:62%;">
+            <div class="dot"></div><div class="ring"></div>
+            <div class="lbl">Riyadh · 1 branch</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANS -->
+  <section class="block plans">
+    <div class="wrap">
+      <div class="s-head fade">
+        <div>
+          <span class="s-eye">Care plans</span>
+          <h2 class="s-title">Transparent pricing.<br><em>No surprises.</em></h2>
+        </div>
+        <p class="s-desc">Pay per visit or settle into a plan. All plans include digital records, a dedicated case coordinator, and 24/7 nurse-on-call support.</p>
+      </div>
+
+      <div class="plan-grid">
+        <div class="plan">
+          <div class="tag">Per visit</div>
+          <h3>Single <em>Visit</em></h3>
+          <p class="blurb">One-off care when you need it — physician, nurse, physio, or lab.</p>
+          <div class="price-row">
+            <span class="p-from">From</span>
+            <span class="p-amt">120</span>
+            <span class="p-cur">SAR</span>
+            <span class="p-per">/ visit</span>
+          </div>
+          <ul>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Any single service</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Records in patient portal</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Same-day if before 2 PM</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>E-prescription &amp; referrals</li>
+          </ul>
+          <a href="#booking" class="cta">Request a visit</a>
+        </div>
+
+        <div class="plan feat">
+          <div class="tag">Most popular</div>
+          <h3>Wellness <em>Monthly</em></h3>
+          <p class="blurb">For older adults &amp; busy households — a monthly bundle of routine and on-demand care.</p>
+          <div class="price-row">
+            <span class="p-from">From</span>
+            <span class="p-amt">1,490</span>
+            <span class="p-cur">SAR</span>
+            <span class="p-per">/ month</span>
+          </div>
+          <ul>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>2 physician &amp; 4 nurse visits</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Quarterly lab panel at home</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Priority booking, 4-hr response</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>24/7 nurse-on-call line</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Dedicated case coordinator</li>
+          </ul>
+          <a href="#booking" class="cta">Start the plan</a>
+        </div>
+
+        <div class="plan">
+          <div class="tag">Chronic &amp; post-op</div>
+          <h3>Recovery <em>Continuum</em></h3>
+          <p class="blurb">Daily nursing and rehab for post-surgical or long-term conditions — custom-built around the case.</p>
+          <div class="price-row">
+            <span class="p-from">From</span>
+            <span class="p-amt">4,200</span>
+            <span class="p-cur">SAR</span>
+            <span class="p-per">/ month</span>
+          </div>
+          <ul>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Daily nursing visits</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>3× weekly physiotherapy</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Specialist consultant reviews</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Equipment &amp; supplies handled</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Family briefings &amp; reports</li>
+          </ul>
+          <a href="#booking" class="cta">Talk to a coordinator</a>
+        </div>
+      </div>
+
+      <p style="text-align:center; margin-top:36px; font-size:13px; color: var(--mute);">
+        Insurance accepted with most major networks · Pre-authorization handled by our billing team.
+      </p>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="block team">
+    <div class="wrap">
+      <div class="s-head fade">
+        <div>
+          <span class="s-eye">Your home-care team</span>
+          <h2 class="s-title">Senior clinicians.<br><em>At your door.</em></h2>
+        </div>
+        <p class="s-desc">Every doctor and physiotherapist on our home-care roster is hospital-credentialed, SCFHS-licensed, and trained on our home-visit protocols.</p>
+      </div>
+
+      <div class="team-grid">
+        <div class="doc">
+          <div class="photo">
+            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=500&q=70" alt="Dr. Khalid Al-Subaie" onerror="this.style.display='none'">
+            <span class="yrs">18 yrs</span>
+          </div>
+          <div class="body">
+            <h4>Dr. Khalid Al-Subaie</h4>
+            <div class="t">Consultant, Internal Medicine</div>
+            <div class="meta"><span class="star">4.9</span><span>114 visits</span></div>
+          </div>
+        </div>
+        <div class="doc">
+          <div class="photo">
+            <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=500&q=70" alt="Dr. Yousef Al-Harbi" onerror="this.style.display='none'">
+            <span class="yrs">19 yrs</span>
+          </div>
+          <div class="body">
+            <h4>Dr. Yousef Al-Harbi</h4>
+            <div class="t">Consultant, Orthopedic Surgery</div>
+            <div class="meta"><span class="star">4.8</span><span>87 visits</span></div>
+          </div>
+        </div>
+        <div class="doc">
+          <div class="photo">
+            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=500&q=70" alt="Dr. Lina Al-Otaibi" onerror="this.style.display='none'">
+            <span class="yrs">12 yrs</span>
+          </div>
+          <div class="body">
+            <h4>Dr. Lina Al-Otaibi</h4>
+            <div class="t">Family Medicine &amp; Geriatrics</div>
+            <div class="meta"><span class="star">4.9</span><span>203 visits</span></div>
+          </div>
+        </div>
+        <div class="doc">
+          <div class="photo">
+            <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=500&q=70" alt="Hassan Al-Ghamdi" onerror="this.style.display='none'">
+            <span class="yrs">9 yrs</span>
+          </div>
+          <div class="body">
+            <h4>Hassan Al-Ghamdi, PT</h4>
+            <div class="t">Senior Physiotherapist</div>
+            <div class="meta"><span class="star">4.9</span><span>156 visits</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin-top: 40px;">
+        <a href="/find-a-doctor.html" class="btn ghost" style="padding: 14px 24px;">
+          See full home-care roster
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORIES -->
+  <section class="block stories">
+    <div class="wrap">
+      <div class="s-head fade">
+        <div>
+          <span class="s-eye">Patient stories</span>
+          <h2 class="s-title">What patients<br><em>tell us.</em></h2>
+        </div>
+        <p class="s-desc">From post-surgical recovery to routine diabetes monitoring — real visits, real outcomes. Pulled from 4,200+ patient reviews.</p>
+      </div>
+
+      <div class="story-grid">
+        <div class="story">
+          <div class="stars">★★★★★</div>
+          <p class="q">"My father had hip surgery and we were dreading the recovery commute. The physio team came three times a week and treated him with such patience and respect. Worth every riyal."</p>
+          <div class="who">
+            <div class="av-fb">RA</div>
+            <div>
+              <div class="n">Reem Al-Anazi</div>
+              <div class="meta">Jeddah · Recovery Continuum plan</div>
+            </div>
+          </div>
+        </div>
+        <div class="story">
+          <div class="stars">★★★★★</div>
+          <p class="q">"Booked a home lab on a Friday morning. The phlebotomist arrived within two hours and my results were in the portal before dinner. This is how healthcare should feel."</p>
+          <div class="who">
+            <div class="av-fb">MK</div>
+            <div>
+              <div class="n">Mohammed Khoury</div>
+              <div class="meta">Riyadh · Single Visit</div>
+            </div>
+          </div>
+        </div>
+        <div class="story">
+          <div class="stars">★★★★★</div>
+          <p class="q">"Dr. Lina visits my mother every fortnight. She remembers everything — medications, family details, what worried us last time. The Wellness plan has changed how we care for her."</p>
+          <div class="who">
+            <div class="av-fb">SA</div>
+            <div>
+              <div class="n">Sara Al-Shehri</div>
+              <div class="meta">Jeddah · Wellness Monthly</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="block faq">
+    <div class="wrap">
+      <div class="faq-grid">
+        <div class="faq-side">
+          <span class="s-eye">FAQ</span>
+          <h2>Questions, <em>answered.</em></h2>
+          <p>If your question isn't here, our coordinators are reachable around the clock — most queries are answered within minutes.</p>
+          <div class="help">
+            <div class="lab">Speak to a coordinator</div>
+            <div class="num">920022811</div>
+            <div class="lin">
+              <span>Sat–Thu · 8 AM – 10 PM</span>
+              <span>Fri · 5 PM – 9 PM</span>
+              <a href="https://wa.me/966542228111" target="_blank">WhatsApp · 0542228111</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-list" id="faqList">
+          <div class="qa open">
+            <button class="qa-q" type="button">
+              <span class="t">What areas do your mobile teams cover?</span>
+              <span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
+            </button>
+            <div class="qa-a"><div class="inner">Our home-care teams operate from our Jeddah (4 branches) and Riyadh (1 branch) facilities, with full coverage across the municipal city limits of both cities. Outer suburbs can be coordinated with advance review — call our coordinators to confirm your address.</div></div>
+          </div>
+          <div class="qa">
+            <button class="qa-q" type="button">
+              <span class="t">Is home care covered by my insurance?</span>
+              <span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
+            </button>
+            <div class="qa-a"><div class="inner">Coverage varies by policy. We're in-network with most major insurers (Tawuniya, Bupa Arabia, MedGulf, Allianz, AXA). Many home nursing, physician, and physiotherapy visits are covered under premium and post-surgical recovery policies. Our billing team verifies pre-authorization with your provider before any visit.</div></div>
+          </div>
+          <div class="qa">
+            <button class="qa-q" type="button">
+              <span class="t">How quickly can a team arrive?</span>
+              <span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
+            </button>
+            <div class="qa-a"><div class="inner">For non-urgent visits, our average response is under four hours. Same-day visits are typically available when requested before 2 PM. Specialty appointments (orthopedic consultants, physiotherapy plans) are usually scheduled 24–48 hours in advance.</div></div>
+          </div>
+          <div class="qa">
+            <button class="qa-q" type="button">
+              <span class="t">Can home care treat emergencies?</span>
+              <span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
+            </button>
+            <div class="qa-a"><div class="inner">No. Home care is structured for scheduled, non-emergency clinical visits, chronic-disease follow-ups, and rehabilitation. For acute emergencies, call Saudi Red Crescent (997) or proceed to the nearest ER. Our coordinators can advise on the right path if you're unsure.</div></div>
+          </div>
+          <div class="qa">
+            <button class="qa-q" type="button">
+              <span class="t">Are your visiting staff fully credentialed?</span>
+              <span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
+            </button>
+            <div class="qa-a"><div class="inner">Every visiting physician, nurse, and physiotherapist holds an active SCFHS license, has cleared My Clinic's internal credentialing, and is trained on our home-visit protocols. Our operation follows CBAHI guidelines, the same standards as our hospitals.</div></div>
+          </div>
+          <div class="qa">
+            <button class="qa-q" type="button">
+              <span class="t">How is my data handled?</span>
+              <span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
+            </button>
+            <div class="qa-a"><div class="inner">All visit notes, prescriptions, and lab results are encrypted in transit and at rest, and stored in your patient portal under PDPL-compliant infrastructure. You control who in your family has access. Records sync within minutes of the visit ending.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final">
+    <div class="wrap">
+      <div class="final-card fade">
+        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=1400&q=70');"></div>
+        <div class="body">
+          <div class="eye">Ready when you are</div>
+          <h2>The next visit<br>could be <em>tomorrow.</em></h2>
+          <p>Tell us about the patient and what's needed. A nurse coordinator will be on the line within minutes — and a team at your door, usually the same day.</p>
+          <div class="ctas">
+            <a href="#booking" class="btn white">Request a home visit</a>
+            <a href="tel:920022811" class="btn outline">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92Z"/></svg>
+              Call 920022811
+            </a>
+          </div>
+          <div class="signoff">
+            <div>Now booking<b>Sat–Thu · 8 AM – 10 PM</b></div>
+            <div>Friday<b>5 PM – 9 PM</b></div>
+            <div>WhatsApp anytime<b>0542228111</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </main>
 
-<!-- footer -->
+<!-- FOOTER -->
 <footer>
   <div class="wrap">
     <div class="foot-grid">
@@ -839,203 +1135,116 @@
         <div class="logo">
           <img class="brand-logo" src="/logo.svg" alt="My Clinic">
         </div>
-        <p class="lede">My Clinic is your partner in health and wellness. With a focus on prevention and early intervention, our team of experts is committed to helping you stay healthy and live your best life.</p>
+        <p class="lede">My Clinic delivers hospital-grade care at home — from physician visits to nursing and rehab. Five branches across Jeddah and Riyadh, CBAHI accredited.</p>
         <div class="contact">
-          <strong>920022811</strong><br>
+          <b>920022811</b>
           WhatsApp · 0542228111
         </div>
       </div>
       <div>
         <h5>Company</h5>
-        <ul><li><a href="#">About My Clinic</a></li><li><a href="#">Our Sites</a></li><li><a href="#">Services</a></li></ul>
-        <h5 style="margin-top: 28px;">Useful Links</h5>
-        <ul><li><a href="#">Contact Us</a></li><li><a href="#">Careers</a></li><li><a href="#">Privacy Policy</a></li></ul>
+        <ul><li><a href="#">About My Clinic</a></li><li><a href="#">Our Sites</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li></ul>
       </div>
       <div>
         <h5>Care</h5>
         <ul><li><a href="/find-a-doctor.html">Find a Doctor</a></li><li><a href="/specialties.html">Specialties</a></li><li><a href="/programs.html">Programs</a></li><li><a href="/telemedicine.html">Telemedicine</a></li><li><a href="/home-healthcare.html">Home Healthcare</a></li></ul>
       </div>
       <div>
-        <h5>Call Center Working Hours</h5>
-        <ul><li>Saturday – Thursday · 8 AM – 10 PM</li><li>Friday · 5 PM – 9 PM</li></ul>
-        <h5 style="margin-top: 28px;">Our Branches</h5>
+        <h5>Branches</h5>
         <ul><li>Jeddah · Al Mohammadiyah</li><li>Jeddah · Al Safa</li><li>Jeddah · Al Khalidiyyah Dental</li><li>Jeddah · Tahlia</li><li>Riyadh · Al Sahafa</li></ul>
       </div>
       <div>
         <h5>Get the app</h5>
         <ul><li><a href="#">App Store</a></li><li><a href="#">Google Play</a></li></ul>
-        <h5 style="margin-top: 28px;">Book Now</h5>
-        <ul><li><a href="/find-a-doctor.html">Book an appointment</a></li></ul>
+        <h5 style="margin-top: 28px;">Policies</h5>
+        <ul><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul>
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© My Clinic 2026 · All rights reserved · CBAHI Accredited</span>
-      <div class="socials"><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">X</a><a href="#">YouTube</a><a href="#">LinkedIn</a></div>
+      <span>© 2026 My Clinic · All rights reserved · CBAHI Accredited · SCFHS Licensed</span>
+      <div class="socials"><a href="#">Instagram</a><a href="#">X</a><a href="#">YouTube</a><a href="#">LinkedIn</a></div>
     </div>
   </div>
 </footer>
 
-<!-- sticky CTA -->
+<!-- STICKY CTA -->
 <div class="sticky-cta" id="stickyCta">
-  <span class="text">Need home testing? Phlebotomists available <b style="color: #fff;">Tomorrow Morning</b></span>
-  <a href="https://wa.me/966542228111?text=Hi%2C%20I'd%20like%20to%20book%20a%20Home%20Lab%20Test%20sample%20collection.">Book Lab Visit →</a>
+  <span class="t">Need a visit? Next slot <b>tomorrow 9:30 AM</b></span>
+  <a href="#booking" class="b">Book now →</a>
 </div>
 
 <script>
-// Mock Doctor Database (for Home care highlights)
-const doctors = [
-  {
-    id: 3,
-    name: "Dr. Khalid Al-Subaie",
-    specialty: "Internal Medicine",
-    title: "Consultant Internal Medicine",
-    experience: 18,
-    branch: "Jeddah Tahlia",
-    rating: 4.7,
-    reviews: 114,
-    homecare: true,
-    img: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=500&q=70"
-  },
-  {
-    id: 5,
-    name: "Dr. Yousef Al-Harbi",
-    specialty: "Orthopedic Surgery",
-    title: "Consultant Orthopedic Surgeon",
-    experience: 19,
-    branch: "Jeddah Al Mohammadiyah",
-    rating: 4.8,
-    reviews: 87,
-    homecare: true,
-    img: "https://images.unsplash.com/photo-1612531822380-fc73a39a4bbe?auto=format&fit=crop&w=500&q=70"
-  }
-];
-
-document.addEventListener('DOMContentLoaded', () => {
-  // Navigation scrolling animation
-  const nav = document.querySelector('.nav');
-  if (nav) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        nav.classList.add('scrolled');
-      } else {
-        nav.classList.remove('scrolled');
-      }
-    }, { passive: true });
-  }
-
-  // Sticky CTA slide in
+(function(){
+  // Nav scroll
+  const nav = document.getElementById('nav');
   const stickyCta = document.getElementById('stickyCta');
-  if (stickyCta) {
-    setTimeout(() => {
-      stickyCta.classList.add('active');
-    }, 1500);
-  }
+  const onScroll = () => {
+    nav.classList.toggle('scrolled', window.scrollY > 30);
+    if (stickyCta) stickyCta.classList.toggle('show', window.scrollY > 700);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
 
-  // Language switcher
-  const langPill = document.querySelector('.lang-pill');
-  if (langPill) {
-    langPill.addEventListener('click', (event) => {
-      const target = event.target.closest('button');
-      if (!target) return;
-      langPill.querySelectorAll('button').forEach((button) => {
-        const active = button === target;
-        button.classList.toggle('active', active);
-        button.setAttribute('aria-pressed', String(active));
-      });
+  // Mobile menu
+  const toggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (toggle && mobileMenu) {
+    toggle.addEventListener('click', () => {
+      const open = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!open));
+      mobileMenu.classList.toggle('open', !open);
+      mobileMenu.setAttribute('aria-hidden', String(open));
+      document.body.style.overflow = !open ? 'hidden' : '';
     });
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      toggle.setAttribute('aria-expanded', 'false');
+      mobileMenu.classList.remove('open');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }));
   }
 
-  // Hydrate Doctors Grid
-  const homeCareDoctorsGrid = document.getElementById('homeCareDoctorsGrid');
-  if (homeCareDoctorsGrid) {
-    homeCareDoctorsGrid.innerHTML = '';
-    doctors.forEach(doc => {
-      const cardHtml = `
-        <div class="doc-card">
-          <div class="doc-img-wrapper">
-            <span class="experience-badge">${doc.experience} Years Exp</span>
-            <img src="${doc.img}" alt="${doc.name}" onerror="this.style.display='none'">
-          </div>
-          <div class="doc-body">
-            <h4>${doc.name}</h4>
-            <div class="doc-title-row">${doc.title}</div>
-            <div class="doc-rating-row">
-              <span class="star-badge">★ ${doc.rating}</span>
-              <span>(${doc.reviews} reviews)</span>
-            </div>
-            <div class="doc-homecare-badge">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-              Available for Home Visit
-            </div>
-            <div class="doc-actions">
-              <a href="/doctor-details.html?id=${doc.id}" class="profile-btn">View Profile</a>
-              <a href="https://wa.me/966542228111?text=Hi%2C%20I'd%20like%20to%20book%20a%20home%20visit%20with%20${encodeURIComponent(doc.name)}." target="_blank" class="book-btn">Request Home Visit</a>
-            </div>
-          </div>
-        </div>
-      `;
-      const div = document.createElement('div');
-      div.innerHTML = cardHtml;
-      homeCareDoctorsGrid.appendChild(div.firstElementChild);
-    });
-  }
+  // Services tabs (click + hover)
+  const items = document.querySelectorAll('.svc-item');
+  const panels = document.querySelectorAll('.svc-panel');
+  const activateSvc = i => {
+    items.forEach(x => x.classList.remove('active'));
+    panels.forEach(x => x.classList.remove('active'));
+    items[i].classList.add('active');
+    panels[i].classList.add('active');
+  };
+  items.forEach((it, i) => {
+    it.addEventListener('click', () => activateSvc(i));
+    it.addEventListener('mouseenter', () => activateSvc(i));
+  });
 
-  // FAQ Accordion Toggle Logic
-  const faqItems = document.querySelectorAll('.faq-item');
-  faqItems.forEach(item => {
-    const trigger = item.querySelector('.faq-trigger');
-    const content = item.querySelector('.faq-content');
-    
-    trigger.addEventListener('click', () => {
-      const isActive = item.classList.contains('active');
-      
-      // Close other items
-      faqItems.forEach(otherItem => {
-        otherItem.classList.remove('active');
-        otherItem.querySelector('.faq-content').style.maxHeight = null;
+  // FAQ
+  document.querySelectorAll('.qa-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const qa = btn.parentElement;
+      const open = qa.classList.contains('open');
+      document.querySelectorAll('.qa').forEach(o => {
+        o.classList.remove('open');
+        o.querySelector('.qa-a').style.maxHeight = null;
       });
-      
-      if (!isActive) {
-        item.classList.add('active');
-        content.style.maxHeight = content.scrollHeight + 'px';
+      if (!open) {
+        qa.classList.add('open');
+        const a = qa.querySelector('.qa-a');
+        a.style.maxHeight = a.scrollHeight + 'px';
       }
     });
   });
+  const first = document.querySelector('.qa.open .qa-a');
+  if (first) first.style.maxHeight = first.scrollHeight + 'px';
 
-  // GSAP Entrance Animations
-  gsap.from(".subpage-hero-inner", {
-    opacity: 0,
-    y: 30,
-    duration: 0.7,
-    ease: "power2.out"
-  });
-  
-  gsap.from(".service-card", {
-    opacity: 0,
-    y: 30,
-    duration: 0.6,
-    stagger: 0.15,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: ".services-grid",
-      start: "top 80%"
-    }
-  });
-
-  gsap.from(".workflow-step", {
-    opacity: 0,
-    y: 20,
-    duration: 0.6,
-    stagger: 0.15,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: ".workflow-grid",
-      start: "top 85%"
-    }
-  });
-});
+  // Fade-in
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade').forEach(el => io.observe(el));
+})();
 </script>
 
 <script src="/assets/language-switcher.js"></script>
+<script src="/assets/mobile-nav.js"></script>
 </body>
 </html>
