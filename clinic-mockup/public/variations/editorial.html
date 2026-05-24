@@ -1,0 +1,894 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>My Clinic — Editorial</title>
+<meta name="viewport" content="width=1440">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=Geist:wght@300;400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/shared.css">
+<style>
+  :root {
+    --serif: 'Newsreader', Georgia, serif;
+    --sans: 'Geist', system-ui, -apple-system, sans-serif;
+    --ar: 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  }
+  body { font-family: var(--sans); background: #fff; color: var(--ink); font-size: 16px; line-height: 1.5; letter-spacing: -0.005em; }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 0 40px; }
+  .ar { font-family: var(--ar); }
+
+  /* Announcement strip */
+  .ribbon { background: var(--navy-deep); color: #fff; font-size: 13px; padding: 9px 0; }
+  .ribbon .wrap { display: flex; justify-content: space-between; align-items: center; }
+  .ribbon-left { display: flex; gap: 22px; align-items: center; color: rgba(255,255,255,.78); }
+  .ribbon-left b { color: #fff; font-weight: 500; }
+  .ribbon-right { display: flex; gap: 18px; align-items: center; color: rgba(255,255,255,.78); }
+  .ribbon a:hover { color: #fff; }
+  .dot { width: 5px; height: 5px; background: var(--coral); border-radius: 50%; display: inline-block; }
+
+  /* Nav */
+  .nav { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.92); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+  .nav .wrap { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 18px 40px; }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo-mark { width: 36px; height: 36px; }
+  .logo-txt { line-height: 1; }
+  .logo-txt .en { font-family: var(--serif); font-size: 22px; font-weight: 500; letter-spacing: -0.02em; }
+  .logo-txt .ar { font-size: 11px; color: var(--mute); letter-spacing: 0; margin-top: 3px; }
+  .nav-links { display: flex; gap: 36px; justify-content: center; }
+  .nav-links a { font-size: 14px; color: var(--ink-2); font-weight: 450; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-right { display: flex; gap: 14px; justify-content: flex-end; align-items: center; }
+  .icon-btn { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--line-cool); transition: .15s; }
+  .icon-btn:hover { background: var(--paper); }
+  .btn { font-size: 14px; font-weight: 500; padding: 11px 20px; border-radius: 999px; transition: .15s; }
+  .btn.primary { background: var(--navy); color: #fff; }
+  .btn.primary:hover { background: var(--navy-deep); }
+  .btn.ghost { color: var(--ink); }
+  .btn.ghost:hover { background: var(--paper); }
+  .lang-pill { font-size: 13px; color: var(--mute); padding: 6px 10px; border-radius: 999px; }
+  .lang-pill .active { color: var(--ink); font-weight: 500; }
+
+  /* Hero */
+  .hero { position: relative; padding: 0; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; padding: 64px 40px 0; max-width: 1440px; margin: 0 auto; align-items: end; min-height: 720px; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy); font-weight: 500; }
+  .eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--navy); }
+  .h-display { font-family: var(--serif); font-weight: 400; font-size: 92px; line-height: 0.95; letter-spacing: -0.035em; color: var(--navy-ink); margin: 26px 0 28px; }
+  .h-display em { font-style: italic; font-weight: 400; color: var(--navy); }
+  .h-sub { font-size: 18px; line-height: 1.55; color: var(--ink-2); max-width: 520px; margin-bottom: 36px; }
+  .hero-ar { font-family: var(--ar); color: var(--mute); font-size: 15px; margin-top: 24px; direction: rtl; max-width: 460px; }
+
+  .hero-meta { display: flex; gap: 40px; margin-top: 60px; padding-top: 36px; border-top: 1px solid var(--line); }
+  .hero-meta div { font-size: 13px; color: var(--mute); }
+  .hero-meta div b { display: block; font-family: var(--serif); font-size: 40px; font-weight: 400; color: var(--navy-ink); letter-spacing: -0.02em; margin-bottom: 4px; line-height: 1; }
+
+  .hero-portrait { position: relative; aspect-ratio: 4/5; border-radius: 4px; overflow: hidden; background: linear-gradient(160deg, #C7D4E5 0%, #8FA9C4 100%); }
+  .hero-portrait img { width: 100%; height: 100%; object-fit: cover; }
+  .portrait-caption { position: absolute; bottom: 24px; left: 24px; right: 24px; color: #fff; font-family: var(--serif); font-style: italic; font-size: 17px; line-height: 1.4; text-shadow: 0 2px 12px rgba(0,0,0,.4); }
+  .portrait-caption small { display: block; font-family: var(--sans); font-style: normal; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.85; margin-bottom: 8px; }
+
+  /* Search card */
+  .search-card { background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow-lg); border-radius: 6px; padding: 6px; display: grid; grid-template-columns: 1fr 1fr 1fr auto; align-items: stretch; max-width: 1240px; margin: 56px auto -50px; position: relative; z-index: 5; }
+  .search-card .field { padding: 18px 22px; border-right: 1px solid var(--line); display: flex; flex-direction: column; gap: 4px; }
+  .search-card .field:last-of-type { border-right: 0; }
+  .search-card .field label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); font-weight: 500; }
+  .search-card .field .val { display: flex; align-items: center; gap: 8px; font-size: 15px; color: var(--ink); }
+  .search-card .field .val svg { width: 14px; opacity: 0.5; }
+  .search-card button.go { background: var(--navy); color: #fff; padding: 0 36px; border-radius: 4px; font-size: 15px; font-weight: 500; display: flex; align-items: center; gap: 10px; }
+  .search-card button.go:hover { background: var(--navy-deep); }
+
+  /* Strip after hero */
+  .trust-strip { background: var(--paper); padding: 110px 0 40px; margin-top: -20px; }
+  .trust-row { display: flex; justify-content: space-between; align-items: center; gap: 40px; opacity: 0.7; }
+  .trust-row .label { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mute); }
+  .trust-row .logos { display: flex; gap: 56px; }
+  .trust-row .logos span { font-family: var(--serif); font-size: 18px; color: var(--ink-2); letter-spacing: -0.01em; opacity: 0.6; }
+
+  /* Section base */
+  section.block { padding: 130px 0; }
+  .section-head { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; margin-bottom: 64px; }
+  .section-title { font-family: var(--serif); font-size: 64px; font-weight: 400; line-height: 1; letter-spacing: -0.03em; color: var(--navy-ink); margin: 18px 0 0; }
+  .section-title em { font-style: italic; color: var(--navy); }
+  .section-desc { font-size: 17px; color: var(--ink-2); line-height: 1.55; max-width: 460px; }
+  .section-cta { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 500; color: var(--navy); margin-top: 18px; }
+  .section-cta::after { content: '→'; transition: .2s; }
+  .section-cta:hover::after { transform: translateX(4px); }
+
+  /* Specialties bento */
+  .bento { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: 220px; gap: 16px; }
+  .bento .cell { background: var(--paper); border-radius: 4px; padding: 28px; position: relative; overflow: hidden; transition: .25s; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; }
+  .bento .cell:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .bento .cell.dark { background: var(--navy-ink); color: #fff; }
+  .bento .cell.dark .num { color: rgba(255,255,255,.4); }
+  .bento .cell.image { background-position: center; background-size: cover; color: #fff; }
+  .bento .cell.image::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 30%, rgba(11,31,61,.78)); }
+  .bento .cell .top { position: relative; z-index: 2; display: flex; justify-content: space-between; }
+  .bento .cell .bottom { position: relative; z-index: 2; }
+  .bento .cell .num { font-family: var(--serif); font-size: 13px; font-style: italic; color: var(--mute); }
+  .bento .cell .name { font-family: var(--serif); font-size: 28px; line-height: 1.05; letter-spacing: -0.02em; margin: 0; font-weight: 400; }
+  .bento .cell .name em { font-style: italic; }
+  .bento .cell .meta { font-size: 12px; color: var(--mute); margin-top: 8px; }
+  .bento .cell.dark .meta, .bento .cell.image .meta { color: rgba(255,255,255,.7); }
+  .bento .span-3 { grid-column: span 3; }
+  .bento .span-4 { grid-column: span 4; }
+  .bento .span-5 { grid-column: span 5; }
+  .bento .span-6 { grid-column: span 6; }
+  .bento .row-2 { grid-row: span 2; }
+  .bento .arrow { width: 32px; height: 32px; border: 1px solid var(--line); border-radius: 50%; display: grid; place-items: center; font-size: 12px; }
+  .bento .cell.dark .arrow, .bento .cell.image .arrow { border-color: rgba(255,255,255,.3); }
+
+  /* Find doctor */
+  .doctors { background: var(--cream); padding: 130px 0; }
+  .doc-grid { display: grid; grid-template-columns: 1.2fr 2fr; gap: 80px; align-items: start; }
+  .doc-left { position: sticky; top: 100px; }
+  .doc-search { background: #fff; border: 1px solid var(--line); border-radius: 4px; padding: 24px; margin-top: 32px; }
+  .doc-search .row { display: flex; gap: 8px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .doc-search .row:last-of-type { border-bottom: 0; }
+  .doc-search .row svg { width: 16px; opacity: 0.5; }
+  .doc-search .row input { flex: 1; border: 0; outline: 0; font: inherit; background: transparent; }
+  .doc-search button { background: var(--navy); color: #fff; padding: 14px; border-radius: 4px; width: 100%; margin-top: 16px; font-weight: 500; }
+  .doc-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .doc-tile { background: #fff; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; transition: .2s; }
+  .doc-tile:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .doc-tile .photo { aspect-ratio: 4/5; background: linear-gradient(165deg, #DCE3EE, #B9C7D9); position: relative; overflow: hidden; }
+  .doc-tile .photo img { width: 100%; height: 100%; object-fit: cover; }
+  .doc-tile .info { padding: 18px; }
+  .doc-tile .info h4 { font-family: var(--serif); font-weight: 400; font-size: 19px; margin: 0 0 4px; letter-spacing: -0.015em; }
+  .doc-tile .info p { font-size: 12px; color: var(--mute); margin: 0 0 12px; line-height: 1.4; }
+  .doc-tile .info .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .doc-tile .info .tag { font-size: 10px; padding: 4px 8px; background: var(--paper); border-radius: 999px; color: var(--ink-2); letter-spacing: 0.04em; text-transform: uppercase; }
+  .doc-tile .info .avail { display: flex; align-items: center; gap: 8px; padding-top: 12px; margin-top: 12px; border-top: 1px solid var(--line); font-size: 12px; color: var(--ink-2); }
+  .doc-tile .info .avail .pill { width: 7px; height: 7px; background: #4CAF50; border-radius: 50%; }
+
+  /* Programs */
+  .programs { padding: 130px 0; }
+  .prog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .prog-card { position: relative; aspect-ratio: 4/5; border-radius: 6px; overflow: hidden; cursor: pointer; background: linear-gradient(160deg, #D5DDE9, #95A7BE); transition: .25s; }
+  .prog-card:hover { transform: scale(1.005); }
+  .prog-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: .4s; }
+  .prog-card:hover img { transform: scale(1.04); }
+  .prog-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 30%, rgba(10,42,82,.85)); }
+  .prog-card .num { position: absolute; top: 24px; left: 24px; right: 24px; display: flex; justify-content: space-between; color: #fff; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; z-index: 2; }
+  .prog-card .num span { opacity: 0.75; }
+  .prog-card .body { position: absolute; bottom: 0; left: 0; right: 0; padding: 28px; color: #fff; z-index: 2; }
+  .prog-card .body h3 { font-family: var(--serif); font-weight: 400; font-size: 28px; margin: 0 0 10px; letter-spacing: -0.02em; line-height: 1.05; }
+  .prog-card .body p { font-size: 13px; opacity: 0.85; margin: 0 0 18px; line-height: 1.5; max-width: 280px; }
+  .prog-card .body .more { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; padding: 8px 14px; background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3); border-radius: 999px; backdrop-filter: blur(8px); }
+
+  /* Split — Telemedicine / Home */
+  .split { background: var(--paper); padding: 130px 0; }
+  .split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .split-card { background: #fff; border-radius: 6px; padding: 56px; min-height: 540px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
+  .split-card.dark { background: var(--navy-ink); color: #fff; }
+  .split-card .label { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mute); font-weight: 500; }
+  .split-card.dark .label { color: rgba(255,255,255,.5); }
+  .split-card h3 { font-family: var(--serif); font-size: 48px; font-weight: 400; line-height: 1.02; letter-spacing: -0.025em; margin: 14px 0 22px; }
+  .split-card p { font-size: 16px; line-height: 1.55; color: var(--ink-2); max-width: 380px; margin: 0; }
+  .split-card.dark p { color: rgba(255,255,255,.75); }
+  .split-card .visual { position: absolute; right: -30px; bottom: -30px; width: 260px; height: 260px; border-radius: 50%; background: var(--paper); display: grid; place-items: center; }
+  .split-card.dark .visual { background: rgba(255,255,255,.05); }
+  .split-card .cta { display: inline-flex; align-items: center; gap: 12px; font-weight: 500; font-size: 15px; padding: 14px 22px; background: var(--navy); color: #fff; border-radius: 999px; width: fit-content; margin-top: 28px; }
+  .split-card.dark .cta { background: #fff; color: var(--navy-ink); }
+
+  /* Stats */
+  .stats { background: var(--navy-ink); color: #fff; padding: 120px 0; }
+  .stats-head { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 80px; align-items: end; }
+  .stats-head h2 { font-family: var(--serif); font-weight: 400; font-size: 64px; line-height: 1; letter-spacing: -0.03em; margin: 0; }
+  .stats-head h2 em { font-style: italic; color: rgba(255,255,255,.6); }
+  .stats-head p { font-size: 17px; color: rgba(255,255,255,.7); max-width: 460px; line-height: 1.55; }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid rgba(255,255,255,.15); border-bottom: 1px solid rgba(255,255,255,.15); }
+  .stats-grid > div { padding: 48px 32px 48px 0; border-right: 1px solid rgba(255,255,255,.15); }
+  .stats-grid > div:last-child { border-right: 0; padding-right: 0; }
+  .stats-num { font-family: var(--serif); font-size: 86px; font-weight: 300; letter-spacing: -0.03em; line-height: 1; margin-bottom: 12px; }
+  .stats-num sup { font-size: 28px; vertical-align: top; margin-left: 4px; opacity: 0.7; }
+  .stats-grid .label { font-size: 13px; color: rgba(255,255,255,.65); line-height: 1.4; }
+
+  /* Map clinics */
+  .clinics { padding: 130px 0; background: var(--cream); }
+  .clinic-wrap { display: grid; grid-template-columns: 1fr 1.4fr; gap: 56px; }
+  .clinic-list { display: flex; flex-direction: column; gap: 8px; max-height: 580px; overflow: hidden; }
+  .clinic-item { padding: 22px 24px; border: 1px solid transparent; border-radius: 4px; cursor: pointer; transition: .15s; background: #fff; }
+  .clinic-item.active { border-color: var(--navy); }
+  .clinic-item .name { font-family: var(--serif); font-size: 22px; letter-spacing: -0.015em; margin-bottom: 4px; }
+  .clinic-item .addr { font-size: 13px; color: var(--mute); margin-bottom: 12px; }
+  .clinic-item .meta { display: flex; gap: 18px; font-size: 12px; color: var(--ink-2); }
+  .clinic-item .meta span { display: flex; align-items: center; gap: 6px; }
+  .clinic-item .meta b { color: var(--navy); font-weight: 500; }
+  .map { background: #E9EEF5; border-radius: 6px; aspect-ratio: 4/3; position: relative; overflow: hidden; background-image:
+    radial-gradient(circle at 30% 40%, #DCE6F2 0%, transparent 40%),
+    radial-gradient(circle at 70% 60%, #D5E0EE 0%, transparent 35%),
+    linear-gradient(135deg, #EEF3FA 0%, #DCE6F2 100%);
+  }
+  .map::before, .map::after { content: ''; position: absolute; background: rgba(14,58,111,.05); }
+  .map::before { width: 60%; height: 30%; left: 10%; top: 35%; border-radius: 40%; transform: rotate(-15deg); }
+  .map-roads { position: absolute; inset: 0; opacity: 0.3; background-image:
+    linear-gradient(90deg, transparent 49.5%, #B9C7D9 49.5%, #B9C7D9 50.5%, transparent 50.5%),
+    linear-gradient(0deg, transparent 49.5%, #B9C7D9 49.5%, #B9C7D9 50.5%, transparent 50.5%),
+    linear-gradient(60deg, transparent 49.5%, #B9C7D9 49.5%, #B9C7D9 50.5%, transparent 50.5%);
+    background-size: 200px 200px, 200px 200px, 280px 280px;
+  }
+  .pin { position: absolute; width: 36px; height: 36px; border-radius: 50% 50% 50% 0; background: var(--coral); transform: rotate(-45deg); box-shadow: 0 8px 18px rgba(233,107,74,.4); cursor: pointer; }
+  .pin::after { content: ''; position: absolute; inset: 8px; background: #fff; border-radius: 50%; }
+  .pin.navy { background: var(--navy); box-shadow: 0 8px 18px rgba(14,58,111,.35); }
+  .pin.active { transform: rotate(-45deg) scale(1.25); z-index: 5; }
+
+  /* News */
+  .news { padding: 130px 0; }
+  .news-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 36px; }
+  .news-card .img { aspect-ratio: 16/10; background: linear-gradient(160deg, #C7D4E5, #92A8C2); border-radius: 4px; margin-bottom: 22px; overflow: hidden; }
+  .news-card .img img { width: 100%; height: 100%; object-fit: cover; }
+  .news-card .tag { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); font-weight: 500; margin-bottom: 10px; }
+  .news-card h4 { font-family: var(--serif); font-weight: 400; font-size: 28px; line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 12px; }
+  .news-card.small h4 { font-size: 21px; }
+  .news-card .meta { font-size: 12px; color: var(--mute); }
+  .news-card.small .img { aspect-ratio: 4/3; }
+
+  /* Testimonials */
+  .testimony { padding: 130px 0; background: var(--paper); }
+  .test-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .test-quote { font-family: var(--serif); font-style: italic; font-size: 46px; font-weight: 300; line-height: 1.15; letter-spacing: -0.02em; color: var(--navy-ink); }
+  .test-quote::before { content: '“'; font-size: 80px; color: var(--coral); display: block; height: 30px; line-height: 0.8; margin-bottom: 18px; }
+  .test-author { display: flex; align-items: center; gap: 14px; margin-top: 36px; }
+  .test-author .ava { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, #B9C7D9, #93A8C0); }
+  .test-author .name { font-weight: 500; font-size: 15px; }
+  .test-author .role { font-size: 12px; color: var(--mute); }
+  .test-side { background: #fff; padding: 40px; border-radius: 4px; }
+  .test-side h4 { font-family: var(--serif); font-size: 24px; font-weight: 400; margin: 0 0 28px; letter-spacing: -0.02em; }
+  .test-mini { padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .test-mini:last-of-type { border-bottom: 0; }
+  .test-mini .stars { color: var(--coral); font-size: 13px; letter-spacing: 2px; margin-bottom: 8px; }
+  .test-mini p { font-size: 14px; color: var(--ink-2); margin: 0 0 8px; line-height: 1.5; }
+  .test-mini small { font-size: 11px; color: var(--mute); letter-spacing: 0.06em; text-transform: uppercase; }
+
+  /* App */
+  .app { padding: 130px 0; background: var(--navy-ink); color: #fff; overflow: hidden; position: relative; }
+  .app-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .app h2 { font-family: var(--serif); font-weight: 400; font-size: 64px; line-height: 1; letter-spacing: -0.03em; margin: 18px 0 24px; }
+  .app p { font-size: 17px; color: rgba(255,255,255,.7); line-height: 1.55; max-width: 460px; margin: 0 0 36px; }
+  .app .stores { display: flex; gap: 14px; }
+  .app .store { display: flex; align-items: center; gap: 12px; padding: 14px 22px; border: 1px solid rgba(255,255,255,.2); border-radius: 6px; transition: .15s; }
+  .app .store:hover { background: rgba(255,255,255,.05); }
+  .app .store small { display: block; font-size: 10px; opacity: 0.6; letter-spacing: 0.08em; text-transform: uppercase; }
+  .app .store b { font-weight: 500; font-size: 14px; }
+  .phone-mock { width: 280px; aspect-ratio: 9/19; background: #000; border-radius: 38px; padding: 8px; margin: 0 auto; position: relative; box-shadow: 0 40px 80px -20px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.1); }
+  .phone-mock .screen { border-radius: 32px; background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%); height: 100%; padding: 60px 22px 22px; position: relative; overflow: hidden; }
+  .phone-mock .notch { position: absolute; top: 18px; left: 50%; transform: translateX(-50%); width: 100px; height: 26px; background: #000; border-radius: 14px; z-index: 5; }
+  .phone-mock .screen .hi { color: rgba(255,255,255,.6); font-size: 11px; }
+  .phone-mock .screen .name { color: #fff; font-family: var(--serif); font-size: 22px; margin: 4px 0 24px; }
+  .phone-mock .screen .appt { background: rgba(255,255,255,.1); border-radius: 12px; padding: 14px; margin-bottom: 12px; }
+  .phone-mock .screen .appt .day { font-size: 10px; opacity: 0.6; }
+  .phone-mock .screen .appt .doc { color: #fff; font-size: 13px; margin-top: 4px; font-weight: 500; }
+  .phone-mock .screen .appt .when { font-size: 11px; opacity: 0.7; margin-top: 4px; }
+  .phone-mock .screen .pills { display: flex; gap: 8px; margin-top: 24px; flex-wrap: wrap; }
+  .phone-mock .screen .pills span { background: rgba(255,255,255,.1); border-radius: 999px; padding: 8px 14px; font-size: 11px; color: rgba(255,255,255,.8); }
+
+  /* Footer */
+  footer { background: #fff; border-top: 1px solid var(--line); padding: 80px 0 32px; }
+  .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr; gap: 56px; margin-bottom: 56px; }
+  .foot-grid h5 { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mute); font-weight: 500; margin: 0 0 18px; }
+  .foot-grid ul { list-style: none; padding: 0; margin: 0; }
+  .foot-grid li { padding: 6px 0; font-size: 14px; color: var(--ink-2); }
+  .foot-grid li a:hover { color: var(--navy); }
+  .foot-grid .lede { font-family: var(--serif); font-size: 26px; line-height: 1.15; letter-spacing: -0.02em; color: var(--navy-ink); margin: 14px 0 24px; max-width: 320px; }
+  .foot-grid .contact { font-size: 14px; color: var(--ink-2); line-height: 1.7; }
+  .foot-bottom { padding-top: 28px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; font-size: 12px; color: var(--mute); }
+  .foot-bottom .socials { display: flex; gap: 16px; }
+
+  /* Sticky CTA */
+  .sticky-cta { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: var(--navy-ink); color: #fff; border-radius: 999px; padding: 8px 8px 8px 24px; display: flex; align-items: center; gap: 20px; box-shadow: var(--shadow-lg); z-index: 40; }
+  .sticky-cta .text { font-size: 13px; opacity: 0.9; }
+  .sticky-cta button { background: var(--coral); color: #fff; padding: 10px 20px; border-radius: 999px; font-weight: 500; font-size: 13px; }
+  .sticky-cta button:hover { background: #d85b3c; }
+
+  /* Decor */
+  .deco-line { width: 100%; height: 1px; background: var(--line); margin: 0; }
+</style>
+</head>
+<body data-screen-label="V1 — Editorial Calm">
+
+<!-- ribbon -->
+<div class="ribbon">
+  <div class="wrap">
+    <div class="ribbon-left">
+      <span><span class="dot"></span> &nbsp;<b>Now open</b> · Sat–Thu 8 AM – 10 PM &nbsp;·&nbsp; Fri 5 PM – 9 PM</span>
+      <span>5 branches · Jeddah, Riyadh</span>
+    </div>
+    <div class="ribbon-right">
+      <a href="#">Patient portal</a>
+      <a href="#">Insurance</a>
+      <a href="#">Careers</a>
+      <a href="#">920 022 811</a>
+    </div>
+  </div>
+</div>
+
+<!-- nav -->
+<nav class="nav">
+  <div class="wrap">
+    <div class="logo">
+      <svg class="logo-mark" viewBox="0 0 40 40" fill="none">
+        <g fill="#0E3A6F">
+          <ellipse cx="20" cy="8" rx="4" ry="6" transform="rotate(0 20 8)"/>
+          <ellipse cx="32" cy="20" rx="4" ry="6" transform="rotate(90 32 20)"/>
+          <ellipse cx="20" cy="32" rx="4" ry="6"/>
+          <ellipse cx="8" cy="20" rx="4" ry="6" transform="rotate(90 8 20)"/>
+          <circle cx="20" cy="20" r="3"/>
+        </g>
+      </svg>
+      <div class="logo-txt">
+        <div class="en">My Clinic</div>
+        <div class="ar">عيـــادتــي</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#">Find a doctor</a>
+      <a href="#">Specialties</a>
+      <a href="#">Programs</a>
+      <a href="#">Telemedicine</a>
+      <a href="#">Home care</a>
+      <a href="#">About</a>
+    </div>
+    <div class="nav-right">
+      <span class="lang-pill"><span class="active">EN</span> · AR</span>
+      <button class="icon-btn" aria-label="Search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg>
+      </button>
+      <button class="btn primary">Book appointment</button>
+    </div>
+  </div>
+</nav>
+
+<!-- hero -->
+<header class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow">Healthcare in Saudi Arabia · Since 2009</div>
+      <h1 class="h-display">Care that <em>listens</em>,<br>medicine that <em>moves</em><br>with you.</h1>
+      <p class="h-sub">From your first call to follow-up, My Clinic brings together specialists, technology, and an unhurried bedside manner — across five branches in Jeddah and Riyadh.</p>
+      <div class="hero-ar">رعاية تنصت إليك، وطب يواكب حياتك — في خمسة فروع عبر جدة والرياض.</div>
+      <div class="hero-meta">
+        <div><b>180+</b>Physicians across 24 specialties</div>
+        <div><b>1.2M</b>Patients seen in 2025</div>
+        <div><b>JCI</b>CBAHI accredited care</div>
+      </div>
+    </div>
+    <div class="hero-portrait">
+      <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=900&q=70" alt="" onerror="this.style.display='none'">
+      <div class="portrait-caption">
+        <small>Dr. Layla Al-Rashed · Internal Medicine</small>
+        “We give our patients more than a diagnosis. We give them time, and a plan they can live with.”
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="search-card">
+      <div class="field">
+        <label>Branch</label>
+        <div class="val">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-7.5-7-12a7 7 0 1 1 14 0c0 4.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Jeddah · Al Mohammadiyah
+        </div>
+      </div>
+      <div class="field">
+        <label>Specialty</label>
+        <div class="val">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3v12a4 4 0 0 0 8 0"/><circle cx="6" cy="3" r="1.5"/><circle cx="12" cy="3" r="1.5"/></svg>
+          Internal Medicine
+        </div>
+      </div>
+      <div class="field">
+        <label>Doctor</label>
+        <div class="val" style="color: var(--mute)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+          Any available
+        </div>
+      </div>
+      <button class="go">Find appointment <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<!-- trust strip -->
+<div class="trust-strip">
+  <div class="wrap">
+    <div class="trust-row">
+      <div class="label">Trusted partners & insurers</div>
+      <div class="logos">
+        <span>Bupa Arabia</span>
+        <span>Tawuniya</span>
+        <span>MedGulf</span>
+        <span>Allianz</span>
+        <span>Saudi Re</span>
+        <span>Walaa</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- specialties bento -->
+<section class="block">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">24 Specialties</div>
+        <h2 class="section-title">Care in every <em>shape</em> a body asks for.</h2>
+      </div>
+      <div>
+        <p class="section-desc">From cardiology to obstetrics, our specialists work as one team — sharing notes, rooms, and rounds, so your care never feels handed off.</p>
+        <a class="section-cta" href="#">View all specialties</a>
+      </div>
+    </div>
+
+    <div class="bento">
+      <div class="cell image span-4 row-2" style="background-image: url('https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=800&q=70')">
+        <div class="top"><span class="num">01 / Cardiology</span><span class="arrow">→</span></div>
+        <div class="bottom"><h3 class="name">A heart that<br><em>keeps pace</em>.</h3><div class="meta">18 cardiologists · 6 sub-specialties</div></div>
+      </div>
+      <div class="cell span-4">
+        <div class="top"><span class="num">02 / Internal Medicine</span><span class="arrow">→</span></div>
+        <div class="bottom"><h3 class="name">Whole-body, primary care.</h3><div class="meta">24 physicians</div></div>
+      </div>
+      <div class="cell dark span-4">
+        <div class="top"><span class="num">03 / Endocrinology</span><span class="arrow">→</span></div>
+        <div class="bottom"><h3 class="name"><em>Diabetes</em> care, redesigned.</h3><div class="meta">Comprehensive metabolic program</div></div>
+      </div>
+      <div class="cell span-4">
+        <div class="top"><span class="num">04 / ENT</span><span class="arrow">→</span></div>
+        <div class="bottom"><h3 class="name">Hearing,<br>breathing, balance.</h3><div class="meta">12 specialists</div></div>
+      </div>
+      <div class="cell image span-4" style="background-image: url('https://images.unsplash.com/photo-1631815589968-fdb09a223b1e?auto=format&fit=crop&w=700&q=70')">
+        <div class="top"><span class="num">05 / Family Medicine</span><span class="arrow">→</span></div>
+        <div class="bottom"><h3 class="name">One doctor.<br>Whole family.</h3></div>
+      </div>
+      <div class="cell span-3">
+        <div class="top"><span class="num">06 / Ophthalmology</span><span class="arrow">→</span></div>
+        <div class="bottom"><h3 class="name">Eyes.</h3><div class="meta">Full surgical suite</div></div>
+      </div>
+      <div class="cell span-3">
+        <div class="top"><span class="num">07 / Orthopedics</span><span class="arrow">→</span></div>
+        <div class="bottom"><h3 class="name">Bones &amp; joints.</h3></div>
+      </div>
+      <div class="cell span-3">
+        <div class="top"><span class="num">08 / Obstetrics</span><span class="arrow">→</span></div>
+        <div class="bottom"><h3 class="name">Women's health.</h3></div>
+      </div>
+      <div class="cell dark span-3">
+        <div class="top"><span class="num">+16 more</span><span class="arrow">→</span></div>
+        <div class="bottom"><h3 class="name">Explore<br>all 24<br>specialties</h3></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- programs -->
+<section class="programs">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Care Programs</div>
+        <h2 class="section-title">Structured paths for the conditions that <em>need them most</em>.</h2>
+      </div>
+      <div>
+        <p class="section-desc">Multi-disciplinary programs that combine specialists, technology, and ongoing coaching — designed around the long arc of chronic care.</p>
+        <a class="section-cta" href="#">All programs</a>
+      </div>
+    </div>
+
+    <div class="prog-grid">
+      <div class="prog-card">
+        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=700&q=70" onerror="this.style.display='none'">
+        <div class="num"><span>Program 01</span><span>12 weeks</span></div>
+        <div class="body">
+          <h3>Diabetes<br>Management</h3>
+          <p>Adult and pediatric pathways. Personal endocrinologist, dietician, and continuous monitoring.</p>
+          <span class="more">Learn more →</span>
+        </div>
+      </div>
+      <div class="prog-card">
+        <img src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=700&q=70" onerror="this.style.display='none'">
+        <div class="num"><span>Program 02</span><span>40 weeks</span></div>
+        <div class="body">
+          <h3>Pregnancy<br>Care</h3>
+          <p>From early antenatal visits through postnatal support — a single OB-GYN team across every trimester.</p>
+          <span class="more">Learn more →</span>
+        </div>
+      </div>
+      <div class="prog-card">
+        <img src="https://images.unsplash.com/photo-1612531386530-97286d97c2d2?auto=format&fit=crop&w=700&q=70" onerror="this.style.display='none'">
+        <div class="num"><span>Program 03</span><span>Ongoing</span></div>
+        <div class="body">
+          <h3>Family<br>Center Care</h3>
+          <p>One pediatric and family medicine team for every member of the household.</p>
+          <span class="more">Learn more →</span>
+        </div>
+      </div>
+      <div class="prog-card">
+        <img src="https://images.unsplash.com/photo-1571772996211-2f02c9727629?auto=format&fit=crop&w=700&q=70" onerror="this.style.display='none'">
+        <div class="num"><span>Program 04</span><span>Lifelong</span></div>
+        <div class="body">
+          <h3>Hearing Aid<br>Program</h3>
+          <p>Audiology testing, fitting, calibration, and long-term hearing care across all ages.</p>
+          <span class="more">Learn more →</span>
+        </div>
+      </div>
+      <div class="prog-card">
+        <img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=700&q=70" onerror="this.style.display='none'">
+        <div class="num"><span>Program 05</span><span>26 weeks</span></div>
+        <div class="body">
+          <h3>Osteoporosis<br>Program</h3>
+          <p>DEXA, endocrine workup, and bone-strengthening protocols tailored to your stage.</p>
+          <span class="more">Learn more →</span>
+        </div>
+      </div>
+      <div class="prog-card">
+        <img src="https://images.unsplash.com/photo-1632053002131-09b1e8c6c2a3?auto=format&fit=crop&w=700&q=70" onerror="this.style.display='none'">
+        <div class="num"><span>Program 06</span><span>0–6 years</span></div>
+        <div class="body">
+          <h3>Pediatric<br>Vaccination</h3>
+          <p>Saudi MoH schedule, gentle technique, and digital records that travel with your child.</p>
+          <span class="more">Learn more →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- stats -->
+<section class="stats">
+  <div class="wrap">
+    <div class="stats-head">
+      <h2>Numbers that <em>mean</em><br>something to us.</h2>
+      <p>We measure ourselves not in size, but in continuity of care — the average patient sees the same physician 4.6 times across a year of treatment with us.</p>
+    </div>
+    <div class="stats-grid">
+      <div><div class="stats-num">17<sup>yrs</sup></div><div class="label">Caring for families across the Kingdom since 2009</div></div>
+      <div><div class="stats-num">5</div><div class="label">Branches in Jeddah & Riyadh, plus tele- and home care</div></div>
+      <div><div class="stats-num">180+</div><div class="label">Board-certified physicians across 24 specialties</div></div>
+      <div><div class="stats-num">1.2M</div><div class="label">Patients seen in 2025 — and counting</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- doctors -->
+<section class="doctors">
+  <div class="wrap doc-grid">
+    <div class="doc-left">
+      <div class="eyebrow">Find your doctor</div>
+      <h2 class="section-title" style="font-size: 56px;">The right physician<br>for the question <em>you're carrying</em>.</h2>
+      <p class="section-desc" style="margin-top: 24px;">Search by specialty, branch, language, or insurer. Every physician profile includes credentials, patient ratings, and live availability.</p>
+      <div class="doc-search">
+        <div class="row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg>
+          <input placeholder="Doctor, specialty, condition…">
+        </div>
+        <div class="row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-7.5-7-12a7 7 0 1 1 14 0c0 4.5-7 12-7 12z"/></svg>
+          <span style="color: var(--mute)">Any branch</span>
+        </div>
+        <div class="row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12h20M12 2v20"/></svg>
+          <span style="color: var(--mute)">Any insurance</span>
+        </div>
+        <button>Search physicians</button>
+      </div>
+    </div>
+    <div class="doc-tiles">
+      <div class="doc-tile">
+        <div class="photo"><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=500&q=70" onerror="this.style.display='none'"></div>
+        <div class="info">
+          <h4>Dr. Hisham Al-Otaibi</h4>
+          <p>Consultant Cardiologist · 22 yrs · Jeddah Al Safa</p>
+          <div class="tags"><span class="tag">Heart Failure</span><span class="tag">Interventional</span></div>
+          <div class="avail"><span class="pill"></span> Next available: <b style="color: var(--ink); margin-left: auto; font-weight: 500;">Tomorrow, 9:30 AM</b></div>
+        </div>
+      </div>
+      <div class="doc-tile">
+        <div class="photo"><img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=500&q=70" onerror="this.style.display='none'"></div>
+        <div class="info">
+          <h4>Dr. Reem Al-Qahtani</h4>
+          <p>Endocrinology & Diabetes · 14 yrs · Riyadh Al Sahafa</p>
+          <div class="tags"><span class="tag">Diabetes</span><span class="tag">Thyroid</span></div>
+          <div class="avail"><span class="pill"></span> Next available: <b style="color: var(--ink); margin-left: auto; font-weight: 500;">Today, 4:15 PM</b></div>
+        </div>
+      </div>
+      <div class="doc-tile">
+        <div class="photo"><img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=500&q=70" onerror="this.style.display='none'"></div>
+        <div class="info">
+          <h4>Dr. Khalid Al-Subaie</h4>
+          <p>Internal Medicine · 18 yrs · Jeddah Tahlia</p>
+          <div class="tags"><span class="tag">Primary care</span><span class="tag">Hypertension</span></div>
+          <div class="avail"><span class="pill"></span> Next available: <b style="color: var(--ink); margin-left: auto; font-weight: 500;">Wed, 11:00 AM</b></div>
+        </div>
+      </div>
+      <div class="doc-tile">
+        <div class="photo"><img src="https://images.unsplash.com/photo-1638202993928-7267aad84c31?auto=format&fit=crop&w=500&q=70" onerror="this.style.display='none'"></div>
+        <div class="info">
+          <h4>Dr. Noor Bakhsh</h4>
+          <p>Obstetrics & Gynecology · 11 yrs · Jeddah Al Khalidiyyah</p>
+          <div class="tags"><span class="tag">Antenatal</span><span class="tag">High-risk</span></div>
+          <div class="avail"><span class="pill"></span> Next available: <b style="color: var(--ink); margin-left: auto; font-weight: 500;">Tomorrow, 2:00 PM</b></div>
+        </div>
+      </div>
+      <div class="doc-tile">
+        <div class="photo"><img src="https://images.unsplash.com/photo-1612531822380-fc73a39a4bbe?auto=format&fit=crop&w=500&q=70" onerror="this.style.display='none'"></div>
+        <div class="info">
+          <h4>Dr. Yousef Al-Harbi</h4>
+          <p>Orthopedic Surgery · 19 yrs · Jeddah Al Mohammadiyah</p>
+          <div class="tags"><span class="tag">Knee</span><span class="tag">Sports</span></div>
+          <div class="avail"><span class="pill"></span> Next available: <b style="color: var(--ink); margin-left: auto; font-weight: 500;">Thu, 10:30 AM</b></div>
+        </div>
+      </div>
+      <div class="doc-tile">
+        <div class="photo"><img src="https://images.unsplash.com/photo-1651008376811-b90baee60c1f?auto=format&fit=crop&w=500&q=70" onerror="this.style.display='none'"></div>
+        <div class="info">
+          <h4>Dr. Sara Al-Faris</h4>
+          <p>Pediatrics · 9 yrs · Riyadh Al Sahafa</p>
+          <div class="tags"><span class="tag">Newborn</span><span class="tag">Vaccines</span></div>
+          <div class="avail"><span class="pill"></span> Next available: <b style="color: var(--ink); margin-left: auto; font-weight: 500;">Today, 6:00 PM</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- split: telemedicine + home -->
+<section class="split">
+  <div class="wrap">
+    <div class="split-grid">
+      <div class="split-card dark">
+        <div>
+          <div class="label">Telemedicine</div>
+          <h3>The clinic in<br>your pocket.</h3>
+          <p>Video consultations with the same physicians who'd see you in-clinic. Prescriptions, lab orders, and follow-up — all from home.</p>
+        </div>
+        <a class="cta">Start a video visit →</a>
+        <div class="visual">
+          <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="m22 8-6 4 6 4z"/></svg>
+        </div>
+      </div>
+      <div class="split-card">
+        <div>
+          <div class="label">Home Healthcare</div>
+          <h3>When the visit<br>comes to you.</h3>
+          <p>Doctor and nurse home visits, physiotherapy at your bedside, IV therapy, post-surgical care, and elder support — across Jeddah and Riyadh.</p>
+        </div>
+        <a class="cta">Request home care →</a>
+        <div class="visual">
+          <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="rgba(14,58,111,.2)" stroke-width="1"><path d="M3 11l9-8 9 8v10a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1z"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- map clinic finder -->
+<section class="clinics">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom: 56px;">
+      <div>
+        <div class="eyebrow">Locations</div>
+        <h2 class="section-title">Five branches.<br>One <em>standard of care</em>.</h2>
+      </div>
+      <div>
+        <p class="section-desc">Whichever branch you visit, your records, your physician notes, and your imaging follow you — seamlessly.</p>
+      </div>
+    </div>
+
+    <div class="clinic-wrap">
+      <div class="clinic-list">
+        <div class="clinic-item active">
+          <div class="name">Jeddah · Al Mohammadiyah</div>
+          <div class="addr">King Abdulaziz Rd, Al Mohammadiyah District, Jeddah</div>
+          <div class="meta"><span>● Open · until 10 PM</span><span><b>12</b> specialties</span><span><b>38</b> doctors</span></div>
+        </div>
+        <div class="clinic-item">
+          <div class="name">Jeddah · Al Safa</div>
+          <div class="addr">Prince Saud Al Faisal St, Al Safa District, Jeddah</div>
+          <div class="meta"><span>● Open · until 10 PM</span><span><b>14</b> specialties</span><span><b>42</b> doctors</span></div>
+        </div>
+        <div class="clinic-item">
+          <div class="name">Jeddah · Al Khalidiyyah Dental Center</div>
+          <div class="addr">Al Khalidiyyah, Jeddah · Specialized dental care</div>
+          <div class="meta"><span>● Open · until 10 PM</span><span><b>1</b> specialty</span><span><b>14</b> dentists</span></div>
+        </div>
+        <div class="clinic-item">
+          <div class="name">Riyadh · Al Sahafa</div>
+          <div class="addr">Anas Bin Malik Rd, Al Sahafa District, Riyadh</div>
+          <div class="meta"><span>● Open · until 10 PM</span><span><b>16</b> specialties</span><span><b>54</b> doctors</span></div>
+        </div>
+        <div class="clinic-item">
+          <div class="name">Jeddah · Tahlia</div>
+          <div class="addr">Prince Mohammed Bin Abdulaziz St, Tahlia, Jeddah</div>
+          <div class="meta"><span>● Open · until 10 PM</span><span><b>11</b> specialties</span><span><b>32</b> doctors</span></div>
+        </div>
+      </div>
+      <div class="map">
+        <div class="map-roads"></div>
+        <div class="pin active" style="left: 28%; top: 32%;"></div>
+        <div class="pin navy" style="left: 42%; top: 48%;"></div>
+        <div class="pin navy" style="left: 36%; top: 62%;"></div>
+        <div class="pin navy" style="left: 66%; top: 28%;"></div>
+        <div class="pin navy" style="left: 22%; top: 58%;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- testimonials -->
+<section class="testimony">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom: 64px;">
+      <div>
+        <div class="eyebrow">Patient stories</div>
+        <h2 class="section-title">What it <em>feels</em> like,<br>in our patients' words.</h2>
+      </div>
+      <div></div>
+    </div>
+
+    <div class="test-grid">
+      <div>
+        <blockquote class="test-quote">The booking was easy, the nurse was courteous, the waiting time was short, and I entered my appointment on time. May God grant them good health.</blockquote>
+        <div class="test-author">
+          <div class="ava"></div>
+          <div>
+            <div class="name">Fatimah A.</div>
+            <div class="role">Patient · Jeddah Al Safa</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-side">
+        <h4>More from patients</h4>
+        <div class="test-mini">
+          <div class="stars">★★★★★</div>
+          <p>More than great. Classy treatment, fast service, cleanliness. May God grant you success.</p>
+          <small>Mohammed K. · Riyadh</small>
+        </div>
+        <div class="test-mini">
+          <div class="stars">★★★★★</div>
+          <p>Dr. Reem was patient, thorough, and explained every step of my diabetes plan. I'm grateful.</p>
+          <small>Norah S. · Riyadh Al Sahafa</small>
+        </div>
+        <div class="test-mini">
+          <div class="stars">★★★★★</div>
+          <p>The home nurse came on time, was professional and warm. Made my recovery so much easier.</p>
+          <small>Abdullah M. · Jeddah</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- news -->
+<section class="news">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">News & announcements</div>
+        <h2 class="section-title">Inside <em>My Clinic</em>.</h2>
+      </div>
+      <div>
+        <p class="section-desc">Research, accreditations, partnerships, and the small milestones that make us proud.</p>
+        <a class="section-cta" href="#">All news</a>
+      </div>
+    </div>
+
+    <div class="news-grid">
+      <div class="news-card">
+        <div class="img"><img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=900&q=70" onerror="this.style.display='none'"></div>
+        <div class="tag">Research · May 2026</div>
+        <h4>"Breaking Barriers in Healthcare" — Unleashing innovation at My Clinic's First Annual Scientific Conference.</h4>
+        <div class="meta">8 min read · Dr. Layla Al-Rashed</div>
+      </div>
+      <div class="news-card small">
+        <div class="img"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=70" onerror="this.style.display='none'"></div>
+        <div class="tag">Partnership · Apr 2026</div>
+        <h4>My Clinic announced as Healthcare Partner of Jeddah United Basketball.</h4>
+        <div class="meta">3 min read</div>
+      </div>
+      <div class="news-card small">
+        <div class="img"><img src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=600&q=70" onerror="this.style.display='none'"></div>
+        <div class="tag">Accreditation · Mar 2026</div>
+        <h4>CBAHI awards My Clinic Al Safa five-year reaccreditation.</h4>
+        <div class="meta">2 min read</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- app -->
+<section class="app">
+  <div class="wrap app-grid">
+    <div>
+      <div class="eyebrow" style="color: rgba(255,255,255,.7);">My Clinic app</div>
+      <h2>A doctor, a clinic, a record — <em style="color: rgba(255,255,255,.55);">in one place</em>.</h2>
+      <p>Book and reschedule appointments, video-consult with your doctor, view lab results and prescriptions, and message your care team. iOS and Android.</p>
+      <div class="stores">
+        <a class="store">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+          <div><small>Download on the</small><b>App Store</b></div>
+        </a>
+        <a class="store">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M3.609 1.814 13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893 2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198 2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.196 12l2.502-2.491zM5.864 2.658 16.802 8.99l-2.302 2.302L5.864 2.658z"/></svg>
+          <div><small>Get it on</small><b>Google Play</b></div>
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="phone-mock">
+        <div class="notch"></div>
+        <div class="screen">
+          <div class="hi">Good evening,</div>
+          <div class="name">Ahmed</div>
+          <div class="appt">
+            <div class="day">UPCOMING · TOMORROW</div>
+            <div class="doc">Dr. Hisham Al-Otaibi · Cardiology</div>
+            <div class="when">9:30 AM · Jeddah Al Safa · Room 304</div>
+          </div>
+          <div class="appt">
+            <div class="day">LAB RESULTS · READY</div>
+            <div class="doc">CBC, Lipid Panel</div>
+            <div class="when">View results →</div>
+          </div>
+          <div class="pills">
+            <span>Video visit</span><span>Find doctor</span><span>Lab orders</span><span>Records</span><span>Prescriptions</span><span>Messages</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">
+          <svg class="logo-mark" viewBox="0 0 40 40" fill="none">
+            <g fill="#0E3A6F"><ellipse cx="20" cy="8" rx="4" ry="6"/><ellipse cx="32" cy="20" rx="4" ry="6" transform="rotate(90 32 20)"/><ellipse cx="20" cy="32" rx="4" ry="6"/><ellipse cx="8" cy="20" rx="4" ry="6" transform="rotate(90 8 20)"/><circle cx="20" cy="20" r="3"/></g>
+          </svg>
+          <div class="logo-txt"><div class="en">My Clinic</div><div class="ar">عيـــادتــي</div></div>
+        </div>
+        <p class="lede">Your partner in health and wellness — across the Kingdom.</p>
+        <div class="contact">
+          920 022 811<br>
+          WhatsApp · 054 222 8111<br>
+          care@myclinic.sa
+        </div>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul><li><a href="#">About</a></li><li><a href="#">Our branches</a></li><li><a href="#">Services</a></li><li><a href="#">Careers</a></li><li><a href="#">News</a></li></ul>
+      </div>
+      <div>
+        <h5>Care</h5>
+        <ul><li><a href="#">Find a doctor</a></li><li><a href="#">Specialties</a></li><li><a href="#">Programs</a></li><li><a href="#">Home care</a></li><li><a href="#">Telemedicine</a></li></ul>
+      </div>
+      <div>
+        <h5>Patients</h5>
+        <ul><li><a href="#">Book an appointment</a></li><li><a href="#">Patient portal</a></li><li><a href="#">Insurance</a></li><li><a href="#">Lab results</a></li><li><a href="#">Pharmacy</a></li></ul>
+      </div>
+      <div>
+        <h5>Get the app</h5>
+        <ul><li><a href="#">App Store</a></li><li><a href="#">Google Play</a></li></ul>
+        <h5 style="margin-top: 28px;">Hours</h5>
+        <ul><li>Sat–Thu · 8 AM – 10 PM</li><li>Fri · 5 PM – 9 PM</li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© My Clinic 2026 · All rights reserved · CBAHI Accredited</span>
+      <div class="socials"><a>Facebook</a><a>Instagram</a><a>X</a><a>YouTube</a><a>LinkedIn</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- sticky CTA -->
+<div class="sticky-cta">
+  <span class="text">Next available at <b style="color: #fff;">Jeddah Al Safa</b> · Today, 4:15 PM</span>
+  <button>Book in 60 seconds →</button>
+</div>
+
+</body>
+</html>

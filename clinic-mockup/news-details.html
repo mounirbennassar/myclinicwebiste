@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>My Clinic - News Details</title>
+<link rel="icon" type="image/png" href="/favclinic.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/shared.css">
+<style>
+  :root {
+    --serif: 'Newsreader', Georgia, serif;
+    --sans: 'Gotham', 'Gotham SSm', 'Gotham A', 'Montserrat', system-ui, -apple-system, sans-serif;
+    --ar: 'Almarai', system-ui, sans-serif;
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+  }
+  body { font-family: var(--sans); background: #fff; color: var(--ink); margin: 0; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 0 40px; }
+  .ribbon { background: var(--navy-deep); color: #fff; font-size: 13px; padding: 10px 0; }
+  .ribbon .wrap { display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+  .ribbon-left, .ribbon-right { display: flex; gap: 22px; align-items: center; color: rgba(255,255,255,.78); }
+  .ribbon b { color: #fff; font-weight: 600; }
+  .dot { width: 6px; height: 6px; background: #fff; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #fff; }
+  .nav { position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 1px solid rgba(11,31,61,.08); box-shadow: 0 12px 36px rgba(11,31,61,.05); }
+  .nav .wrap { display: grid; grid-template-columns: minmax(220px, 1fr) auto minmax(210px, 1fr); align-items: center; padding: 22px 40px; }
+  .logo { display: flex; align-items: center; }
+  .nav-links { display: flex; gap: 36px; justify-content: center; }
+  .nav-links a { font-size: 14px; color: var(--ink-2); font-weight: 600; }
+  .nav-links a:hover, .nav-links a.active { color: var(--navy); }
+  .nav-right { display: flex; gap: 14px; justify-content: flex-end; align-items: center; }
+  .btn { font-size: 14px; font-weight: 700; padding: 12px 24px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; }
+  .btn.primary { background: var(--navy); color: #fff; box-shadow: 0 8px 22px rgba(0,56,104,.18); }
+  .lang-pill { font-size: 12px; color: var(--mute); padding: 4px; border-radius: 999px; background: #f4f7fb; border: 1px solid rgba(11,31,61,.1); display: inline-flex; align-items: center; gap: 3px; }
+  .lang-pill button { min-width: 42px; border: 0; background: transparent; color: var(--mute); padding: 9px 10px; border-radius: 999px; font: inherit; font-weight: 700; }
+  .lang-pill button.active { color: var(--navy); background: #fff; box-shadow: 0 3px 12px rgba(11,31,61,.1); }
+  .news-hero { position: relative; overflow: hidden; background: var(--navy-ink); color: #fff; }
+  .news-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,29,56,.96) 0%, rgba(0,56,104,.82) 48%, rgba(0,29,56,.5) 100%), url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=1800&q=80') center/cover; }
+  .news-hero .wrap { position: relative; min-height: 620px; display: grid; align-items: end; padding-top: 90px; padding-bottom: 78px; }
+  .crumb { display: inline-flex; align-items: center; gap: 10px; color: rgba(255,255,255,.76); font-size: 13px; font-weight: 700; margin-bottom: 28px; }
+  .article-kicker { width: fit-content; padding: 9px 13px; border-radius: 999px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.24); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; font-weight: 800; margin-bottom: 18px; }
+  .news-hero h1 { max-width: 920px; font-size: clamp(44px, 6vw, 78px); line-height: .98; letter-spacing: -.035em; margin: 0 0 22px; font-weight: 600; text-wrap: balance; }
+  .dek { max-width: 760px; color: rgba(255,255,255,.82); font-size: 19px; line-height: 1.65; margin: 0; }
+  .article-meta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; color: rgba(255,255,255,.84); font-size: 14px; font-weight: 600; }
+  .article-meta span { padding: 10px 13px; border-radius: 999px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.16); }
+  .article-shell { background: linear-gradient(180deg, #fff 0%, var(--cream) 100%); padding: 80px 0 110px; }
+  .article-grid { display: grid; grid-template-columns: minmax(0, 760px) 340px; gap: 80px; align-items: start; }
+  .article-body { background: #fff; border: 1px solid var(--line-cool); border-radius: var(--radius-lg); padding: 56px; box-shadow: var(--shadow-sm); }
+  .article-body .lead { font-size: 22px; line-height: 1.65; color: var(--navy-ink); margin-top: 0; font-weight: 500; }
+  .article-body h2 { font-family: var(--sans); font-size: 34px; line-height: 1.16; letter-spacing: -.02em; color: var(--navy-ink); margin: 48px 0 14px; font-weight: 600; }
+  .article-body p { color: var(--ink-2); font-size: 17px; line-height: 1.78; margin: 0 0 22px; }
+  .quote-panel { margin: 42px 0; padding: 34px; border-radius: var(--radius-md); background: var(--navy); color: #fff; }
+  .quote-panel p { color: #fff; font-size: 24px; line-height: 1.45; margin: 0 0 18px; font-weight: 600; }
+  .quote-panel small { color: rgba(255,255,255,.75); font-weight: 700; }
+  .article-aside { position: sticky; top: 120px; display: grid; gap: 18px; }
+  .aside-card { background: #fff; border: 1px solid var(--line-cool); border-radius: var(--radius-md); padding: 24px; box-shadow: var(--shadow-sm); }
+  .aside-card h3 { margin: 0 0 14px; font-size: 16px; color: var(--navy-ink); }
+  .aside-card p, .aside-card li { font-size: 14px; color: var(--ink-2); line-height: 1.6; }
+  .aside-card ul { padding-left: 18px; margin: 0; }
+  .share-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .share-row a { padding: 9px 12px; border-radius: 999px; background: var(--paper); color: var(--navy); font-size: 12px; font-weight: 800; }
+  .related { margin-top: 34px; border-top: 1px solid var(--line-cool); padding-top: 34px; }
+  .related a { display: block; padding: 18px 0; border-bottom: 1px solid var(--line-cool); color: var(--navy-ink); font-weight: 700; line-height: 1.35; }
+  .cta-band { margin-top: 34px; padding: 30px; border-radius: var(--radius-md); background: var(--navy-ink); color: #fff; }
+  .cta-band h3 { margin: 0 0 10px; font-size: 24px; }
+  .cta-band p { color: rgba(255,255,255,.76); margin-bottom: 20px; }
+  footer { background: #fff; border-top: 1px solid var(--line-cool); padding: 54px 0; }
+  .foot-bottom { display: flex; justify-content: space-between; gap: 24px; color: var(--mute); font-size: 13px; }
+  .socials { display: flex; gap: 18px; }
+  @media (max-width: 980px) {
+    .nav .wrap { grid-template-columns: 1fr auto; gap: 18px; }
+    .nav-links { display: none; }
+    .article-grid { grid-template-columns: 1fr; gap: 28px; }
+    .article-aside { position: static; }
+    .article-body { padding: 34px; }
+  }
+  @media (max-width: 640px) {
+    .wrap { padding: 0 22px; }
+    .ribbon { display: none; }
+    .news-hero .wrap { min-height: 560px; padding-top: 68px; padding-bottom: 52px; }
+    .article-body { padding: 26px; border-radius: var(--radius-md); }
+    .news-hero h1 { font-size: 38px; }
+    .dek { font-size: 17px; }
+    .foot-bottom { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+<div class="ribbon">
+  <div class="wrap">
+    <div class="ribbon-left"><span><span class="dot"></span> Now open · Sat-Thu 8 AM - 10 PM · Fri 5 PM - 9 PM</span><span>5 branches · Jeddah, Riyadh</span></div>
+    <div class="ribbon-right"><a href="#">Contact Us</a><a href="#">Careers</a><a href="#">WhatsApp · 0542228111</a><b>920022811</b></div>
+  </div>
+</div>
+<nav class="nav">
+  <div class="wrap">
+    <a class="logo" href="/"><img class="brand-logo" src="/logo.svg" alt="My Clinic"></a>
+    <div class="nav-links">
+      <a href="/find-a-doctor.html">Find a Doctor</a>
+      <a href="/specialties.html">Specialties</a>
+      <a href="/programs.html">Programs</a>
+      <a href="/telemedicine.html">Telemedicine</a>
+      <a href="/home-healthcare.html">Home Healthcare</a>
+    </div>
+    <div class="nav-right">
+      <span class="lang-pill"><button class="active">EN</button><button>AR</button></span>
+      <a href="/find-a-doctor.html" class="btn primary">Book Now</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section class="news-hero">
+    <div class="wrap">
+      <div>
+        <a class="crumb" href="/">&larr; Back to home</a>
+        <div class="article-kicker">Research · May 2026</div>
+        <h1>"Breaking Barriers in Healthcare" - innovation from My Clinic's first annual scientific conference.</h1>
+        <p class="dek">A mock editorial detail page for the latest My Clinic announcement, designed with a cleaner reading experience, stronger hierarchy, and practical calls to action.</p>
+        <div class="article-meta"><span>8 min read</span><span>Dr. Layla Al-Rashed</span><span>Scientific Affairs</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="article-shell">
+    <div class="wrap article-grid">
+      <article class="article-body">
+        <p class="lead">My Clinic hosted its first annual scientific conference under the theme "Breaking Barriers in Healthcare", bringing together clinicians, researchers, and care leaders to discuss practical innovation across outpatient medicine.</p>
+        <p>The event focused on measurable improvements in access, safety, patient communication, and coordinated care. Sessions highlighted how multidisciplinary teams can use technology and shared clinical pathways to reduce friction for patients and support earlier intervention.</p>
+        <h2>Designed around the patient journey</h2>
+        <p>Conference tracks covered chronic disease management, women's health, pediatric care, telemedicine, home healthcare, and diagnostic workflows. Each session was framed around one core question: how can care become easier to understand, easier to access, and more consistent across branches?</p>
+        <p>Speakers shared examples from My Clinic teams, including remote follow-up workflows, faster referral loops between specialties, and patient education tools that help families make confident decisions.</p>
+        <div class="quote-panel">
+          <p>"Innovation is only meaningful when patients feel the difference in their appointment, their recovery, and their everyday life."</p>
+          <small>Dr. Layla Al-Rashed · Scientific Affairs</small>
+        </div>
+        <h2>What comes next</h2>
+        <p>Following the conference, My Clinic will continue developing practical programs that connect specialists, nurses, digital services, and home care teams around the same patient goals.</p>
+        <p>The next phase includes expanded clinical education sessions, broader digital follow-up options, and deeper collaboration between branch teams to keep patient care consistent from first visit to follow-up.</p>
+        <div class="related">
+          <h2>Related updates</h2>
+          <a href="/news-details.html">Winners of Jeddah United celebrated at the My Clinic Winners Ceremony.</a>
+          <a href="/news-details.html">CBAHI accreditation awarded to My Clinic Al Safa.</a>
+        </div>
+      </article>
+
+      <aside class="article-aside">
+        <div class="aside-card">
+          <h3>Article Summary</h3>
+          <p>A clean mock news detail template for announcements, research updates, accreditations, and community stories.</p>
+        </div>
+        <div class="aside-card">
+          <h3>Highlights</h3>
+          <ul>
+            <li>Patient-centered innovation theme</li>
+            <li>Multidisciplinary clinical sessions</li>
+            <li>Focus on access, safety, and continuity</li>
+          </ul>
+        </div>
+        <div class="aside-card">
+          <h3>Share</h3>
+          <div class="share-row"><a href="#">LinkedIn</a><a href="#">X</a><a href="#">WhatsApp</a></div>
+        </div>
+        <div class="cta-band">
+          <h3>Need care today?</h3>
+          <p>Find the right physician or book the next available appointment at your preferred branch.</p>
+          <a class="btn primary" href="/find-a-doctor.html">Book an appointment</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-bottom">
+    <span>© My Clinic 2026 · All rights reserved · CBAHI Accredited</span>
+    <div class="socials"><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">X</a><a href="#">LinkedIn</a></div>
+  </div>
+</footer>
+
+<script src="/assets/language-switcher.js"></script>
+</body>
+</html>

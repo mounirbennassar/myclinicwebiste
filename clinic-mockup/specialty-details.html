@@ -1,0 +1,1449 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>My Clinic — Specialty Details</title>
+<link rel="icon" type="image/png" href="/favclinic.png">
+<meta name="viewport" content="width=1440">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/shared.css">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<style>
+  :root {
+    --serif: 'Newsreader', Georgia, serif;
+    --sans: 'Gotham', 'Gotham SSm', 'Gotham A', 'Montserrat', system-ui, -apple-system, sans-serif;
+    --ar: 'Almarai', system-ui, sans-serif;
+    
+    /* Premium shadows */
+    --shadow-sm: 0 2px 8px rgba(11,31,61,.04), 0 1px 2px rgba(11,31,61,.02);
+    --shadow-md: 0 12px 36px -8px rgba(11,31,61,.12), 0 4px 12px -2px rgba(11,31,61,.04);
+    --shadow-lg: 0 32px 64px -16px rgba(11,31,61,.22), 0 16px 32px -12px rgba(11,31,61,.08);
+    
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  body { font-family: var(--sans); background: var(--cream); color: var(--ink); font-size: 16px; line-height: 1.6; letter-spacing: -0.005em; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 0 40px; }
+  .ar { font-family: var(--ar); }
+
+  /* Announcement strip */
+  .ribbon { background: var(--navy-deep); color: #fff; font-size: 13px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .ribbon .wrap { display: flex; justify-content: space-between; align-items: center; }
+  .ribbon-left { display: flex; gap: 24px; align-items: center; color: rgba(255,255,255,.78); }
+  .ribbon-left b { color: #fff; font-weight: 500; }
+  .ribbon-right { display: flex; gap: 20px; align-items: center; color: rgba(255,255,255,.78); }
+  .ribbon a { transition: color 0.2s ease; }
+  .ribbon a:hover { color: #fff; text-decoration: underline; }
+  .dot { width: 6px; height: 6px; background: #fff; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #fff; }
+
+  /* Nav */
+  .nav { position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 1px solid rgba(11,31,61,.08); box-shadow: 0 12px 36px rgba(11,31,61,.05); transition: padding 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; }
+  .nav .wrap { display: grid; grid-template-columns: minmax(220px, 1fr) auto minmax(210px, 1fr); align-items: center; padding: 22px 40px; transition: padding 0.3s ease; }
+  .nav.scrolled { background: #fff; box-shadow: 0 10px 30px rgba(11,31,61,0.07); }
+  .nav.scrolled .wrap { padding: 14px 40px; }
+  
+  .logo { display: flex; align-items: center; gap: 14px; cursor: pointer; }
+  .logo-mark { width: 36px; height: 36px; transition: transform 0.3s ease; }
+  .logo:hover .logo-mark { transform: rotate(15deg) scale(1.05); }
+  .logo-txt { line-height: 1.1; }
+  .logo-txt .en { font-family: var(--serif); font-size: 23px; font-weight: 500; letter-spacing: -0.02em; color: var(--navy); }
+  .logo-txt .ar { font-size: 11px; color: var(--mute); letter-spacing: 0.05em; margin-top: 3px; font-weight: 500; }
+  
+  .nav-links { display: flex; gap: 36px; justify-content: center; }
+  .nav-links a { font-size: 14px; color: var(--ink-2); font-weight: 500; position: relative; padding: 8px 0; transition: color 0.25s ease; }
+  .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background: var(--navy); transition: width 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), left 0.25s cubic-bezier(0.25, 0.8, 0.25, 1); }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-links a:hover::after { width: 100%; left: 0; }
+  .nav-links a.active { color: var(--navy); }
+  .nav-links a.active::after { width: 100%; left: 0; }
+  
+  .nav-right { display: flex; gap: 14px; justify-content: flex-end; align-items: center; }
+  
+  .btn { font-size: 14px; font-weight: 600; padding: 11px 24px; border-radius: 999px; transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease; border: 1px solid transparent; display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; }
+  .btn.primary { background: var(--navy); color: #fff; box-shadow: 0 4px 14px rgba(0, 56, 104, 0.15); }
+  .btn.primary:hover { background: var(--navy-deep); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0, 56, 104, 0.2); }
+  .btn.primary:active { transform: translateY(0); }
+  
+  .lang-pill { font-size: 12px; color: var(--mute); padding: 4px; border-radius: 999px; background: #f4f7fb; border: 1px solid rgba(11,31,61,.1); display: inline-flex; align-items: center; gap: 3px; box-shadow: inset 0 1px 0 rgba(255,255,255,.75); }
+  .lang-pill::before { content: ''; width: 16px; height: 16px; margin: 0 5px 0 6px; background: currentColor; opacity: .68; -webkit-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.93 9h-3.02a15.7 15.7 0 0 0-1.16-5.04A8.03 8.03 0 0 1 18.93 11ZM12 4.04c.83 1.2 1.62 3.38 1.86 6.96H10.14C10.38 7.42 11.17 5.24 12 4.04ZM4.26 13h3.79c.12 1.91.43 3.65.9 5.05A8.02 8.02 0 0 1 4.26 13Zm3.79-2H4.26a8.02 8.02 0 0 1 4.69-5.05A17.1 17.1 0 0 0 8.05 11ZM12 19.96c-.83-1.2-1.62-3.38-1.86-6.96h3.72c-.24 3.58-1.03 5.76-1.86 6.96Zm3.05-1.91c.47-1.4.78-3.14.9-5.05h3.79a8.02 8.02 0 0 1-4.69 5.05ZM15.95 11a17.1 17.1 0 0 0-.9-5.05A8.02 8.02 0 0 1 19.74 11h-3.79Z'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.93 9h-3.02a15.7 15.7 0 0 0-1.16-5.04A8.03 8.03 0 0 1 18.93 11ZM12 4.04c.83 1.2 1.62 3.38 1.86 6.96H10.14C10.38 7.42 11.17 5.24 12 4.04ZM4.26 13h3.79c.12 1.91.43 3.65.9 5.05A8.02 8.02 0 0 1 4.26 13Zm3.79-2H4.26a8.02 8.02 0 0 1 4.69-5.05A17.1 17.1 0 0 0 8.05 11ZM12 19.96c-.83-1.2-1.62-3.38-1.86-6.96h3.72c-.24 3.58-1.03 5.76-1.86 6.96Zm3.05-1.91c.47-1.4.78-3.14.9-5.05h3.79a8.02 8.02 0 0 1-4.69 5.05ZM15.95 11a17.1 17.1 0 0 0-.9-5.05A8.02 8.02 0 0 1 19.74 11h-3.79Z'/%3E%3C/svg%3E") center / contain no-repeat; }
+  .lang-pill button { min-width: 42px; border: 0; background: transparent; color: var(--mute); padding: 9px 10px; border-radius: 999px; font: inherit; font-weight: 600; cursor: pointer; transition: color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease; }
+  .lang-pill button:hover { color: var(--navy); }
+  .lang-pill button.active { color: var(--navy); background: #fff; box-shadow: 0 3px 12px rgba(11,31,61,.1); }
+
+  /* Subpage Hero */
+  .subpage-hero {
+    background: var(--navy-ink);
+    color: #fff;
+    padding: 100px 0 110px;
+    position: relative;
+    overflow: hidden;
+  }
+  .subpage-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--hero-bg-url, url('https://images.unsplash.com/photo-1579684389782-64d84b5e9056?auto=format&fit=crop&w=2000&q=80'));
+    background-size: cover;
+    background-position: center;
+    opacity: 0.26;
+    z-index: 1;
+    transition: background-image 0.4s ease;
+  }
+  .subpage-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0, 29, 56, 0.94) 0%, rgba(0, 56, 104, 0.88) 100%);
+    z-index: 1;
+  }
+  .subpage-hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 840px;
+    margin: 0;
+  }
+  .subpage-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #fff;
+    opacity: 0.85;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .subpage-title {
+    font-family: var(--serif);
+    font-size: 52px;
+    line-height: 1.1;
+    font-weight: 400;
+    margin: 0 0 16px;
+    letter-spacing: -0.02em;
+  }
+  .subpage-title em {
+    font-style: italic;
+    color: rgba(255,255,255,0.9);
+    font-weight: 300;
+  }
+  .subpage-desc {
+    font-size: 19px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.8);
+    font-weight: 300;
+    margin: 0;
+  }
+
+  /* Single Column Layout Container */
+  .details-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 40px 120px;
+  }
+
+  /* Alternating layout row */
+  .details-section-row {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 56px;
+    align-items: center;
+    margin-bottom: 90px;
+  }
+  .details-section-row.reverse > :first-child {
+    order: 2;
+  }
+  .details-section-row.reverse > :last-child {
+    order: 1;
+  }
+
+  /* Image wrappers for sections */
+  .section-image-wrapper {
+    width: 100%;
+    aspect-ratio: 1.35;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--line-cool);
+    background: var(--paper);
+  }
+  .section-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+  .section-image-wrapper:hover img {
+    transform: scale(1.05);
+  }
+  
+  /* Details cards custom styling */
+  .details-card-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin: 0 0 20px;
+    border-bottom: 1px solid var(--line-cool);
+    padding-bottom: 10px;
+  }
+  .department-subhead {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--navy-ink);
+    margin: 0 0 20px;
+    line-height: 1.25;
+  }
+  .department-full-text {
+    font-size: 16px;
+    color: var(--ink-2);
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  /* Treatments & Services Grid */
+  .treatments-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 10px;
+  }
+  .treatment-item {
+    background: #fff;
+    border: 1px solid var(--line-cool);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .treatment-item:hover {
+    transform: translateY(-4px);
+    border-color: var(--navy);
+    box-shadow: var(--shadow-md);
+  }
+  .treatment-item h4 {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--navy-ink);
+    margin: 0 0 8px;
+  }
+  .treatment-item p {
+    font-size: 14px;
+    color: var(--mute);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* Inclusions list */
+  .inclusions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .inclusion-list-item {
+    position: relative;
+    padding: 16px 20px 16px 48px;
+    background: #fff;
+    border: 1px solid var(--line-cool);
+    border-radius: var(--radius-sm);
+    font-size: 14.5px;
+    color: var(--ink-2);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+  }
+  .inclusion-list-item:hover {
+    transform: translateY(-2px);
+    border-color: var(--navy);
+    box-shadow: var(--shadow-md);
+  }
+  .inclusion-list-item::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    width: 18px;
+    height: 18px;
+    background: currentColor;
+    color: var(--navy);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='3' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 6 9 17l-5-5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='3' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 6 9 17l-5-5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+
+  /* Meet Our Specialists section */
+  .specialists-showcase {
+    border-top: 1px solid var(--line-cool);
+    padding: 80px 0 30px;
+  }
+  .specialists-title {
+    font-family: var(--serif);
+    font-size: 34px;
+    color: var(--navy-ink);
+    margin: 0 0 8px;
+    text-align: center;
+  }
+  .specialists-subtitle {
+    font-size: 15px;
+    color: var(--mute);
+    text-align: center;
+    margin: 0 0 44px;
+  }
+  
+  /* Doctor Cards Grid */
+  .doctors-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-bottom: 60px;
+  }
+  .doc-card {
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--line-cool);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    display: flex;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.4s ease;
+  }
+  .doc-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--navy);
+  }
+  .doc-img-wrapper {
+    width: 200px;
+    position: relative;
+    background: var(--navy-ink);
+    overflow: hidden;
+  }
+  .doc-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+  .doc-card:hover .doc-img-wrapper img {
+    transform: scale(1.05);
+  }
+  .experience-badge {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--navy-deep);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(11,31,61,0.08);
+  }
+  .doc-body {
+    padding: 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .doc-body h4 {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--navy-ink);
+    margin: 0 0 4px;
+  }
+  .doc-title-row {
+    font-size: 13.5px;
+    color: var(--navy);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .doc-rating-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13.5px;
+    color: var(--mute);
+    margin-bottom: 16px;
+  }
+  .star-badge {
+    background: #fffdf5;
+    border: 1px solid #fceca1;
+    color: #b25e00;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+  }
+  .doc-branch-label {
+    font-size: 13px;
+    color: var(--ink-2);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+  .doc-branch-label svg {
+    width: 14px;
+    height: 14px;
+    color: var(--navy);
+  }
+  .doc-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+  }
+  .doc-actions a {
+    flex: 1;
+    text-align: center;
+    padding: 8px 12px;
+    font-size: 12.5px;
+    font-weight: 600;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: var(--transition);
+  }
+  .doc-actions .profile-btn {
+    background: #ffffff;
+    color: var(--navy);
+    border: 1px solid var(--line-cool);
+  }
+  .doc-actions .profile-btn:hover {
+    background: var(--cream-soft);
+    border-color: var(--navy);
+  }
+  .doc-actions .book-btn {
+    background: var(--navy);
+    color: #fff;
+  }
+  .doc-actions .book-btn:hover {
+    background: var(--navy-deep);
+  }
+
+  /* Wide CTA Banner styling */
+  .wide-cta-banner {
+    background: linear-gradient(135deg, var(--navy-ink) 0%, var(--navy-deep) 100%);
+    color: #fff;
+    border-radius: var(--radius-md);
+    padding: 56px 64px;
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    margin: 80px 0 90px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .wide-cta-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 80% 20%, rgba(0, 56, 104, 0.4) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .wide-cta-banner h3 {
+    font-family: var(--serif);
+    font-size: 38px;
+    font-weight: 400;
+    margin: 0 0 14px;
+    letter-spacing: -0.015em;
+  }
+  .wide-cta-banner p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.8);
+    max-width: 720px;
+    margin: 0 auto 36px;
+    line-height: 1.65;
+  }
+  .wide-cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  .btn.whatsapp-wide {
+    background: #10B981;
+    color: #fff;
+  }
+  .btn.whatsapp-wide:hover {
+    background: #059669;
+    box-shadow: 0 6px 20px rgba(16,185,129,0.25);
+    transform: translateY(-1px);
+  }
+  .btn.primary-wide {
+    background: #fff;
+    color: var(--navy);
+  }
+  .btn.primary-wide:hover {
+    background: #e1e8f1;
+    box-shadow: 0 6px 20px rgba(255,255,255,0.15);
+    transform: translateY(-1px);
+  }
+
+  /* Bottom explore specialties showcase */
+  .bottom-explore {
+    border-top: 1px solid var(--line-cool);
+    padding-top: 80px;
+  }
+  .bottom-explore-title {
+    font-family: var(--serif);
+    font-size: 34px;
+    color: var(--navy-ink);
+    margin: 0 0 8px;
+    text-align: center;
+  }
+  .bottom-explore-subtitle {
+    font-size: 15px;
+    color: var(--mute);
+    text-align: center;
+    margin: 0 0 44px;
+  }
+  .bottom-explore-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  /* Related specialty card */
+  .bottom-explore-grid .spec-explore-card {
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--line-cool);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.4s ease;
+  }
+  .bottom-explore-grid .spec-explore-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--navy);
+  }
+  .bottom-explore-grid .spec-explore-card-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    background: var(--navy-ink);
+  }
+  .bottom-explore-grid .spec-explore-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+  .bottom-explore-grid .spec-explore-card:hover img {
+    transform: scale(1.05);
+  }
+  .bottom-explore-grid .body {
+    padding: 22px 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+  }
+  .bottom-explore-grid .body h4 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 19px;
+    color: var(--navy-ink);
+    margin: 0 0 10px;
+    line-height: 1.3;
+  }
+  .bottom-explore-grid .body .more {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: gap 0.25s ease, color 0.25s ease;
+    margin-top: auto;
+  }
+  .bottom-explore-grid .spec-explore-card:hover .body .more {
+    color: var(--navy-deep);
+    gap: 8px;
+  }
+
+  /* Fallback card */
+  .fallback-card {
+    text-align: center;
+    max-width: 600px;
+    margin: 120px auto 160px;
+    padding: 64px 40px;
+    background: #fff;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--line-cool);
+    box-shadow: var(--shadow-sm);
+  }
+  .fallback-card h2 {
+    font-family: var(--serif);
+    font-size: 38px;
+    color: var(--navy-ink);
+    margin: 0 0 16px;
+    font-weight: 400;
+  }
+  .fallback-card p {
+    font-size: 16px;
+    color: var(--mute);
+    margin: 0 0 32px;
+  }
+
+  /* Responsive styling */
+  @media (max-width: 900px) {
+    .doctors-grid { grid-template-columns: 1fr; gap: 24px; }
+  }
+  @media (max-width: 768px) {
+    .details-container { padding: 40px 20px 80px; }
+    .details-section-row { grid-template-columns: 1fr; gap: 32px; margin-bottom: 60px; }
+    .details-section-row.reverse > :first-child { order: unset; }
+    .details-section-row.reverse > :last-child { order: unset; }
+    .treatments-grid { grid-template-columns: 1fr; gap: 16px; }
+    .inclusions-grid { grid-template-columns: 1fr; gap: 12px; }
+    .bottom-explore-grid { grid-template-columns: 1fr; gap: 24px; }
+    .subpage-hero { padding: 80px 0 90px; }
+    .subpage-title { font-size: 38px; }
+    .nav .wrap { padding: 18px 24px; grid-template-columns: auto 1fr; }
+    .nav-links { display: none; }
+    .nav.scrolled .wrap { padding: 12px 24px; }
+  }
+
+  /* Footer styles */
+  footer { background: #fff; border-top: 1px solid var(--line); padding: 100px 0 40px; }
+  .foot-grid { display: grid; grid-template-columns: 1.5fr repeat(4, 1fr); gap: 48px; margin-bottom: 80px; }
+  @media (max-width: 1024px) {
+    .foot-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  }
+  @media (max-width: 600px) {
+    .foot-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+  footer .logo { margin-bottom: 24px; }
+  footer .lede { color: var(--mute); font-size: 14.5px; line-height: 1.6; margin: 0 0 24px; max-width: 320px; }
+  footer .contact { font-size: 15px; color: var(--ink-2); line-height: 1.5; }
+  footer .contact strong { font-size: 19px; color: var(--navy); display: inline-block; margin-bottom: 4px; }
+  footer h5 { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); margin: 0 0 20px; font-weight: 700; }
+  footer ul { list-style: none; padding: 0; margin: 0; }
+  footer ul li { margin-bottom: 12px; font-size: 14.5px; }
+  footer ul li a { color: var(--mute); transition: color 0.2s ease; }
+  footer ul li a:hover { color: var(--navy); }
+  
+  .foot-bottom { border-top: 1px solid var(--line-cool); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; color: var(--mute); font-size: 13.5px; }
+  @media (max-width: 768px) {
+    .foot-bottom { flex-direction: column; gap: 16px; text-align: center; }
+  }
+  .foot-bottom .socials { display: flex; gap: 20px; }
+  .foot-bottom .socials a { transition: color 0.2s ease; }
+  .foot-bottom .socials a:hover { color: var(--navy); }
+
+  /* Sticky CTA */
+  .sticky-cta { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); z-index: 40; background: var(--navy-deep); color: #fff; padding: 12px 28px; border-radius: 999px; box-shadow: 0 20px 48px -10px rgba(0, 29, 56, 0.35); display: flex; align-items: center; gap: 24px; border: 1px solid rgba(255,255,255,0.08); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none; }
+  .sticky-cta.active { transform: translateX(-50%) translateY(0); pointer-events: auto; }
+  @media (max-width: 768px) {
+    .sticky-cta { width: calc(100% - 32px); justify-content: space-between; padding: 14px 20px; bottom: 16px; font-size: 13px; gap: 12px; }
+  }
+  .sticky-cta .text { font-size: 13.5px; color: rgba(255,255,255,.75); font-weight: 500; }
+  .sticky-cta a { font-size: 13.5px; font-weight: 600; padding: 9px 18px; background: #fff; color: var(--navy) !important; border-radius: 999px; white-space: nowrap; transition: background-color 0.2s ease, transform 0.2s ease; }
+  .sticky-cta a:hover { background: #e1e8f1; transform: translateY(-0.5px); }
+</style>
+</head>
+<body>
+
+<!-- ribbon -->
+<div class="ribbon">
+  <div class="wrap">
+    <div class="ribbon-left">
+      <span><span class="dot"></span> &nbsp;<b>Now open</b> · Sat–Thu 8 AM – 10 PM &nbsp;·&nbsp; Fri 5 PM – 9 PM</span>
+      <span>5 branches · Jeddah, Riyadh</span>
+    </div>
+    <div class="ribbon-right">
+      <a href="/index.html#contact">Contact Us</a>
+      <a href="#">Careers</a>
+      <a href="https://wa.me/966542228111" target="_blank">WhatsApp · 0542228111</a>
+      <a href="tel:920022811"><b>920022811</b></a>
+    </div>
+  </div>
+</div>
+
+<!-- nav -->
+<nav class="nav">
+  <div class="wrap">
+    <a href="/index.html" class="logo">
+      <img class="brand-logo" src="/logo.svg" alt="My Clinic">
+    </a>
+    <div class="nav-links">
+      <a href="/find-a-doctor.html">Find a Doctor</a>
+      <a href="/specialties.html" class="active">Specialties</a>
+      <a href="/programs.html">Programs</a>
+      <a href="/telemedicine.html">Telemedicine</a>
+      <a href="/home-healthcare.html">Home Healthcare</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-pill" role="group" aria-label="Language switcher">
+        <button type="button" class="active" aria-pressed="true">EN</button>
+        <button type="button" aria-pressed="false">AR</button>
+      </div>
+      <a href="/find-a-doctor.html" class="btn primary">Book Now</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Main Details Layout (shown when specialty is loaded) -->
+<main id="mainDetailsContent" style="display: none;">
+  <!-- subpage hero banner -->
+  <header class="subpage-hero" id="specialtyHero">
+    <div class="wrap">
+      <div class="subpage-hero-inner">
+        <div class="subpage-eyebrow" id="specialtyTag">Specialty Tag</div>
+        <h1 class="subpage-title" id="specialtyTitle">Specialty Title</h1>
+        <p class="subpage-desc" id="specialtySubtitle">Subtitle description of the specialty.</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="details-container">
+    
+    <!-- Row 1: About Department (Text Left, Image Right) -->
+    <div class="details-section-row">
+      <div>
+        <div class="details-card-title">About the Department</div>
+        <h3 class="department-subhead" id="departmentSubhead">Providing Medical Excellence</h3>
+        <p class="department-full-text" id="specialtyOverview">Detailed overview will be loaded here...</p>
+      </div>
+      <div class="section-image-wrapper">
+        <img id="specialtyImage1" src="" alt="Specialty Clinical Image" onerror="this.style.display='none'">
+      </div>
+    </div>
+
+    <!-- Row 2: Services & Treatments (Full Width) -->
+    <div style="margin-bottom: 80px;">
+      <div class="details-card-title" style="margin-bottom: 20px;">Treatments &amp; Services Offered</div>
+      <div class="treatments-grid" id="treatmentsGrid">
+        <!-- Dynamic content -->
+      </div>
+    </div>
+
+    <!-- Row 3: Standards & Diagnostic Equipment (Image Left, Text Right) -->
+    <div class="details-section-row reverse">
+      <div>
+        <div class="details-card-title">Clinical Standards &amp; Screenings</div>
+        <p style="font-size: 15px; color: var(--mute); margin-bottom: 24px;">Our clinical teams are backed by state-of-the-art diagnostic testing, certified laboratory support, and modern surgical suites:</p>
+        <div class="inclusions-grid" id="inclusionsGrid">
+          <!-- Dynamic content -->
+        </div>
+      </div>
+      <div class="section-image-wrapper">
+        <img id="specialtyImage2" src="" alt="Diagnostic Technology Image" onerror="this.style.display='none'">
+      </div>
+    </div>
+
+    <!-- Row 4: Our Specialists (Dynamic Doctors List) -->
+    <div class="specialists-showcase" id="specialistsShowcaseSection" style="display: none;">
+      <h3 class="specialists-title">Meet Our Medical Specialists</h3>
+      <p class="specialists-subtitle">Connect with our board-certified consultants for this specialty department.</p>
+      <div class="doctors-grid" id="doctorsGrid">
+        <!-- Dynamic content from doctors array -->
+      </div>
+    </div>
+
+    <!-- Row 5: Wide CTA Banner -->
+    <div class="wide-cta-banner">
+      <h3 id="ctaHeading">Ready to Consult a Specialist?</h3>
+      <p id="ctaDescription">Embark on a customized plan designed to safeguard your well-being. Partner with leading board-certified specialists, coordinate care effortlessly, and manage your health journey with confidence.</p>
+      <div class="wide-cta-buttons">
+        <a href="#" class="btn primary-wide" id="specialistFindDocBtn">Schedule Appointment</a>
+        <a href="#" target="_blank" class="btn whatsapp-wide" id="specialistWhatsAppBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px; display: inline-block; vertical-align: middle;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Inquire via WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <!-- Row 6: Explore Other Departments -->
+    <div class="bottom-explore">
+      <h3 class="bottom-explore-title">Explore Other Clinical Departments</h3>
+      <p class="bottom-explore-subtitle">Discover our wider range of medical and surgical care centers at My Clinic.</p>
+      <div class="bottom-explore-grid" id="bottomExploreGrid">
+        <!-- Dynamic content -->
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- Fallback details card (shown when specialty is invalid) -->
+<main id="fallbackContent" style="display: none;">
+  <div class="wrap">
+    <div class="details-card fallback-card">
+      <h2>Clinical Department Not Found</h2>
+      <p>The specialty department page you followed does not exist. Please explore our full directory of medical specialties.</p>
+      <a href="/specialties.html" class="btn primary">View All Specialties</a>
+    </div>
+  </div>
+</main>
+
+<!-- footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">
+          <img class="brand-logo" src="/logo.svg" alt="My Clinic">
+        </div>
+        <p class="lede">My Clinic is your partner in health and wellness. With a focus on prevention and early intervention, our team of experts is committed to helping you stay healthy and live your best life.</p>
+        <div class="contact">
+          <strong>920022811</strong><br>
+          WhatsApp · 0542228111
+        </div>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul><li><a href="#">About My Clinic</a></li><li><a href="#">Our Sites</a></li><li><a href="#">Services</a></li></ul>
+        <h5 style="margin-top: 28px;">Useful Links</h5>
+        <ul><li><a href="#">Contact Us</a></li><li><a href="#">Careers</a></li><li><a href="#">Privacy Policy</a></li></ul>
+      </div>
+      <div>
+        <h5>Care</h5>
+        <ul><li><a href="/find-a-doctor.html">Find a Doctor</a></li><li><a href="/specialties.html">Specialties</a></li><li><a href="/programs.html">Programs</a></li><li><a href="/telemedicine.html">Telemedicine</a></li><li><a href="/home-healthcare.html">Home Healthcare</a></li></ul>
+      </div>
+      <div>
+        <h5>Call Center Working Hours</h5>
+        <ul><li>Saturday – Thursday · 8 AM – 10 PM</li><li>Friday · 5 PM – 9 PM</li></ul>
+        <h5 style="margin-top: 28px;">Our Branches</h5>
+        <ul><li>Jeddah · Al Mohammadiyah</li><li>Jeddah · Al Safa</li><li>Jeddah · Al Khalidiyyah Dental</li><li>Jeddah · Tahlia</li><li>Riyadh · Al Sahafa</li></ul>
+      </div>
+      <div>
+        <h5>Get the app</h5>
+        <ul><li><a href="#">App Store</a></li><li><a href="#">Google Play</a></li></ul>
+        <h5 style="margin-top: 28px;">Book Now</h5>
+        <ul><li><a href="/find-a-doctor.html">Book an appointment</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© My Clinic 2026 · All rights reserved · CBAHI Accredited</span>
+      <div class="socials"><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">X</a><a href="#">YouTube</a><a href="#">LinkedIn</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- sticky CTA -->
+<div class="sticky-cta" id="stickyCta">
+  <span class="text">Next available at <b style="color: #fff;">Jeddah Al Safa</b> · Today, 4:15 PM</span>
+  <a href="/find-a-doctor.html">Book in 60 seconds →</a>
+</div>
+
+<script>
+// Mock Doctor Database (synchronized with find-a-doctor.html and doctor-details.html)
+const doctors = [
+  {
+    id: 1,
+    name: "Dr. Hisham Al-Otaibi",
+    specialty: "Cardiology",
+    title: "Consultant Cardiologist",
+    experience: 22,
+    branch: "Jeddah Al Safa",
+    rating: 4.9,
+    reviews: 142,
+    img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=500&q=70"
+  },
+  {
+    id: 2,
+    name: "Dr. Reem Al-Qahtani",
+    specialty: "Endocrinology",
+    title: "Consultant Endocrinology & Diabetes",
+    experience: 14,
+    branch: "Riyadh Al Sahafa",
+    rating: 4.8,
+    reviews: 98,
+    img: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=500&q=70"
+  },
+  {
+    id: 3,
+    name: "Dr. Khalid Al-Subaie",
+    specialty: "Internal Medicine",
+    title: "Consultant Internal Medicine",
+    experience: 18,
+    branch: "Jeddah Tahlia",
+    rating: 4.7,
+    reviews: 114,
+    img: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=500&q=70"
+  },
+  {
+    id: 4,
+    name: "Dr. Noor Bakhsh",
+    specialty: "Obstetrics & Gynecology",
+    title: "Consultant Obstetrics & Gynecology",
+    experience: 11,
+    branch: "Jeddah Al Khalidiyyah Dental Center",
+    rating: 4.9,
+    reviews: 182,
+    img: "https://images.unsplash.com/photo-1638202993928-7267aad84c31?auto=format&fit=crop&w=500&q=70"
+  },
+  {
+    id: 5,
+    name: "Dr. Yousef Al-Harbi",
+    specialty: "Orthopedic Surgery",
+    title: "Consultant Orthopedic Surgeon",
+    experience: 19,
+    branch: "Jeddah Al Mohammadiyah",
+    rating: 4.8,
+    reviews: 87,
+    img: "https://images.unsplash.com/photo-1612531822380-fc73a39a4bbe?auto=format&fit=crop&w=500&q=70"
+  },
+  {
+    id: 6,
+    name: "Dr. Sara Al-Faris",
+    specialty: "Pediatrics",
+    title: "Consultant Pediatrician",
+    experience: 9,
+    branch: "Riyadh Al Sahafa",
+    rating: 4.9,
+    reviews: 156,
+    img: "https://images.unsplash.com/photo-1651008376811-b90baee60c1f?auto=format&fit=crop&w=500&q=70"
+  },
+  {
+    id: 7,
+    name: "Dr. Layla Mansour",
+    specialty: "Dermatology",
+    title: "Consultant Dermatologist",
+    experience: 12,
+    branch: "Jeddah Tahlia",
+    rating: 4.9,
+    reviews: 104,
+    img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=500&q=70"
+  },
+  {
+    id: 8,
+    name: "Dr. Tariq Al-Masoud",
+    specialty: "Ophthalmology",
+    title: "Consultant Ophthalmologist",
+    experience: 16,
+    branch: "Riyadh Al Sahafa",
+    rating: 4.6,
+    reviews: 73,
+    img: "https://images.unsplash.com/photo-1607990283143-e81e7a2c93ab?auto=format&fit=crop&w=500&q=70"
+  },
+  {
+    id: 9,
+    name: "Dr. Faisal Al-Mutairi",
+    specialty: "Dentistry",
+    title: "Consultant Orthodontist & Dental Implants",
+    experience: 15,
+    branch: "Jeddah Al Khalidiyyah Dental Center",
+    rating: 4.9,
+    reviews: 132,
+    img: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=500&q=70"
+  },
+  {
+    id: 10,
+    name: "Dr. Mona Al-Ahmad",
+    specialty: "ENT",
+    title: "Consultant Otolaryngologist",
+    experience: 12,
+    branch: "Jeddah Tahlia",
+    rating: 4.8,
+    reviews: 84,
+    img: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=500&q=70"
+  },
+  {
+    id: 11,
+    name: "Dr. Waleed Al-Saeed",
+    specialty: "Rheumatology",
+    title: "Consultant Rheumatologist",
+    experience: 16,
+    branch: "Jeddah Al Safa",
+    rating: 4.8,
+    reviews: 55,
+    img: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=500&q=70"
+  }
+];
+
+// Specialties Rich Details Database
+const specialtiesDetailsData = {
+  cardiology: {
+    id: "cardiology",
+    name: "Cardiology",
+    subtitle: "Advanced Cardiovascular Diagnostics & Heart Care",
+    tag: "Cardiology Division",
+    image: "https://images.unsplash.com/photo-1628348068343-c6a848d2b6dd?auto=format&fit=crop&w=1200&q=80",
+    image2: "https://images.unsplash.com/photo-1579684389782-64d84b5e9056?auto=format&fit=crop&w=800&q=80",
+    overview: "Our Cardiology Department combines state-of-the-art diagnostic screening with tailored therapy plans to support heart health and prevent cardiovascular risks. From electrocardiograms and echocardiography scans to chronic cardiovascular therapy management, our expert consultants provide compassionate, evidence-based care.",
+    services: [
+      { name: "Electrocardiography (ECG)", desc: "Precision monitoring of heart rhythm to identify arrhythmias and baseline health." },
+      { name: "Echocardiogram (Echo Scan)", desc: "High-resolution ultrasound imaging of cardiac valves and muscle contractility." },
+      { name: "Holter Rhythm Monitoring", desc: "24-48 hour continuous outpatient rhythm tracking to detect transient arrhythmias." },
+      { name: "Preventative Cardiology", desc: "Custom medical and nutrition strategies to regulate cholesterol and minimize cardiac risk." }
+    ],
+    diagnostics: [
+      "12-Lead Electrocardiography",
+      "Transthoracic Echocardiogram (TTE)",
+      "24-Hour Ambulatory Blood Pressure Monitoring",
+      "High-Sensitivity Cardiac Troponin Panels"
+    ],
+    doctorSpecialtyFilter: "Cardiology",
+    whatsappText: "Hi, I'm inquiring about booking a Cardiology consultation."
+  },
+  endocrinology: {
+    id: "endocrinology",
+    name: "Endocrinology",
+    subtitle: "Expert Hormone Therapy & Diabetes Care",
+    tag: "Endocrinology Center",
+    image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=80",
+    image2: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80",
+    overview: "We provide specialized pathways for diabetes mellitus (both adult and pediatric), complex thyroid hormone disorders, adrenal issues, and general metabolic health. Our team integrates the latest remote continuous glucose monitoring (CGM) systems with expert nutritional planning to restore natural hormonal balance.",
+    services: [
+      { name: "Diabetes Mellitus Care", desc: "Comprehensive insulin optimization, patient counseling, and glycemic control." },
+      { name: "Thyroid Clinic", desc: "Diagnostics and therapy pathways for hypothyroidism, hyperthyroidism, and goiters." },
+      { name: "Metabolic Risk Control", desc: "Structured obesity management, insulin resistance care, and metabolic assessments." },
+      { name: "Hormonal Balancing", desc: "Therapies for pituitary, adrenal, and sex hormone deficits or hyper-secretion." }
+    ],
+    diagnostics: [
+      "HbA1c & Fasting Glucose Panels",
+      "Thyroid Ultrasound & Fine Needle Aspiration (FNA)",
+      "ACTH & Cortisol Hormone Mapping",
+      "CGM Sensor Calibrations"
+    ],
+    doctorSpecialtyFilter: "Endocrinology",
+    whatsappText: "Hi, I'm inquiring about endocrine hormone screenings or diabetes management."
+  },
+  "internal-medicine": {
+    id: "internal-medicine",
+    name: "Internal Medicine",
+    subtitle: "Comprehensive Primary Care & Chronic Disease Management",
+    tag: "Internal Medicine Department",
+    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=80",
+    image2: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&w=800&q=80",
+    overview: "Our Internal Medicine physicians act as the core of adult healthcare, managing everything from complex, multi-system chronic diseases to annual preventive physical screenings. We offer thorough diagnostic evaluations and coordinate specialized referrals to keep you in peak wellness.",
+    services: [
+      { name: "Chronic Disease Care", desc: "Long-term coordination for hypertension, type-2 diabetes, asthma, and lipid disorders." },
+      { name: "Executive Health Checks", desc: "Annual comprehensive physical examinations, lab panels, and lifestyle counseling." },
+      { name: "Geriatric Medicine", desc: "Dedicated, polypharmacy-checked care pathways for elderly patients." },
+      { name: "Infectious Illness Care", desc: "Rapid clinical testing and targeted therapy for acute bacterial and viral infections." }
+    ],
+    diagnostics: [
+      "Comprehensive Biochemical Screening",
+      "Cardiovascular Risk Assessments",
+      "Adult Immunization Timelines",
+      "Abdominal & Pelvic Ultrasound Diagnostics"
+    ],
+    doctorSpecialtyFilter: "Internal Medicine",
+    whatsappText: "Hi, I'd like to book an Internal Medicine general checkup."
+  },
+  "obstetrics-gynecology": {
+    id: "obstetrics-gynecology",
+    name: "Obstetrics & Gynecology",
+    subtitle: "Compassionate Care for Women at Every Stage of Life",
+    tag: "Women's Health Department",
+    image: "https://images.unsplash.com/photo-1518152006812-edab29b069ac?auto=format&fit=crop&w=1200&q=80",
+    image2: "https://images.unsplash.com/photo-1638202993928-7267aad84c31?auto=format&fit=crop&w=800&q=80",
+    overview: "Our Obstetrics & Gynecology division offers complete maternal care, high-risk pregnancy pathways, 3D/4D fetal scans, family planning advice, and expert gynecological screening. We partner with you to ensure comfort, confidence, and expert clinical safety throughout your maternity journey.",
+    services: [
+      { name: "Antenatal Maternity Pathway", desc: "Structured pregnancy checkups, fetal scans, and nutritional support from week 1." },
+      { name: "High-Risk Pregnancy Care", desc: "Specialized monitoring for preeclampsia, gestational diabetes, and multiple births." },
+      { name: "Gynecological Screening", desc: "Pap smears, HPV screening, and routine preventative pelvic checks." },
+      { name: "Polycystic Ovary Syndrome (PCOS)", desc: "Metabolic and endocrine therapies to regulate cycles and support fertility." }
+    ],
+    diagnostics: [
+      "2D/3D Obstetric Anatomy Scans",
+      "Fetal Doppler Flow Studies",
+      "Non-Invasive Prenatal Testing (NIPT)",
+      "Cervical Cancer Screening (Pap/HPV)"
+    ],
+    doctorSpecialtyFilter: "Obstetrics & Gynecology",
+    whatsappText: "Hi, I'm inquiring about prenatal programs or gynecology appointments."
+  },
+  "orthopedic-surgery": {
+    id: "orthopedic-surgery",
+    name: "Orthopedic Surgery",
+    subtitle: "Restoring Mobility, Strength & Joint Health",
+    tag: "Orthopedics & Joint Care",
+    image: "https://images.unsplash.com/photo-1582284729022-520556214f49?auto=format&fit=crop&w=1200&q=80",
+    image2: "https://images.unsplash.com/photo-1612531822380-fc73a39a4bbe?auto=format&fit=crop&w=800&q=80",
+    overview: "Our Orthopedic Surgery department provides comprehensive management of the musculoskeletal system. From joint replacement surgery and sports ligament repair to simple fracture setting and spinal care, we keep you moving pain-free using minimally invasive methods.",
+    services: [
+      { name: "Joint Replacements", desc: "Total and partial knee, hip, and shoulder replacement surgery." },
+      { name: "Sports Ligament Repairs", desc: "Advanced arthroscopic reconstruction of ACL, meniscus, and rotator cuffs." },
+      { name: "Spine & Sciatica Care", desc: "Diagnostic mapping and decompression therapy for disc herniation and nerve pain." },
+      { name: "Fracture and Trauma Center", desc: "Rapid alignment, casting, and surgical osteosynthesis for bone fractures." }
+    ],
+    diagnostics: [
+      "High-Resolution Joint X-Ray Imaging",
+      "Magnetic Resonance Imaging (MRI) Diagnostics",
+      "Bone Density Scan Reviews",
+      "Joint Aspiration & Fluid Analyses"
+    ],
+    doctorSpecialtyFilter: "Orthopedic Surgery",
+    whatsappText: "Hi, I'm inquiring about joint pain treatments or orthopedic consults."
+  },
+  pediatrics: {
+    id: "pediatrics",
+    name: "Pediatrics",
+    subtitle: "Nurturing and Protecting the Health of Your Children",
+    tag: "Pediatric Clinic",
+    image: "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=1200&q=80",
+    image2: "https://images.unsplash.com/photo-1651008376811-b90baee60c1f?auto=format&fit=crop&w=800&q=80",
+    overview: "The Pediatric clinic offers complete physical and behavioral growth monitoring, Ministry of Health mandated immunizations, allergy treatments, and emergency care. We create a welcoming, friendly, and low-stress environment for infants and children.",
+    services: [
+      { name: "Immunizations & Vaccines", desc: "Seamless Ministry of Health (MOH) vaccine schedule tracking and pediatric immunizations." },
+      { name: "Newborn Follow-up", desc: "Expert neonatal checkups, weight monitoring, and post-natal parenting support." },
+      { name: "Growth & Milestones Audit", desc: "Assessments tracking physical, mental, and speech milestone progression." },
+      { name: "Asthma & Allergy Care", desc: "Comprehensive inhaler coaching, allergy testing, and chronic symptom control." }
+    ],
+    diagnostics: [
+      "Standard Growth & Milestone Audits",
+      "Pediatric Blood Panels & Allergy Profiling",
+      "Hearing & Vision Screening",
+      "Stool & Urine Pediatric Analyses"
+    ],
+    doctorSpecialtyFilter: "Pediatrics",
+    whatsappText: "Hi, I'd like to book a pediatric appointment or vaccine check."
+  },
+  dermatology: {
+    id: "dermatology",
+    name: "Dermatology",
+    subtitle: "Advanced Dermatology Care & Aesthetic Treatments",
+    tag: "Dermatology & Laser Center",
+    image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=1200&q=80",
+    image2: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
+    overview: "Our Dermatology division is equipped to handle complex clinical skin pathologies like eczema, psoriasis, acne, and skin cancers, alongside a state-of-the-art aesthetic clinic providing laser therapies, botox, and rejuvenation.",
+    services: [
+      { name: "Acne & Scar Therapies", desc: "Clinical chemical peels, advanced laser resurfacing, and pharmaceutical acne protocols." },
+      { name: "Chronic Eczema & Psoriasis", desc: "Advanced topical, biological, and light therapies to suppress inflammatory skin cells." },
+      { name: "Cosmetic Rejuvenation", desc: "Premium anti-aging Botox, dermal fillers, and diagnostic skin-booster hydration." },
+      { name: "Laser Skin Surgery", desc: "Precision vascular vein removal, hyperpigmentation clearing, and hair removal." }
+    ],
+    diagnostics: [
+      "Dermoscopic Lesion Inspections",
+      "Diagnostic Skin Biopsies",
+      "Allergen Patch Testing",
+      "Digital Mole Mapping"
+    ],
+    doctorSpecialtyFilter: "Dermatology",
+    whatsappText: "Hi, I'm inquiring about dermatology treatments or cosmetic laser services."
+  },
+  ophthalmology: {
+    id: "ophthalmology",
+    name: "Ophthalmology",
+    subtitle: "Advanced Eye Diagnostics & Vision Correction",
+    tag: "Ophthalmology Clinic",
+    image: "https://images.unsplash.com/photo-1579684389782-64d84b5e9056?auto=format&fit=crop&w=1200&q=80",
+    image2: "https://images.unsplash.com/photo-1607990283143-e81e7a2c93ab?auto=format&fit=crop&w=800&q=80",
+    overview: "We provide comprehensive ophthalmological care, visual acuity profiling, laser vision corrections (LASIK), and advanced surgical treatments for cataracts and glaucoma. Restore your visual clarity with our certified specialists.",
+    services: [
+      { name: "Refractive LASIK", desc: "Surgical vision correction using custom wavefront topography to eliminate corrective lenses." },
+      { name: "Cataract Surgery Center", desc: "Micro-incision phacoemulsification with high-definition intraocular lens (IOL) implants." },
+      { name: "Glaucoma Clinic", desc: "Intraocular pressure tracking, computerized visual fields, and laser therapies." },
+      { name: "Dry Eye Diagnostic Lab", desc: "Assessment of tear film breakup and custom prescription moisturizing treatments." }
+    ],
+    diagnostics: [
+      "Optical Coherence Tomography (OCT)",
+      "Visual Field Analysis (Perimetry)",
+      "Corneal Topography Scanning",
+      "Intraocular Pressure Checks (Tonometry)"
+    ],
+    doctorSpecialtyFilter: "Ophthalmology",
+    whatsappText: "Hi, I'd like to book an eye exam or consult for vision correction."
+  },
+  dentistry: {
+    id: "dentistry",
+    name: "Dentistry & Orthodontics",
+    subtitle: "Comprehensive Smile Makeovers & Advanced Family Dentistry",
+    tag: "Dentistry & Orthodontics Center",
+    image: "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=1200&q=80",
+    image2: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=800&q=80",
+    overview: "Housed in our dedicated Dentistry and Orthodontics center, we provide modern implants, custom Invisalign smile alignments, cosmetic teeth whitening, root canals, and pediatric care for perfect family oral hygiene.",
+    services: [
+      { name: "Invisalign & Alignment", desc: "Invisible clear aligners and modern aesthetic braces for comfortable orthodontic alignment." },
+      { name: "Dental Implants Surgery", desc: "Surgical bone integration and placement of lifelike titanium implants and ceramic crowns." },
+      { name: "Cosmetic Makeovers", desc: "Porcelain veneers, composite bonding, and professional teeth whitening treatments." },
+      { name: "General Family Dentistry", desc: "Painless cavity fills, deep scaling, root canals, and diagnostic hygiene checkups." }
+    ],
+    diagnostics: [
+      "3D Cone Beam Computed Tomography (CBCT)",
+      "Digital Panoramic X-Rays (OPG)",
+      "Intraoral 3D Camera Scans",
+      "Bite & TMJ Alignment Analysis"
+    ],
+    doctorSpecialtyFilter: "Dentistry",
+    whatsappText: "Hi, I'm interested in dental implants or clear alignment consults."
+  },
+  ent: {
+    id: "ent",
+    name: "ENT (Ear, Nose & Throat)",
+    subtitle: "Complete Care for Otolaryngology & Hearing Health",
+    tag: "ENT Department",
+    image: "https://images.unsplash.com/photo-1598252577519-74d11cfc6bdf?auto=format&fit=crop&w=1200&q=80",
+    image2: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=800&q=80",
+    overview: "Our ENT department offers complete diagnostics and therapies for sinus infections, throat pathologies, nasal alignment (septoplasty), snoring, sleep apnea, and hearing/audiology assessments.",
+    services: [
+      { name: "Sinus & Rhinology", desc: "Minimally invasive endoscopic sinus surgery (FESS) to treat chronic congestion." },
+      { name: "Hearing & Audiology", desc: "Computerized audiometry evaluations, custom hearing aid fits, and balance checks." },
+      { name: "Septoplasty Alignment", desc: "Surgical corrective septoplasty to repair deviated nasal septums and improve breathing." },
+      { name: "Pediatric Otolaryngology", desc: "Surgical removal of chronic adenoids, tonsils, and placement of middle-ear fluid tubes." }
+    ],
+    diagnostics: [
+      "Functional Endoscopic Nasal Scans",
+      "Pure-Tone Outpatient Audiometry",
+      "Impedance Tympanometry",
+      "Diagnostic Fiberoptic Laryngoscopy"
+    ],
+    doctorSpecialtyFilter: "ENT",
+    whatsappText: "Hi, I'm inquiring about hearing assessments or sinus allergy consults."
+  },
+  rheumatology: {
+    id: "rheumatology",
+    name: "Rheumatology",
+    subtitle: "Specialized Therapy for Autoimmune Diseases & Joints",
+    tag: "Rheumatology Department",
+    image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=1200&q=80",
+    image2: "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=800&q=80",
+    overview: "We provide specialized diagnostic profiling and therapies for rheumatoid arthritis, gout, osteoporosis, lupus, and other autoimmune conditions. We combine medication and bone mineral monitoring to protect your joints.",
+    services: [
+      { name: "Rheumatoid Arthritis Clinic", desc: "Custom biological and disease-modifying anti-rheumatic drug (DMARD) therapies." },
+      { name: "Osteoporosis Program", desc: "Bone mineral density assessments, mineral supplementation, and bone rebuilding plans." },
+      { name: "Autoimmune Investigations", desc: "Systematic screening and disease control for systemic lupus erythematosus (SLE) and Sjögren's." },
+      { name: "Gout Management Center", desc: "Uric acid blood regulation, lifestyle coaching, and anti-inflammatory arthritis support." }
+    ],
+    diagnostics: [
+      "Autoantibody Serology Testing (RF, ANA, Anti-CCP)",
+      "Dual-Energy X-ray Absorptiometry (DEXA) Reviews",
+      "Joint Aspiration Crystals Profiling",
+      "Bone Metabolic Marker Panels"
+    ],
+    doctorSpecialtyFilter: "Rheumatology",
+    whatsappText: "Hi, I'd like to book an appointment with a Rheumatologist."
+  }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Navigation scrolling animation
+  const nav = document.querySelector('.nav');
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    }, { passive: true });
+  }
+
+  // Sticky CTA slide in
+  const stickyCta = document.getElementById('stickyCta');
+  if (stickyCta) {
+    setTimeout(() => {
+      stickyCta.classList.add('active');
+    }, 1500);
+  }
+
+  // Language switcher
+  const langPill = document.querySelector('.lang-pill');
+  if (langPill) {
+    langPill.addEventListener('click', (event) => {
+      const target = event.target.closest('button');
+      if (!target) return;
+      langPill.querySelectorAll('button').forEach((button) => {
+        const active = button === target;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+    });
+  }
+
+  // URL Parsing & Page Hydration
+  const urlParams = new URLSearchParams(window.location.search);
+  const specId = urlParams.get('id');
+
+  const mainDetailsContent = document.getElementById('mainDetailsContent');
+  const fallbackContent = document.getElementById('fallbackContent');
+
+  if (specId && specialtiesDetailsData[specId]) {
+    const spec = specialtiesDetailsData[specId];
+    
+    // Hydrate Page title
+    document.title = `My Clinic — ${spec.name}`;
+    
+    // Hero & Background Image
+    const specialtyHero = document.getElementById('specialtyHero');
+    specialtyHero.style.setProperty('--hero-bg-url', `url('${spec.image}')`);
+    
+    document.getElementById('specialtyTag').textContent = spec.tag;
+    document.getElementById('specialtyTitle').innerHTML = spec.name.replace("&", "<em>&</em>");
+    document.getElementById('specialtySubtitle').textContent = spec.subtitle;
+
+    // Overview Section Row
+    document.getElementById('departmentSubhead').textContent = spec.subtitle;
+    document.getElementById('specialtyOverview').textContent = spec.overview;
+    document.getElementById('specialtyImage1').src = spec.image;
+
+    // Treatments grid
+    const treatmentsGrid = document.getElementById('treatmentsGrid');
+    treatmentsGrid.innerHTML = '';
+    spec.services.forEach(serv => {
+      const div = document.createElement('div');
+      div.className = 'treatment-item';
+      div.innerHTML = `<h4>${serv.name}</h4><p>${serv.desc}</p>`;
+      treatmentsGrid.appendChild(div);
+    });
+
+    // Inclusions
+    const inclusionsGrid = document.getElementById('inclusionsGrid');
+    inclusionsGrid.innerHTML = '';
+    spec.diagnostics.forEach(diag => {
+      const div = document.createElement('div');
+      div.className = 'inclusion-list-item';
+      div.textContent = diag;
+      inclusionsGrid.appendChild(div);
+    });
+    document.getElementById('specialtyImage2').src = spec.image2;
+
+    // Filter Doctors Matching Specialty
+    const matchingDocs = doctors.filter(doc => doc.specialty.toLowerCase() === spec.doctorSpecialtyFilter.toLowerCase());
+    const specialistsSection = document.getElementById('specialistsShowcaseSection');
+    const doctorsGrid = document.getElementById('doctorsGrid');
+    
+    if (matchingDocs.length > 0) {
+      specialistsSection.style.display = 'block';
+      doctorsGrid.innerHTML = '';
+      
+      matchingDocs.forEach(doc => {
+        const cardHtml = `
+          <div class="doc-card">
+            <div class="doc-img-wrapper">
+              <span class="experience-badge">${doc.experience} Years Exp</span>
+              <img src="${doc.img}" alt="${doc.name}" onerror="this.style.display='none'">
+            </div>
+            <div class="doc-body">
+              <h4>${doc.name}</h4>
+              <div class="doc-title-row">${doc.title}</div>
+              <div class="doc-rating-row">
+                <span class="star-badge">★ ${doc.rating}</span>
+                <span>(${doc.reviews} reviews)</span>
+              </div>
+              <div class="doc-branch-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                ${doc.branch}
+              </div>
+              <div class="doc-actions">
+                <a href="/doctor-details.html?id=${doc.id}" class="profile-btn">View Profile</a>
+                <a href="/find-a-doctor.html?specialty=${encodeURIComponent(doc.specialty)}&branch=${encodeURIComponent(doc.branch)}" class="book-btn">Book Now</a>
+              </div>
+            </div>
+          </div>
+        `;
+        const div = document.createElement('div');
+        div.innerHTML = cardHtml;
+        doctorsGrid.appendChild(div.firstElementChild);
+      });
+    }
+
+    // Action CTAs
+    document.getElementById('specialistFindDocBtn').href = `/find-a-doctor.html?specialty=${encodeURIComponent(spec.doctorSpecialtyFilter)}`;
+    document.getElementById('specialistWhatsAppBtn').href = `https://wa.me/966542228111?text=${encodeURIComponent(spec.whatsappText)}`;
+
+    // Bottom Explore Specialties Grid (Load exactly 3 other specialties horizontally)
+    const bottomExploreGrid = document.getElementById('bottomExploreGrid');
+    bottomExploreGrid.innerHTML = '';
+    
+    let renderedCount = 0;
+    const keys = Object.keys(specialtiesDetailsData);
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+      if (key !== specId && renderedCount < 3) {
+        const item = specialtiesDetailsData[key];
+        const cardHtml = `
+          <a href="/specialty-details.html?id=${item.id}" class="spec-explore-card">
+            <div class="spec-explore-card-image-wrapper">
+              <img src="${item.image}" alt="${item.name}" onerror="this.style.display='none'">
+            </div>
+            <div class="body">
+              <h4>${item.name}</h4>
+              <span class="more">Explore specialty &rarr;</span>
+            </div>
+          </a>
+        `;
+        const div = document.createElement('div');
+        div.innerHTML = cardHtml;
+        bottomExploreGrid.appendChild(div.firstElementChild);
+        renderedCount++;
+      }
+    }
+
+    // Toggle Content Views
+    mainDetailsContent.style.display = 'block';
+    fallbackContent.style.display = 'none';
+
+    // Entry Animations using GSAP
+    gsap.from(".subpage-hero-inner", {
+      opacity: 0,
+      y: 20,
+      duration: 0.6,
+      ease: "power2.out"
+    });
+    gsap.from(".details-section-row", {
+      opacity: 0,
+      y: 35,
+      duration: 0.7,
+      stagger: 0.2,
+      ease: "power2.out",
+      delay: 0.15
+    });
+    gsap.from(".treatment-item", {
+      opacity: 0,
+      y: 20,
+      duration: 0.5,
+      stagger: 0.05,
+      ease: "power2.out",
+      delay: 0.3
+    });
+    gsap.from(".inclusion-list-item", {
+      opacity: 0,
+      scale: 0.96,
+      duration: 0.5,
+      stagger: 0.05,
+      ease: "power2.out",
+      delay: 0.45
+    });
+    if (matchingDocs.length > 0) {
+      gsap.from(".specialists-showcase", {
+        opacity: 0,
+        y: 30,
+        duration: 0.7,
+        ease: "power2.out",
+        delay: 0.55
+      });
+    }
+    gsap.from(".wide-cta-banner", {
+      opacity: 0,
+      y: 30,
+      duration: 0.7,
+      ease: "power2.out",
+      delay: 0.65
+    });
+    gsap.from(".bottom-explore", {
+      opacity: 0,
+      y: 30,
+      duration: 0.7,
+      ease: "power2.out",
+      delay: 0.75
+    });
+  } else {
+    // Show fallback state
+    mainDetailsContent.style.display = 'none';
+    fallbackContent.style.display = 'block';
+  }
+});
+</script>
+
+<script src="/assets/language-switcher.js"></script>
+</body>
+</html>

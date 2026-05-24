@@ -1,0 +1,1322 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>My Clinic — Editorial</title>
+<meta name="viewport" content="width=1440">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/shared.css">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<style>
+  :root {
+    --serif: 'Newsreader', Georgia, serif;
+    --sans: 'Gotham', 'Gotham SSm', 'Gotham A', 'Montserrat', system-ui, -apple-system, sans-serif;
+    --ar: 'Almarai', system-ui, sans-serif;
+    
+    /* Modern shadow systems */
+    --shadow-sm: 0 2px 8px rgba(11,31,61,.04), 0 1px 2px rgba(11,31,61,.02);
+    --shadow-md: 0 12px 36px -8px rgba(11,31,61,.12), 0 4px 12px -2px rgba(11,31,61,.04);
+    --shadow-lg: 0 32px 64px -16px rgba(11,31,61,.22), 0 16px 32px -12px rgba(11,31,61,.08);
+    
+    /* Elegant design tokens */
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+  
+  /* Typography Enhancements */
+  h1, h2, h3, h4, .stats-head h2, .split-card h3 {
+    text-wrap: balance;
+  }
+  p, .section-desc, .hero-sub {
+    text-wrap: pretty;
+  }
+
+  body { font-family: var(--sans); background: #fff; color: var(--ink); font-size: 16px; line-height: 1.6; letter-spacing: -0.005em; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 0 40px; }
+  .ar { font-family: var(--ar); }
+
+  /* Announcement strip */
+  .ribbon { background: var(--navy-deep); color: #fff; font-size: 13px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .ribbon .wrap { display: flex; justify-content: space-between; align-items: center; }
+  .ribbon-left { display: flex; gap: 24px; align-items: center; color: rgba(255,255,255,.78); }
+  .ribbon-left b { color: #fff; font-weight: 500; }
+  .ribbon-right { display: flex; gap: 20px; align-items: center; color: rgba(255,255,255,.78); }
+  .ribbon a { transition: color 0.2s ease; }
+  .ribbon a:hover { color: #fff; text-decoration: underline; }
+  .dot { width: 6px; height: 6px; background: #fff; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #fff; }
+
+  /* Nav */
+  .nav { position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 1px solid rgba(11,31,61,.08); box-shadow: 0 12px 36px rgba(11,31,61,.05); transition: padding 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; }
+  .nav .wrap { display: grid; grid-template-columns: minmax(220px, 1fr) auto minmax(210px, 1fr); align-items: center; padding: 22px 40px; transition: padding 0.3s ease; }
+  .nav.scrolled { background: #fff; box-shadow: 0 10px 30px rgba(11,31,61,0.07); }
+  .nav.scrolled .wrap { padding: 14px 40px; }
+  
+  .logo { display: flex; align-items: center; gap: 14px; cursor: pointer; }
+  .logo-mark { width: 36px; height: 36px; transition: transform 0.3s ease; }
+  .logo:hover .logo-mark { transform: rotate(15deg) scale(1.05); }
+  .logo-txt { line-height: 1.1; }
+  .logo-txt .en { font-family: var(--serif); font-size: 23px; font-weight: 500; letter-spacing: -0.02em; color: var(--navy); }
+  .logo-txt .ar { font-size: 11px; color: var(--mute); letter-spacing: 0.05em; margin-top: 3px; font-weight: 500; }
+  
+  .nav-links { display: flex; gap: 36px; justify-content: center; }
+  .nav-links a { font-size: 14px; color: var(--ink-2); font-weight: 500; position: relative; padding: 8px 0; transition: color 0.25s ease; }
+  .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background: var(--navy); transition: width 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), left 0.25s cubic-bezier(0.25, 0.8, 0.25, 1); }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-links a:hover::after { width: 100%; left: 0; }
+  
+  .nav-right { display: flex; gap: 14px; justify-content: flex-end; align-items: center; }
+  .icon-btn { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--line-cool); transition: var(--transition); color: var(--ink-2); }
+  .icon-btn:hover { background: var(--paper); border-color: var(--navy); color: var(--navy); transform: scale(1.05); }
+  
+  .btn { font-size: 14px; font-weight: 600; padding: 11px 24px; border-radius: 999px; transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease; border: 1px solid transparent; display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; }
+  .btn.primary { background: var(--navy); color: #fff; box-shadow: 0 4px 14px rgba(0, 56, 104, 0.15); }
+  .btn.primary:hover { background: var(--navy-deep); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0, 56, 104, 0.2); }
+  .btn.primary:active { transform: translateY(0); }
+  .btn.ghost { color: var(--ink-2); border-color: var(--line-cool); }
+  .btn.ghost:hover { background: var(--paper); transform: translateY(-1px); border-color: var(--navy); color: var(--navy); }
+  .btn.ghost:active { transform: translateY(0); }
+  
+  .lang-pill { font-size: 12px; color: var(--mute); padding: 4px; border-radius: 999px; background: #f4f7fb; border: 1px solid rgba(11,31,61,.1); display: inline-flex; align-items: center; gap: 3px; box-shadow: inset 0 1px 0 rgba(255,255,255,.75); }
+  .lang-pill::before { content: ''; width: 16px; height: 16px; margin: 0 5px 0 6px; background: currentColor; opacity: .68; -webkit-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.93 9h-3.02a15.7 15.7 0 0 0-1.16-5.04A8.03 8.03 0 0 1 18.93 11ZM12 4.04c.83 1.2 1.62 3.38 1.86 6.96H10.14C10.38 7.42 11.17 5.24 12 4.04ZM4.26 13h3.79c.12 1.91.43 3.65.9 5.05A8.02 8.02 0 0 1 4.26 13Zm3.79-2H4.26a8.02 8.02 0 0 1 4.69-5.05A17.1 17.1 0 0 0 8.05 11ZM12 19.96c-.83-1.2-1.62-3.38-1.86-6.96h3.72c-.24 3.58-1.03 5.76-1.86 6.96Zm3.05-1.91c.47-1.4.78-3.14.9-5.05h3.79a8.02 8.02 0 0 1-4.69 5.05ZM15.95 11a17.1 17.1 0 0 0-.9-5.05A8.02 8.02 0 0 1 19.74 11h-3.79Z'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.93 9h-3.02a15.7 15.7 0 0 0-1.16-5.04A8.03 8.03 0 0 1 18.93 11ZM12 4.04c.83 1.2 1.62 3.38 1.86 6.96H10.14C10.38 7.42 11.17 5.24 12 4.04ZM4.26 13h3.79c.12 1.91.43 3.65.9 5.05A8.02 8.02 0 0 1 4.26 13Zm3.79-2H4.26a8.02 8.02 0 0 1 4.69-5.05A17.1 17.1 0 0 0 8.05 11ZM12 19.96c-.83-1.2-1.62-3.38-1.86-6.96h3.72c-.24 3.58-1.03 5.76-1.86 6.96Zm3.05-1.91c.47-1.4.78-3.14.9-5.05h3.79a8.02 8.02 0 0 1-4.69 5.05ZM15.95 11a17.1 17.1 0 0 0-.9-5.05A8.02 8.02 0 0 1 19.74 11h-3.79Z'/%3E%3C/svg%3E") center / contain no-repeat; }
+  .lang-pill button { min-width: 42px; border: 0; background: transparent; color: var(--mute); padding: 9px 10px; border-radius: 999px; font: inherit; font-weight: 600; cursor: pointer; transition: color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease; }
+  .lang-pill button:hover { color: var(--navy); }
+  .lang-pill button.active { color: var(--navy); background: #fff; box-shadow: 0 3px 12px rgba(11,31,61,.1); }
+
+  /* Hero slider — modern, cinematic */
+  .hero { position: relative; height: 92vh; min-height: 720px; overflow: hidden; background: var(--navy-ink); color: #fff; }
+  .hero-slides { position: absolute; inset: 0; }
+  .hero-slide { position: absolute; inset: 0; opacity: 0; }
+  .hero-slide.active { opacity: 1; }
+  .hero-slide .bg { position: absolute; inset: 0; background-size: cover; background-position: center; transform: scale(1.08); will-change: transform; }
+  .hero-slide .veil { position: absolute; inset: 0; background:
+    linear-gradient(100deg, rgba(0,56,104,.9) 0%, rgba(0,56,104,.68) 45%, rgba(0,56,104,.36) 100%),
+    linear-gradient(180deg, rgba(0,29,56,.24) 0%, rgba(0,29,56,.72) 100%);
+  }
+  .hero-inner { position: relative; z-index: 3; height: 100%; max-width: 1320px; margin: 0 auto; padding: 0 40px; display: flex; flex-direction: column; justify-content: center; }
+  .hero-content { max-width: 760px; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 14px; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: #fff; font-weight: 600; margin-bottom: 28px; }
+  .hero-eyebrow::before { content: ''; width: 36px; height: 1px; background: #fff; opacity: 0.8; }
+  .hero-title { font-family: var(--sans); font-weight: 500; font-size: 64px; line-height: 1.1; letter-spacing: -0.025em; color: #fff; margin: 0 0 28px; }
+  .hero-title em { font-style: normal; font-weight: 300; color: #cdd9ec; font-family: var(--serif); }
+  .hero-sub { font-size: 20px; line-height: 1.6; color: rgba(255,255,255,.8); max-width: 580px; margin: 0 0 20px; font-weight: 300; }
+  
+  .hero-ar-line { font-family: var(--ar); color: rgba(255,255,255,.6); font-size: 15px; direction: rtl; max-width: 520px; margin-bottom: 40px; padding: 10px 20px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 999px; width: fit-content; display: inline-flex; gap: 8px; align-items: center; }
+  
+  .hero-ctas { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .hero-ctas .cta-primary { background: #fff; color: var(--navy); padding: 16px 32px; border-radius: 999px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 10px; transition: transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.25s ease, box-shadow 0.25s ease; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); }
+  .hero-ctas .cta-primary:hover { background: var(--paper); transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25); }
+  .hero-ctas .cta-ghost { color: #fff; border: 1px solid rgba(255,255,255,.35); padding: 15px 30px; border-radius: 999px; font-size: 15px; font-weight: 500; transition: transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.25s ease, border-color 0.25s ease; display: inline-flex; align-items: center; gap: 10px; }
+  .hero-ctas .cta-ghost:hover { background: rgba(255,255,255,.08); border-color: #fff; transform: translateY(-2px); }
+
+  /* Slider controls */
+  .hero-controls { position: absolute; left: 40px; right: 40px; bottom: 56px; z-index: 4; display: flex; justify-content: space-between; align-items: flex-end; max-width: 1320px; margin: 0 auto; padding: 0; pointer-events: none; }
+  .hero-controls > * { pointer-events: auto; }
+  .hero-dots { display: flex; align-items: center; gap: 20px; }
+  .hero-dot { display: flex; align-items: center; gap: 14px; background: none; border: 0; color: rgba(255,255,255,.6); font-family: var(--serif); font-style: italic; font-size: 14px; cursor: pointer; padding: 0; transition: color .25s; }
+  .hero-dot .bar { display: block; width: 36px; height: 1px; background: rgba(255,255,255,.25); position: relative; overflow: hidden; transition: width .4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+  .hero-dot.active { color: #fff; }
+  .hero-dot.active .bar { width: 96px; background: rgba(255,255,255,.25); }
+  .hero-dot.active .bar::after { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 0%; background: #fff; animation: hero-progress var(--slide-dur, 6.5s) linear forwards; }
+  @keyframes hero-progress { from { width: 0%; } to { width: 100%; } }
+  .hero-arrows { display: flex; gap: 12px; }
+  .hero-arrow { width: 52px; height: 52px; border-radius: 50%; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.2); color: #fff; display: grid; place-items: center; cursor: pointer; transition: transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.25s ease, border-color 0.25s ease; backdrop-filter: blur(8px); }
+  .hero-arrow:hover { background: #fff; border-color: #fff; color: var(--navy-ink); transform: translateY(-2px); }
+  .hero-counter { position: absolute; top: 50%; right: 40px; transform: translateY(-50%) rotate(90deg); transform-origin: right center; z-index: 4; font-family: var(--serif); font-style: italic; color: rgba(255,255,255,.55); font-size: 14px; letter-spacing: 0.04em; }
+  .hero-counter b { color: #fff; font-style: normal; font-family: var(--sans); font-weight: 400; font-size: 12px; letter-spacing: 0.18em; margin-right: 12px; }
+
+  /* Floating quote card */
+  .hero-quote { position: absolute; right: 40px; bottom: 140px; z-index: 4; max-width: 340px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.15); backdrop-filter: blur(20px); border-radius: var(--radius-md); padding: 26px 28px; color: #fff; box-shadow: 0 10px 40px rgba(0,0,0,0.2); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .hero-quote::before { content: '“'; position: absolute; top: -15px; left: 20px; font-family: var(--serif); font-size: 70px; color: rgba(255,255,255,0.15); line-height: 1; }
+  .hero-quote small { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 12px; font-weight: 600; }
+  .hero-quote p { font-family: var(--serif); font-style: italic; font-size: 16px; line-height: 1.5; margin: 0; position: relative; z-index: 2; text-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; padding: 64px 40px 0; max-width: 1440px; margin: 0 auto; align-items: end; min-height: 720px; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 12px; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); font-weight: 600; }
+  .eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--navy); }
+  .h-display { font-family: var(--serif); font-weight: 400; font-size: 92px; line-height: 0.95; letter-spacing: -0.035em; color: var(--navy-ink); margin: 26px 0 28px; }
+  .h-display em { font-style: italic; font-weight: 400; color: var(--navy); }
+  .h-sub { font-size: 18px; line-height: 1.55; color: var(--ink-2); max-width: 520px; margin-bottom: 36px; }
+  .hero-ar { font-family: var(--ar); color: var(--mute); font-size: 15px; margin-top: 24px; direction: rtl; max-width: 460px; }
+
+  .hero-meta { display: flex; gap: 40px; margin-top: 60px; padding-top: 36px; border-top: 1px solid var(--line); }
+  .hero-meta div { font-size: 13px; color: var(--mute); }
+  .hero-meta div b { display: block; font-family: var(--serif); font-size: 40px; font-weight: 400; color: var(--navy-ink); letter-spacing: -0.02em; margin-bottom: 4px; line-height: 1; }
+
+  .hero-portrait { position: relative; aspect-ratio: 4/5; border-radius: var(--radius-md); overflow: hidden; background: linear-gradient(160deg, #C7D4E5 0%, #8FA9C4 100%); }
+  .hero-portrait img { width: 100%; height: 100%; object-fit: cover; }
+  .portrait-caption { position: absolute; bottom: 24px; left: 24px; right: 24px; color: #fff; font-family: var(--serif); font-style: italic; font-size: 17px; line-height: 1.4; text-shadow: 0 2px 12px rgba(0,0,0,.4); }
+  .portrait-caption small { display: block; font-family: var(--sans); font-style: normal; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.85; margin-bottom: 8px; }
+
+  /* Search card */
+  .search-card { background: #fff; border: 1px solid var(--line); box-shadow: 0 30px 70px rgba(11,31,61,0.15); border-radius: var(--radius-md); padding: 8px; display: grid; grid-template-columns: 1fr 1fr 1fr auto; align-items: center; max-width: 1240px; margin: 56px auto -50px; position: relative; z-index: 5; }
+  .search-card .field { padding: 16px 26px; border-right: 1px solid var(--line); display: flex; flex-direction: column; gap: 6px; cursor: pointer; transition: background-color 0.25s ease, border-radius 0.25s ease; position: relative; }
+  .search-card .field:hover { background-color: var(--paper); border-radius: var(--radius-sm); }
+  .search-card .field:last-of-type { border-right: 0; }
+  .search-card .field label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); font-weight: 600; }
+  .search-card .field .val { display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--ink); font-weight: 500; }
+  .search-card .field .val svg { width: 16px; height: 16px; color: var(--navy); opacity: 0.75; transition: opacity 0.2s ease; }
+  .search-card .field:hover .val svg { opacity: 1; }
+  
+  .search-card .field::after { content: ''; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 4px solid var(--mute); opacity: 0; transition: opacity 0.2s ease, transform 0.2s ease; }
+  .search-card .field:hover::after { opacity: 0.6; transform: translateY(-50%) translateY(2px); }
+  
+  .search-card button.go { background: var(--navy); color: #fff; padding: 18px 40px; border-radius: 999px; font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 10px; transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease; margin-left: 8px; box-shadow: 0 4px 14px rgba(0, 56, 104, 0.2); }
+  .search-card button.go:hover { background: var(--navy-deep); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0, 56, 104, 0.3); }
+
+  /* Strip after hero */
+  .trust-strip { background: var(--cream); padding: 110px 0 50px; margin-top: -20px; border-bottom: 1px solid var(--line-cool); }
+  .trust-row { display: flex; justify-content: space-between; align-items: center; gap: 40px; }
+  .trust-row .label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mute); font-weight: 600; opacity: 0.8; }
+  .trust-row .logos { display: flex; gap: 32px; align-items: center; }
+  .trust-row .logos span { font-family: var(--sans); font-size: 14px; font-weight: 600; color: var(--ink-2); letter-spacing: 0.05em; padding: 10px 20px; border: 1px solid var(--line-cool); border-radius: 999px; background: #fff; box-shadow: var(--shadow-sm); opacity: 0.7; transition: transform 0.25s ease, opacity 0.25s ease, border-color 0.25s ease; cursor: default; }
+  .trust-row .logos span:hover { opacity: 1; transform: translateY(-2px); border-color: var(--navy); }
+
+  /* Section base */
+  section.block { padding: 130px 0; }
+  .section-head { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; margin-bottom: 64px; }
+  .section-title { font-family: var(--serif); font-size: 64px; font-weight: 400; line-height: 1.1; letter-spacing: -0.03em; color: var(--navy-ink); margin: 18px 0 0; text-wrap: balance; }
+  .section-title em { font-style: italic; color: var(--navy); font-weight: 300; }
+  .section-desc { font-size: 17px; color: var(--ink-2); line-height: 1.6; max-width: 480px; text-wrap: balance; }
+  .section-cta { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--navy); margin-top: 18px; transition: color 0.2s ease; }
+  .section-cta::after { content: '→'; transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1); }
+  .section-cta:hover { color: var(--navy-deep); }
+  .section-cta:hover::after { transform: translateX(6px); }
+
+  /* Specialties bento */
+  .bento { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: 220px; gap: 20px; }
+  .bento .cell { background: var(--paper); border-radius: var(--radius-md); padding: 32px; position: relative; overflow: hidden; transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s ease; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--line-cool); }
+  .bento .cell:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--navy); }
+  .bento .cell.dark { background: var(--navy-ink); color: #fff; border-color: transparent; }
+  .bento .cell.dark:hover { border-color: transparent; }
+  .bento .cell.dark .num { color: rgba(255,255,255,.5); }
+  .bento .cell.image { color: #fff; border-color: transparent; }
+  .bento .cell.image::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,56,104,0.28) 0%, rgba(0,56,104,0.48) 46%, rgba(0,36,70,0.92) 100%); z-index: 2; pointer-events: none; }
+  .bento .cell.image:hover { border-color: transparent; }
+  
+  .bento .cell .cell-bg { position: absolute; inset: 0; background-position: center; background-size: cover; transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); z-index: 1; }
+  .bento .cell:hover .cell-bg { transform: scale(1.08); }
+  
+  .bento .cell .top { position: relative; z-index: 3; display: flex; justify-content: flex-end; align-items: center; }
+  .bento .cell .bottom { position: relative; z-index: 3; }
+  
+  .bento .cell .num { font-family: var(--serif); font-size: 13px; font-style: italic; color: var(--mute); font-weight: 500; }
+  .bento .cell .name { font-family: var(--serif); font-size: 28px; line-height: 1.1; letter-spacing: -0.02em; margin: 0; font-weight: 400; text-wrap: balance; }
+  .bento .cell .name em { font-style: italic; font-weight: 300; }
+  .bento .cell .meta { font-size: 13px; color: var(--ink-2); margin-top: 10px; font-weight: 400; }
+  .bento .cell.dark .meta { color: rgba(255,255,255,.75); }
+  .bento .cell.image .meta { color: rgba(255,255,255,.85); }
+  
+  .bento .arrow { width: 36px; height: 36px; border: 1px solid var(--line-cool); border-radius: 50%; display: grid; place-items: center; font-size: 13px; transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.25s ease; background: #fff; color: var(--ink); }
+  .bento .cell:hover .arrow { transform: rotate(-45deg); background: var(--navy); border-color: var(--navy); color: #fff; }
+  .bento .cell.dark .arrow { border-color: rgba(255,255,255,.2); background: rgba(255,255,255,.05); color: #fff; }
+  .bento .cell.dark:hover .arrow { background: #fff; color: var(--navy-ink); border-color: #fff; }
+  .bento .cell.image .arrow { border-color: rgba(255,255,255,.3); background: rgba(255,255,255,.1); color: #fff; backdrop-filter: blur(8px); }
+  .bento .cell.image:hover .arrow { background: #fff; color: var(--navy); border-color: #fff; }
+
+  .bento .span-3 { grid-column: span 3; }
+  .bento .span-4 { grid-column: span 4; }
+  .bento .span-5 { grid-column: span 5; }
+  .bento .span-6 { grid-column: span 6; }
+  .bento .row-2 { grid-row: span 2; }
+
+  /* Find doctor */
+  .doctors { background: var(--cream); padding: 130px 0; }
+  .doc-grid { display: grid; grid-template-columns: 1.05fr 2fr; gap: 80px; align-items: start; }
+  .doc-left { position: sticky; top: 120px; }
+  
+  .doc-search { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-md); padding: 32px; margin-top: 36px; box-shadow: var(--shadow-sm); }
+  .doc-search .row { display: flex; gap: 12px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .doc-search .row:last-of-type { border-bottom: 0; }
+  .doc-search .row svg { width: 18px; height: 18px; color: var(--navy); opacity: 0.6; }
+  .doc-search .row input { flex: 1; border: 0; outline: 0; font: inherit; background: transparent; color: var(--ink); }
+  .doc-search .row input::placeholder { color: var(--mute); opacity: 0.7; }
+  .doc-search button { background: var(--navy); color: #fff; padding: 16px; border-radius: 999px; width: 100%; margin-top: 24px; font-weight: 600; font-size: 15px; transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 4px 12px rgba(0, 56, 104, 0.15); }
+  .doc-search button:hover { background: var(--navy-deep); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0, 56, 104, 0.25); }
+  
+  .doc-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .doc-tile { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-md); overflow: hidden; transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s ease; box-shadow: var(--shadow-sm); }
+  .doc-tile:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--navy); }
+  .doc-tile .photo { aspect-ratio: 4/5; background: linear-gradient(165deg, #DCE3EE, #B9C7D9); position: relative; overflow: hidden; }
+  .doc-tile .photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+  .doc-tile:hover .photo img { transform: scale(1.05); }
+  .doc-tile .info { padding: 22px; }
+  .doc-tile .info h4 { font-family: var(--serif); font-weight: 500; font-size: 20px; margin: 0 0 6px; letter-spacing: -0.015em; color: var(--ink); }
+  .doc-tile .info p { font-size: 13px; color: var(--mute); margin: 0 0 16px; line-height: 1.5; }
+  .doc-tile .info .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .doc-tile .info .tag { font-size: 10px; font-weight: 500; padding: 4px 10px; background: var(--paper); border: 1px solid var(--line-cool); border-radius: 999px; color: var(--ink-2); letter-spacing: 0.04em; text-transform: uppercase; }
+  .doc-tile .info .avail { display: flex; align-items: center; gap: 8px; padding-top: 14px; margin-top: 14px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-2); font-weight: 500; }
+  .doc-tile .info .avail .pill { width: 8px; height: 8px; background: #10B981; border-radius: 50%; position: relative; }
+  
+  .doc-tile .info .avail .pill::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; background: rgba(16, 185, 129, 0.4); animation: pulse 2s infinite; }
+
+  /* Programs */
+  .programs { padding: 130px 0; }
+  .prog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .prog-card { position: relative; aspect-ratio: 4/5; border-radius: var(--radius-md); overflow: hidden; cursor: pointer; background: linear-gradient(160deg, #D5DDE9, #95A7BE); transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: var(--shadow-sm); }
+  .prog-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .prog-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); }
+  .prog-card:hover img { transform: scale(1.06); }
+  .prog-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,42,82,0) 30%, rgba(10,42,82,0.9) 100%); z-index: 2; pointer-events: none; }
+  
+  .prog-card .num { position: absolute; top: 28px; left: 28px; right: 28px; display: flex; justify-content: space-between; color: #fff; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; z-index: 3; font-weight: 600; }
+  .prog-card .num span { opacity: 0.85; padding: 6px 12px; background: rgba(0,0,0,0.2); backdrop-filter: blur(8px); border-radius: 999px; }
+  .prog-card .body { position: absolute; bottom: 0; left: 0; right: 0; padding: 32px; color: #fff; z-index: 3; }
+  .prog-card .body h3 { font-family: var(--serif); font-weight: 400; font-size: 28px; margin: 0 0 12px; letter-spacing: -0.02em; line-height: 1.1; text-wrap: balance; }
+  .prog-card .body p { font-size: 14px; opacity: 0.85; margin: 0 0 22px; line-height: 1.5; max-width: 290px; text-wrap: balance; }
+  .prog-card .body .more { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; padding: 8px 16px; background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.25); border-radius: 999px; backdrop-filter: blur(8px); transition: background-color 0.2s ease, border-color 0.2s ease; }
+  .prog-card:hover .body .more { background: #fff; color: var(--navy); border-color: #fff; }
+
+  /* Split — Telemedicine / Home */
+  .split { background: var(--paper); padding: 130px 0; border-top: 1px solid var(--line-cool); border-bottom: 1px solid var(--line-cool); }
+  .split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .split-card { background: #fff; border-radius: var(--radius-md); padding: 64px; min-height: 540px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; border: 1px solid var(--line-cool); box-shadow: var(--shadow-sm); transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+  .split-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--navy); }
+  .split-card.dark { background: var(--navy-ink); color: #fff; border-color: transparent; }
+  .split-card.dark:hover { border-color: transparent; }
+  .split-card .label { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mute); font-weight: 600; }
+  .split-card.dark .label { color: rgba(255,255,255,.5); }
+  .split-card h3 { font-family: var(--serif); font-size: 48px; font-weight: 400; line-height: 1.05; letter-spacing: -0.025em; margin: 14px 0 24px; text-wrap: balance; }
+  .split-card p { font-size: 16px; line-height: 1.6; color: var(--ink-2); max-width: 400px; margin: 0; text-wrap: balance; }
+  .split-card.dark p { color: rgba(255,255,255,.8); }
+  .split-card .visual { position: absolute; right: -40px; bottom: -40px; width: 280px; height: 280px; border-radius: 50%; background: var(--paper); display: grid; place-items: center; transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+  .split-card:hover .visual { transform: scale(1.05) rotate(5deg); }
+  .split-card.dark .visual { background: rgba(255,255,255,.04); }
+  .split-card .cta { display: inline-flex; align-items: center; gap: 12px; font-weight: 500; font-size: 15px; padding: 14px 26px; background: var(--navy); color: #fff; border-radius: 999px; width: fit-content; margin-top: 28px; transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 4px 12px rgba(0, 56, 104, 0.15); }
+  .split-card .cta:hover { background: var(--navy-deep); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0, 56, 104, 0.25); }
+  .split-card.dark .cta { background: #fff; color: var(--navy-ink); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  .split-card.dark .cta:hover { background: var(--paper); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,0,0,0.2); }
+  body.lang-ar .split-card { direction: rtl; text-align: right; }
+  body.lang-ar .split-card .cta { align-self: flex-start; margin-left: auto; margin-right: 0; }
+  body.lang-ar .split-card .visual { right: auto; left: -40px; }
+  body.lang-ar .split-card .label { letter-spacing: 0; }
+  body.lang-ar .split-card p { margin-right: 0; margin-left: auto; }
+
+  /* Stats */
+  .stats { background: var(--navy-ink); color: #fff; padding: 130px 0; }
+  .stats-head { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 0; align-items: center; }
+  .stats-head h2 { font-family: var(--serif); font-weight: 400; font-size: 64px; line-height: 1.05; letter-spacing: -0.03em; margin: 0; text-wrap: balance; }
+  .stats-head h2 em { font-style: italic; color: rgba(255,255,255,.6); font-weight: 300; }
+  .stats-head p { font-size: 17px; color: rgba(255,255,255,.7); max-width: 480px; line-height: 1.6; text-wrap: balance; }
+  .stats-cta-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
+  .stats-cta-actions a { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; padding: 15px 28px; font-size: 15px; font-weight: 600; transition: transform .2s ease, background-color .2s ease, border-color .2s ease; }
+  .stats-cta-actions .primary { background: #fff; color: var(--navy-ink); }
+  .stats-cta-actions .ghost { border: 1px solid rgba(255,255,255,.32); color: #fff; }
+  .stats-cta-actions a:hover { transform: translateY(-1px); }
+  .stats-cta-actions .primary:hover { background: var(--paper); }
+  .stats-cta-actions .ghost:hover { border-color: #fff; background: rgba(255,255,255,.06); }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid rgba(255,255,255,.08); border-bottom: 1px solid rgba(255,255,255,.08); }
+  .stats-grid > div { padding: 48px 32px 48px 32px; border-right: 1px solid rgba(255,255,255,.08); transition: background-color 0.3s ease; }
+  .stats-grid > div:first-child { padding-left: 0; }
+  .stats-grid > div:last-child { border-right: 0; padding-right: 0; }
+  .stats-grid > div:hover { background: rgba(255, 255, 255, 0.02); }
+  .stats-num { font-family: var(--serif); font-size: 92px; font-weight: 300; letter-spacing: -0.03em; line-height: 1; margin-bottom: 16px; color: #fff; display: flex; align-items: flex-start; }
+  .stats-num sup { font-size: 26px; font-family: var(--sans); font-weight: 500; margin-left: 4px; opacity: 0.8; margin-top: 10px; }
+  .stats-grid .label { font-size: 13px; color: rgba(255,255,255,.7); line-height: 1.55; text-wrap: balance; }
+
+  /* Map clinics */
+  .clinics { padding: 130px 0; background: var(--cream); border-top: 1px solid var(--line-cool); border-bottom: 1px solid var(--line-cool); }
+  .clinic-wrap { display: grid; grid-template-columns: 1fr 1.35fr; gap: 56px; }
+  .clinic-list { display: flex; flex-direction: column; gap: 12px; max-height: 580px; }
+  .clinic-item { padding: 26px 28px; border: 1px solid var(--line-cool); border-radius: var(--radius-md); cursor: pointer; transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; background: #fff; box-shadow: var(--shadow-sm); }
+  .clinic-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--navy); }
+  .clinic-item.active { border-color: var(--navy); border-width: 2px; box-shadow: var(--shadow-md); }
+  .clinic-item .name { font-family: var(--serif); font-size: 22px; letter-spacing: -0.015em; margin-bottom: 6px; color: var(--ink); font-weight: 500; }
+  .clinic-item .addr { font-size: 13px; color: var(--mute); margin-bottom: 14px; line-height: 1.4; }
+  .clinic-item .meta { display: flex; gap: 18px; font-size: 13px; color: var(--ink-2); }
+  .clinic-item .meta span { display: flex; align-items: center; gap: 6px; }
+  .clinic-item .meta b { color: var(--navy); font-weight: 600; }
+  .map { background: #E9EEF5; border-radius: var(--radius-md); aspect-ratio: 4/3; position: relative; overflow: hidden; border: 1px solid var(--line-cool); box-shadow: var(--shadow-sm); background-image:
+    radial-gradient(circle at 30% 40%, #DCE6F2 0%, transparent 40%),
+    radial-gradient(circle at 70% 60%, #D5E0EE 0%, transparent 35%),
+    linear-gradient(135deg, #EEF3FA 0%, #DCE6F2 100%);
+  }
+  .map::before, .map::after { content: ''; position: absolute; background: rgba(14,58,111,.05); }
+  .map::before { width: 60%; height: 30%; left: 10%; top: 35%; border-radius: 40%; transform: rotate(-15deg); }
+  .map-roads { position: absolute; inset: 0; opacity: 0.3; background-image:
+    linear-gradient(90deg, transparent 49.5%, #B9C7D9 49.5%, #B9C7D9 50.5%, transparent 50.5%),
+    linear-gradient(0deg, transparent 49.5%, #B9C7D9 49.5%, #B9C7D9 50.5%, transparent 50.5%),
+    linear-gradient(60deg, transparent 49.5%, #B9C7D9 49.5%, #B9C7D9 50.5%, transparent 50.5%);
+    background-size: 200px 200px, 200px 200px, 280px 280px;
+  }
+  .pin { position: absolute; width: 36px; height: 36px; border-radius: 50% 50% 50% 0; background: var(--navy); transform: rotate(-45deg); box-shadow: 0 8px 18px rgba(0,56,104,.35); cursor: pointer; transition: transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1); }
+  .pin::after { content: ''; position: absolute; inset: 8px; background: #fff; border-radius: 50%; }
+  .pin.active { transform: rotate(-45deg) scale(1.25); z-index: 5; }
+
+  /* News */
+  .news { padding: 130px 0; }
+  .news-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(320px, .9fr); grid-template-rows: repeat(2, minmax(230px, auto)); gap: 22px; }
+  .news-card { position: relative; display: flex; min-height: 260px; overflow: hidden; border-radius: var(--radius-md); border: 1px solid rgba(0,56,104,.12); background: #fff; box-shadow: var(--shadow-sm); cursor: pointer; isolation: isolate; transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease; }
+  .news-card:hover { transform: translateY(-5px); border-color: rgba(0,56,104,.28); box-shadow: var(--shadow-lg); }
+  .news-card .img { position: absolute; inset: 0; margin: 0; overflow: hidden; background: linear-gradient(160deg, #C7D4E5, #92A8C2); }
+  .news-card .img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,56,104,.1) 0%, rgba(0,36,70,.58) 52%, rgba(0,29,56,.92) 100%); z-index: 1; }
+  .news-card .img img { width: 100%; height: 100%; object-fit: cover; transition: transform .65s cubic-bezier(0.25, 0.8, 0.25, 1); }
+  .news-card:hover .img img { transform: scale(1.06); }
+  .news-card .body { position: relative; z-index: 2; display: flex; flex-direction: column; justify-content: flex-end; width: 100%; min-height: 100%; padding: 30px; color: #fff; }
+  .news-card .tag { width: fit-content; font-size: 11px; letter-spacing: 0.13em; text-transform: uppercase; color: #fff; font-weight: 700; margin-bottom: 14px; padding: 8px 12px; border: 1px solid rgba(255,255,255,.28); border-radius: 999px; background: rgba(255,255,255,.12); backdrop-filter: blur(10px); }
+  .news-card h4 { font-family: var(--sans); font-weight: 600; font-size: 26px; line-height: 1.18; letter-spacing: -0.018em; margin: 0 0 14px; color: #fff; text-wrap: balance; }
+  .news-card .meta { display: flex; align-items: center; justify-content: space-between; gap: 18px; font-size: 13px; color: rgba(255,255,255,.78); font-weight: 500; }
+  .news-card .meta::after { content: 'Read article →'; color: #fff; font-weight: 700; white-space: nowrap; transition: transform .25s ease; }
+  .news-card:hover .meta::after { transform: translateX(4px); }
+  .news-card.featured { grid-row: span 2; min-height: 520px; }
+  .news-card.featured .body { padding: 38px; }
+  .news-card.featured h4 { font-size: 36px; max-width: 760px; }
+  .news-card.small { min-height: 249px; }
+  .news-card.small h4 { font-size: 21px; line-height: 1.24; }
+  @media (max-width: 700px) {
+    .news-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto; gap: 12px; }
+    .news-card.featured { grid-column: 1 / -1; grid-row: auto; min-height: 360px; }
+    .news-card.small { min-height: 220px; }
+    .news-card .body { padding: 18px; }
+    .news-card.featured .body { padding: 24px; }
+    .news-card.featured h4 { font-size: 27px; }
+    .news-card.small h4 { font-size: 16px; line-height: 1.25; }
+    .news-card .tag { font-size: 9px; padding: 6px 8px; margin-bottom: 10px; letter-spacing: .08em; }
+    .news-card .meta { font-size: 11px; display: block; }
+    .news-card .meta::after { display: block; margin-top: 8px; font-size: 11px; }
+  }
+
+  /* Testimonials */
+  .testimony { padding: 130px 0; background: var(--paper); border-top: 1px solid var(--line-cool); border-bottom: 1px solid var(--line-cool); }
+  .test-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .test-quote { font-family: var(--serif); font-style: italic; font-size: 42px; font-weight: 300; line-height: 1.25; letter-spacing: -0.02em; color: var(--navy-ink); text-wrap: balance; position: relative; }
+  .test-quote::before { content: '“'; font-size: 100px; color: var(--navy); display: block; height: 40px; line-height: 0.8; margin-bottom: 24px; opacity: 0.85; }
+  .test-author { display: flex; align-items: center; gap: 16px; margin-top: 40px; }
+  .test-author .ava { width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg, #B9C7D9, #93A8C0); border: 1px solid var(--line-cool); }
+  .test-author .name { font-weight: 600; font-size: 15px; color: var(--ink); }
+  .test-author .role { font-size: 13px; color: var(--mute); }
+  .test-side { background: #fff; padding: 48px; border-radius: var(--radius-md); border: 1px solid var(--line-cool); box-shadow: var(--shadow-sm); }
+  .test-side h4 { font-family: var(--serif); font-size: 24px; font-weight: 450; margin: 0 0 28px; letter-spacing: -0.02em; color: var(--ink); }
+  .test-mini { padding: 24px 0; border-bottom: 1px solid var(--line); transition: transform 0.2s ease; }
+  .test-mini:last-of-type { border-bottom: 0; padding-bottom: 0; }
+  .test-mini:first-of-type { padding-top: 0; }
+  .test-mini:hover { transform: translateX(4px); }
+  .test-mini .stars { color: var(--navy); font-size: 14px; letter-spacing: 3px; margin-bottom: 10px; }
+  .test-mini p { font-size: 15px; color: var(--ink-2); margin: 0 0 10px; line-height: 1.55; }
+  .test-mini small { font-size: 11px; color: var(--mute); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; }
+
+  /* App */
+  .app { padding: 130px 0; background: var(--navy-ink); color: #fff; overflow: hidden; position: relative; }
+  .app-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .app h2 { font-family: var(--serif); font-weight: 400; font-size: 64px; line-height: 1.05; letter-spacing: -0.03em; margin: 18px 0 24px; text-wrap: balance; }
+  .app p { font-size: 17px; color: rgba(255,255,255,.75); line-height: 1.6; max-width: 480px; margin: 0 0 36px; text-wrap: balance; }
+  .app .stores { display: flex; gap: 16px; }
+  .app .store { display: flex; align-items: center; gap: 14px; padding: 12px 26px; border: 1px solid rgba(255,255,255,.15); border-radius: 12px; transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease; background: rgba(255,255,255,0.03); cursor: pointer; }
+  .app .store:hover { background: rgba(255,255,255,.08); transform: translateY(-2px); border-color: rgba(255,255,255,0.3); }
+  .app .store small { display: block; font-size: 9px; opacity: 0.6; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 2px; }
+  .app .store b { font-weight: 600; font-size: 14px; letter-spacing: -0.01em; }
+  
+  .phone-mock { width: 310px; aspect-ratio: 9/19; background: #000; border-radius: 44px; padding: 10px; margin: 0 auto; position: relative; box-shadow: 0 40px 80px -20px rgba(0,0,0,.7), 0 0 0 2px rgba(255,255,255,.15); transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+  .phone-mock:hover { transform: translateY(-8px) rotate(2deg); }
+  .phone-mock .screen { border-radius: 36px; background: linear-gradient(180deg, var(--navy-deep) 0%, #00152a 100%); height: 100%; padding: 56px 20px 20px; position: relative; overflow: hidden; display: flex; flex-direction: column; font-family: var(--sans); }
+  .phone-mock .notch { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 110px; height: 28px; background: #000; border-radius: 14px; z-index: 5; box-shadow: inset 0 0 4px rgba(255,255,255,0.1); }
+  
+  .phone-status-bar { position: absolute; top: 18px; left: 24px; right: 24px; display: flex; justify-content: space-between; align-items: center; color: #fff; font-size: 11px; font-weight: 600; z-index: 4; letter-spacing: -0.01em; }
+  .phone-status-bar .icons { display: flex; gap: 5px; align-items: center; }
+  .phone-status-bar .battery { width: 20px; height: 10px; border: 1.5px solid rgba(255,255,255,0.8); border-radius: 3px; position: relative; padding: 1px; }
+  .phone-status-bar .battery::after { content: ''; position: absolute; top: 2px; right: -4px; width: 2px; height: 3px; background: rgba(255,255,255,0.8); border-radius: 0 1px 1px 0; }
+  .phone-status-bar .battery-fill { height: 100%; width: 85%; background: #fff; border-radius: 1px; }
+  
+  .phone-mock .screen .hi { color: rgba(255,255,255,.6); font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; }
+  .phone-mock .screen .name { color: #fff; font-family: var(--serif); font-size: 24px; margin: 4px 0 20px; font-weight: 400; }
+  
+  .phone-mock .screen .appt { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 16px; margin-bottom: 14px; transition: background-color 0.2s ease; cursor: pointer; backdrop-filter: blur(5px); }
+  .phone-mock .screen .appt:hover { background: rgba(255,255,255,0.12); }
+  .phone-mock .screen .appt .day { font-size: 9px; font-weight: 700; color: #34D399; letter-spacing: 0.06em; text-transform: uppercase; }
+  .phone-mock .screen .appt.alert .day { color: #F59E0B; }
+  .phone-mock .screen .appt .doc { color: #fff; font-size: 13px; margin: 6px 0 2px; font-weight: 600; }
+  .phone-mock .screen .appt .when { font-size: 11px; color: rgba(255,255,255,.7); line-height: 1.4; }
+  
+  .phone-mock .screen .pills { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+  .phone-mock .screen .pills span { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 12px 10px; font-size: 11px; color: #fff; font-weight: 500; text-align: center; cursor: pointer; transition: background-color 0.2s ease, transform 0.2s ease; }
+  .phone-mock .screen .pills span:hover { background: rgba(255,255,255,0.12); transform: scale(1.02); }
+
+  /* Footer */
+  footer { background: #fff; border-top: 1px solid var(--line); padding: 100px 0 40px; }
+  .foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 72px; }
+  .foot-grid h5 { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mute); font-weight: 600; margin: 0 0 22px; }
+  .foot-grid ul { list-style: none; padding: 0; margin: 0; }
+  .foot-grid li { padding: 8px 0; font-size: 14px; color: var(--ink-2); transition: transform 0.2s ease; }
+  .foot-grid li a { transition: color 0.2s ease; display: inline-block; }
+  .foot-grid li a:hover { color: var(--navy); transform: translateX(2px); }
+  .foot-grid .lede { font-family: var(--serif); font-size: 24px; line-height: 1.3; letter-spacing: -0.02em; color: var(--navy-ink); margin: 18px 0 24px; max-width: 320px; text-wrap: balance; }
+  .foot-grid .contact { font-size: 14px; color: var(--ink-2); line-height: 1.8; margin-top: 18px; }
+  .foot-grid .contact strong { font-size: 18px; color: var(--navy); font-weight: 600; }
+  .foot-bottom { padding-top: 32px; border-top: 1px solid var(--line-cool); display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--mute); }
+  .foot-bottom .socials { display: flex; gap: 20px; }
+  .foot-bottom .socials a { transition: color 0.2s ease; }
+  .foot-bottom .socials a:hover { color: var(--navy); }
+
+  /* Sticky CTA */
+  .sticky-cta { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(120px); opacity: 0; background: rgba(0, 29, 56, 0.95); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 999px; padding: 8px 8px 8px 28px; display: flex; align-items: center; gap: 24px; box-shadow: 0 15px 45px rgba(0,0,0,0.4); z-index: 40; transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease; }
+  .sticky-cta.visible { transform: translateX(-50%) translateY(0); opacity: 1; }
+  .sticky-cta .text { font-size: 13px; opacity: 0.95; font-weight: 450; }
+  .sticky-cta button { background: #fff; color: var(--navy); padding: 11px 22px; border-radius: 999px; font-weight: 600; font-size: 13px; transition: transform 0.2s ease, background-color 0.2s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+  .sticky-cta button:hover { background: var(--paper); transform: scale(1.02); }
+
+  /* Decor */
+  .deco-line { width: 100%; height: 1px; background: var(--line-cool); margin: 0; }
+</style>
+</head>
+<body data-screen-label="V1 — Editorial Calm">
+
+<!-- ribbon -->
+<div class="ribbon">
+  <div class="wrap">
+    <div class="ribbon-left">
+      <span><span class="dot"></span> &nbsp;<b>Now open</b> · Sat–Thu 8 AM – 10 PM &nbsp;·&nbsp; Fri 5 PM – 9 PM</span>
+      <span>5 branches · Jeddah, Riyadh</span>
+    </div>
+    <div class="ribbon-right">
+      <a href="#">Contact Us</a>
+      <a href="#">Careers</a>
+      <a href="https://wa.me/966542228111" target="_blank">WhatsApp · 0542228111</a>
+      <a href="tel:920022811"><b>920022811</b></a>
+    </div>
+  </div>
+</div>
+
+<!-- nav -->
+<nav class="nav">
+  <div class="wrap">
+    <div class="logo">
+      <svg class="logo-mark" viewBox="0 0 40 40" fill="none">
+        <g fill="#0E3A6F">
+          <ellipse cx="20" cy="8" rx="4" ry="6" transform="rotate(0 20 8)"/>
+          <ellipse cx="32" cy="20" rx="4" ry="6" transform="rotate(90 32 20)"/>
+          <ellipse cx="20" cy="32" rx="4" ry="6"/>
+          <ellipse cx="8" cy="20" rx="4" ry="6" transform="rotate(90 8 20)"/>
+          <circle cx="20" cy="20" r="3"/>
+        </g>
+      </svg>
+      <div class="logo-txt">
+        <div class="en">My Clinic</div>
+        <div class="ar">عيـــادتــي</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#">Find a Doctor</a>
+      <a href="#">Programs</a>
+      <a href="#">Specialties</a>
+      <a href="#">Telemedicine</a>
+      <a href="#">Home Healthcare</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-pill" role="group" aria-label="Language switcher">
+        <button type="button" class="active" aria-pressed="true">EN</button>
+        <button type="button" aria-pressed="false">AR</button>
+      </div>
+      <button class="btn primary">Book Now</button>
+    </div>
+  </div>
+</nav>
+
+<!-- hero slider -->
+<header class="hero" id="hero">
+  <div class="hero-slides" id="heroSlides">
+    <div class="hero-slide active" data-eyebrow="Call Center · Extended hours"
+         data-title="Our team is &lt;em&gt;ready&lt;/em&gt;&lt;br&gt;to serve you."
+         data-sub="We've extended our call center hours. Saturday through Thursday, 8 AM to 10 PM — and Friday 5 PM to 9 PM. Call 920022811 or book online in seconds."
+         data-quote="“Your partner in health and wellness, across the Kingdom.”">
+      <div class="bg" style="background-image: url('https://images.unsplash.com/photo-1551190822-a9333d879b1f?auto=format&fit=crop&w=2000&q=80')"></div>
+      <div class="veil"></div>
+    </div>
+    <div class="hero-slide" data-eyebrow="Find your doctor"
+         data-title="The right physician&lt;br&gt;for &lt;em&gt;your question&lt;/em&gt;."
+         data-sub="Connect with a diverse range of experienced healthcare professionals. Browse profiles, read patient reviews, and choose the doctor who resonates with your needs."
+         data-quote="“The booking was easy, the nurse was courteous, the waiting time was short.” — Patient testimonial">
+      <div class="bg" style="background-image: url('https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=2000&q=80')"></div>
+      <div class="veil"></div>
+    </div>
+    <div class="hero-slide" data-eyebrow="Telemedicine · Home Healthcare"
+         data-title="Care that comes &lt;em&gt;to you&lt;/em&gt;,&lt;br&gt;wherever you are."
+         data-sub="Video consultations from home, doctor and nurse visits at your doorstep, and physiotherapy at your bedside — across our five branches in Jeddah and Riyadh."
+         data-quote="“More than great. Classy treatment, fast service, cleanliness.” — Patient testimonial">
+      <div class="bg" style="background-image: url('https://images.unsplash.com/photo-1666214280391-8ff5bd3c0bf0?auto=format&fit=crop&w=2000&q=80')"></div>
+      <div class="veil"></div>
+    </div>
+  </div>
+
+  <div class="hero-inner">
+    <div class="hero-content" id="heroContent">
+      <div class="hero-eyebrow" id="heroEyebrow">Call Center · Extended hours</div>
+      <h1 class="hero-title" id="heroTitle">Our team is <em>ready</em><br>to serve you.</h1>
+      <p class="hero-sub" id="heroSub">We've extended our call center hours. Saturday through Thursday, 8 AM to 10 PM — and Friday 5 PM to 9 PM. Call 920022811 or book online in seconds.</p>
+      <div class="hero-ctas">
+        <a class="cta-primary" href="#">Book appointment <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a>
+        <a class="cta-ghost" href="#">Find a doctor</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-quote" id="heroQuote">
+    <small>From our patients</small>
+    <p id="heroQuoteText">“We give patients more than a diagnosis — we give them a plan they can live with.” — Dr. Layla Al-Rashed</p>
+  </div>
+
+  <div class="hero-counter"><b id="heroIdx">01</b> / 03</div>
+
+  <div class="hero-controls">
+    <div class="hero-dots" id="heroDots">
+      <button class="hero-dot active" data-i="0"><span class="bar"></span><span class="lbl">01 · Call center</span></button>
+      <button class="hero-dot" data-i="1"><span class="bar"></span><span class="lbl">02 · Find a doctor</span></button>
+      <button class="hero-dot" data-i="2"><span class="bar"></span><span class="lbl">03 · Tele &amp; Home</span></button>
+    </div>
+    <div class="hero-arrows">
+      <button class="hero-arrow" id="heroPrev" aria-label="Previous"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <button class="hero-arrow" id="heroNext" aria-label="Next"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<!-- search card overlap -->
+<div class="wrap" style="position: relative;">
+  <div class="search-card" style="margin-top: -50px; margin-bottom: 0;">
+      <div class="field">
+        <label>Branch</label>
+        <div class="val">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-7.5-7-12a7 7 0 1 1 14 0c0 4.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Jeddah · Al Mohammadiyah
+        </div>
+      </div>
+      <div class="field">
+        <label>Specialty</label>
+        <div class="val">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3v12a4 4 0 0 0 8 0"/><circle cx="6" cy="3" r="1.5"/><circle cx="12" cy="3" r="1.5"/></svg>
+          Specialty
+        </div>
+      </div>
+      <div class="field">
+        <label>Doctor</label>
+        <div class="val" style="color: var(--mute)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+          All Doctors
+        </div>
+      </div>
+      <button class="go">Search <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></button>
+    </div>
+</div>
+
+<!-- trust strip -->
+<div class="trust-strip">
+  <div class="wrap">
+    <div class="trust-row">
+      <div class="label">Trusted partners & insurers</div>
+      <div class="logos">
+        <span>Bupa Arabia</span>
+        <span>Tawuniya</span>
+        <span>MedGulf</span>
+        <span>Allianz</span>
+        <span>Saudi Re</span>
+        <span>Walaa</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- specialties bento -->
+<section class="block">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Specialties</div>
+        <h2 class="section-title">Specialized care, <em>connected around you</em>.</h2>
+      </div>
+      <div>
+        <p class="section-desc">From cardiology to obstetrics, our specialists work as one team — sharing notes, rooms, and rounds so your care never feels handed off.</p>
+        <a class="section-cta" href="#">View all specialties</a>
+      </div>
+    </div>
+
+    <div class="bento">
+      <div class="cell image span-4 row-2">
+        <div class="cell-bg" style="background-image: url('/clinic/specialties/cardiology.jpg')"></div>
+        <div class="top"><span class="arrow">→</span></div>
+        <div class="bottom"><h3 class="name">Cardiology</h3><div class="meta">Heart care, diagnostics & prevention</div></div>
+      </div>
+      <div class="cell image span-4">
+        <div class="cell-bg" style="background-image: url('/clinic/specialties/internal-medicine.jpg')"></div>
+        <div class="top"><span class="arrow">→</span></div>
+        <div class="bottom"><h3 class="name">Internal Medicine</h3><div class="meta">Whole-body adult primary care</div></div>
+      </div>
+      <div class="cell image span-4">
+        <div class="cell-bg" style="background-image: url('/clinic/specialties/endocrinology.jpg')"></div>
+        <div class="top"><span class="arrow">→</span></div>
+        <div class="bottom"><h3 class="name">Endocrinology &amp; <em>Diabetes</em></h3><div class="meta">Comprehensive metabolic program</div></div>
+      </div>
+      <div class="cell image span-4">
+        <div class="cell-bg" style="background-image: url('/clinic/specialties/ent.jpg')"></div>
+        <div class="top"><span class="arrow">→</span></div>
+        <div class="bottom"><h3 class="name">ENT</h3><div class="meta">Hearing, breathing, balance</div></div>
+      </div>
+      <div class="cell image span-4">
+        <div class="cell-bg" style="background-image: url('/clinic/specialties/family-medicine.jpg')"></div>
+        <div class="top"><span class="arrow">→</span></div>
+        <div class="bottom"><h3 class="name">Family Medicine</h3><div class="meta">One doctor for the whole family</div></div>
+      </div>
+      <div class="cell image span-3">
+        <div class="cell-bg" style="background-image: url('/clinic/specialties/ophthalmology.jpg')"></div>
+        <div class="top"><span class="arrow">→</span></div>
+        <div class="bottom"><h3 class="name">Ophthalmology</h3><div class="meta">Eye care & full surgical suite</div></div>
+      </div>
+      <div class="cell image span-3">
+        <div class="cell-bg" style="background-image: url('/clinic/specialties/orthopedics.jpg')"></div>
+        <div class="top"><span class="arrow">→</span></div>
+        <div class="bottom"><h3 class="name">Orthopedics</h3><div class="meta">Bones, joints & mobility</div></div>
+      </div>
+      <div class="cell image span-3">
+        <div class="cell-bg" style="background-image: url('/clinic/specialties/obgyn.jpg')"></div>
+        <div class="top"><span class="arrow">→</span></div>
+        <div class="bottom"><h3 class="name">OB &amp; Gynecology</h3><div class="meta">Women's health</div></div>
+      </div>
+      <div class="cell image span-3">
+        <div class="cell-bg" style="background-image: url('/clinic/specialties/view-all.jpg')"></div>
+        <div class="top"><span class="arrow">→</span></div>
+        <div class="bottom"><h3 class="name">View all<br><em>specialties</em></h3></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- programs -->
+<section class="programs">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Programs</div>
+        <h2 class="section-title">Programs that take care of <em>the whole journey</em>.</h2>
+      </div>
+      <div>
+        <p class="section-desc">Multi-disciplinary programs combining specialists, technology, and ongoing coaching — designed for life's important chapters.</p>
+        <a class="section-cta" href="#">View all programs</a>
+      </div>
+    </div>
+
+    <div class="prog-grid">
+      <div class="prog-card">
+        <img src="/clinic/programs/diabetes.jpg" onerror="this.style.display='none'">
+        <div class="num"><span>Program 01</span><span>12 weeks</span></div>
+        <div class="body">
+          <h3>Diabetes Management<br>Adult &amp; Pediatric</h3>
+          <p>Adult and pediatric pathways. Personal endocrinologist, dietician, and continuous monitoring.</p>
+          <span class="more">Learn more →</span>
+        </div>
+      </div>
+      <div class="prog-card">
+        <img src="/clinic/programs/pregnancy.jpg" onerror="this.style.display='none'">
+        <div class="num"><span>Program 02</span><span>40 weeks</span></div>
+        <div class="body">
+          <h3>Pregnancy<br>Care Program</h3>
+          <p>From early antenatal visits through postnatal support — a single OB-GYN team across every trimester.</p>
+          <span class="more">Learn more →</span>
+        </div>
+      </div>
+      <div class="prog-card">
+        <img src="/clinic/programs/family-care.jpg" onerror="this.style.display='none'">
+        <div class="num"><span>Program 03</span><span>Ongoing</span></div>
+        <div class="body">
+          <h3>Family Center<br>Care Program</h3>
+          <p>One pediatric and family medicine team for every member of the household.</p>
+          <span class="more">Learn more →</span>
+        </div>
+      </div>
+      <div class="prog-card">
+        <img src="/clinic/programs/hearing.jpg" onerror="this.style.display='none'">
+        <div class="num"><span>Program 04</span><span>Lifelong</span></div>
+        <div class="body">
+          <h3>Hearing Aid<br>Program</h3>
+          <p>Audiology testing, fitting, calibration, and long-term hearing care across all ages.</p>
+          <span class="more">Learn more →</span>
+        </div>
+      </div>
+      <div class="prog-card">
+        <img src="/clinic/programs/osteoporosis.jpg" onerror="this.style.display='none'">
+        <div class="num"><span>Program 05</span><span>26 weeks</span></div>
+        <div class="body">
+          <h3>Osteoporosis<br>Program</h3>
+          <p>DEXA, endocrine workup, and bone-strengthening protocols tailored to your stage.</p>
+          <span class="more">Learn more →</span>
+        </div>
+      </div>
+      <div class="prog-card">
+        <img src="/clinic/programs/pediatric-vax.jpg" onerror="this.style.display='none'">
+        <div class="num"><span>Program 06</span><span>0–6 years</span></div>
+        <div class="body">
+          <h3>Pediatric<br>Vaccination Program</h3>
+          <p>Saudi MoH schedule, gentle technique, and digital records that travel with your child.</p>
+          <span class="more">Learn more →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- stats -->
+<section class="stats">
+  <div class="wrap">
+    <div class="stats-head">
+      <h2>Ready to begin <em>your care journey</em>?</h2>
+      <div>
+        <p>Choose the service that fits your needs today. Book with a specialist, explore our clinical programs, or speak with our team for guidance.</p>
+        <div class="stats-cta-actions">
+          <a class="primary" href="/find-a-doctor.html">Book an appointment</a>
+          <a class="ghost" href="/programs.html">Explore programs</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- doctors -->
+<section class="doctors">
+  <div class="wrap doc-grid">
+    <div class="doc-left">
+      <div class="eyebrow">Find Your Doctor</div>
+      <h2 class="section-title" style="font-size: 56px;">Find Your <em>Doctor</em>.</h2>
+      <p class="section-desc" style="margin-top: 24px;">Our service connects you with a diverse range of experienced healthcare professionals, each dedicated to your well-being. Browse profiles, read patient reviews, and choose the doctor who resonates with your needs — whether you're seeking a specialist or a primary care physician.</p>
+      <div class="doc-search">
+        <div class="row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg>
+          <input placeholder="Doctor, specialty, condition…">
+        </div>
+        <div class="row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-7.5-7-12a7 7 0 1 1 14 0c0 4.5-7 12-7 12z"/></svg>
+          <span style="color: var(--mute)">Any branch</span>
+        </div>
+        <div class="row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12h20M12 2v20"/></svg>
+          <span style="color: var(--mute)">Any insurance</span>
+        </div>
+        <button>Search physicians</button>
+      </div>
+    </div>
+    <div class="doc-tiles">
+      <div class="doc-tile">
+        <div class="photo"><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=500&q=70" onerror="this.style.display='none'"></div>
+        <div class="info">
+          <h4>Dr. Hisham Al-Otaibi</h4>
+          <p>Consultant Cardiologist · 22 yrs · Jeddah Al Safa</p>
+          <div class="tags"><span class="tag">Heart Failure</span><span class="tag">Interventional</span></div>
+          <div class="avail"><span class="pill"></span> Next available: <b style="color: var(--ink); margin-left: auto; font-weight: 500;">Tomorrow, 9:30 AM</b></div>
+        </div>
+      </div>
+      <div class="doc-tile">
+        <div class="photo"><img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=500&q=70" onerror="this.style.display='none'"></div>
+        <div class="info">
+          <h4>Dr. Reem Al-Qahtani</h4>
+          <p>Endocrinology & Diabetes · 14 yrs · Riyadh Al Sahafa</p>
+          <div class="tags"><span class="tag">Diabetes</span><span class="tag">Thyroid</span></div>
+          <div class="avail"><span class="pill"></span> Next available: <b style="color: var(--ink); margin-left: auto; font-weight: 500;">Today, 4:15 PM</b></div>
+        </div>
+      </div>
+      <div class="doc-tile">
+        <div class="photo"><img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=500&q=70" onerror="this.style.display='none'"></div>
+        <div class="info">
+          <h4>Dr. Khalid Al-Subaie</h4>
+          <p>Internal Medicine · 18 yrs · Jeddah Tahlia</p>
+          <div class="tags"><span class="tag">Primary care</span><span class="tag">Hypertension</span></div>
+          <div class="avail"><span class="pill"></span> Next available: <b style="color: var(--ink); margin-left: auto; font-weight: 500;">Wed, 11:00 AM</b></div>
+        </div>
+      </div>
+      <div class="doc-tile">
+        <div class="photo"><img src="https://images.unsplash.com/photo-1638202993928-7267aad84c31?auto=format&fit=crop&w=500&q=70" onerror="this.style.display='none'"></div>
+        <div class="info">
+          <h4>Dr. Noor Bakhsh</h4>
+          <p>Obstetrics & Gynecology · 11 yrs · Jeddah Al Khalidiyyah</p>
+          <div class="tags"><span class="tag">Antenatal</span><span class="tag">High-risk</span></div>
+          <div class="avail"><span class="pill"></span> Next available: <b style="color: var(--ink); margin-left: auto; font-weight: 500;">Tomorrow, 2:00 PM</b></div>
+        </div>
+      </div>
+      <div class="doc-tile">
+        <div class="photo"><img src="https://images.unsplash.com/photo-1612531822380-fc73a39a4bbe?auto=format&fit=crop&w=500&q=70" onerror="this.style.display='none'"></div>
+        <div class="info">
+          <h4>Dr. Yousef Al-Harbi</h4>
+          <p>Orthopedic Surgery · 19 yrs · Jeddah Al Mohammadiyah</p>
+          <div class="tags"><span class="tag">Knee</span><span class="tag">Sports</span></div>
+          <div class="avail"><span class="pill"></span> Next available: <b style="color: var(--ink); margin-left: auto; font-weight: 500;">Thu, 10:30 AM</b></div>
+        </div>
+      </div>
+      <div class="doc-tile">
+        <div class="photo"><img src="https://images.unsplash.com/photo-1651008376811-b90baee60c1f?auto=format&fit=crop&w=500&q=70" onerror="this.style.display='none'"></div>
+        <div class="info">
+          <h4>Dr. Sara Al-Faris</h4>
+          <p>Pediatrics · 9 yrs · Riyadh Al Sahafa</p>
+          <div class="tags"><span class="tag">Newborn</span><span class="tag">Vaccines</span></div>
+          <div class="avail"><span class="pill"></span> Next available: <b style="color: var(--ink); margin-left: auto; font-weight: 500;">Today, 6:00 PM</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- split: telemedicine + home -->
+<section class="split">
+  <div class="wrap">
+    <div class="split-grid">
+      <div class="split-card dark">
+        <div>
+          <div class="label">Telemedicine</div>
+          <h3>Telemedicine</h3>
+          <p>Access quality medical care from your own comfort through our telemedicine service. Connect with healthcare professionals via video consultations, saving time and ensuring convenience. Stay healthy with virtual visits that bring healthcare to you.</p>
+        </div>
+        <a class="cta">Learn more →</a>
+        <div class="visual">
+          <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="m22 8-6 4 6 4z"/></svg>
+        </div>
+      </div>
+      <div class="split-card">
+        <div>
+          <div class="label">Home Healthcare</div>
+          <h3>Bringing care<br>to your doorstep.</h3>
+          <p>Experience the convenience of home healthcare as our professionals provide you with home care that includes doctor and nurse visits. Revitalize your health — we also provide physiotherapy expertise at the comfort of your home.</p>
+        </div>
+        <a class="cta">Contact us →</a>
+        <div class="visual">
+          <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="rgba(14,58,111,.2)" stroke-width="1"><path d="M3 11l9-8 9 8v10a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1z"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- map clinic finder -->
+<section class="clinics">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom: 56px;">
+      <div>
+        <div class="eyebrow">Our Branches</div>
+        <h2 class="section-title">Select Your <em>Location</em>.</h2>
+      </div>
+      <div>
+        <p class="section-desc">Whichever branch you visit, your records, your physician notes, and your imaging follow you — seamlessly.</p>
+      </div>
+    </div>
+
+    <div class="clinic-wrap">
+      <div class="clinic-list">
+        <div class="clinic-item active">
+          <div class="name">Jeddah · Al Mohammadiyah</div>
+          <div class="addr">King Abdulaziz Rd, Al Mohammadiyah District, Jeddah</div>
+          <div class="meta"><span>● Open · until 10 PM</span><span><b>12</b> specialties</span><span><b>38</b> doctors</span></div>
+        </div>
+        <div class="clinic-item">
+          <div class="name">Jeddah · Al Safa</div>
+          <div class="addr">Prince Saud Al Faisal St, Al Safa District, Jeddah</div>
+          <div class="meta"><span>● Open · until 10 PM</span><span><b>14</b> specialties</span><span><b>42</b> doctors</span></div>
+        </div>
+        <div class="clinic-item">
+          <div class="name">Jeddah · Al Khalidiyyah Dental Center</div>
+          <div class="addr">Al Khalidiyyah, Jeddah · Specialized dental care</div>
+          <div class="meta"><span>● Open · until 10 PM</span><span><b>1</b> specialty</span><span><b>14</b> dentists</span></div>
+        </div>
+        <div class="clinic-item">
+          <div class="name">Riyadh · Al Sahafa</div>
+          <div class="addr">Anas Bin Malik Rd, Al Sahafa District, Riyadh</div>
+          <div class="meta"><span>● Open · until 10 PM</span><span><b>16</b> specialties</span><span><b>54</b> doctors</span></div>
+        </div>
+        <div class="clinic-item">
+          <div class="name">Jeddah · Tahlia</div>
+          <div class="addr">Prince Mohammed Bin Abdulaziz St, Tahlia, Jeddah</div>
+          <div class="meta"><span>● Open · until 10 PM</span><span><b>11</b> specialties</span><span><b>32</b> doctors</span></div>
+        </div>
+      </div>
+      <div class="map">
+        <div class="map-roads"></div>
+        <div class="pin active" style="left: 28%; top: 32%;"></div>
+        <div class="pin navy" style="left: 42%; top: 48%;"></div>
+        <div class="pin navy" style="left: 36%; top: 62%;"></div>
+        <div class="pin navy" style="left: 66%; top: 28%;"></div>
+        <div class="pin navy" style="left: 22%; top: 58%;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- testimonials -->
+<section class="testimony">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom: 64px;">
+      <div>
+        <div class="eyebrow">Patient Testimonial</div>
+        <h2 class="section-title">In our patients' <em>own words</em>.</h2>
+      </div>
+      <div></div>
+    </div>
+
+    <div class="test-grid">
+      <div>
+        <blockquote class="test-quote">The booking was easy, the nurse was courteous, the waiting time was short, and I entered my appointment on time. May God grant them good health.</blockquote>
+        <div class="test-author">
+          <div class="ava"></div>
+          <div>
+            <div class="name">Fatimah A.</div>
+            <div class="role">Patient · Jeddah Al Safa</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-side">
+        <h4>More from patients</h4>
+        <div class="test-mini">
+          <div class="stars">★★★★★</div>
+          <p>More than great. Classy treatment, fast service, cleanliness. May God grant you success.</p>
+          <small>Mohammed K. · Riyadh</small>
+        </div>
+        <div class="test-mini">
+          <div class="stars">★★★★★</div>
+          <p>Dr. Reem was patient, thorough, and explained every step of my diabetes plan. I'm grateful.</p>
+          <small>Norah S. · Riyadh Al Sahafa</small>
+        </div>
+        <div class="test-mini">
+          <div class="stars">★★★★★</div>
+          <p>The home nurse came on time, was professional and warm. Made my recovery so much easier.</p>
+          <small>Abdullah M. · Jeddah</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- news -->
+<section class="news">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">News &amp; Announcements</div>
+        <h2 class="section-title">News &amp; <em>Announcements</em>.</h2>
+      </div>
+      <div>
+        <p class="section-desc">Stay informed with our latest updates, news and announcements.</p>
+        <a class="section-cta" href="#">Learn more</a>
+      </div>
+    </div>
+
+    <div class="news-grid">
+      <a class="news-card featured" href="/news-details.html">
+        <div class="img"><img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=900&q=70" onerror="this.style.display='none'"></div>
+        <div class="body">
+          <div class="tag">Research · May 2026</div>
+          <h4>"Breaking Barriers in Healthcare" — Unleashing innovation at My Clinic's First Annual Scientific Conference.</h4>
+          <div class="meta">8 min read · Dr. Layla Al-Rashed</div>
+        </div>
+      </a>
+      <a class="news-card small" href="/news-details.html">
+        <div class="img"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=70" onerror="this.style.display='none'"></div>
+        <div class="body">
+          <div class="tag">Community · Apr 2026</div>
+          <h4>Winners of Jeddah United — celebrated in style at the My Clinic Winners Ceremony.</h4>
+          <div class="meta">3 min read</div>
+        </div>
+      </a>
+      <a class="news-card small" href="/news-details.html">
+        <div class="img"><img src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=600&q=70" onerror="this.style.display='none'"></div>
+        <div class="body">
+          <div class="tag">Accreditation · Mar 2026</div>
+          <h4>CBAHI accreditation awarded to My Clinic Al Safa.</h4>
+          <div class="meta">2 min read</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- app -->
+<section class="app">
+  <div class="wrap app-grid">
+    <div>
+      <div class="eyebrow" style="color: rgba(255,255,255,.7);">My Clinic app</div>
+      <h2>Download <em style="color: rgba(255,255,255,.55);">our app</em>.</h2>
+      <p>Stay connected with your healthcare needs on the go. With our app, you can easily schedule appointments, access medical records, lab results, X-rays, receive personalized health tips, and connect with healthcare professionals from the comfort of your own device.</p>
+      <div class="stores">
+        <a class="store">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+          <div><small>Download on the</small><b>App Store</b></div>
+        </a>
+        <a class="store">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M3.609 1.814 13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893 2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198 2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.196 12l2.502-2.491zM5.864 2.658 16.802 8.99l-2.302 2.302L5.864 2.658z"/></svg>
+          <div><small>Get it on</small><b>Google Play</b></div>
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="phone-mock">
+        <div class="notch"></div>
+        <div class="screen">
+          <div class="phone-status-bar">
+            <span>09:41</span>
+            <div class="icons">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="display: inline-block; vertical-align: middle;"><path d="M2 22h20V2L2 22z" opacity="0.3"/><path d="M2 22h16V6L2 22z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="display: inline-block; vertical-align: middle;"><path d="M12 21a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm0-18C6.48 3 2 7.48 2 13c0 2.21.72 4.25 1.93 5.93l1.43-1.43A7.935 7.935 0 0 1 4 13c0-4.42 3.58-8 8-8s8 3.58 8 8c0 1.63-.49 3.14-1.33 4.41l1.42 1.42C21.28 17.25 22 15.21 22 13c0-5.52-4.48-10-10-10zm0 4c-3.31 0-6 2.69-6 6 0 1.28.4 2.47 1.09 3.45l1.44-1.44C8.18 14.47 8 13.76 8 13c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .76-.18 1.47-.53 2.01l1.44 1.44c.69-.98 1.09-2.17 1.09-3.45 0-3.31-2.69-6-6-6z"/></svg>
+              <div class="battery" style="display: inline-block; vertical-align: middle;">
+                <div class="battery-fill"></div>
+              </div>
+            </div>
+          </div>
+          <div class="hi">Good evening,</div>
+          <div class="name">Ahmed</div>
+          <div class="appt">
+            <div class="day">UPCOMING · TOMORROW</div>
+            <div class="doc">Dr. Hisham Al-Otaibi · Cardiology</div>
+            <div class="when">9:30 AM · Jeddah Al Safa · Room 304</div>
+          </div>
+          <div class="appt">
+            <div class="day">LAB RESULTS · READY</div>
+            <div class="doc">CBC, Lipid Panel</div>
+            <div class="when">View results →</div>
+          </div>
+          <div class="pills">
+            <span>Video visit</span><span>Find doctor</span><span>Lab orders</span><span>Records</span><span>Prescriptions</span><span>Messages</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">
+          <svg class="logo-mark" viewBox="0 0 40 40" fill="none">
+            <g fill="#003868"><ellipse cx="20" cy="8" rx="4" ry="6"/><ellipse cx="32" cy="20" rx="4" ry="6" transform="rotate(90 32 20)"/><ellipse cx="20" cy="32" rx="4" ry="6"/><ellipse cx="8" cy="20" rx="4" ry="6" transform="rotate(90 8 20)"/><circle cx="20" cy="20" r="3"/></g>
+          </svg>
+          <div class="logo-txt"><div class="en">My Clinic</div><div class="ar">عيـــادتــي</div></div>
+        </div>
+        <p class="lede">My Clinic is your partner in health and wellness. With a focus on prevention and early intervention, our team of experts is committed to helping you stay healthy and live your best life.</p>
+        <div class="contact">
+          <strong>920022811</strong><br>
+          WhatsApp · 0542228111
+        </div>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul><li><a href="#">About My Clinic</a></li><li><a href="#">Our Sites</a></li><li><a href="#">Services</a></li></ul>
+        <h5 style="margin-top: 28px;">Useful Links</h5>
+        <ul><li><a href="#">Contact Us</a></li><li><a href="#">Careers</a></li><li><a href="#">Privacy Policy</a></li></ul>
+      </div>
+      <div>
+        <h5>Care</h5>
+        <ul><li><a href="#">Find a Doctor</a></li><li><a href="#">Specialties</a></li><li><a href="#">Programs</a></li><li><a href="#">Telemedicine</a></li><li><a href="#">Home Healthcare</a></li></ul>
+      </div>
+      <div>
+        <h5>Call Center Working Hours</h5>
+        <ul><li>Saturday – Thursday · 8 AM – 10 PM</li><li>Friday · 5 PM – 9 PM</li></ul>
+        <h5 style="margin-top: 28px;">Our Branches</h5>
+        <ul><li>Jeddah · Al Mohammadiyah</li><li>Jeddah · Al Safa</li><li>Jeddah · Al Khalidiyyah Dental</li><li>Jeddah · Tahlia</li><li>Riyadh · Al Sahafa</li></ul>
+      </div>
+      <div>
+        <h5>Get the app</h5>
+        <ul><li><a href="#">App Store</a></li><li><a href="#">Google Play</a></li></ul>
+        <h5 style="margin-top: 28px;">Book Now</h5>
+        <ul><li><a href="#">Book an appointment</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© My Clinic 2026 · All rights reserved · CBAHI Accredited</span>
+      <div class="socials"><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">X</a><a href="#">YouTube</a><a href="#">LinkedIn</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- sticky CTA -->
+<div class="sticky-cta">
+  <span class="text">Next available at <b style="color: #fff;">Jeddah Al Safa</b> · Today, 4:15 PM</span>
+  <button>Book in 60 seconds →</button>
+</div>
+
+<script>
+(function () {
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.hero-dot');
+  const eyebrow = document.getElementById('heroEyebrow');
+  const titleEl = document.getElementById('heroTitle');
+  const subEl = document.getElementById('heroSub');
+  const quoteEl = document.getElementById('heroQuoteText');
+  const idxEl = document.getElementById('heroIdx');
+  const prev = document.getElementById('heroPrev');
+  const next = document.getElementById('heroNext');
+  const SLIDE_DUR = 6.5; // seconds
+  document.documentElement.style.setProperty('--slide-dur', SLIDE_DUR + 's');
+
+  let cur = 0;
+  let timer = null;
+  const len = slides.length;
+
+  function setText(el, html) {
+    if (!el) return;
+    // animated out
+    gsap.to(el, { y: -14, opacity: 0, duration: 0.35, ease: 'power2.in', onComplete: () => {
+      el.innerHTML = html;
+      gsap.fromTo(el, { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out' });
+    }});
+  }
+
+  function go(i, dir = 1) {
+    if (i === cur) return;
+    const incoming = slides[i];
+    const outgoing = slides[cur];
+
+    // background crossfade + ken burns
+    gsap.set(incoming, { opacity: 0 });
+    incoming.classList.add('active');
+    gsap.to(outgoing, { opacity: 0, duration: 1.0, ease: 'power2.inOut', onComplete: () => outgoing.classList.remove('active') });
+    gsap.to(incoming, { opacity: 1, duration: 1.0, ease: 'power2.inOut' });
+
+    const inBg = incoming.querySelector('.bg');
+    gsap.fromTo(inBg, { scale: 1.18, xPercent: dir > 0 ? 2 : -2 }, { scale: 1.02, xPercent: 0, duration: SLIDE_DUR + 1.5, ease: 'power1.out' });
+
+    // text swap
+    const d = incoming.dataset;
+    setText(eyebrow, d.eyebrow);
+    setText(titleEl, d.title);
+    setText(subEl, d.sub);
+    setText(quoteEl, d.quote);
+
+    // counter
+    idxEl.textContent = String(i + 1).padStart(2, '0');
+
+    // dots
+    dots.forEach((d, j) => d.classList.toggle('active', j === i));
+    // restart progress animation
+    dots.forEach(d => {
+      const bar = d.querySelector('.bar');
+      if (bar) { bar.style.animation = 'none'; void bar.offsetWidth; bar.style.animation = ''; }
+    });
+
+    cur = i;
+    restart();
+  }
+
+  function nextSlide() { go((cur + 1) % len, 1); }
+  function prevSlide() { go((cur - 1 + len) % len, -1); }
+
+  function restart() {
+    clearInterval(timer);
+    timer = setInterval(nextSlide, SLIDE_DUR * 1000);
+  }
+
+  // initial ken-burns on first slide
+  const firstBg = slides[0].querySelector('.bg');
+  gsap.fromTo(firstBg, { scale: 1.18 }, { scale: 1.02, duration: SLIDE_DUR + 1.5, ease: 'power1.out' });
+
+  // initial reveal
+  gsap.from('#heroContent > *', { y: 30, opacity: 0, duration: 1, ease: 'power3.out', stagger: 0.12, delay: 0.2 });
+  gsap.from('#heroQuote', { x: 40, opacity: 0, duration: 1, ease: 'power3.out', delay: 0.9 });
+  gsap.from('.hero-controls', { y: 30, opacity: 0, duration: 1, ease: 'power3.out', delay: 0.7 });
+
+  dots.forEach(d => d.addEventListener('click', () => go(+d.dataset.i, +d.dataset.i > cur ? 1 : -1)));
+  next.addEventListener('click', nextSlide);
+  prev.addEventListener('click', prevSlide);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') nextSlide();
+    if (e.key === 'ArrowLeft') prevSlide();
+  });
+
+  // pause on hover
+  const hero = document.getElementById('hero');
+  hero.addEventListener('mouseenter', () => clearInterval(timer));
+  hero.addEventListener('mouseleave', restart);
+
+  // Scroll-driven events: Navbar shrinking and Sticky CTA slide-in
+  const nav = document.querySelector('.nav');
+  const stickyCta = document.querySelector('.sticky-cta');
+  
+  if (nav || stickyCta) {
+    const heroHeight = hero ? hero.offsetHeight : 600;
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      if (nav) {
+        if (scrolled > 50) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      }
+      if (stickyCta) {
+        if (scrolled > heroHeight - 100) {
+          stickyCta.classList.add('visible');
+        } else {
+          stickyCta.classList.remove('visible');
+        }
+      }
+    }, { passive: true });
+  }
+
+  // Stats count-up animation using IntersectionObserver + GSAP
+  const statsSection = document.querySelector('.stats');
+  if (statsSection && window.IntersectionObserver) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          observer.unobserve(entry.target);
+          const elements = entry.target.querySelectorAll('.stat-val');
+          elements.forEach(el => {
+            const target = parseFloat(el.dataset.target);
+            const decimals = parseInt(el.dataset.decimals || '0', 10);
+            const obj = { val: 0 };
+            gsap.to(obj, {
+              val: target,
+              duration: 2,
+              ease: 'power2.out',
+              onUpdate: () => {
+                el.textContent = obj.val.toFixed(decimals);
+              }
+            });
+          });
+        }
+      });
+    }, { threshold: 0.15 });
+    observer.observe(statsSection);
+  }
+
+  // Premium Language switcher toggle animation / action
+  const langPill = document.querySelector('.lang-pill');
+  if (langPill) {
+    langPill.addEventListener('click', (event) => {
+      const target = event.target.closest('button');
+      if (!target) return;
+      langPill.querySelectorAll('button').forEach((button) => {
+        const active = button === target;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+    });
+  }
+
+  // Premium interactive Clinic and Map Selector
+  const clinicItems = document.querySelectorAll('.clinic-item');
+  const mapPins = document.querySelectorAll('.map .pin');
+  if (clinicItems.length && mapPins.length) {
+    clinicItems.forEach((item, idx) => {
+      item.addEventListener('click', () => {
+        clinicItems.forEach(el => el.classList.remove('active'));
+        mapPins.forEach(el => el.classList.remove('active'));
+        
+        item.classList.add('active');
+        if (mapPins[idx]) {
+          mapPins[idx].classList.add('active');
+          gsap.fromTo(mapPins[idx], { scale: 1 }, { scale: 1.25, duration: 0.4, ease: 'back.out(2.5)' });
+        }
+      });
+    });
+
+    mapPins.forEach((pin, idx) => {
+      pin.addEventListener('click', () => {
+        if (clinicItems[idx]) {
+          clinicItems[idx].click();
+        }
+      });
+    });
+  }
+
+  restart();
+})();
+</script>
+
+<script src="/assets/language-switcher.js"></script>
+</body>
+</html>

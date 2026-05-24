@@ -1,0 +1,1031 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>My Clinic — Program Details</title>
+<link rel="icon" type="image/png" href="/favclinic.png">
+<meta name="viewport" content="width=1440">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/shared.css">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<style>
+  :root {
+    --serif: 'Newsreader', Georgia, serif;
+    --sans: 'Gotham', 'Gotham SSm', 'Gotham A', 'Montserrat', system-ui, -apple-system, sans-serif;
+    --ar: 'Almarai', system-ui, sans-serif;
+    
+    /* Modern shadow systems */
+    --shadow-sm: 0 2px 8px rgba(11,31,61,.04), 0 1px 2px rgba(11,31,61,.02);
+    --shadow-md: 0 12px 36px -8px rgba(11,31,61,.12), 0 4px 12px -2px rgba(11,31,61,.04);
+    --shadow-lg: 0 32px 64px -16px rgba(11,31,61,.22), 0 16px 32px -12px rgba(11,31,61,.08);
+    
+    /* Elegant design tokens */
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  body { font-family: var(--sans); background: var(--cream); color: var(--ink); font-size: 16px; line-height: 1.6; letter-spacing: -0.005em; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 0 40px; }
+  .ar { font-family: var(--ar); }
+
+  /* Announcement strip */
+  .ribbon { background: var(--navy-deep); color: #fff; font-size: 13px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .ribbon .wrap { display: flex; justify-content: space-between; align-items: center; }
+  .ribbon-left { display: flex; gap: 24px; align-items: center; color: rgba(255,255,255,.78); }
+  .ribbon-left b { color: #fff; font-weight: 500; }
+  .ribbon-right { display: flex; gap: 20px; align-items: center; color: rgba(255,255,255,.78); }
+  .ribbon a { transition: color 0.2s ease; }
+  .ribbon a:hover { color: #fff; text-decoration: underline; }
+  .dot { width: 6px; height: 6px; background: #fff; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #fff; }
+
+  /* Nav */
+  .nav { position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 1px solid rgba(11,31,61,.08); box-shadow: 0 12px 36px rgba(11,31,61,.05); transition: padding 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; }
+  .nav .wrap { display: grid; grid-template-columns: minmax(220px, 1fr) auto minmax(210px, 1fr); align-items: center; padding: 22px 40px; transition: padding 0.3s ease; }
+  .nav.scrolled { background: #fff; box-shadow: 0 10px 30px rgba(11,31,61,0.07); }
+  .nav.scrolled .wrap { padding: 14px 40px; }
+  
+  .logo { display: flex; align-items: center; gap: 14px; cursor: pointer; }
+  .logo-mark { width: 36px; height: 36px; transition: transform 0.3s ease; }
+  .logo:hover .logo-mark { transform: rotate(15deg) scale(1.05); }
+  .logo-txt { line-height: 1.1; }
+  .logo-txt .en { font-family: var(--serif); font-size: 23px; font-weight: 500; letter-spacing: -0.02em; color: var(--navy); }
+  .logo-txt .ar { font-size: 11px; color: var(--mute); letter-spacing: 0.05em; margin-top: 3px; font-weight: 500; }
+  
+  .nav-links { display: flex; gap: 36px; justify-content: center; }
+  .nav-links a { font-size: 14px; color: var(--ink-2); font-weight: 500; position: relative; padding: 8px 0; transition: color 0.25s ease; }
+  .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background: var(--navy); transition: width 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), left 0.25s cubic-bezier(0.25, 0.8, 0.25, 1); }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-links a:hover::after { width: 100%; left: 0; }
+  .nav-links a.active { color: var(--navy); }
+  .nav-links a.active::after { width: 100%; left: 0; }
+  
+  .nav-right { display: flex; gap: 14px; justify-content: flex-end; align-items: center; }
+  
+  .btn { font-size: 14px; font-weight: 600; padding: 11px 24px; border-radius: 999px; transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease; border: 1px solid transparent; display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; }
+  .btn.primary { background: var(--navy); color: #fff; box-shadow: 0 4px 14px rgba(0, 56, 104, 0.15); }
+  .btn.primary:hover { background: var(--navy-deep); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0, 56, 104, 0.2); }
+  .btn.primary:active { transform: translateY(0); }
+  
+  .lang-pill { font-size: 12px; color: var(--mute); padding: 4px; border-radius: 999px; background: #f4f7fb; border: 1px solid rgba(11,31,61,.1); display: inline-flex; align-items: center; gap: 3px; box-shadow: inset 0 1px 0 rgba(255,255,255,.75); }
+  .lang-pill::before { content: ''; width: 16px; height: 16px; margin: 0 5px 0 6px; background: currentColor; opacity: .68; -webkit-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.93 9h-3.02a15.7 15.7 0 0 0-1.16-5.04A8.03 8.03 0 0 1 18.93 11ZM12 4.04c.83 1.2 1.62 3.38 1.86 6.96H10.14C10.38 7.42 11.17 5.24 12 4.04ZM4.26 13h3.79c.12 1.91.43 3.65.9 5.05A8.02 8.02 0 0 1 4.26 13Zm3.79-2H4.26a8.02 8.02 0 0 1 4.69-5.05A17.1 17.1 0 0 0 8.05 11ZM12 19.96c-.83-1.2-1.62-3.38-1.86-6.96h3.72c-.24 3.58-1.03 5.76-1.86 6.96Zm3.05-1.91c.47-1.4.78-3.14.9-5.05h3.79a8.02 8.02 0 0 1-4.69 5.05ZM15.95 11a17.1 17.1 0 0 0-.9-5.05A8.02 8.02 0 0 1 19.74 11h-3.79Z'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.93 9h-3.02a15.7 15.7 0 0 0-1.16-5.04A8.03 8.03 0 0 1 18.93 11ZM12 4.04c.83 1.2 1.62 3.38 1.86 6.96H10.14C10.38 7.42 11.17 5.24 12 4.04ZM4.26 13h3.79c.12 1.91.43 3.65.9 5.05A8.02 8.02 0 0 1 4.26 13Zm3.79-2H4.26a8.02 8.02 0 0 1 4.69-5.05A17.1 17.1 0 0 0 8.05 11ZM12 19.96c-.83-1.2-1.62-3.38-1.86-6.96h3.72c-.24 3.58-1.03 5.76-1.86 6.96Zm3.05-1.91c.47-1.4.78-3.14.9-5.05h3.79a8.02 8.02 0 0 1-4.69 5.05ZM15.95 11a17.1 17.1 0 0 0-.9-5.05A8.02 8.02 0 0 1 19.74 11h-3.79Z'/%3E%3C/svg%3E") center / contain no-repeat; }
+  .lang-pill button { min-width: 42px; border: 0; background: transparent; color: var(--mute); padding: 9px 10px; border-radius: 999px; font: inherit; font-weight: 600; cursor: pointer; transition: color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease; }
+  .lang-pill button:hover { color: var(--navy); }
+  .lang-pill button.active { color: var(--navy); background: #fff; box-shadow: 0 3px 12px rgba(11,31,61,.1); }
+
+  /* Subpage Hero */
+  .subpage-hero {
+    background: var(--navy-ink);
+    color: #fff;
+    padding: 100px 0 110px;
+    position: relative;
+    overflow: hidden;
+  }
+  .subpage-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--hero-bg-url, url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=2000&q=80'));
+    background-size: cover;
+    background-position: center;
+    opacity: 0.28;
+    z-index: 1;
+    transition: background-image 0.4s ease;
+  }
+  .subpage-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0, 29, 56, 0.94) 0%, rgba(0, 56, 104, 0.88) 100%);
+    z-index: 1;
+  }
+  .subpage-hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 840px;
+    margin: 0;
+  }
+  .subpage-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #fff;
+    opacity: 0.85;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .subpage-title {
+    font-family: var(--serif);
+    font-size: 52px;
+    line-height: 1.1;
+    font-weight: 400;
+    margin: 0 0 16px;
+    letter-spacing: -0.02em;
+  }
+  .subpage-title em {
+    font-style: italic;
+    color: rgba(255,255,255,0.9);
+    font-weight: 300;
+  }
+  .subpage-desc {
+    font-size: 19px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.8);
+    font-weight: 300;
+    margin: 0;
+  }
+
+  /* Single Column Layout Container */
+  .details-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 40px 120px;
+  }
+
+  /* Alternating layout row */
+  .details-section-row {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 56px;
+    align-items: center;
+    margin-bottom: 90px;
+  }
+  .details-section-row.reverse > :first-child {
+    order: 2;
+  }
+  .details-section-row.reverse > :last-child {
+    order: 1;
+  }
+
+  /* Image wrappers for sections */
+  .section-image-wrapper {
+    width: 100%;
+    aspect-ratio: 1.35;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--line-cool);
+    background: var(--paper);
+  }
+  .section-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+  .section-image-wrapper:hover img {
+    transform: scale(1.05);
+  }
+  
+  /* Details cards custom styling */
+  .details-card-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin: 0 0 20px;
+    border-bottom: 1px solid var(--line-cool);
+    padding-bottom: 10px;
+  }
+  .program-subhead {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--navy-ink);
+    margin: 0 0 20px;
+    line-height: 1.25;
+  }
+  .program-full-text {
+    font-size: 16px;
+    color: var(--ink-2);
+    line-height: 1.75;
+    margin: 0;
+  }
+  
+  /* Timeline curriculum styling */
+  .curriculum-timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .curriculum-timeline li {
+    position: relative;
+    padding-left: 36px;
+    padding-bottom: 28px;
+  }
+  .curriculum-timeline li:last-child {
+    padding-bottom: 0;
+  }
+  .curriculum-timeline li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--navy);
+    background: #fff;
+    z-index: 2;
+  }
+  .curriculum-timeline li::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 21px;
+    width: 2px;
+    height: calc(100% - 10px);
+    background: var(--line-cool);
+    z-index: 1;
+  }
+  .curriculum-timeline li:last-child::after {
+    display: none;
+  }
+  .curriculum-timeline h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy-ink);
+    margin: 0 0 3px;
+  }
+  .curriculum-timeline p {
+    font-size: 14px;
+    color: var(--mute);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* Diagnostics 2-Column Grid */
+  .diagnostics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .diagnostics-list-item {
+    position: relative;
+    padding: 16px 20px 16px 48px;
+    background: #fff;
+    border: 1px solid var(--line-cool);
+    border-radius: var(--radius-sm);
+    font-size: 14.5px;
+    color: var(--ink-2);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+  }
+  .diagnostics-list-item:hover {
+    transform: translateY(-2px);
+    border-color: var(--navy);
+    box-shadow: var(--shadow-md);
+  }
+  .diagnostics-list-item::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    width: 18px;
+    height: 18px;
+    background: currentColor;
+    color: var(--navy);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='3' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 6 9 17l-5-5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='3' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 6 9 17l-5-5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+  
+  /* Wide CTA Banner styling */
+  .wide-cta-banner {
+    background: linear-gradient(135deg, var(--navy-ink) 0%, var(--navy-deep) 100%);
+    color: #fff;
+    border-radius: var(--radius-md);
+    padding: 56px 64px;
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    margin: 80px 0 90px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .wide-cta-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 80% 20%, rgba(0, 56, 104, 0.4) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .wide-cta-banner h3 {
+    font-family: var(--serif);
+    font-size: 38px;
+    font-weight: 400;
+    margin: 0 0 14px;
+    letter-spacing: -0.015em;
+  }
+  .wide-cta-banner p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.8);
+    max-width: 720px;
+    margin: 0 auto 36px;
+    line-height: 1.65;
+  }
+  .wide-cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  .btn.whatsapp-wide {
+    background: #10B981;
+    color: #fff;
+  }
+  .btn.whatsapp-wide:hover {
+    background: #059669;
+    box-shadow: 0 6px 20px rgba(16,185,129,0.25);
+    transform: translateY(-1px);
+  }
+  .btn.primary-wide {
+    background: #fff;
+    color: var(--navy);
+  }
+  .btn.primary-wide:hover {
+    background: #e1e8f1;
+    box-shadow: 0 6px 20px rgba(255,255,255,0.15);
+    transform: translateY(-1px);
+  }
+
+  /* Bottom explore programs showcase */
+  .bottom-explore {
+    border-top: 1px solid var(--line-cool);
+    padding-top: 80px;
+  }
+  .bottom-explore-title {
+    font-family: var(--serif);
+    font-size: 34px;
+    color: var(--navy-ink);
+    margin: 0 0 8px;
+    text-align: center;
+  }
+  .bottom-explore-subtitle {
+    font-size: 15px;
+    color: var(--mute);
+    text-align: center;
+    margin: 0 0 44px;
+  }
+  .bottom-explore-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  /* Shared program cards */
+  .bottom-explore-grid .prog-card {
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid var(--line-cool);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.4s ease;
+  }
+  .bottom-explore-grid .prog-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--navy);
+  }
+  .bottom-explore-grid .prog-card-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    background: var(--navy-ink);
+  }
+  .bottom-explore-grid .prog-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+  .bottom-explore-grid .prog-card:hover img {
+    transform: scale(1.05);
+  }
+  .bottom-explore-grid .duration-badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--navy);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 5px 10px;
+    border-radius: 999px;
+    backdrop-filter: blur(8px);
+    z-index: 2;
+  }
+  .bottom-explore-grid .body {
+    padding: 22px 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+  }
+  .bottom-explore-grid .body h4 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 19px;
+    color: var(--navy-ink);
+    margin: 0 0 10px;
+    line-height: 1.3;
+  }
+  .bottom-explore-grid .body .more {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: gap 0.25s ease, color 0.25s ease;
+    margin-top: auto;
+  }
+  .bottom-explore-grid .prog-card:hover .body .more {
+    color: var(--navy-deep);
+    gap: 8px;
+  }
+
+  /* Fallback card */
+  .fallback-card {
+    text-align: center;
+    max-width: 600px;
+    margin: 120px auto 160px;
+    padding: 64px 40px;
+    background: #fff;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--line-cool);
+    box-shadow: var(--shadow-sm);
+  }
+  .fallback-card h2 {
+    font-family: var(--serif);
+    font-size: 38px;
+    color: var(--navy-ink);
+    margin: 0 0 16px;
+    font-weight: 400;
+  }
+  .fallback-card p {
+    font-size: 16px;
+    color: var(--mute);
+    margin: 0 0 32px;
+  }
+
+  /* Responsive styling */
+  @media (max-width: 768px) {
+    .details-container { padding: 40px 20px 80px; }
+    .details-section-row { grid-template-columns: 1fr; gap: 32px; margin-bottom: 60px; }
+    .details-section-row.reverse > :first-child { order: unset; }
+    .details-section-row.reverse > :last-child { order: unset; }
+    .diagnostics-grid { grid-template-columns: 1fr; gap: 12px; }
+    .bottom-explore-grid { grid-template-columns: 1fr; gap: 24px; }
+    .subpage-hero { padding: 80px 0 90px; }
+    .subpage-title { font-size: 38px; }
+    .nav .wrap { padding: 18px 24px; grid-template-columns: auto 1fr; }
+    .nav-links { display: none; }
+    .nav.scrolled .wrap { padding: 12px 24px; }
+  }
+
+  /* Footer styles */
+  footer { background: #fff; border-top: 1px solid var(--line); padding: 100px 0 40px; }
+  .foot-grid { display: grid; grid-template-columns: 1.5fr repeat(4, 1fr); gap: 48px; margin-bottom: 80px; }
+  @media (max-width: 1024px) {
+    .foot-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  }
+  @media (max-width: 600px) {
+    .foot-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+  footer .logo { margin-bottom: 24px; }
+  footer .lede { color: var(--mute); font-size: 14.5px; line-height: 1.6; margin: 0 0 24px; max-width: 320px; }
+  footer .contact { font-size: 15px; color: var(--ink-2); line-height: 1.5; }
+  footer .contact strong { font-size: 19px; color: var(--navy); display: inline-block; margin-bottom: 4px; }
+  footer h5 { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); margin: 0 0 20px; font-weight: 700; }
+  footer ul { list-style: none; padding: 0; margin: 0; }
+  footer ul li { margin-bottom: 12px; font-size: 14.5px; }
+  footer ul li a { color: var(--mute); transition: color 0.2s ease; }
+  footer ul li a:hover { color: var(--navy); }
+  
+  .foot-bottom { border-top: 1px solid var(--line-cool); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; color: var(--mute); font-size: 13.5px; }
+  @media (max-width: 768px) {
+    .foot-bottom { flex-direction: column; gap: 16px; text-align: center; }
+  }
+  .foot-bottom .socials { display: flex; gap: 20px; }
+  .foot-bottom .socials a { transition: color 0.2s ease; }
+  .foot-bottom .socials a:hover { color: var(--navy); }
+
+  /* Sticky CTA */
+  .sticky-cta { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); z-index: 40; background: var(--navy-deep); color: #fff; padding: 12px 28px; border-radius: 999px; box-shadow: 0 20px 48px -10px rgba(0, 29, 56, 0.35); display: flex; align-items: center; gap: 24px; border: 1px solid rgba(255,255,255,0.08); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none; }
+  .sticky-cta.active { transform: translateX(-50%) translateY(0); pointer-events: auto; }
+  @media (max-width: 768px) {
+    .sticky-cta { width: calc(100% - 32px); justify-content: space-between; padding: 14px 20px; bottom: 16px; font-size: 13px; gap: 12px; }
+  }
+  .sticky-cta .text { font-size: 13.5px; color: rgba(255,255,255,.75); font-weight: 500; }
+  .sticky-cta a { font-size: 13.5px; font-weight: 600; padding: 9px 18px; background: #fff; color: var(--navy) !important; border-radius: 999px; white-space: nowrap; transition: background-color 0.2s ease, transform 0.2s ease; }
+  .sticky-cta a:hover { background: #e1e8f1; transform: translateY(-0.5px); }
+</style>
+</head>
+<body>
+
+<!-- ribbon -->
+<div class="ribbon">
+  <div class="wrap">
+    <div class="ribbon-left">
+      <span><span class="dot"></span> &nbsp;<b>Now open</b> · Sat–Thu 8 AM – 10 PM &nbsp;·&nbsp; Fri 5 PM – 9 PM</span>
+      <span>5 branches · Jeddah, Riyadh</span>
+    </div>
+    <div class="ribbon-right">
+      <a href="/index.html#contact">Contact Us</a>
+      <a href="#">Careers</a>
+      <a href="https://wa.me/966542228111" target="_blank">WhatsApp · 0542228111</a>
+      <a href="tel:920022811"><b>920022811</b></a>
+    </div>
+  </div>
+</div>
+
+<!-- nav -->
+<nav class="nav">
+  <div class="wrap">
+    <a href="/index.html" class="logo">
+      <img class="brand-logo" src="/logo.svg" alt="My Clinic">
+    </a>
+    <div class="nav-links">
+      <a href="/find-a-doctor.html">Find a Doctor</a>
+      <a href="/specialties.html">Specialties</a>
+      <a href="/programs.html" class="active">Programs</a>
+      <a href="/telemedicine.html">Telemedicine</a>
+      <a href="/home-healthcare.html">Home Healthcare</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-pill" role="group" aria-label="Language switcher">
+        <button type="button" class="active" aria-pressed="true">EN</button>
+        <button type="button" aria-pressed="false">AR</button>
+      </div>
+      <a href="/find-a-doctor.html" class="btn primary">Book Now</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Main Details Layout (shown when program is loaded) -->
+<main id="mainDetailsContent" style="display: none;">
+  <!-- subpage hero banner -->
+  <header class="subpage-hero" id="programHero">
+    <div class="wrap">
+      <div class="subpage-hero-inner">
+        <div class="subpage-eyebrow" id="programDuration">Duration Tag</div>
+        <h1 class="subpage-title" id="programTitle">Program Title</h1>
+        <p class="subpage-desc" id="programSubtitle">Subtitle overview of the healthcare program.</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="details-container">
+    
+    <!-- Row 1: Description & Goals (Text Left, Image Right) -->
+    <div class="details-section-row">
+      <div>
+        <div class="details-card-title">Program Description &amp; Goals</div>
+        <h3 class="program-subhead" id="programCardSubhead">Underlying philosophy</h3>
+        <p class="program-full-text" id="programCardOverview">Detailed program overview description will be loaded here...</p>
+      </div>
+      <div class="section-image-wrapper">
+        <img id="programImage1" src="" alt="Program Overview Image" onerror="this.style.display='none'">
+      </div>
+    </div>
+
+    <!-- Row 2: Journey & Timeline (Image Left, Text Right) -->
+    <div class="details-section-row reverse">
+      <div>
+        <div class="details-card-title">Curriculum Journey &amp; Milestones</div>
+        <ul class="curriculum-timeline" id="programCardCurriculum">
+          <!-- Populated dynamically -->
+        </ul>
+      </div>
+      <div class="section-image-wrapper">
+        <img id="programImage2" src="" alt="Program Journey Image" onerror="this.style.display='none'">
+      </div>
+    </div>
+
+    <!-- Row 3: Diagnostics & Inclusions (Full Width Grid) -->
+    <div style="margin-bottom: 80px;">
+      <div class="details-card-title" style="margin-bottom: 8px;">Included in Program &amp; Diagnostics</div>
+      <p style="font-size: 15px; color: var(--mute); margin-bottom: 24px;">Our clinical pathways package together the following regular screenings, diagnostic scans, and laboratory blood panels:</p>
+      <div class="diagnostics-grid" id="programCardDiagnostics">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+
+    <!-- Row 4: Wide CTA Banner -->
+    <div class="wide-cta-banner">
+      <h3 id="ctaHeading">Ready to Begin Your Healthcare Pathway?</h3>
+      <p id="ctaDescription">Embark on a customized plan designed to safeguard your well-being. Partner with leading board-certified specialists, coordinate care effortlessly, and manage your health journey with confidence.</p>
+      <div class="wide-cta-buttons">
+        <a href="#" class="btn primary-wide" id="bookingFindSpecialistBtn">Book Specialist Consult</a>
+        <a href="#" target="_blank" class="btn whatsapp-wide" id="bookingWhatsAppBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px; display: inline-block; vertical-align: middle;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <!-- Row 5: Explore Other Programs -->
+    <div class="bottom-explore">
+      <h3 class="bottom-explore-title">Explore Other Clinical Pathways</h3>
+      <p class="bottom-explore-subtitle">Discover our other preventative care and health management programs designed for your family.</p>
+      <div class="bottom-explore-grid" id="bottomExploreGrid">
+        <!-- Related program cards populated dynamically -->
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- Fallback details card (shown when program is invalid) -->
+<main id="fallbackContent" style="display: none;">
+  <div class="wrap">
+    <div class="details-card fallback-card">
+      <h2>Program Profile Not Found</h2>
+      <p>The program link you followed might be incorrect or has been archived. Please explore our list of available programs.</p>
+      <a href="/programs.html" class="btn primary">Back to Programs</a>
+    </div>
+  </div>
+</main>
+
+<!-- footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">
+          <img class="brand-logo" src="/logo.svg" alt="My Clinic">
+        </div>
+        <p class="lede">My Clinic is your partner in health and wellness. With a focus on prevention and early intervention, our team of experts is committed to helping you stay healthy and live your best life.</p>
+        <div class="contact">
+          <strong>920022811</strong><br>
+          WhatsApp · 0542228111
+        </div>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul><li><a href="#">About My Clinic</a></li><li><a href="#">Our Sites</a></li><li><a href="#">Services</a></li></ul>
+        <h5 style="margin-top: 28px;">Useful Links</h5>
+        <ul><li><a href="#">Contact Us</a></li><li><a href="#">Careers</a></li><li><a href="#">Privacy Policy</a></li></ul>
+      </div>
+      <div>
+        <h5>Care</h5>
+        <ul><li><a href="/find-a-doctor.html">Find a Doctor</a></li><li><a href="/specialties.html">Specialties</a></li><li><a href="/programs.html">Programs</a></li><li><a href="/telemedicine.html">Telemedicine</a></li><li><a href="/home-healthcare.html">Home Healthcare</a></li></ul>
+      </div>
+      <div>
+        <h5>Call Center Working Hours</h5>
+        <ul><li>Saturday – Thursday · 8 AM – 10 PM</li><li>Friday · 5 PM – 9 PM</li></ul>
+        <h5 style="margin-top: 28px;">Our Branches</h5>
+        <ul><li>Jeddah · Al Mohammadiyah</li><li>Jeddah · Al Safa</li><li>Jeddah · Al Khalidiyyah Dental</li><li>Jeddah · Tahlia</li><li>Riyadh · Al Sahafa</li></ul>
+      </div>
+      <div>
+        <h5>Get the app</h5>
+        <ul><li><a href="#">App Store</a></li><li><a href="#">Google Play</a></li></ul>
+        <h5 style="margin-top: 28px;">Book Now</h5>
+        <ul><li><a href="/find-a-doctor.html">Book an appointment</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© My Clinic 2026 · All rights reserved · CBAHI Accredited</span>
+      <div class="socials"><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">X</a><a href="#">YouTube</a><a href="#">LinkedIn</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- sticky CTA -->
+<div class="sticky-cta" id="stickyCta">
+  <span class="text">Next available at <b style="color: #fff;">Jeddah Al Safa</b> · Today, 4:15 PM</span>
+  <a href="/find-a-doctor.html">Book in 60 seconds →</a>
+</div>
+
+<script>
+// Program details database with primary and secondary images
+const programsData = {
+  diabetes: {
+    id: "diabetes",
+    title: "Diabetes Management (Adult & Pediatric)",
+    subtitle: "Guiding Your Journey to Better Diabetes Control",
+    duration: "6-Month Program",
+    image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=800&q=80",
+    image2: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80",
+    overview: "Our comprehensive Diabetes Management program offers a holistic, patient-centered pathway for both adults and children. Designed by clinical endocrinology experts, the program combines advanced glucose monitoring technology, expert dietary guidance, and continuous clinical support to help you achieve stable glycemic control, minimize risk factors, and live confidently.",
+    curriculum: [
+      { step: "Initial Mapping", desc: "Initial Endocrinology Consultation & clinical assessments to map out baseline levels." },
+      { step: "CGM Setup", desc: "Continuous Glucose Monitor (CGM) sensor fitting & customized high/low alert calibration." },
+      { step: "Nutritional Planning", desc: "Bi-weekly consultations with a Clinical Dietitian to adapt dietary habits and meal prep." },
+      { step: "Education & Treatment", desc: "Interactive diabetes self-management training on insulin, medication, and hypoglycemia prevention." },
+      { step: "Midterm Panel", desc: "3-Month interim HbA1c Lab panel screening and medical adjustments." },
+      { step: "Long-term Support", desc: "6-Month final endocrinology evaluation and custom long-term maintenance strategy." }
+    ],
+    diagnostics: [
+      "Glycated Hemoglobin (HbA1c) Testing",
+      "Lipid Panel (HDL, LDL, Triglycerides)",
+      "Kidney Function Check (Microalbuminuria)",
+      "Continuous Glucose Monitoring (CGM) Sensor & Reports"
+    ],
+    specialistType: "Endocrinology",
+    whatsappText: "Hi, I'm interested in the Diabetes Management program. Could you provide details?"
+  },
+  'family-care': {
+    id: "family-care",
+    title: "Family Center Care Program",
+    subtitle: "Discover Personalized Care at Our Family Medicine Center",
+    duration: "Annual Program",
+    image: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&w=800&q=80",
+    image2: "https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=800&q=80",
+    overview: "Keep your household healthy with a program that makes preventive primary care effortless and continuous. The Family Center Care Program links every member of your family to a primary care physician who manages overall health, updates pediatric and adult vaccination timelines, directs preventive health screenings, and coordinates with specialists when necessary.",
+    curriculum: [
+      { step: "Household Baseline", desc: "Annual baseline health assessments for all registered family members." },
+      { step: "Biometric Audits", desc: "Quarterly biometric screenings and blood pressure tracking." },
+      { step: "Prevention Roadmap", desc: "Custom cardiovascular, nutrition, and lifestyle prevention roadmaps." },
+      { step: "Vaccine Coordination", desc: "Priority pediatric and adult immunization scheduling and tracking." },
+      { step: "Concierge Access", desc: "24/7 virtual primary care care-coordination desk." },
+      { step: "Yearly Audit", desc: "Annual comprehensive health summary review and specialist referrals." }
+    ],
+    diagnostics: [
+      "Complete Blood Count (CBC) & Routine Chemistry",
+      "Age-appropriate Preventive Cancer and Cardiac Risks",
+      "Blood Pressure, BMI, & Metabolic Screenings",
+      "Annual Urinalysis & Vision/Hearing Assessments"
+    ],
+    specialistType: "Family Medicine",
+    whatsappText: "Hi, I'd like to get more information on registering my household for the Family Center Care Program."
+  },
+  hearing: {
+    id: "hearing",
+    title: "Hearing Aid Program",
+    subtitle: "A Bridge to a More Vibrant and Engaged World",
+    duration: "12-Month Program",
+    image: "https://images.unsplash.com/photo-1598252577519-74d11cfc6bdf?auto=format&fit=crop&w=800&q=80",
+    image2: "https://images.unsplash.com/photo-1571772996211-2f02c9727629?auto=format&fit=crop&w=800&q=80",
+    overview: "Regain the joy of clear communication. Our Hearing Aid Program offers an expert-guided pathway for patients requiring audiological rehabilitation. From precision hearing assessments to fitting state-of-the-art digital hearing aids, our audiologists support you through the calibration and transition phase, ensuring optimal comfort and performance.",
+    curriculum: [
+      { step: "Audiological Exam", desc: "Comprehensive audiological assessment and otoscopy." },
+      { step: "Device Selection", desc: "Hearing aid technology consultation and digital device selection." },
+      { step: "Precision Fitting", desc: "Custom ear mold impressions and precise 3D acoustic fitting." },
+      { step: "Verification", desc: "Real-Ear Measurement (REM) verification and customized programming." },
+      { step: "Sound Adaptation", desc: "1-Month post-fitting calibration and sound adaptation review." },
+      { step: "Ongoing Tuning", desc: "Quarterly maintenance checkups, cleaning, and sound fine-tuning." }
+    ],
+    diagnostics: [
+      "Pure-Tone Audiometry (Air & Bone Conduction)",
+      "Speech Audiometry (Speech Recognition Threshold)",
+      "Tympanometry & Acoustic Reflex Testing",
+      "Ear Canal Physical Inspection & Sound Field Verification"
+    ],
+    specialistType: "ENT",
+    whatsappText: "Hi, I'm inquiring about the Hearing Aid Program and audiology evaluations."
+  },
+  osteoporosis: {
+    id: "osteoporosis",
+    title: "Osteoporosis Program",
+    subtitle: "Battling Osteoporosis Together for Bone Strength",
+    duration: "12-Month Program",
+    image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=800&q=80",
+    image2: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=800&q=80",
+    overview: "Maintain your strength and structural independence. Our Osteoporosis Program provides an evidence-based approach to assessing bone density, identifying fracture risks, and implementing therapies. Combining pharmacological care with targeted bone-strengthening exercise plans and mineral-rich nutrition, we build a scaffold for a safer, active future.",
+    curriculum: [
+      { step: "Density Scan", desc: "Initial Bone Mineral Density (BMD) scan analysis and specialist examination." },
+      { step: "Endocrine Workup", desc: "Workup for secondary osteoporosis factor markers." },
+      { step: "Treatment Init", desc: "Custom pharmacological bone treatment plan setup." },
+      { step: "Physical Therapy", desc: "Targeted physical therapy consultation for safe weight-bearing exercises." },
+      { step: "Tolerance Review", desc: "6-Month mineral level check-up and medication tolerance review." },
+      { step: "1-Year Re-evaluation", desc: "12-Month Dual-Energy X-Ray Absorptiometry (DEXA) scan comparisons." }
+    ],
+    diagnostics: [
+      "DEXA Bone Density Scan (Spine, Hip, & Forearm)",
+      "Serum Calcium, Vitamin D (25-Hydroxy), & Phosphorus Panel",
+      "Bone Turnover Markers (P1NP, Beta-CrossLaps)",
+      "Thyroid and Parathyroid Hormone Level Assessments"
+    ],
+    specialistType: "Rheumatology",
+    whatsappText: "Hi, I'm interested in booking a consultation under the Osteoporosis Program."
+  },
+  'pediatric-vax': {
+    id: "pediatric-vax",
+    title: "Pediatric Vaccination Program",
+    subtitle: "Guardians of Tomorrow's Health",
+    duration: "Birth to 6 Years",
+    image: "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=800&q=80",
+    image2: "https://images.unsplash.com/photo-1632053002131-09b1e8c6c2a3?auto=format&fit=crop&w=800&q=80",
+    overview: "Secure your child's developmental milestone protection from the very start. The Pediatric Vaccination Program aligns with the Ministry of Health and international pediatric recommendations, providing a seamless schedule for baby vaccinations, physical developmental check-ups, and pediatric guidance under one stress-free program.",
+    curriculum: [
+      { step: "Birth Alignment", desc: "Newborn wellness exam and basic vaccination milestone alignment." },
+      { step: "Immunizations", desc: "Ministry of Health (MOH) mandatory immunizations at scheduled intervals." },
+      { step: "Growth Audits", desc: "Pediatrician-led height, weight, and behavioral development audits." },
+      { step: "Parental Coaching", desc: "Coaching on infant nutrition, sleep hygiene, and post-vaccine home care." },
+      { step: "Digital Tracking", desc: "Automated vaccination notifications and digital health record updates." },
+      { step: "School-Entry Check", desc: "School-entry immunization schedule review and certification." }
+    ],
+    diagnostics: [
+      "Physical Pediatric Growth Assessment (Weight, Length, Head Circumference)",
+      "Developmental Milestone Audit (Motor Skills, Speech, Visual Tracking)",
+      "Basic Newborn Jaundice and Anemia Screenings (if applicable)"
+    ],
+    specialistType: "Pediatrics",
+    whatsappText: "Hi, I'd like to check the schedule and register my child in the Pediatric Vaccination Program."
+  },
+  pregnancy: {
+    id: "pregnancy",
+    title: "Pregnancy Care Program",
+    subtitle: "New Beginnings with Expert Pregnancy Care",
+    duration: "9-Month Program",
+    image: "https://images.unsplash.com/photo-1518152006812-edab29b069ac?auto=format&fit=crop&w=800&q=80",
+    image2: "https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=800&q=80",
+    overview: "Walk the path to motherhood with peace of mind. Our Pregnancy Care Program bundles every prenatal visit, high-definition fetal scan, laboratory panel, and birth planning consult into a single, comprehensive pathway. Hand-in-hand with our board-certified OB-GYN specialists, midwives, and nutritionists, you will receive personalized support at every stage.",
+    curriculum: [
+      { step: "Trimester 1 & 2", desc: "Monthly antenatal checks, scans, and basic nutritional reviews." },
+      { step: "Genetic Screens", desc: "Comprehensive genetic and metabolic blood panels." },
+      { step: "Anatomy Scans", desc: "High-resolution 2D/3D obstetric anatomy scans." },
+      { step: "Trimester 3 Checks", desc: "Weekly OB-GYN check-ups from Week 36 through birth." },
+      { step: "Birth Prep", desc: "Birth plan coordination and anesthesiology pre-admission consults." },
+      { step: "Post-Natal Support", desc: "Postpartum check-ups at Week 2 and Week 6." }
+    ],
+    diagnostics: [
+      "Routine Fetal Anatomy Ultrasounds & Doppler Flow Studies",
+      "Complete Maternity Blood Panel (Blood Group, Rh Factor, Infectious Screens)",
+      "Glucose Tolerance Testing (GTT) for Gestational Diabetes Detection",
+      "Non-Invasive Prenatal Testing (NIPT) & Group B Strep (GBS) Screening"
+    ],
+    specialistType: "Obstetrics",
+    whatsappText: "Hi, I'd like to sign up for the Pregnancy Care Program and schedule my first prenatal visit."
+  }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Navigation scrolling animation
+  const nav = document.querySelector('.nav');
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    }, { passive: true });
+  }
+
+  // Sticky CTA slide in
+  const stickyCta = document.getElementById('stickyCta');
+  if (stickyCta) {
+    setTimeout(() => {
+      stickyCta.classList.add('active');
+    }, 1500);
+  }
+
+  // Language switcher
+  const langPill = document.querySelector('.lang-pill');
+  if (langPill) {
+    langPill.addEventListener('click', (event) => {
+      const target = event.target.closest('button');
+      if (!target) return;
+      langPill.querySelectorAll('button').forEach((button) => {
+        const active = button === target;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+    });
+  }
+
+  // URL Parsing & Page Hydration
+  const urlParams = new URLSearchParams(window.location.search);
+  const programId = urlParams.get('id');
+
+  const mainDetailsContent = document.getElementById('mainDetailsContent');
+  const fallbackContent = document.getElementById('fallbackContent');
+
+  if (programId && programsData[programId]) {
+    const program = programsData[programId];
+    
+    // Hydrate Page
+    document.title = `My Clinic — ${program.title}`;
+    
+    // Hero & Background Image
+    const programHero = document.getElementById('programHero');
+    programHero.style.setProperty('--hero-bg-url', `url('${program.image}')`);
+    
+    document.getElementById('programDuration').textContent = program.duration;
+    document.getElementById('programTitle').innerHTML = program.title.replace("(", "<em>(").replace(")", ")</em>");
+    document.getElementById('programSubtitle').textContent = program.subtitle;
+
+    // Overview Section Row
+    document.getElementById('programCardSubhead').textContent = program.subtitle;
+    document.getElementById('programCardOverview').textContent = program.overview;
+    document.getElementById('programImage1').src = program.image;
+
+    // Curriculum Timeline
+    const programCardCurriculum = document.getElementById('programCardCurriculum');
+    programCardCurriculum.innerHTML = '';
+    program.curriculum.forEach(curr => {
+      const li = document.createElement('li');
+      li.innerHTML = `<h4>${curr.step}</h4><p>${curr.desc}</p>`;
+      programCardCurriculum.appendChild(li);
+    });
+    document.getElementById('programImage2').src = program.image2;
+
+    // Diagnostics 2-Column list
+    const programCardDiagnostics = document.getElementById('programCardDiagnostics');
+    programCardDiagnostics.innerHTML = '';
+    program.diagnostics.forEach(diag => {
+      const div = document.createElement('div');
+      div.className = 'diagnostics-list-item';
+      div.textContent = diag;
+      programCardDiagnostics.appendChild(div);
+    });
+
+    // Action CTAs
+    document.getElementById('bookingFindSpecialistBtn').href = `/find-a-doctor.html?specialty=${encodeURIComponent(program.specialistType)}`;
+    document.getElementById('bookingWhatsAppBtn').href = `https://wa.me/966542228111?text=${encodeURIComponent(program.whatsappText)}`;
+
+    // Bottom Explore catalog - Load exactly 3 other programs horizontally
+    const bottomExploreGrid = document.getElementById('bottomExploreGrid');
+    bottomExploreGrid.innerHTML = '';
+    
+    let renderedCount = 0;
+    Object.keys(programsData).forEach(key => {
+      if (key !== programId && renderedCount < 3) {
+        const item = programsData[key];
+        const cardHtml = `
+          <a href="/program-details.html?id=${item.id}" class="prog-card">
+            <div class="prog-card-image-wrapper">
+              <span class="duration-badge">${item.duration}</span>
+              <img src="${item.image}" alt="${item.title}" onerror="this.style.display='none'">
+            </div>
+            <div class="body">
+              <h4>${item.title.split('(')[0].trim()}</h4>
+              <span class="more">Learn details &rarr;</span>
+            </div>
+          </a>
+        `;
+        const div = document.createElement('div');
+        div.innerHTML = cardHtml;
+        bottomExploreGrid.appendChild(div.firstElementChild);
+        renderedCount++;
+      }
+    });
+
+    // Toggle Content Views
+    mainDetailsContent.style.display = 'block';
+    fallbackContent.style.display = 'none';
+
+    // Entry Animations using GSAP
+    gsap.from(".subpage-hero-inner", {
+      opacity: 0,
+      y: 20,
+      duration: 0.6,
+      ease: "power2.out"
+    });
+    gsap.from(".details-section-row", {
+      opacity: 0,
+      y: 35,
+      duration: 0.7,
+      stagger: 0.2,
+      ease: "power2.out",
+      delay: 0.15
+    });
+    gsap.from(".diagnostics-list-item", {
+      opacity: 0,
+      scale: 0.96,
+      duration: 0.5,
+      stagger: 0.05,
+      ease: "power2.out",
+      delay: 0.4
+    });
+    gsap.from(".wide-cta-banner", {
+      opacity: 0,
+      y: 30,
+      duration: 0.7,
+      ease: "power2.out",
+      delay: 0.55
+    });
+    gsap.from(".bottom-explore", {
+      opacity: 0,
+      y: 30,
+      duration: 0.7,
+      ease: "power2.out",
+      delay: 0.65
+    });
+  } else {
+    // Show fallback state
+    mainDetailsContent.style.display = 'none';
+    fallbackContent.style.display = 'block';
+  }
+});
+</script>
+
+<script src="/assets/language-switcher.js"></script>
+</body>
+</html>

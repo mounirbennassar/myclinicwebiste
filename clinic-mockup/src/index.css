@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, sans-serif;
+  color: theme("colors.ink.700");
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-display {
+  font-family: "Playfair Display", serif;
+}
+
+/* Slide entry */
+.slide-enter {
+  opacity: 0;
+  transform: scale(1.03);
+}
+.slide-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 800ms ease, transform 8s ease-out;
+}

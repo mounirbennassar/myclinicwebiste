@@ -1,0 +1,904 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>My Clinic — Cinematic</title>
+<meta name="viewport" content="width=1440">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/shared.css">
+<style>
+  :root {
+    --sans: 'Hanken Grotesk', system-ui, sans-serif;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --ar: 'IBM Plex Sans Arabic', sans-serif;
+  }
+  body { font-family: var(--sans); background: #050B1A; color: #fff; font-size: 16px; line-height: 1.5; letter-spacing: -0.005em; }
+  .wrap { max-width: 1440px; margin: 0 auto; padding: 0 48px; }
+  .mono { font-family: var(--mono); letter-spacing: 0; }
+  .serif { font-family: var(--serif); font-style: italic; }
+
+  /* === Top floating nav === */
+  .topnav { position: absolute; top: 0; left: 0; right: 0; z-index: 30; padding: 28px 48px; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 40px; }
+  .topnav .logo { display: flex; align-items: center; gap: 12px; color: #fff; }
+  .topnav .logo svg { width: 38px; height: 38px; }
+  .topnav .logo .en { font-size: 20px; font-weight: 600; letter-spacing: -0.025em; line-height: 1; }
+  .topnav .logo .ar { font-family: var(--ar); font-size: 11px; opacity: 0.7; margin-top: 3px; }
+  .topnav-pill { justify-self: center; background: rgba(255,255,255,.06); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,.12); border-radius: 999px; padding: 6px; display: flex; gap: 4px; }
+  .topnav-pill a { padding: 9px 18px; font-size: 13.5px; color: rgba(255,255,255,.75); border-radius: 999px; transition: .15s; }
+  .topnav-pill a:hover { background: rgba(255,255,255,.06); color: #fff; }
+  .topnav-pill a.active { background: rgba(255,255,255,.95); color: var(--navy-ink); }
+  .topnav-right { display: flex; gap: 12px; align-items: center; }
+  .topnav-right .lng { font-size: 12.5px; color: rgba(255,255,255,.75); padding: 8px; }
+  .topnav-right .lng b { color: #fff; }
+  .topnav-right .iconbtn { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,.06); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,.12); display: grid; place-items: center; }
+  .topnav-right .iconbtn:hover { background: rgba(255,255,255,.12); }
+  .topnav-right .cta { background: #fff; color: var(--navy-ink); font-weight: 500; font-size: 13.5px; padding: 12px 22px; border-radius: 999px; display: inline-flex; align-items: center; gap: 8px; }
+
+  /* === Hero === */
+  .hero { position: relative; min-height: 100vh; overflow: hidden; background:
+    radial-gradient(ellipse at 70% 30%, rgba(14,58,111,.4) 0%, transparent 60%),
+    radial-gradient(ellipse at 20% 80%, rgba(233,107,74,.15) 0%, transparent 50%),
+    linear-gradient(180deg, #050B1A 0%, #0A1936 100%);
+    padding: 140px 48px 80px;
+  }
+  .hero-bg { position: absolute; inset: 0; opacity: 0.5; background-image: url('https://images.unsplash.com/photo-1631815589968-fdb09a223b1e?auto=format&fit=crop&w=1600&q=70'); background-size: cover; background-position: center; mix-blend-mode: luminosity; }
+  .hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5,11,26,.4) 0%, #050B1A 100%); }
+  .hero-grain { position: absolute; inset: 0; opacity: 0.5; background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,.02) 2px, rgba(255,255,255,.02) 3px);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 1440px; margin: 0 auto; min-height: calc(100vh - 220px); display: grid; grid-template-rows: 1fr auto; }
+
+  .hero-top { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; align-items: end; }
+  .h-eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,.6); display: flex; align-items: center; gap: 14px; margin-bottom: 30px; }
+  .h-eyebrow::before { content: ''; width: 50px; height: 1px; background: rgba(255,255,255,.4); }
+  .h-display { font-size: 144px; font-weight: 400; line-height: 0.92; letter-spacing: -0.045em; color: #fff; margin: 0; }
+  .h-display em { font-family: var(--serif); font-style: italic; font-weight: 400; color: #fff; }
+  .h-display .lit { color: rgba(255,255,255,.4); }
+
+  .h-side { padding-bottom: 12px; }
+  .h-side p { font-size: 17px; color: rgba(255,255,255,.7); line-height: 1.55; margin: 0 0 24px; max-width: 380px; }
+  .h-side .ar-line { font-family: var(--ar); font-size: 18px; color: rgba(255,255,255,.5); direction: rtl; line-height: 1.7; max-width: 320px; }
+  .h-actions { display: flex; gap: 12px; margin-top: 32px; }
+  .h-actions .primary { background: #fff; color: var(--navy-ink); padding: 16px 24px; border-radius: 999px; font-weight: 500; font-size: 14px; display: inline-flex; align-items: center; gap: 10px; }
+  .h-actions .ghost { padding: 16px 24px; border-radius: 999px; font-weight: 500; font-size: 14px; border: 1px solid rgba(255,255,255,.2); color: #fff; backdrop-filter: blur(10px); background: rgba(255,255,255,.04); display: inline-flex; align-items: center; gap: 10px; }
+  .h-actions .ghost .iconwrap { width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,.1); display: grid; place-items: center; }
+
+  /* Floating cards in hero */
+  .h-floats { position: absolute; right: 48px; top: 180px; display: flex; flex-direction: column; gap: 12px; z-index: 3; pointer-events: none; }
+  .h-float { background: rgba(255,255,255,.06); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,.12); border-radius: 16px; padding: 16px 18px; min-width: 240px; pointer-events: auto; }
+  .h-float .label { font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,.5); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+  .h-float .v { display: flex; gap: 10px; align-items: center; }
+  .h-float .v .big { font-size: 28px; font-weight: 500; letter-spacing: -0.02em; line-height: 1; }
+  .h-float .v .meta { font-size: 11.5px; color: rgba(255,255,255,.6); line-height: 1.3; }
+  .h-float .v .live-d { width: 9px; height: 9px; background: #2DAE9A; border-radius: 50%; box-shadow: 0 0 0 4px rgba(45,174,154,.2); margin-right: 6px; }
+
+  /* Hero booking */
+  .h-book { background: rgba(255,255,255,.05); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,.12); border-radius: 20px; padding: 10px; display: flex; gap: 6px; align-items: stretch; margin-top: 72px; max-width: 1100px; }
+  .h-book .field { flex: 1; padding: 14px 20px; border-radius: 14px; cursor: pointer; transition: .15s; }
+  .h-book .field:hover { background: rgba(255,255,255,.04); }
+  .h-book .field label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,.5); display: block; margin-bottom: 6px; }
+  .h-book .field .v { font-size: 15px; color: #fff; display: flex; justify-content: space-between; align-items: center; }
+  .h-book .field .v svg { width: 12px; opacity: 0.4; }
+  .h-book .divider { width: 1px; background: rgba(255,255,255,.1); margin: 14px 0; }
+  .h-book .go { background: #fff; color: var(--navy-ink); padding: 0 32px; border-radius: 14px; font-weight: 500; font-size: 14px; display: flex; align-items: center; gap: 10px; }
+  .h-book .go:hover { background: var(--cream); }
+
+  /* Bottom marquee strip in hero */
+  .marquee { border-top: 1px solid rgba(255,255,255,.1); margin-top: 80px; padding: 28px 0 0; display: flex; justify-content: space-between; align-items: center; gap: 40px; }
+  .marquee .item { display: flex; align-items: center; gap: 14px; font-size: 13px; color: rgba(255,255,255,.55); }
+  .marquee .item b { color: #fff; font-weight: 500; font-size: 22px; letter-spacing: -0.02em; }
+
+  /* === Sections === */
+  section.b { padding: 140px 0; position: relative; }
+
+  /* Section: stats marquee in italic */
+  .stat-runner { padding: 80px 0; overflow: hidden; border-block: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.015); }
+  .stat-runner .line { display: flex; align-items: center; gap: 60px; white-space: nowrap; font-family: var(--serif); font-style: italic; font-size: 96px; letter-spacing: -0.035em; line-height: 1; color: rgba(255,255,255,.92); animation: scroll 60s linear infinite; }
+  .stat-runner .line span { display: flex; align-items: center; gap: 60px; }
+  .stat-runner .line .dot { display: inline-block; width: 16px; height: 16px; background: var(--coral); border-radius: 50%; }
+  .stat-runner .line .label { font-family: var(--sans); font-style: normal; font-size: 14px; color: rgba(255,255,255,.5); letter-spacing: 0.06em; text-transform: uppercase; }
+  @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+  /* Section head */
+  .sec-head { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; margin-bottom: 80px; }
+  .sec-eb { font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,.5); display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+  .sec-eb::before { content: ''; width: 40px; height: 1px; background: rgba(255,255,255,.3); }
+  .sec-title { font-size: 80px; font-weight: 400; line-height: 1; letter-spacing: -0.035em; margin: 0; color: #fff; }
+  .sec-title em { font-family: var(--serif); font-style: italic; font-weight: 400; }
+  .sec-title .lit { color: rgba(255,255,255,.4); }
+  .sec-desc { font-size: 17px; color: rgba(255,255,255,.65); max-width: 460px; line-height: 1.55; margin: 0; }
+  .sec-cta { display: inline-flex; align-items: center; gap: 12px; margin-top: 24px; font-size: 14px; color: #fff; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,.3); padding-bottom: 6px; width: fit-content; }
+
+  /* Specialties — large interactive cards */
+  .spec-rail { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .sr { aspect-ratio: 3/4; border-radius: 20px; overflow: hidden; position: relative; cursor: pointer; transition: .3s; background: #0E1830; }
+  .sr:hover { transform: translateY(-4px); }
+  .sr .ph { position: absolute; inset: 0; background-position: center; background-size: cover; opacity: 0.55; transition: .4s; }
+  .sr:hover .ph { opacity: 0.7; transform: scale(1.04); }
+  .sr::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5,11,26,.2) 0%, rgba(5,11,26,.85) 80%); }
+  .sr .top { position: absolute; top: 22px; left: 22px; right: 22px; display: flex; justify-content: space-between; align-items: start; z-index: 2; }
+  .sr .top .idx { font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,.5); letter-spacing: 0.06em; }
+  .sr .top .arr { width: 36px; height: 36px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 50%; display: grid; place-items: center; backdrop-filter: blur(10px); transition: .2s; }
+  .sr:hover .top .arr { background: #fff; }
+  .sr:hover .top .arr svg { stroke: var(--navy-ink); }
+  .sr .bottom { position: absolute; bottom: 22px; left: 22px; right: 22px; z-index: 2; }
+  .sr .bottom h3 { font-size: 28px; font-weight: 400; line-height: 1; letter-spacing: -0.025em; margin: 0 0 8px; }
+  .sr .bottom h3 em { font-family: var(--serif); font-style: italic; }
+  .sr .bottom .meta { font-family: var(--mono); font-size: 10.5px; color: rgba(255,255,255,.6); letter-spacing: 0.04em; }
+  .spec-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 28px; }
+  .spec-tab { padding: 10px 16px; border-radius: 999px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); font-size: 12.5px; color: rgba(255,255,255,.75); }
+  .spec-tab.active { background: #fff; color: var(--navy-ink); border-color: #fff; }
+
+  /* Programs horizontal scroller */
+  .prog-rail { display: grid; grid-template-columns: 380px 380px 380px 380px; gap: 20px; overflow-x: auto; padding-bottom: 20px; }
+  .prog { aspect-ratio: 4/5; border-radius: 28px; overflow: hidden; position: relative; cursor: pointer; transition: .3s; background: #0E1830; }
+  .prog .ph { position: absolute; inset: 0; background-size: cover; background-position: center; }
+  .prog::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5,11,26,.15) 0%, rgba(5,11,26,.92) 100%); }
+  .prog .head { position: absolute; top: 22px; left: 22px; right: 22px; z-index: 2; display: flex; justify-content: space-between; align-items: start; }
+  .prog .head .tag { background: rgba(255,255,255,.95); color: var(--navy-ink); font-family: var(--mono); font-size: 11px; padding: 6px 12px; border-radius: 999px; font-weight: 500; }
+  .prog .head .num { font-family: var(--serif); font-style: italic; font-size: 32px; color: rgba(255,255,255,.7); line-height: 1; }
+  .prog .body { position: absolute; bottom: 0; left: 0; right: 0; padding: 28px; z-index: 2; }
+  .prog .body h3 { font-size: 34px; font-weight: 400; line-height: 1; letter-spacing: -0.025em; margin: 0 0 12px; }
+  .prog .body h3 em { font-family: var(--serif); font-style: italic; }
+  .prog .body p { font-size: 13px; color: rgba(255,255,255,.7); line-height: 1.5; margin: 0 0 20px; }
+  .prog .body .more { display: inline-flex; align-items: center; gap: 10px; font-size: 12.5px; padding: 10px 16px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 999px; backdrop-filter: blur(10px); }
+
+  /* Telemedicine / Home alternating */
+  .alt-block { display: grid; grid-template-columns: 1fr 1fr; gap: 0; min-height: 600px; border-radius: 28px; overflow: hidden; }
+  .alt-block .text-side { padding: 60px; display: flex; flex-direction: column; justify-content: space-between; background: linear-gradient(160deg, #0A1936 0%, #050B1A 100%); border: 1px solid rgba(255,255,255,.08); }
+  .alt-block .text-side .label { font-family: var(--mono); font-size: 11px; color: var(--coral); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 28px; }
+  .alt-block .text-side h3 { font-size: 56px; font-weight: 400; line-height: 1; letter-spacing: -0.03em; margin: 0; }
+  .alt-block .text-side h3 em { font-family: var(--serif); font-style: italic; }
+  .alt-block .text-side p { font-size: 16px; color: rgba(255,255,255,.7); line-height: 1.55; margin: 24px 0 0; max-width: 380px; }
+  .alt-block .text-side .features { display: grid; gap: 12px; margin-top: 36px; }
+  .alt-block .text-side .feat { padding: 14px 0; border-top: 1px solid rgba(255,255,255,.1); display: grid; grid-template-columns: 28px 1fr auto; gap: 14px; align-items: center; font-size: 14px; }
+  .alt-block .text-side .feat:last-of-type { border-bottom: 1px solid rgba(255,255,255,.1); }
+  .alt-block .text-side .feat .ic { width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,.06); display: grid; place-items: center; color: rgba(255,255,255,.6); }
+  .alt-block .text-side .feat .meta { font-size: 11px; color: rgba(255,255,255,.5); }
+  .alt-block .text-side .cta { display: inline-flex; align-items: center; gap: 10px; padding: 16px 24px; background: #fff; color: var(--navy-ink); border-radius: 999px; font-weight: 500; font-size: 14px; margin-top: 36px; width: fit-content; }
+
+  .alt-block .vis-side { position: relative; overflow: hidden; background: #0E1830; }
+  .alt-block .vis-side .img { position: absolute; inset: 0; background-size: cover; background-position: center; }
+  .alt-block .vis-side .overlay { position: absolute; inset: 0; background: linear-gradient(45deg, rgba(10,25,54,.4), transparent); }
+  .alt-block .vis-side .video-ui { position: absolute; bottom: 32px; left: 32px; right: 32px; display: flex; gap: 12px; align-items: center; padding: 14px 18px; background: rgba(0,0,0,.5); backdrop-filter: blur(20px); border-radius: 14px; }
+  .alt-block .vis-side .video-ui .ava { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #B9C7D9, #93A8C0); }
+  .alt-block .vis-side .video-ui .info { flex: 1; }
+  .alt-block .vis-side .video-ui .info .name { font-size: 13px; font-weight: 500; }
+  .alt-block .vis-side .video-ui .info .stat { font-size: 11px; color: rgba(255,255,255,.6); display: flex; align-items: center; gap: 6px; }
+  .alt-block .vis-side .video-ui .info .stat::before { content: ''; width: 6px; height: 6px; background: #2DAE9A; border-radius: 50%; }
+  .alt-block .vis-side .video-ui .btns { display: flex; gap: 6px; }
+  .alt-block .vis-side .video-ui .btns .b { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,.1); display: grid; place-items: center; }
+  .alt-block .vis-side .video-ui .btns .end { background: var(--coral); }
+
+  /* Map clinics — cinematic */
+  .map-cine { position: relative; min-height: 700px; border-radius: 32px; overflow: hidden; background: #0B142B; border: 1px solid rgba(255,255,255,.08); }
+  .map-cine .bg-map { position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 30% 40%, #1a3050 0%, transparent 40%),
+      radial-gradient(circle at 70% 60%, #14253f 0%, transparent 35%),
+      linear-gradient(135deg, #0E1A33 0%, #050B1A 100%);
+  }
+  .map-cine .bg-map::after { content: ''; position: absolute; inset: 0; background-image:
+      linear-gradient(90deg, transparent 49.5%, rgba(255,255,255,.04) 49.5%, rgba(255,255,255,.04) 50.5%, transparent 50.5%),
+      linear-gradient(0deg, transparent 49.5%, rgba(255,255,255,.04) 49.5%, rgba(255,255,255,.04) 50.5%, transparent 50.5%);
+    background-size: 100px 100px; mask-image: radial-gradient(circle at center, #000 30%, transparent 70%);
+  }
+  .map-cine .panel { position: absolute; top: 32px; left: 32px; width: 340px; background: rgba(5,11,26,.7); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,.1); border-radius: 20px; padding: 24px; z-index: 3; }
+  .map-cine .panel h4 { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,.5); margin: 0 0 16px; }
+  .map-cine .panel .cl { padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.08); cursor: pointer; }
+  .map-cine .panel .cl:last-of-type { border-bottom: 0; padding-bottom: 0; }
+  .map-cine .panel .cl .top { display: flex; justify-content: space-between; margin-bottom: 4px; }
+  .map-cine .panel .cl .top .n { font-size: 14px; font-weight: 500; }
+  .map-cine .panel .cl .top .d { font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,.5); }
+  .map-cine .panel .cl .info { font-size: 11.5px; color: rgba(255,255,255,.55); display: flex; gap: 12px; }
+  .map-cine .panel .cl.active .n { color: var(--coral); }
+  .map-cine .pin { position: absolute; transform: translate(-50%, -100%); cursor: pointer; }
+  .map-cine .pin .ring { width: 60px; height: 60px; border-radius: 50%; background: rgba(233,107,74,.18); position: absolute; top: -10px; left: -10px; animation: ringpulse 2s ease-out infinite; }
+  @keyframes ringpulse { 0% { transform: scale(0.5); opacity: 1; } 100% { transform: scale(1.4); opacity: 0; } }
+  .map-cine .pin .core { width: 40px; height: 40px; border-radius: 50% 50% 50% 0; background: var(--coral); transform: rotate(-45deg); box-shadow: 0 12px 40px rgba(233,107,74,.6); position: relative; }
+  .map-cine .pin .core::after { content: ''; position: absolute; inset: 10px; background: #fff; border-radius: 50%; }
+  .map-cine .pin.dim { opacity: 0.6; }
+  .map-cine .pin.dim .core { background: rgba(255,255,255,.6); box-shadow: 0 4px 12px rgba(0,0,0,.3); }
+  .map-cine .pin.dim .core::after { background: var(--navy-deep); inset: 11px; }
+  .map-cine .pin.dim .ring { display: none; }
+  .map-cine .focused-card { position: absolute; bottom: 32px; right: 32px; background: rgba(5,11,26,.7); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,.1); border-radius: 20px; padding: 24px; width: 380px; z-index: 3; }
+  .map-cine .focused-card .lab { font-family: var(--mono); font-size: 10px; color: var(--coral); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 8px; }
+  .map-cine .focused-card h4 { font-size: 24px; font-weight: 500; margin: 0 0 16px; letter-spacing: -0.02em; }
+  .map-cine .focused-card .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; padding: 14px 0; border-block: 1px solid rgba(255,255,255,.1); margin-bottom: 16px; }
+  .map-cine .focused-card .stats > div { }
+  .map-cine .focused-card .stats .v { font-size: 22px; font-weight: 500; letter-spacing: -0.02em; }
+  .map-cine .focused-card .stats .l { font-size: 10px; color: rgba(255,255,255,.55); letter-spacing: 0.04em; text-transform: uppercase; }
+  .map-cine .focused-card .actions { display: flex; gap: 8px; }
+  .map-cine .focused-card .actions a { flex: 1; padding: 12px; border-radius: 10px; text-align: center; font-size: 12.5px; font-weight: 500; }
+  .map-cine .focused-card .actions .p { background: #fff; color: var(--navy-ink); }
+  .map-cine .focused-card .actions .s { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); }
+
+  /* Doctors gallery */
+  .docs-cine { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; align-items: stretch; }
+  .dc { background: #0E1830; border-radius: 16px; overflow: hidden; position: relative; aspect-ratio: 3/5; cursor: pointer; transition: .3s; }
+  .dc:hover { transform: translateY(-3px); }
+  .dc .ph { position: absolute; inset: 0; background-size: cover; background-position: center 20%; }
+  .dc::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(5,11,26,.85) 95%); }
+  .dc .info { position: absolute; bottom: 16px; left: 16px; right: 16px; z-index: 2; }
+  .dc .info .nm { font-size: 14px; font-weight: 500; line-height: 1.2; margin-bottom: 4px; }
+  .dc .info .sp { font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,.65); letter-spacing: 0.04em; text-transform: uppercase; }
+  .dc .avail { position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,.95); color: var(--navy-ink); font-family: var(--mono); font-size: 9px; padding: 4px 8px; border-radius: 999px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; z-index: 2; display: flex; align-items: center; gap: 5px; }
+  .dc .avail::before { content: ''; width: 6px; height: 6px; background: #2DAE9A; border-radius: 50%; }
+
+  /* Testimonials */
+  .testi-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 20px; align-items: stretch; }
+  .testi-main { background: linear-gradient(135deg, rgba(233,107,74,.15), rgba(14,58,111,.1)); border: 1px solid rgba(255,255,255,.1); border-radius: 28px; padding: 56px; position: relative; }
+  .testi-main .quote-mark { font-family: var(--serif); font-style: italic; font-size: 240px; line-height: 0.5; color: var(--coral); height: 80px; display: block; margin-bottom: 20px; }
+  .testi-main blockquote { font-family: var(--serif); font-style: italic; font-size: 52px; font-weight: 400; line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 32px; max-width: 700px; }
+  .testi-main .who { display: flex; align-items: center; gap: 14px; margin-top: 48px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,.1); }
+  .testi-main .who .ava { width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg, #B9C7D9, #93A8C0); }
+  .testi-main .who .n { font-size: 16px; font-weight: 500; }
+  .testi-main .who .r { font-size: 12.5px; color: rgba(255,255,255,.5); margin-top: 2px; }
+  .testi-side { display: flex; flex-direction: column; gap: 12px; }
+  .ts-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 20px; padding: 24px; flex: 1; }
+  .ts-card .stars { color: var(--coral); font-size: 13px; letter-spacing: 2px; margin-bottom: 12px; }
+  .ts-card p { font-size: 13.5px; line-height: 1.55; color: rgba(255,255,255,.8); margin: 0 0 14px; }
+  .ts-card .who { display: flex; align-items: center; gap: 10px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.08); }
+  .ts-card .who .ava { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #B9C7D9, #93A8C0); }
+  .ts-card .who .n { font-size: 13px; font-weight: 500; }
+  .ts-card .who .r { font-size: 11px; color: rgba(255,255,255,.5); margin-top: 1px; }
+
+  /* News */
+  .news-cine { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 20px; }
+  .nc { display: flex; flex-direction: column; cursor: pointer; }
+  .nc .ph { aspect-ratio: 16/10; border-radius: 16px; overflow: hidden; background: linear-gradient(160deg, #1A2E4F, #0A1936); margin-bottom: 20px; }
+  .nc.feat .ph { aspect-ratio: 16/9; }
+  .nc .ph img { width: 100%; height: 100%; object-fit: cover; transition: .3s; }
+  .nc:hover .ph img { transform: scale(1.04); }
+  .nc .tg { font-family: var(--mono); font-size: 11px; color: var(--coral); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .nc h4 { font-size: 22px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 500; margin: 0 0 12px; }
+  .nc.feat h4 { font-size: 32px; line-height: 1.1; max-width: 520px; }
+  .nc h4 em { font-family: var(--serif); font-style: italic; }
+  .nc .meta { font-size: 12px; color: rgba(255,255,255,.5); }
+
+  /* App download */
+  .app-cine { background: linear-gradient(135deg, #0E3A6F 0%, #0A2A52 100%); border-radius: 32px; padding: 80px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center; position: relative; overflow: hidden; }
+  .app-cine::before { content: ''; position: absolute; top: -200px; right: -200px; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(233,107,74,.25) 0%, transparent 70%); }
+  .app-cine .lbl { font-family: var(--mono); font-size: 12px; color: rgba(255,255,255,.6); letter-spacing: 0.14em; text-transform: uppercase; }
+  .app-cine h3 { font-size: 72px; font-weight: 400; line-height: 0.95; letter-spacing: -0.035em; margin: 18px 0 24px; }
+  .app-cine h3 em { font-family: var(--serif); font-style: italic; color: rgba(255,255,255,.6); }
+  .app-cine p { font-size: 17px; color: rgba(255,255,255,.7); line-height: 1.55; margin: 0 0 36px; max-width: 460px; }
+  .app-cine .stores { display: flex; gap: 12px; }
+  .app-cine .store { display: flex; gap: 12px; align-items: center; padding: 14px 22px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); border-radius: 14px; backdrop-filter: blur(10px); }
+  .app-cine .store small { display: block; font-size: 10px; opacity: 0.6; letter-spacing: 0.08em; text-transform: uppercase; }
+  .app-cine .store b { font-size: 14px; font-weight: 500; }
+  .app-cine .phone-vis { position: relative; aspect-ratio: 9/16; max-width: 320px; margin: 0 auto; }
+  .app-cine .phone-vis::before { content: ''; position: absolute; inset: -40px; background: radial-gradient(circle, rgba(255,255,255,.08) 0%, transparent 60%); border-radius: 50%; }
+  .phone-shell { position: relative; aspect-ratio: 9/19; background: #0A1224; border-radius: 36px; padding: 6px; box-shadow: 0 50px 100px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.08); }
+  .phone-shell .scr { border-radius: 30px; background: linear-gradient(180deg, #050B1A 0%, #0A1936 100%); height: 100%; padding: 50px 18px 18px; position: relative; overflow: hidden; }
+  .phone-shell .notch { position: absolute; top: 16px; left: 50%; transform: translateX(-50%); width: 96px; height: 26px; background: #000; border-radius: 14px; z-index: 5; }
+  .phone-shell .scr .greet { color: rgba(255,255,255,.55); font-size: 11px; }
+  .phone-shell .scr .name-l { font-family: var(--serif); font-style: italic; font-size: 26px; color: #fff; margin: 4px 0 24px; }
+  .phone-shell .scr .pill-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+  .phone-shell .scr .pg-card { background: rgba(255,255,255,.06); padding: 14px; border-radius: 12px; }
+  .phone-shell .scr .pg-card .num { font-size: 22px; font-weight: 500; margin-bottom: 2px; }
+  .phone-shell .scr .pg-card .lbl { font-size: 10px; color: rgba(255,255,255,.55); }
+  .phone-shell .scr .next-appt { background: var(--coral); border-radius: 12px; padding: 14px; margin-bottom: 8px; }
+  .phone-shell .scr .next-appt .l { font-size: 9px; opacity: 0.85; letter-spacing: 0.06em; text-transform: uppercase; }
+  .phone-shell .scr .next-appt .d { font-size: 14px; font-weight: 600; margin: 4px 0; }
+  .phone-shell .scr .next-appt .w { font-size: 11px; opacity: 0.85; }
+
+  /* Insurance row */
+  .ins-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+  .ins-row > div { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 24px 16px; display: grid; place-items: center; font-family: var(--serif); font-style: italic; font-size: 22px; color: rgba(255,255,255,.5); }
+
+  /* Footer */
+  footer.fcine { border-top: 1px solid rgba(255,255,255,.08); padding: 80px 48px 32px; }
+  .ftr-cine-grid { max-width: 1440px; margin: 0 auto 60px; display: grid; grid-template-columns: 1.6fr repeat(4, 1fr); gap: 60px; }
+  .ftr-cine-grid h5 { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,.4); margin: 0 0 16px; }
+  .ftr-cine-grid ul { list-style: none; padding: 0; margin: 0; }
+  .ftr-cine-grid li { padding: 6px 0; font-size: 14px; color: rgba(255,255,255,.7); }
+  .ftr-cine-grid .lede { font-size: 32px; line-height: 1.1; letter-spacing: -0.025em; max-width: 380px; margin: 20px 0; }
+  .ftr-cine-grid .lede em { font-family: var(--serif); font-style: italic; }
+  .ftr-cine-bottom { max-width: 1440px; margin: 0 auto; padding-top: 32px; border-top: 1px solid rgba(255,255,255,.08); display: flex; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,.4); }
+
+  /* Sticky bottom */
+  .sticky-cta { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: rgba(5,11,26,.8); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,.15); border-radius: 999px; padding: 8px 8px 8px 24px; display: flex; align-items: center; gap: 20px; z-index: 40; box-shadow: 0 24px 60px rgba(0,0,0,.4); }
+  .sticky-cta .text { font-size: 13px; color: rgba(255,255,255,.85); display: flex; align-items: center; gap: 10px; }
+  .sticky-cta .text .ind { width: 8px; height: 8px; background: #2DAE9A; border-radius: 50%; box-shadow: 0 0 0 4px rgba(45,174,154,.2); }
+  .sticky-cta button { background: var(--coral); color: #fff; padding: 12px 22px; border-radius: 999px; font-weight: 500; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+</style>
+</head>
+<body data-screen-label="V3 — Cinematic 2027">
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+
+  <nav class="topnav">
+    <div class="logo">
+      <svg viewBox="0 0 40 40" fill="none"><g fill="#fff"><ellipse cx="20" cy="8" rx="4" ry="6"/><ellipse cx="32" cy="20" rx="4" ry="6" transform="rotate(90 32 20)"/><ellipse cx="20" cy="32" rx="4" ry="6"/><ellipse cx="8" cy="20" rx="4" ry="6" transform="rotate(90 8 20)"/><circle cx="20" cy="20" r="3"/></g></svg>
+      <div><div class="en">My Clinic</div><div class="ar">عيـــادتــي</div></div>
+    </div>
+    <div class="topnav-pill">
+      <a class="active">Care</a>
+      <a>Specialties</a>
+      <a>Doctors</a>
+      <a>Programs</a>
+      <a>Branches</a>
+      <a>App</a>
+    </div>
+    <div class="topnav-right">
+      <span class="lng"><b>EN</b> · AR</span>
+      <button class="iconbtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg></button>
+      <a class="cta">Book a visit <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a>
+    </div>
+  </nav>
+
+  <div class="hero-content">
+    <div>
+      <div class="hero-top">
+        <div>
+          <div class="h-eyebrow">Care in Saudi Arabia · Since 2009</div>
+          <h1 class="h-display">Care, <em>quietly</em><br>extraordinary<span class="lit">.</span></h1>
+        </div>
+        <div class="h-side">
+          <p>180+ board-certified physicians across 24 specialties — practicing in five branches across Jeddah and Riyadh, and now wherever you are.</p>
+          <div class="ar-line">رعاية هادئة، استثنائية. في خمسة فروع بجدة والرياض، وأينما كنت.</div>
+          <div class="h-actions">
+            <a class="primary">Book a visit <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a>
+            <a class="ghost"><span class="iconwrap"><svg width="10" height="10" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span> Watch our story</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- floating cards -->
+      <div class="h-floats">
+        <div class="h-float">
+          <div class="label">// Live now</div>
+          <div class="v"><span class="live-d"></span><div><div class="big" style="font-size: 22px;">42 doctors</div><div class="meta">in tele-consultations</div></div></div>
+        </div>
+        <div class="h-float">
+          <div class="label">// Today</div>
+          <div class="v"><div><div class="big">2,418</div><div class="meta">patients seen across 5 branches</div></div></div>
+        </div>
+        <div class="h-float">
+          <div class="label">// Patient rating</div>
+          <div class="v"><div><div class="big">4.8<span style="font-size: 14px; opacity: .5; margin-left: 4px;">/ 5</span></div><div class="meta">across 38,420 reviews</div></div></div>
+        </div>
+      </div>
+
+      <!-- booking strip -->
+      <div class="h-book">
+        <div class="field" style="flex: 0 0 auto; padding-right: 32px;">
+          <label>// I want to</label>
+          <div class="v">Book a visit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        </div>
+        <div class="divider"></div>
+        <div class="field">
+          <label>Branch</label>
+          <div class="v">Jeddah · Al Safa <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        </div>
+        <div class="divider"></div>
+        <div class="field">
+          <label>Specialty</label>
+          <div class="v">Internal Medicine <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        </div>
+        <div class="divider"></div>
+        <div class="field">
+          <label>When</label>
+          <div class="v">Tomorrow morning <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        </div>
+        <button class="go">Find slots <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></button>
+      </div>
+    </div>
+
+    <div class="marquee">
+      <div class="item"><b>17 years</b> · Caring for Saudi families</div>
+      <div class="item"><b>5 branches</b> · Jeddah &amp; Riyadh</div>
+      <div class="item"><b>180+ doctors</b> · 24 specialties</div>
+      <div class="item"><b>CBAHI</b> · Five-year accredited</div>
+      <div class="item"><b>1.2M+</b> · Patients in 2025</div>
+    </div>
+  </div>
+</section>
+
+<!-- Italic stats marquee -->
+<div class="stat-runner">
+  <div class="line">
+    <span>180 physicians <span class="dot"></span></span>
+    <span>24 specialties <span class="dot"></span></span>
+    <span>5 branches <span class="dot"></span></span>
+    <span>1.2M patients <span class="dot"></span></span>
+    <span>17 years of care <span class="dot"></span></span>
+    <span>180 physicians <span class="dot"></span></span>
+    <span>24 specialties <span class="dot"></span></span>
+    <span>5 branches <span class="dot"></span></span>
+    <span>1.2M patients <span class="dot"></span></span>
+    <span>17 years of care <span class="dot"></span></span>
+  </div>
+</div>
+
+<!-- Specialties -->
+<section class="b">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-eb">01 — Specialties</div>
+        <h2 class="sec-title">Care in every <em>shape</em><br>a body asks for<span class="lit">.</span></h2>
+      </div>
+      <div>
+        <p class="sec-desc">From cardiology to obstetrics, our specialists work as one team — sharing notes, rooms, and rounds. So your care never feels handed off.</p>
+        <a class="sec-cta">Browse all 24 specialties →</a>
+      </div>
+    </div>
+
+    <div class="spec-tabs">
+      <span class="spec-tab active">All</span>
+      <span class="spec-tab">Heart &amp; vascular</span>
+      <span class="spec-tab">Brain &amp; spine</span>
+      <span class="spec-tab">Women &amp; children</span>
+      <span class="spec-tab">Surgery</span>
+      <span class="spec-tab">Senses</span>
+      <span class="spec-tab">Internal</span>
+      <span class="spec-tab">Diagnostics</span>
+    </div>
+
+    <div class="spec-rail">
+      <div class="sr">
+        <div class="ph" style="background-image: url('https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=700&q=70')"></div>
+        <div class="top"><span class="idx">01</span><div class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></div></div>
+        <div class="bottom"><h3>Cardiology</h3><div class="meta">18 doctors · 6 sub-specialties</div></div>
+      </div>
+      <div class="sr">
+        <div class="ph" style="background-image: url('https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=700&q=70')"></div>
+        <div class="top"><span class="idx">02</span><div class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></div></div>
+        <div class="bottom"><h3>Endocrinology &amp; <em>Diabetes</em></h3><div class="meta">9 doctors · adult &amp; pediatric</div></div>
+      </div>
+      <div class="sr">
+        <div class="ph" style="background-image: url('https://images.unsplash.com/photo-1631815589968-fdb09a223b1e?auto=format&fit=crop&w=700&q=70')"></div>
+        <div class="top"><span class="idx">03</span><div class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></div></div>
+        <div class="bottom"><h3>ENT</h3><div class="meta">12 doctors</div></div>
+      </div>
+      <div class="sr">
+        <div class="ph" style="background-image: url('https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=700&q=70')"></div>
+        <div class="top"><span class="idx">04</span><div class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></div></div>
+        <div class="bottom"><h3>Family<br><em>Medicine</em></h3><div class="meta">15 doctors</div></div>
+      </div>
+      <div class="sr">
+        <div class="ph" style="background-image: url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=700&q=70')"></div>
+        <div class="top"><span class="idx">05</span><div class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></div></div>
+        <div class="bottom"><h3>Internal<br>Medicine</h3><div class="meta">24 doctors</div></div>
+      </div>
+      <div class="sr">
+        <div class="ph" style="background-image: url('https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=700&q=70')"></div>
+        <div class="top"><span class="idx">06</span><div class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></div></div>
+        <div class="bottom"><h3>Obstetrics &amp; <em>Gynecology</em></h3><div class="meta">14 doctors</div></div>
+      </div>
+      <div class="sr">
+        <div class="ph" style="background-image: url('https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=700&q=70')"></div>
+        <div class="top"><span class="idx">07</span><div class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></div></div>
+        <div class="bottom"><h3>Ophthalmology</h3><div class="meta">8 doctors</div></div>
+      </div>
+      <div class="sr" style="background: linear-gradient(160deg, var(--navy), var(--navy-deep));">
+        <div class="top"><span class="idx" style="color: rgba(255,255,255,.7)">+17</span><div class="arr" style="background: #fff;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0E3A6F" stroke-width="2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></div></div>
+        <div class="bottom"><h3>Explore all<br><em>specialties</em></h3><div class="meta">24 in total</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Programs cinematic -->
+<section class="b" style="padding-top: 60px;">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-eb">02 — Care programs</div>
+        <h2 class="sec-title">Structured paths for the conditions that <em>need them</em><span class="lit"> most.</span></h2>
+      </div>
+      <div>
+        <p class="sec-desc">Multi-disciplinary programs — specialists, technology, and ongoing coaching, designed around the long arc of chronic care.</p>
+        <a class="sec-cta">All programs →</a>
+      </div>
+    </div>
+
+    <div class="prog-rail">
+      <div class="prog">
+        <div class="ph" style="background-image: url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=700&q=70')"></div>
+        <div class="head"><span class="tag">12 weeks</span><span class="num">01</span></div>
+        <div class="body">
+          <h3>Diabetes <em>Management</em></h3>
+          <p>Personal endocrinologist, dietician, and continuous monitoring — for adults and children.</p>
+          <a class="more">Enrol now →</a>
+        </div>
+      </div>
+      <div class="prog">
+        <div class="ph" style="background-image: url('https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=700&q=70')"></div>
+        <div class="head"><span class="tag">40 weeks</span><span class="num">02</span></div>
+        <div class="body">
+          <h3>Pregnancy <em>Care</em></h3>
+          <p>Antenatal through postnatal — one OB-GYN team across every trimester.</p>
+          <a class="more">Learn more →</a>
+        </div>
+      </div>
+      <div class="prog">
+        <div class="ph" style="background-image: url('https://images.unsplash.com/photo-1612531386530-97286d97c2d2?auto=format&fit=crop&w=700&q=70')"></div>
+        <div class="head"><span class="tag">Ongoing</span><span class="num">03</span></div>
+        <div class="body">
+          <h3>Family <em>Center Care</em></h3>
+          <p>One team for every member of the household — pediatrics &amp; family medicine.</p>
+          <a class="more">Learn more →</a>
+        </div>
+      </div>
+      <div class="prog">
+        <div class="ph" style="background-image: url('https://images.unsplash.com/photo-1571772996211-2f02c9727629?auto=format&fit=crop&w=700&q=70')"></div>
+        <div class="head"><span class="tag">Lifelong</span><span class="num">04</span></div>
+        <div class="body">
+          <h3>Hearing <em>Aid</em></h3>
+          <p>Audiology testing, fitting, and long-term hearing care across all ages.</p>
+          <a class="more">Learn more →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Telemedicine alt block -->
+<section class="b" style="padding-top: 60px;">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-eb">03 — Care, anywhere</div>
+        <h2 class="sec-title">Two ways to see us<br>without <em>seeing us</em><span class="lit">.</span></h2>
+      </div>
+    </div>
+
+    <div class="alt-block" style="margin-bottom: 20px;">
+      <div class="text-side">
+        <div>
+          <div class="label">// Telemedicine</div>
+          <h3>A doctor,<br>in <em>fifteen minutes</em>.</h3>
+          <p>Connect with the same physicians who'd see you in clinic — over high-definition video, anywhere in the Kingdom.</p>
+        </div>
+        <div class="features">
+          <div class="feat"><div class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div>Average wait: 15 minutes</div><div class="meta">42 doctors online now</div></div>
+          <div class="feat"><div class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div><div>Prescriptions delivered to your pharmacy</div><div class="meta">Same day</div></div>
+          <div class="feat"><div class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20"/><path d="M12 2v20"/></svg></div><div>Lab orders &amp; imaging referrals</div><div class="meta">In-app</div></div>
+        </div>
+        <a class="cta">Start a video visit →</a>
+      </div>
+      <div class="vis-side" style="background-image: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=70'); background-size: cover; background-position: center;">
+        <div class="overlay"></div>
+        <div style="position: absolute; top: 24px; left: 24px; right: 24px; display: flex; justify-content: space-between; align-items: center; color: #fff; z-index: 2;">
+          <div style="display: flex; gap: 10px; align-items: center; font-family: var(--mono); font-size: 12px;"><span style="width: 9px; height: 9px; background: var(--coral); border-radius: 50%; box-shadow: 0 0 0 5px rgba(233,107,74,.2);"></span>REC · 00:08:42</div>
+          <div style="font-family: var(--mono); font-size: 11px; opacity: 0.7;">HD · Encrypted</div>
+        </div>
+        <div class="video-ui">
+          <div class="ava"></div>
+          <div class="info"><div class="name">Dr. Hisham Al-Otaibi</div><div class="stat">Cardiology · Live consult</div></div>
+          <div class="btns"><div class="b"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M3 9v6h4l5 5V4l-5 5z"/></svg></div><div class="b"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M2 6v12h4l5-5h2l5 5h4V6h-4l-5 5h-2L6 6z"/></svg></div><div class="b end"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M19 4 5 18M5 4l14 14"/></svg></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alt-block">
+      <div class="vis-side" style="background-image: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=900&q=70'); background-size: cover; background-position: center;">
+        <div class="overlay"></div>
+        <div style="position: absolute; bottom: 32px; left: 32px; right: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; z-index: 2;">
+          <div style="background: rgba(0,0,0,.4); backdrop-filter: blur(20px); padding: 14px; border-radius: 12px;">
+            <div style="font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,.6);">// Nurse en route</div>
+            <div style="margin-top: 6px; font-size: 14px; font-weight: 500;">Sarah · 12 min away</div>
+          </div>
+          <div style="background: rgba(0,0,0,.4); backdrop-filter: blur(20px); padding: 14px; border-radius: 12px;">
+            <div style="font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,.6);">// Service</div>
+            <div style="margin-top: 6px; font-size: 14px; font-weight: 500;">Post-surgical care</div>
+          </div>
+        </div>
+      </div>
+      <div class="text-side">
+        <div>
+          <div class="label">// Home Healthcare</div>
+          <h3>When the visit<br>comes to <em>you</em>.</h3>
+          <p>Doctor and nurse home visits, physiotherapy at your bedside, IV therapy, post-surgical care, and elder support.</p>
+        </div>
+        <div class="features">
+          <div class="feat"><div class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8v10a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1z"/></svg></div><div>Doctor &amp; nurse home visits</div><div class="meta">Same-day</div></div>
+          <div class="feat"><div class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7z"/></svg></div><div>Physiotherapy &amp; rehab</div><div class="meta">At bedside</div></div>
+          <div class="feat"><div class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M7 12h10"/></svg></div><div>Elder &amp; post-surgical care</div><div class="meta">24/7 line</div></div>
+        </div>
+        <a class="cta">Request home care →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Map clinics -->
+<section class="b" style="padding-top: 60px;">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-eb">04 — Branches</div>
+        <h2 class="sec-title">Five locations.<br><em>One</em> standard of care<span class="lit">.</span></h2>
+      </div>
+      <div>
+        <p class="sec-desc">Whichever branch you visit, your records, your physician notes, and your imaging follow you — seamlessly.</p>
+      </div>
+    </div>
+
+    <div class="map-cine">
+      <div class="bg-map"></div>
+
+      <div class="panel">
+        <h4>Our branches</h4>
+        <div class="cl active">
+          <div class="top"><span class="n">Jeddah · Al Safa</span><span class="d">2.3 km</span></div>
+          <div class="info"><span>38 doctors</span><span>14 specialties</span><span>● Open</span></div>
+        </div>
+        <div class="cl">
+          <div class="top"><span class="n">Jeddah · Al Mohammadiyah</span><span class="d">4.7 km</span></div>
+          <div class="info"><span>42 doctors</span><span>12 specialties</span></div>
+        </div>
+        <div class="cl">
+          <div class="top"><span class="n">Jeddah · Al Khalidiyyah</span><span class="d">6.1 km</span></div>
+          <div class="info"><span>14 dentists</span><span>Dental center</span></div>
+        </div>
+        <div class="cl">
+          <div class="top"><span class="n">Jeddah · Tahlia</span><span class="d">8.2 km</span></div>
+          <div class="info"><span>32 doctors</span><span>11 specialties</span></div>
+        </div>
+        <div class="cl">
+          <div class="top"><span class="n">Riyadh · Al Sahafa</span><span class="d">~860 km</span></div>
+          <div class="info"><span>54 doctors</span><span>16 specialties</span></div>
+        </div>
+      </div>
+
+      <div class="pin" style="left: 55%; top: 45%;"><div class="ring"></div><div class="core"></div></div>
+      <div class="pin dim" style="left: 70%; top: 35%;"><div class="core"></div></div>
+      <div class="pin dim" style="left: 65%; top: 60%;"><div class="core"></div></div>
+      <div class="pin dim" style="left: 45%; top: 65%;"><div class="core"></div></div>
+      <div class="pin dim" style="left: 80%; top: 75%;"><div class="core"></div></div>
+
+      <div class="focused-card">
+        <div class="lab">// Featured branch</div>
+        <h4>Jeddah · Al Safa</h4>
+        <div class="stats">
+          <div><div class="v">38</div><div class="l">Doctors</div></div>
+          <div><div class="v">14</div><div class="l">Specialties</div></div>
+          <div><div class="v">10pm</div><div class="l">Open till</div></div>
+        </div>
+        <div class="actions"><a class="p">Book here →</a><a class="s">Get directions</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Doctors -->
+<section class="b" style="padding-top: 60px;">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-eb">05 — The people</div>
+        <h2 class="sec-title">180+ physicians,<br>each one <em>chosen</em><span class="lit">.</span></h2>
+      </div>
+      <div>
+        <p class="sec-desc">Browse profiles, read patient ratings, and book directly. Every credential, every language, every availability — transparent.</p>
+        <a class="sec-cta">Find your doctor →</a>
+      </div>
+    </div>
+
+    <div class="docs-cine">
+      <div class="dc">
+        <div class="ph" style="background-image: url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=400&q=70')"></div>
+        <span class="avail">Today</span>
+        <div class="info"><div class="nm">Dr. Hisham Al-Otaibi</div><div class="sp">Cardiology · 22y</div></div>
+      </div>
+      <div class="dc">
+        <div class="ph" style="background-image: url('https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=400&q=70')"></div>
+        <span class="avail">Today</span>
+        <div class="info"><div class="nm">Dr. Reem Al-Qahtani</div><div class="sp">Endocrinology · 14y</div></div>
+      </div>
+      <div class="dc">
+        <div class="ph" style="background-image: url('https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=70')"></div>
+        <span class="avail">Wed</span>
+        <div class="info"><div class="nm">Dr. Khalid Al-Subaie</div><div class="sp">Internal Med · 18y</div></div>
+      </div>
+      <div class="dc">
+        <div class="ph" style="background-image: url('https://images.unsplash.com/photo-1638202993928-7267aad84c31?auto=format&fit=crop&w=400&q=70')"></div>
+        <span class="avail">Tomorrow</span>
+        <div class="info"><div class="nm">Dr. Noor Bakhsh</div><div class="sp">OB-GYN · 11y</div></div>
+      </div>
+      <div class="dc">
+        <div class="ph" style="background-image: url('https://images.unsplash.com/photo-1612531822380-fc73a39a4bbe?auto=format&fit=crop&w=400&q=70')"></div>
+        <span class="avail">Thu</span>
+        <div class="info"><div class="nm">Dr. Yousef Al-Harbi</div><div class="sp">Orthopedics · 19y</div></div>
+      </div>
+      <div class="dc">
+        <div class="ph" style="background-image: url('https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=400&q=70')"></div>
+        <span class="avail">Wed</span>
+        <div class="info"><div class="nm">Dr. Layla Al-Rashed</div><div class="sp">Internal Med · 16y</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="b" style="padding-top: 60px;">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-eb">06 — Patient stories</div>
+        <h2 class="sec-title">In our patients'<br><em>own words</em><span class="lit">.</span></h2>
+      </div>
+      <div>
+        <p class="sec-desc">38,420 reviews. 4.8 average. We read every one.</p>
+      </div>
+    </div>
+
+    <div class="testi-grid">
+      <div class="testi-main">
+        <span class="quote-mark">"</span>
+        <blockquote>The booking was easy, the nurse was courteous, the waiting time was short, and I entered my appointment on time.</blockquote>
+        <div class="who">
+          <div class="ava"></div>
+          <div>
+            <div class="n">Fatimah A.</div>
+            <div class="r">Patient · Jeddah Al Safa · 5★ review</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-side">
+        <div class="ts-card">
+          <div class="stars">★★★★★</div>
+          <p>More than great. Classy treatment, fast service, cleanliness. May God grant you success.</p>
+          <div class="who"><div class="ava"></div><div><div class="n">Mohammed K.</div><div class="r">Riyadh Al Sahafa</div></div></div>
+        </div>
+        <div class="ts-card">
+          <div class="stars">★★★★★</div>
+          <p>Dr. Reem was patient, thorough, and explained every step of my diabetes plan. I'm grateful.</p>
+          <div class="who"><div class="ava"></div><div><div class="n">Norah S.</div><div class="r">Riyadh Al Sahafa</div></div></div>
+        </div>
+        <div class="ts-card">
+          <div class="stars">★★★★★</div>
+          <p>The home nurse came on time, was professional and warm. Made my recovery so much easier.</p>
+          <div class="who"><div class="ava"></div><div><div class="n">Abdullah M.</div><div class="r">Jeddah</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- App -->
+<section class="b" style="padding-top: 60px;">
+  <div class="wrap">
+    <div class="app-cine">
+      <div>
+        <div class="lbl">// My Clinic App</div>
+        <h3>The clinic in your <em>pocket</em>.</h3>
+        <p>Book appointments, video-consult with your doctor, view lab results and prescriptions, and message your care team. iOS and Android.</p>
+        <div class="stores">
+          <a class="store"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg><div><small>Download on the</small><b>App Store</b></div></a>
+          <a class="store"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M3.609 1.814 13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893 2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198 2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.196 12l2.502-2.491zM5.864 2.658 16.802 8.99l-2.302 2.302L5.864 2.658z"/></svg><div><small>Get it on</small><b>Google Play</b></div></a>
+        </div>
+      </div>
+      <div class="phone-vis">
+        <div class="phone-shell">
+          <div class="notch"></div>
+          <div class="scr">
+            <div class="greet">Good evening,</div>
+            <div class="name-l">Ahmed</div>
+            <div class="next-appt">
+              <div class="l">UPCOMING · TOMORROW</div>
+              <div class="d">Dr. Hisham · Cardiology</div>
+              <div class="w">9:30 AM · Al Safa</div>
+            </div>
+            <div class="pill-grid">
+              <div class="pg-card"><div class="num">12</div><div class="lbl">Lab results</div></div>
+              <div class="pg-card"><div class="num">3</div><div class="lbl">Prescriptions</div></div>
+              <div class="pg-card"><div class="num">5</div><div class="lbl">Upcoming visits</div></div>
+              <div class="pg-card"><div class="num">2</div><div class="lbl">Unread messages</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- News -->
+<section class="b" style="padding-top: 60px;">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-eb">07 — News &amp; announcements</div>
+        <h2 class="sec-title">Inside <em>My Clinic</em><span class="lit">.</span></h2>
+      </div>
+      <div>
+        <p class="sec-desc">Research, accreditations, partnerships — and the small milestones we're proud of.</p>
+        <a class="sec-cta">All stories →</a>
+      </div>
+    </div>
+
+    <div class="news-cine">
+      <div class="nc feat">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=900&q=70" onerror="this.style.display='none'"></div>
+        <div class="tg">Research · May 2026</div>
+        <h4>"Breaking Barriers in Healthcare" — innovation at our <em>First Annual</em> Scientific Conference</h4>
+        <div class="meta">8 min read · Dr. Layla Al-Rashed</div>
+      </div>
+      <div class="nc">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=700&q=70" onerror="this.style.display='none'"></div>
+        <div class="tg">Partnership · Apr 2026</div>
+        <h4>Healthcare Partner of <em>Jeddah United</em> Basketball.</h4>
+        <div class="meta">3 min read</div>
+      </div>
+      <div class="nc">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=700&q=70" onerror="this.style.display='none'"></div>
+        <div class="tg">Accreditation · Mar 2026</div>
+        <h4>CBAHI awards Al Safa <em>five-year</em> reaccreditation.</h4>
+        <div class="meta">2 min read</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Insurance -->
+<section class="b" style="padding: 80px 0 120px;">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom: 32px;">
+      <div>
+        <div class="sec-eb">08 — Insurance partners</div>
+        <h2 class="sec-title" style="font-size: 48px;">Direct billing with the Kingdom's <em>major insurers</em>.</h2>
+      </div>
+      <div>
+        <a class="sec-cta">Check your coverage →</a>
+      </div>
+    </div>
+    <div class="ins-row">
+      <div>Bupa Arabia</div>
+      <div>Tawuniya</div>
+      <div>MedGulf</div>
+      <div>Allianz</div>
+      <div>Walaa</div>
+      <div>Saudi Re</div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="fcine">
+  <div class="ftr-cine-grid">
+    <div>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <svg width="38" height="38" viewBox="0 0 40 40" fill="none"><g fill="#fff"><ellipse cx="20" cy="8" rx="4" ry="6"/><ellipse cx="32" cy="20" rx="4" ry="6" transform="rotate(90 32 20)"/><ellipse cx="20" cy="32" rx="4" ry="6"/><ellipse cx="8" cy="20" rx="4" ry="6" transform="rotate(90 8 20)"/><circle cx="20" cy="20" r="3"/></g></svg>
+        <div><div style="font-size: 20px; font-weight: 600;">My Clinic</div><div style="font-family: var(--ar); font-size: 12px; opacity: 0.6;">عيـــادتــي</div></div>
+      </div>
+      <p class="lede">Care, quietly <em>extraordinary</em>.</p>
+      <div style="font-size: 14px; color: rgba(255,255,255,.7); line-height: 1.7;">
+        920 022 811<br>
+        WhatsApp · 054 222 8111<br>
+        care@myclinic.sa
+      </div>
+    </div>
+    <div><h5>Company</h5><ul><li>About</li><li>Our branches</li><li>Services</li><li>Careers</li><li>News</li></ul></div>
+    <div><h5>Care</h5><ul><li>Find a doctor</li><li>Specialties</li><li>Programs</li><li>Home care</li><li>Telemedicine</li></ul></div>
+    <div><h5>Patients</h5><ul><li>Book appointment</li><li>Patient portal</li><li>Insurance</li><li>Lab results</li><li>Pharmacy</li></ul></div>
+    <div>
+      <h5>Get the app</h5>
+      <ul><li>App Store</li><li>Google Play</li></ul>
+      <h5 style="margin-top: 28px;">Hours</h5>
+      <ul><li>Sat–Thu · 8 AM – 10 PM</li><li>Fri · 5 PM – 9 PM</li></ul>
+    </div>
+  </div>
+  <div class="ftr-cine-bottom">
+    <span>© My Clinic 2026 · CBAHI accredited · Privacy · Terms</span>
+    <span>Facebook · Instagram · X · YouTube · LinkedIn</span>
+  </div>
+</footer>
+
+<div class="sticky-cta">
+  <span class="text"><span class="ind"></span>Next available at <b>Al Safa</b> · Today, 4:15 PM</span>
+  <button>Book in 60s <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></button>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1069 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>My Clinic — Telemedicine (Virtual Consultations)</title>
+<link rel="icon" type="image/png" href="/favclinic.png">
+<meta name="viewport" content="width=1440">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/shared.css">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<style>
+  :root {
+    --serif: 'Newsreader', Georgia, serif;
+    --sans: 'Gotham', 'Gotham SSm', 'Gotham A', 'Montserrat', system-ui, -apple-system, sans-serif;
+    --ar: 'Almarai', system-ui, sans-serif;
+    
+    /* Premium shadows */
+    --shadow-sm: 0 2px 8px rgba(11,31,61,.04), 0 1px 2px rgba(11,31,61,.02);
+    --shadow-md: 0 12px 36px -8px rgba(11,31,61,.12), 0 4px 12px -2px rgba(11,31,61,.04);
+    --shadow-lg: 0 32px 64px -16px rgba(11,31,61,.22), 0 16px 32px -12px rgba(11,31,61,.08);
+    
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  body { font-family: var(--sans); background: var(--cream); color: var(--ink); font-size: 16px; line-height: 1.6; letter-spacing: -0.005em; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 0 40px; }
+  .ar { font-family: var(--ar); }
+
+  /* Announcement strip */
+  .ribbon { background: var(--navy-deep); color: #fff; font-size: 13px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .ribbon .wrap { display: flex; justify-content: space-between; align-items: center; }
+  .ribbon-left { display: flex; gap: 24px; align-items: center; color: rgba(255,255,255,.78); }
+  .ribbon-left b { color: #fff; font-weight: 500; }
+  .ribbon-right { display: flex; gap: 20px; align-items: center; color: rgba(255,255,255,.78); }
+  .ribbon a { transition: color 0.2s ease; }
+  .ribbon a:hover { color: #fff; text-decoration: underline; }
+  .dot { width: 6px; height: 6px; background: #fff; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #fff; }
+
+  /* Nav */
+  .nav { position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 1px solid rgba(11,31,61,.08); box-shadow: 0 12px 36px rgba(11,31,61,.05); transition: padding 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; }
+  .nav .wrap { display: grid; grid-template-columns: minmax(220px, 1fr) auto minmax(210px, 1fr); align-items: center; padding: 22px 40px; transition: padding 0.3s ease; }
+  .nav.scrolled { background: #fff; box-shadow: 0 10px 30px rgba(11,31,61,0.07); }
+  .nav.scrolled .wrap { padding: 14px 40px; }
+  
+  .logo { display: flex; align-items: center; gap: 14px; cursor: pointer; }
+  .logo-mark { width: 36px; height: 36px; transition: transform 0.3s ease; }
+  .logo:hover .logo-mark { transform: rotate(15deg) scale(1.05); }
+  .logo-txt { line-height: 1.1; }
+  .logo-txt .en { font-family: var(--serif); font-size: 23px; font-weight: 500; letter-spacing: -0.02em; color: var(--navy); }
+  .logo-txt .ar { font-size: 11px; color: var(--mute); letter-spacing: 0.05em; margin-top: 3px; font-weight: 500; }
+  
+  .nav-links { display: flex; gap: 36px; justify-content: center; }
+  .nav-links a { font-size: 14px; color: var(--ink-2); font-weight: 500; position: relative; padding: 8px 0; transition: color 0.25s ease; }
+  .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background: var(--navy); transition: width 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), left 0.25s cubic-bezier(0.25, 0.8, 0.25, 1); }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-links a:hover::after { width: 100%; left: 0; }
+  .nav-links a.active { color: var(--navy); }
+  .nav-links a.active::after { width: 100%; left: 0; }
+  
+  .nav-right { display: flex; gap: 14px; justify-content: flex-end; align-items: center; }
+  
+  .btn { font-size: 14px; font-weight: 600; padding: 11px 24px; border-radius: 999px; transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease; border: 1px solid transparent; display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; }
+  .btn.primary { background: var(--navy); color: #fff; box-shadow: 0 4px 14px rgba(0, 56, 104, 0.15); }
+  .btn.primary:hover { background: var(--navy-deep); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0, 56, 104, 0.2); }
+  
+  .lang-pill { font-size: 12px; color: var(--mute); padding: 4px; border-radius: 999px; background: #f4f7fb; border: 1px solid rgba(11,31,61,.1); display: inline-flex; align-items: center; gap: 3px; box-shadow: inset 0 1px 0 rgba(255,255,255,.75); }
+  .lang-pill::before { content: ''; width: 16px; height: 16px; margin: 0 5px 0 6px; background: currentColor; opacity: .68; -webkit-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.93 9h-3.02a15.7 15.7 0 0 0-1.16-5.04A8.03 8.03 0 0 1 18.93 11ZM12 4.04c.83 1.2 1.62 3.38 1.86 6.96H10.14C10.38 7.42 11.17 5.24 12 4.04ZM4.26 13h3.79c.12 1.91.43 3.65.9 5.05A8.02 8.02 0 0 1 4.26 13Zm3.79-2H4.26a8.02 8.02 0 0 1 4.69-5.05A17.1 17.1 0 0 0 8.05 11ZM12 19.96c-.83-1.2-1.62-3.38-1.86-6.96h3.72c-.24 3.58-1.03 5.76-1.86 6.96Zm3.05-1.91c.47-1.4.78-3.14.9-5.05h3.79a8.02 8.02 0 0 1-4.69 5.05ZM15.95 11a17.1 17.1 0 0 0-.9-5.05A8.02 8.02 0 0 1 19.74 11h-3.79Z'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.93 9h-3.02a15.7 15.7 0 0 0-1.16-5.04A8.03 8.03 0 0 1 18.93 11ZM12 4.04c.83 1.2 1.62 3.38 1.86 6.96H10.14C10.38 7.42 11.17 5.24 12 4.04ZM4.26 13h3.79c.12 1.91.43 3.65.9 5.05A8.02 8.02 0 0 1 4.26 13Zm3.79-2H4.26a8.02 8.02 0 0 1 4.69-5.05A17.1 17.1 0 0 0 8.05 11ZM12 19.96c-.83-1.2-1.62-3.38-1.86-6.96h3.72c-.24 3.58-1.03 5.76-1.86 6.96Zm3.05-1.91c.47-1.4.78-3.14.9-5.05h3.79a8.02 8.02 0 0 1-4.69 5.05ZM15.95 11a17.1 17.1 0 0 0-.9-5.05A8.02 8.02 0 0 1 19.74 11h-3.79Z'/%3E%3C/svg%3E") center / contain no-repeat; }
+  .lang-pill button { min-width: 42px; border: 0; background: transparent; color: var(--mute); padding: 9px 10px; border-radius: 999px; font: inherit; font-weight: 600; cursor: pointer; transition: color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease; }
+  .lang-pill button:hover { color: var(--navy); }
+  .lang-pill button.active { color: var(--navy); background: #fff; box-shadow: 0 3px 12px rgba(11,31,61,.1); }
+
+  /* Subpage Hero */
+  .subpage-hero {
+    background: var(--navy-ink);
+    color: #fff;
+    padding: 120px 0 130px;
+    position: relative;
+    overflow: hidden;
+  }
+  .subpage-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=2000&q=80');
+    background-size: cover;
+    background-position: center 25%;
+    opacity: 0.22;
+    z-index: 1;
+  }
+  .subpage-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0, 29, 56, 0.96) 0%, rgba(0, 56, 104, 0.88) 100%);
+    z-index: 1;
+  }
+  .subpage-hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 860px;
+    margin: 0;
+  }
+  .subpage-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #fff;
+    opacity: 0.85;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+  .subpage-title {
+    font-family: var(--serif);
+    font-size: 56px;
+    line-height: 1.15;
+    font-weight: 400;
+    margin: 0 0 20px;
+    letter-spacing: -0.02em;
+  }
+  .subpage-title em {
+    font-style: italic;
+    color: rgba(255,255,255,0.92);
+    font-weight: 300;
+  }
+  .subpage-desc {
+    font-size: 20px;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.82);
+    font-weight: 300;
+    margin: 0 0 40px;
+  }
+  .hero-buttons {
+    display: flex;
+    gap: 16px;
+  }
+  .btn.white {
+    background: #fff;
+    color: var(--navy);
+  }
+  .btn.white:hover {
+    background: #e2eaf4;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(255,255,255,0.15);
+  }
+  .btn.outline {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.4);
+    color: #fff;
+  }
+  .btn.outline:hover {
+    border-color: #fff;
+    background: rgba(255,255,255,0.06);
+    transform: translateY(-1px);
+  }
+
+  /* Main content container */
+  .telemed-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 90px 40px 120px;
+  }
+
+  /* Section Header */
+  .section-title-wrap {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--navy);
+    margin-bottom: 12px;
+    display: block;
+  }
+  .section-header-title {
+    font-family: var(--serif);
+    font-size: 38px;
+    color: var(--navy-ink);
+    margin: 0 auto 16px;
+    font-weight: 400;
+    max-width: 720px;
+  }
+
+  /* Grid benefits */
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-bottom: 100px;
+  }
+  .benefit-card {
+    background: #fff;
+    border: 1px solid var(--line-cool);
+    border-radius: var(--radius-md);
+    padding: 40px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .benefit-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--navy);
+    box-shadow: var(--shadow-lg);
+  }
+  .benefit-icon-box {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    background: var(--cream-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--navy);
+    margin-bottom: 24px;
+    border: 1px solid rgba(14,58,111,.06);
+  }
+  .benefit-card h3 {
+    font-family: var(--serif);
+    font-size: 23px;
+    color: var(--navy-ink);
+    margin: 0 0 12px;
+    font-weight: 500;
+  }
+  .benefit-card p {
+    font-size: 15px;
+    color: var(--mute);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* Timeline section styling */
+  .workflow-section {
+    background: #fff;
+    border: 1px solid var(--line-cool);
+    border-radius: var(--radius-lg);
+    padding: 64px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 100px;
+  }
+  .workflow-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    position: relative;
+  }
+  /* Horizontal divider line */
+  .workflow-grid::before {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--line-cool) 0%, var(--navy) 50%, var(--line-cool) 100%);
+    z-index: 1;
+  }
+  .workflow-step {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  .step-num {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid var(--navy);
+    color: var(--navy);
+    font-size: 18px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    box-shadow: 0 0 0 6px #fff;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  }
+  .workflow-step:hover .step-num {
+    transform: scale(1.1);
+    background: var(--navy);
+    color: #fff;
+  }
+  .workflow-step h4 {
+    font-family: var(--serif);
+    font-size: 21px;
+    color: var(--navy-ink);
+    margin: 0 0 8px;
+    font-weight: 500;
+  }
+  .workflow-step p {
+    font-size: 14.5px;
+    color: var(--mute);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Doctors section */
+  .specialists-section {
+    border-top: 1px solid var(--line-cool);
+    padding: 90px 0 20px;
+  }
+  .doctors-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 48px;
+  }
+  .doc-card {
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--line-cool);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    display: flex;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.4s ease;
+  }
+  .doc-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--navy);
+  }
+  .doc-img-wrapper {
+    width: 200px;
+    position: relative;
+    background: var(--navy-ink);
+    overflow: hidden;
+  }
+  .doc-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+  .doc-card:hover .doc-img-wrapper img {
+    transform: scale(1.05);
+  }
+  .experience-badge {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--navy-deep);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(11,31,61,0.08);
+  }
+  .doc-body {
+    padding: 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .doc-body h4 {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--navy-ink);
+    margin: 0 0 4px;
+  }
+  .doc-title-row {
+    font-size: 13.5px;
+    color: var(--navy);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .doc-rating-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13.5px;
+    color: var(--mute);
+    margin-bottom: 16px;
+  }
+  .star-badge {
+    background: #fffdf5;
+    border: 1px solid #fceca1;
+    color: #b25e00;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+  }
+  .doc-video-badge {
+    font-size: 12px;
+    color: #10B981;
+    font-weight: 600;
+    background: #ECFDF5;
+    border: 1px solid #A7F3D0;
+    padding: 2px 8px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 20px;
+    align-self: flex-start;
+  }
+  .doc-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+  }
+  .doc-actions a {
+    flex: 1;
+    text-align: center;
+    padding: 8px 12px;
+    font-size: 12.5px;
+    font-weight: 600;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: var(--transition);
+  }
+  .doc-actions .profile-btn {
+    background: #ffffff;
+    color: var(--navy);
+    border: 1px solid var(--line-cool);
+  }
+  .doc-actions .profile-btn:hover {
+    background: var(--cream-soft);
+    border-color: var(--navy);
+  }
+  .doc-actions .book-btn {
+    background: var(--navy);
+    color: #fff;
+  }
+  .doc-actions .book-btn:hover {
+    background: var(--navy-deep);
+  }
+
+  /* FAQ Accordion Styling */
+  .faq-section {
+    border-top: 1px solid var(--line-cool);
+    padding: 90px 0 20px;
+    margin-bottom: 40px;
+  }
+  .faq-list {
+    max-width: 800px;
+    margin: 48px auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .faq-item {
+    background: #fff;
+    border: 1px solid var(--line-cool);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .faq-item.active {
+    border-color: var(--navy);
+    box-shadow: var(--shadow-md);
+  }
+  .faq-trigger {
+    width: 100%;
+    padding: 24px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: none;
+    border: 0;
+    text-align: left;
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--navy-ink);
+    cursor: pointer;
+  }
+  .faq-chevron {
+    width: 20px;
+    height: 20px;
+    color: var(--navy);
+    transition: transform 0.3s ease;
+  }
+  .faq-item.active .faq-chevron {
+    transform: rotate(180deg);
+  }
+  .faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+  .faq-content-inner {
+    padding: 0 32px 28px;
+    font-size: 15px;
+    color: var(--mute);
+    line-height: 1.65;
+  }
+
+  /* CTA Banner styling */
+  .wide-cta-banner {
+    background: linear-gradient(135deg, var(--navy-ink) 0%, var(--navy-deep) 100%);
+    color: #fff;
+    border-radius: var(--radius-md);
+    padding: 64px;
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    margin: 80px 0 90px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .wide-cta-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 80% 20%, rgba(0, 56, 104, 0.4) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .wide-cta-banner h3 {
+    font-family: var(--serif);
+    font-size: 40px;
+    font-weight: 400;
+    margin: 0 0 16px;
+    letter-spacing: -0.015em;
+  }
+  .wide-cta-banner p {
+    font-size: 16.5px;
+    color: rgba(255,255,255,0.8);
+    max-width: 720px;
+    margin: 0 auto 36px;
+    line-height: 1.65;
+  }
+  .wide-cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  .btn.whatsapp-wide {
+    background: #10B981;
+    color: #fff;
+  }
+  .btn.whatsapp-wide:hover {
+    background: #059669;
+    box-shadow: 0 6px 20px rgba(16,185,129,0.25);
+    transform: translateY(-1px);
+  }
+  .btn.primary-wide {
+    background: #fff;
+    color: var(--navy);
+  }
+  .btn.primary-wide:hover {
+    background: #e1e8f1;
+    box-shadow: 0 6px 20px rgba(255,255,255,0.15);
+    transform: translateY(-1px);
+  }
+
+  /* Sticky CTA */
+  .sticky-cta { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); z-index: 40; background: var(--navy-deep); color: #fff; padding: 12px 28px; border-radius: 999px; box-shadow: 0 20px 48px -10px rgba(0, 29, 56, 0.35); display: flex; align-items: center; gap: 24px; border: 1px solid rgba(255,255,255,0.08); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none; }
+  .sticky-cta.active { transform: translateX(-50%) translateY(0); pointer-events: auto; }
+  @media (max-width: 768px) {
+    .sticky-cta { width: calc(100% - 32px); justify-content: space-between; padding: 14px 20px; bottom: 16px; font-size: 13px; gap: 12px; }
+  }
+  .sticky-cta .text { font-size: 13.5px; color: rgba(255,255,255,.75); font-weight: 500; }
+  .sticky-cta a { font-size: 13.5px; font-weight: 600; padding: 9px 18px; background: #fff; color: var(--navy) !important; border-radius: 999px; white-space: nowrap; transition: background-color 0.2s ease, transform 0.2s ease; }
+  .sticky-cta a:hover { background: #e1e8f1; transform: translateY(-0.5px); }
+
+  /* Footer styles */
+  footer { background: #fff; border-top: 1px solid var(--line); padding: 100px 0 40px; }
+  .foot-grid { display: grid; grid-template-columns: 1.5fr repeat(4, 1fr); gap: 48px; margin-bottom: 80px; }
+  @media (max-width: 1024px) {
+    .foot-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  }
+  @media (max-width: 600px) {
+    .foot-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+  footer .logo { margin-bottom: 24px; }
+  footer .lede { color: var(--mute); font-size: 14.5px; line-height: 1.6; margin: 0 0 24px; max-width: 320px; }
+  footer .contact { font-size: 15px; color: var(--ink-2); line-height: 1.5; }
+  footer .contact strong { font-size: 19px; color: var(--navy); display: inline-block; margin-bottom: 4px; }
+  footer h5 { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); margin: 0 0 20px; font-weight: 700; }
+  footer ul { list-style: none; padding: 0; margin: 0; }
+  footer ul li { margin-bottom: 12px; font-size: 14.5px; }
+  footer ul li a { color: var(--mute); transition: color 0.2s ease; }
+  footer ul li a:hover { color: var(--navy); }
+  
+  .foot-bottom { border-top: 1px solid var(--line-cool); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; color: var(--mute); font-size: 13.5px; }
+  @media (max-width: 768px) {
+    .foot-bottom { flex-direction: column; gap: 16px; text-align: center; }
+  }
+  .foot-bottom .socials { display: flex; gap: 20px; }
+  .foot-bottom .socials a { transition: color 0.2s ease; }
+  .foot-bottom .socials a:hover { color: var(--navy); }
+
+  /* Responsive Breakpoints */
+  @media (max-width: 900px) {
+    .benefits-grid { grid-template-columns: 1fr; }
+    .doctors-grid { grid-template-columns: 1fr; }
+    .workflow-grid { grid-template-columns: 1fr; gap: 48px; }
+    .workflow-grid::before { display: none; }
+  }
+  @media (max-width: 768px) {
+    .telemed-container { padding: 40px 20px 80px; }
+    .subpage-title { font-size: 38px; }
+    .subpage-hero { padding: 80px 0 90px; }
+    .nav .wrap { padding: 18px 24px; grid-template-columns: auto 1fr; }
+    .nav-links { display: none; }
+    .nav.scrolled .wrap { padding: 12px 24px; }
+    .workflow-section { padding: 32px; }
+    .wide-cta-banner { padding: 40px 24px; }
+    .wide-cta-buttons { flex-direction: column; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ribbon -->
+<div class="ribbon">
+  <div class="wrap">
+    <div class="ribbon-left">
+      <span><span class="dot"></span> &nbsp;<b>Now open</b> · Sat–Thu 8 AM – 10 PM &nbsp;·&nbsp; Fri 5 PM – 9 PM</span>
+      <span>5 branches · Jeddah, Riyadh</span>
+    </div>
+    <div class="ribbon-right">
+      <a href="/index.html#contact">Contact Us</a>
+      <a href="#">Careers</a>
+      <a href="https://wa.me/966542228111" target="_blank">WhatsApp · 0542228111</a>
+      <a href="tel:920022811"><b>920022811</b></a>
+    </div>
+  </div>
+</div>
+
+<!-- nav -->
+<nav class="nav">
+  <div class="wrap">
+    <a href="/index.html" class="logo">
+      <img class="brand-logo" src="/logo.svg" alt="My Clinic">
+    </a>
+    <div class="nav-links">
+      <a href="/find-a-doctor.html">Find a Doctor</a>
+      <a href="/specialties.html">Specialties</a>
+      <a href="/programs.html">Programs</a>
+      <a href="/telemedicine.html" class="active">Telemedicine</a>
+      <a href="/home-healthcare.html">Home Healthcare</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-pill" role="group" aria-label="Language switcher">
+        <button type="button" class="active" aria-pressed="true">EN</button>
+        <button type="button" aria-pressed="false">AR</button>
+      </div>
+      <a href="/find-a-doctor.html" class="btn primary">Book Now</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <!-- Hero Section -->
+  <header class="subpage-hero">
+    <div class="wrap">
+      <div class="subpage-hero-inner">
+        <div class="subpage-eyebrow">Digital Healthcare Delivery</div>
+        <h1 class="subpage-title">Virtual Care. <em>Real doctors.</em></h1>
+        <p class="subpage-desc">Connect with our board-certified medical and surgical consultants from the comfort of your home, office, or while traveling. High-definition video consultations, digital prescriptions, and continuous care coordination in just a few taps.</p>
+        <div class="hero-buttons">
+          <a href="/find-a-doctor.html?telemedicine=true" class="btn white">Book Virtual Consultation</a>
+          <a href="#howItWorks" class="btn outline">See How It Works</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="telemed-container">
+    
+    <!-- Benefits Grid -->
+    <section>
+      <div class="section-title-wrap">
+        <span class="section-eyebrow">Virtual Benefits</span>
+        <h2 class="section-header-title">Clinical Care Redefined for <em>Modern Life</em></h2>
+      </div>
+      
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <h3>Skip the Commute &amp; Waiting</h3>
+          <p>No traffic, no parking hassles, and no clinic waiting rooms. Complete your regular specialist follow-ups and diagnostic reviews online in a peaceful environment.</p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h3>Secure &amp; Encrypted</h3>
+          <p>Your privacy is absolute. Our telemedicine platform runs on end-to-end encrypted video architecture and complies with strict local regulatory guidelines for digital health records.</p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.5 22a9 9 0 1 1 9-9h-9v9z"/><path d="M22 10.5A9 9 0 0 0 13.5 2V10.5H22z"/></svg>
+          </div>
+          <h3>Digital Prescriptions</h3>
+          <p>Get electronic prescriptions (e-prescriptions) sent straight to your phone and shared with our pharmacy partners instantly for delivery or nearby pick-up.</p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+          </div>
+          <h3>Seamless Diagnostics Continuity</h3>
+          <p>If your virtual consultation requires a physical laboratory assessment or diagnostic scan, your doctor instantly places the referral order. Visit any of our branches anytime for swift tests.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="howItWorks" class="workflow-section">
+      <div class="section-title-wrap">
+        <span class="section-eyebrow">Three Simple Steps</span>
+        <h2 class="section-header-title">How Your Virtual <em>Visit Works</em></h2>
+      </div>
+
+      <div class="workflow-grid">
+        <div class="workflow-step">
+          <div class="step-num">1</div>
+          <h4>Choose Specialist</h4>
+          <p>Browse our directory of board-certified consultants. Filter for specialties that offer telemedicine video calls.</p>
+        </div>
+
+        <div class="workflow-step">
+          <div class="step-num">2</div>
+          <h4>Confirm Your Slot</h4>
+          <p>Pick a convenient virtual consultation hour, complete the registration, and confirm your booking online.</p>
+        </div>
+
+        <div class="workflow-step">
+          <div class="step-num">3</div>
+          <h4>Connect via Video</h4>
+          <p>Tap the secure video consultation link in your SMS confirmation on any device to instantly join your doctor.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dynamic Care Specialists Section -->
+    <section class="specialists-section">
+      <div class="section-title-wrap">
+        <span class="section-eyebrow">Virtual Specialists</span>
+        <h2 class="section-header-title">Meet Our <em>Telemedicine</em> Doctors</h2>
+        <p style="color: var(--mute); max-width: 600px; margin: 8px auto 0; font-size: 15px;">Book a remote consultation with our experienced clinical department consultants.</p>
+      </div>
+
+      <div class="doctors-grid" id="telemedDoctorsGrid">
+        <!-- Dynically loaded from JS doctors array -->
+      </div>
+    </section>
+
+    <!-- Interactive FAQ Section -->
+    <section class="faq-section">
+      <div class="section-title-wrap">
+        <span class="section-eyebrow">FAQ</span>
+        <h2 class="section-header-title">Common Questions About <em>Virtual Consultations</em></h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-trigger">
+            <span>What technical devices do I need?</span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-content">
+            <div class="faq-content-inner">
+              Any standard smartphone, tablet, or computer equipped with a functional camera, microphone, and stable internet connection is fully supported. No application downloads are required; the secure session launches directly inside your web browser.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger">
+            <span>Are virtual consults covered by medical insurance?</span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-content">
+            <div class="faq-content-inner">
+              Yes, many corporate and private medical insurance policies within the Kingdom cover virtual telemedicine consultations identically to standard physical clinic consults. You can verify your specific insurance coverage network during checkout or by contacting our 24/7 billing support line.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger">
+            <span>How do I receive prescribed medications?</span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-content">
+            <div class="faq-content-inner">
+              Following your session, the consultant will generate a digital prescription sent straight to your phone via SMS. You can redeem this electronic barcode at any major pharmacy branch across Saudi Arabia, or coordinate home delivery via our clinical pharmacy team.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger">
+            <span>What if the doctor requests a physical lab or blood test?</span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-content">
+            <div class="faq-content-inner">
+              If diagnostic laboratory or imaging tests are required, your physician will issue an electronic order. You can walk into any of our 5 physical branches in Jeddah or Riyadh without requiring an additional scheduling delay to complete your laboratory screens. The results will upload automatically to your doctor.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom CTA Banner -->
+    <div class="wide-cta-banner">
+      <h3>Ready to Meet Your Doctor Online?</h3>
+      <p>Schedule a secure digital consultation in under a minute. Connect with our leading board-certified specialists, review diagnostic reports, and manage your health seamlessly from anywhere.</p>
+      <div class="wide-cta-buttons">
+        <a href="/find-a-doctor.html?telemedicine=true" class="btn primary-wide">Book Video Appointment</a>
+        <a href="https://wa.me/966542228111?text=Hi%2C%20I'm%20inquiring%20about%20booking%20a%20Telemedicine%20consultation." target="_blank" class="btn whatsapp-wide">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px; display: inline-block; vertical-align: middle;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Inquire via WhatsApp
+        </a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">
+          <img class="brand-logo" src="/logo.svg" alt="My Clinic">
+        </div>
+        <p class="lede">My Clinic is your partner in health and wellness. With a focus on prevention and early intervention, our team of experts is committed to helping you stay healthy and live your best life.</p>
+        <div class="contact">
+          <strong>920022811</strong><br>
+          WhatsApp · 0542228111
+        </div>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul><li><a href="#">About My Clinic</a></li><li><a href="#">Our Sites</a></li><li><a href="#">Services</a></li></ul>
+        <h5 style="margin-top: 28px;">Useful Links</h5>
+        <ul><li><a href="#">Contact Us</a></li><li><a href="#">Careers</a></li><li><a href="#">Privacy Policy</a></li></ul>
+      </div>
+      <div>
+        <h5>Care</h5>
+        <ul><li><a href="/find-a-doctor.html">Find a Doctor</a></li><li><a href="/specialties.html">Specialties</a></li><li><a href="/programs.html">Programs</a></li><li><a href="/telemedicine.html">Telemedicine</a></li><li><a href="/home-healthcare.html">Home Healthcare</a></li></ul>
+      </div>
+      <div>
+        <h5>Call Center Working Hours</h5>
+        <ul><li>Saturday – Thursday · 8 AM – 10 PM</li><li>Friday · 5 PM – 9 PM</li></ul>
+        <h5 style="margin-top: 28px;">Our Branches</h5>
+        <ul><li>Jeddah · Al Mohammadiyah</li><li>Jeddah · Al Safa</li><li>Jeddah · Al Khalidiyyah Dental</li><li>Jeddah · Tahlia</li><li>Riyadh · Al Sahafa</li></ul>
+      </div>
+      <div>
+        <h5>Get the app</h5>
+        <ul><li><a href="#">App Store</a></li><li><a href="#">Google Play</a></li></ul>
+        <h5 style="margin-top: 28px;">Book Now</h5>
+        <ul><li><a href="/find-a-doctor.html">Book an appointment</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© My Clinic 2026 · All rights reserved · CBAHI Accredited</span>
+      <div class="socials"><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">X</a><a href="#">YouTube</a><a href="#">LinkedIn</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- sticky CTA -->
+<div class="sticky-cta" id="stickyCta">
+  <span class="text">Next virtual consult available <b style="color: #fff;">Today, 3:30 PM</b></span>
+  <a href="/find-a-doctor.html?telemedicine=true">Book Video Call →</a>
+</div>
+
+<script>
+// Mock Doctor Database (for virtual doctor filter highlights)
+const doctors = [
+  {
+    id: 1,
+    name: "Dr. Hisham Al-Otaibi",
+    specialty: "Cardiology",
+    title: "Consultant Cardiologist",
+    experience: 22,
+    branch: "Jeddah Al Safa",
+    rating: 4.9,
+    reviews: 142,
+    telemed: true,
+    img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=500&q=70"
+  },
+  {
+    id: 2,
+    name: "Dr. Reem Al-Qahtani",
+    specialty: "Endocrinology",
+    title: "Consultant Endocrinology & Diabetes",
+    experience: 14,
+    branch: "Riyadh Al Sahafa",
+    rating: 4.8,
+    reviews: 98,
+    telemed: true,
+    img: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=500&q=70"
+  },
+  {
+    id: 6,
+    name: "Dr. Sara Al-Faris",
+    specialty: "Pediatrics",
+    title: "Consultant Pediatrician",
+    experience: 9,
+    branch: "Riyadh Al Sahafa",
+    rating: 4.9,
+    reviews: 156,
+    telemed: true,
+    img: "https://images.unsplash.com/photo-1651008376811-b90baee60c1f?auto=format&fit=crop&w=500&q=70"
+  },
+  {
+    id: 7,
+    name: "Dr. Layla Mansour",
+    specialty: "Dermatology",
+    title: "Consultant Dermatologist",
+    experience: 12,
+    branch: "Jeddah Tahlia",
+    rating: 4.9,
+    reviews: 104,
+    telemed: true,
+    img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=500&q=70"
+  }
+];
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Navigation scrolling animation
+  const nav = document.querySelector('.nav');
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    }, { passive: true });
+  }
+
+  // Sticky CTA slide in
+  const stickyCta = document.getElementById('stickyCta');
+  if (stickyCta) {
+    setTimeout(() => {
+      stickyCta.classList.add('active');
+    }, 1500);
+  }
+
+  // Language switcher
+  const langPill = document.querySelector('.lang-pill');
+  if (langPill) {
+    langPill.addEventListener('click', (event) => {
+      const target = event.target.closest('button');
+      if (!target) return;
+      langPill.querySelectorAll('button').forEach((button) => {
+        const active = button === target;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+    });
+  }
+
+  // Hydrate Doctors Grid
+  const telemedDoctorsGrid = document.getElementById('telemedDoctorsGrid');
+  if (telemedDoctorsGrid) {
+    telemedDoctorsGrid.innerHTML = '';
+    doctors.forEach(doc => {
+      const cardHtml = `
+        <div class="doc-card">
+          <div class="doc-img-wrapper">
+            <span class="experience-badge">${doc.experience} Years Exp</span>
+            <img src="${doc.img}" alt="${doc.name}" onerror="this.style.display='none'">
+          </div>
+          <div class="doc-body">
+            <h4>${doc.name}</h4>
+            <div class="doc-title-row">${doc.title}</div>
+            <div class="doc-rating-row">
+              <span class="star-badge">★ ${doc.rating}</span>
+              <span>(${doc.reviews} reviews)</span>
+            </div>
+            <div class="doc-video-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+              Available for Video Consult
+            </div>
+            <div class="doc-actions">
+              <a href="/doctor-details.html?id=${doc.id}" class="profile-btn">View Profile</a>
+              <a href="/find-a-doctor.html?specialty=${encodeURIComponent(doc.specialty)}&telemed=true" class="book-btn">Book Video Call</a>
+            </div>
+          </div>
+        </div>
+      `;
+      const div = document.createElement('div');
+      div.innerHTML = cardHtml;
+      telemedDoctorsGrid.appendChild(div.firstElementChild);
+    });
+  }
+
+  // FAQ Accordion Toggle Logic
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(item => {
+    const trigger = item.querySelector('.faq-trigger');
+    const content = item.querySelector('.faq-content');
+    
+    trigger.addEventListener('click', () => {
+      const isActive = item.classList.contains('active');
+      
+      // Close other items
+      faqItems.forEach(otherItem => {
+        otherItem.classList.remove('active');
+        otherItem.querySelector('.faq-content').style.maxHeight = null;
+      });
+      
+      if (!isActive) {
+        item.classList.add('active');
+        content.style.maxHeight = content.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // GSAP Entrance Animations
+  gsap.from(".subpage-hero-inner", {
+    opacity: 0,
+    y: 30,
+    duration: 0.7,
+    ease: "power2.out"
+  });
+  
+  gsap.from(".benefit-card", {
+    opacity: 0,
+    y: 30,
+    duration: 0.6,
+    stagger: 0.15,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: ".benefits-grid",
+      start: "top 80%"
+    }
+  });
+
+  gsap.from(".workflow-step", {
+    opacity: 0,
+    y: 20,
+    duration: 0.6,
+    stagger: 0.15,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: ".workflow-grid",
+      start: "top 85%"
+    }
+  });
+});
+</script>
+
+<script src="/assets/language-switcher.js"></script>
+</body>
+</html>

@@ -1,0 +1,1065 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>My Clinic — Clinical Specialties</title>
+<link rel="icon" type="image/png" href="/favclinic.png">
+<meta name="description" content="Explore our wide range of clinical specialties and family medicine departments across Jeddah and Riyadh branches.">
+<meta name="viewport" content="width=1440">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/shared.css">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<style>
+  :root {
+    --serif: 'Newsreader', Georgia, serif;
+    --sans: 'Gotham', 'Gotham SSm', 'Gotham A', 'Montserrat', system-ui, -apple-system, sans-serif;
+    --ar: 'Almarai', system-ui, sans-serif;
+    
+    /* Premium design tokens */
+    --shadow-sm: 0 2px 8px rgba(11,31,61,.04), 0 1px 2px rgba(11,31,61,.02);
+    --shadow-md: 0 12px 36px -8px rgba(11,31,61,.12), 0 4px 12px -2px rgba(11,31,61,.04);
+    --shadow-lg: 0 32px 64px -16px rgba(11,31,61,.22), 0 16px 32px -12px rgba(11,31,61,.08);
+    
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  body { font-family: var(--sans); background: var(--cream); color: var(--ink); font-size: 16px; line-height: 1.6; letter-spacing: -0.005em; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 0 40px; }
+  .ar { font-family: var(--ar); }
+
+  /* Announcement strip */
+  .ribbon { background: var(--navy-deep); color: #fff; font-size: 13px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .ribbon .wrap { display: flex; justify-content: space-between; align-items: center; }
+  .ribbon-left { display: flex; gap: 24px; align-items: center; color: rgba(255,255,255,.78); }
+  .ribbon-left b { color: #fff; font-weight: 500; }
+  .ribbon-right { display: flex; gap: 20px; align-items: center; color: rgba(255,255,255,.78); }
+  .ribbon a { transition: color 0.2s ease; }
+  .ribbon a:hover { color: #fff; text-decoration: underline; }
+  .dot { width: 6px; height: 6px; background: #fff; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #fff; }
+
+  /* Nav */
+  .nav { position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 1px solid rgba(11,31,61,.08); box-shadow: 0 12px 36px rgba(11,31,61,.05); transition: padding 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; }
+  .nav .wrap { display: grid; grid-template-columns: minmax(220px, 1fr) auto minmax(210px, 1fr); align-items: center; padding: 22px 40px; transition: padding 0.3s ease; }
+  .nav.scrolled { background: #fff; box-shadow: 0 10px 30px rgba(11,31,61,0.07); }
+  .nav.scrolled .wrap { padding: 14px 40px; }
+  
+  .logo { display: flex; align-items: center; gap: 14px; cursor: pointer; }
+  .logo-mark { width: 36px; height: 36px; transition: transform 0.3s ease; }
+  .logo:hover .logo-mark { transform: rotate(15deg) scale(1.05); }
+  .logo-txt { line-height: 1.1; }
+  .logo-txt .en { font-family: var(--serif); font-size: 23px; font-weight: 500; letter-spacing: -0.02em; color: var(--navy); }
+  .logo-txt .ar { font-size: 11px; color: var(--mute); letter-spacing: 0.05em; margin-top: 3px; font-weight: 500; }
+  
+  .nav-links { display: flex; gap: 36px; justify-content: center; }
+  .nav-links a { font-size: 14px; color: var(--ink-2); font-weight: 500; position: relative; padding: 8px 0; transition: color 0.25s ease; }
+  .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background: var(--navy); transition: width 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), left 0.25s cubic-bezier(0.25, 0.8, 0.25, 1); }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-links a:hover::after { width: 100%; left: 0; }
+  .nav-links a.active { color: var(--navy); }
+  .nav-links a.active::after { width: 100%; left: 0; }
+  
+  .nav-right { display: flex; gap: 14px; justify-content: flex-end; align-items: center; }
+  
+  .btn { font-size: 14px; font-weight: 600; padding: 11px 24px; border-radius: 999px; transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease; border: 1px solid transparent; display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; }
+  .btn.primary { background: var(--navy); color: #fff; box-shadow: 0 4px 14px rgba(0, 56, 104, 0.15); }
+  .btn.primary:hover { background: var(--navy-deep); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0, 56, 104, 0.2); }
+  .btn.primary:active { transform: translateY(0); }
+  
+  .lang-pill { font-size: 12px; color: var(--mute); padding: 4px; border-radius: 999px; background: #f4f7fb; border: 1px solid rgba(11,31,61,.1); display: inline-flex; align-items: center; gap: 3px; box-shadow: inset 0 1px 0 rgba(255,255,255,.75); }
+  .lang-pill::before { content: ''; width: 16px; height: 16px; margin: 0 5px 0 6px; background: currentColor; opacity: .68; -webkit-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.93 9h-3.02a15.7 15.7 0 0 0-1.16-5.04A8.03 8.03 0 0 1 18.93 11ZM12 4.04c.83 1.2 1.62 3.38 1.86 6.96H10.14C10.38 7.42 11.17 5.24 12 4.04ZM4.26 13h3.79c.12 1.91.43 3.65.9 5.05A8.02 8.02 0 0 1 4.26 13Zm3.79-2H4.26a8.02 8.02 0 0 1 4.69-5.05A17.1 17.1 0 0 0 8.05 11ZM12 19.96c-.83-1.2-1.62-3.38-1.86-6.96h3.72c-.24 3.58-1.03 5.76-1.86 6.96Zm3.05-1.91c.47-1.4.78-3.14.9-5.05h3.79a8.02 8.02 0 0 1-4.69 5.05ZM15.95 11a17.1 17.1 0 0 0-.9-5.05A8.02 8.02 0 0 1 19.74 11h-3.79Z'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.93 9h-3.02a15.7 15.7 0 0 0-1.16-5.04A8.03 8.03 0 0 1 18.93 11ZM12 4.04c.83 1.2 1.62 3.38 1.86 6.96H10.14C10.38 7.42 11.17 5.24 12 4.04ZM4.26 13h3.79c.12 1.91.43 3.65.9 5.05A8.02 8.02 0 0 1 4.26 13Zm3.79-2H4.26a8.02 8.02 0 0 1 4.69-5.05A17.1 17.1 0 0 0 8.05 11ZM12 19.96c-.83-1.2-1.62-3.38-1.86-6.96h3.72c-.24 3.58-1.03 5.76-1.86 6.96Zm3.05-1.91c.47-1.4.78-3.14.9-5.05h3.79a8.02 8.02 0 0 1-4.69 5.05ZM15.95 11a17.1 17.1 0 0 0-.9-5.05A8.02 8.02 0 0 1 19.74 11h-3.79Z'/%3E%3C/svg%3E") center / contain no-repeat; }
+  .lang-pill button { min-width: 42px; border: 0; background: transparent; color: var(--mute); padding: 9px 10px; border-radius: 999px; font: inherit; font-weight: 600; cursor: pointer; transition: color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease; }
+  .lang-pill button:hover { color: var(--navy); }
+  .lang-pill button.active { color: var(--navy); background: #fff; box-shadow: 0 3px 12px rgba(11,31,61,.1); }
+
+  /* Subpage Hero */
+  .subpage-hero {
+    background: var(--navy-ink);
+    color: #fff;
+    padding: 90px 0 100px;
+    position: relative;
+    overflow: hidden;
+  }
+  .subpage-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0, 29, 56, 0.94) 0%, rgba(0, 56, 104, 0.90) 100%),
+                url('https://images.unsplash.com/photo-1579684389782-64d84b5e9056?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
+    opacity: 0.22;
+    z-index: 1;
+  }
+  .subpage-hero-inner {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .subpage-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #fff;
+    opacity: 0.85;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .subpage-eyebrow::before, .subpage-eyebrow::after {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: #fff;
+    opacity: 0.6;
+  }
+  .subpage-title {
+    font-family: var(--serif);
+    font-size: 52px;
+    line-height: 1.1;
+    font-weight: 400;
+    margin: 0 0 24px;
+    letter-spacing: -0.02em;
+  }
+  .subpage-title em {
+    font-style: italic;
+    color: rgba(255,255,255,0.9);
+    font-weight: 300;
+  }
+  .subpage-desc {
+    font-size: 19px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.85);
+    font-weight: 300;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  /* Interactive Filter Section (Modern Floating Panel) */
+  .filter-section {
+    position: relative;
+    z-index: 10;
+    margin-top: -50px;
+    margin-bottom: 40px;
+  }
+  .filter-container {
+    background: #ffffff;
+    border: 1px solid rgba(11,31,61,0.08);
+    border-radius: var(--radius-md);
+    padding: 32px;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    backdrop-filter: blur(10px);
+  }
+  .filter-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+  }
+  .search-box-wrapper {
+    position: relative;
+    flex: 1;
+    max-width: 540px;
+  }
+  .search-box-wrapper svg {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    color: var(--mute);
+    pointer-events: none;
+  }
+  .search-input {
+    width: 100%;
+    padding: 16px 24px 16px 52px;
+    font-family: inherit;
+    font-size: 15px;
+    border: 1px solid var(--line-cool);
+    border-radius: 999px;
+    background: var(--cream);
+    color: var(--ink);
+    box-shadow: inset 0 2px 4px rgba(11,31,61,0.02);
+    transition: var(--transition);
+  }
+  .search-input:focus {
+    outline: none;
+    border-color: var(--navy);
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(14, 58, 111, 0.08);
+  }
+  body.lang-ar .filter-container,
+  body.lang-ar .filter-top-row,
+  body.lang-ar .location-filters-row,
+  body.lang-ar .spec-card {
+    direction: rtl;
+  }
+  body.lang-ar .search-box-wrapper svg {
+    left: auto;
+    right: 20px;
+  }
+  body.lang-ar .search-input {
+    padding: 16px 52px 16px 24px;
+    font-family: var(--ar);
+  }
+  body.lang-ar .spec-card-actions {
+    direction: rtl;
+  }
+  .results-tally {
+    font-size: 14px;
+    color: var(--mute);
+    font-weight: 500;
+    background: var(--paper);
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--line-cool);
+  }
+  .results-tally b {
+    color: var(--navy);
+  }
+
+  /* Location filter pills */
+  .location-filters-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .location-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--navy-ink);
+  }
+  .location-pills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .pill-btn {
+    border: 1px solid var(--line-cool);
+    background: #ffffff;
+    color: var(--ink-2);
+    font-size: 13.5px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: var(--transition);
+    user-select: none;
+  }
+  .pill-btn:hover {
+    border-color: var(--navy);
+    color: var(--navy);
+    background: var(--cream-soft);
+    transform: translateY(-1px);
+  }
+  .pill-btn.active {
+    background: var(--navy);
+    color: #ffffff;
+    border-color: var(--navy);
+    box-shadow: 0 4px 12px rgba(14, 58, 111, 0.2);
+  }
+
+  /* Specialties Directory Grid */
+  .specialties-section {
+    padding: 0 0 120px;
+  }
+  .specialties-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+  }
+  
+  /* Specialty Modern Card */
+  .spec-card {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid rgba(11,31,61,0.08);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .spec-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(14, 58, 111, 0.15);
+  }
+  .spec-card-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    background: var(--navy-ink);
+  }
+  .spec-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .spec-card:hover img {
+    transform: scale(1.08);
+  }
+  .spec-card-image-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10,42,82,0) 60%, rgba(0, 0, 0, 0.4) 100%);
+    pointer-events: none;
+  }
+  
+  .spec-card .card-body {
+    padding: 28px 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .spec-card .card-body h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 26px;
+    color: var(--navy-ink);
+    margin: 0 0 10px;
+    line-height: 1.2;
+  }
+  .spec-card .card-body h3 a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .spec-card .card-body h3 a:hover {
+    color: var(--navy);
+  }
+  .spec-card .card-body p {
+    font-size: 14px;
+    color: var(--mute);
+    margin: 0 0 20px;
+    line-height: 1.6;
+    flex: 1;
+  }
+  
+  /* Available branches label & tags inside card */
+  .spec-branches-box {
+    margin-bottom: 24px;
+  }
+  .spec-branches-title {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--navy);
+    margin-bottom: 10px;
+    opacity: 0.8;
+  }
+  .spec-branches-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .branch-tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink-2);
+    background: #fff;
+    padding: 4px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(11,31,61,0.1);
+    box-shadow: 0 2px 4px rgba(11,31,61,0.02);
+  }
+  .branch-tag.highlighted-branch {
+    background: rgba(14, 58, 111, 0.05);
+    color: var(--navy-deep);
+    border-color: rgba(14, 58, 111, 0.2);
+  }
+
+  .spec-card-actions {
+    display: flex;
+    gap: 12px;
+    border-top: 1px solid rgba(11,31,61,0.06);
+    padding-top: 24px;
+    margin-top: auto;
+  }
+  .spec-card-actions a {
+    flex: 1;
+    text-align: center;
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+  }
+  .spec-card-actions .find-doc-btn {
+    background: var(--navy);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 56, 104, 0.12);
+  }
+  .spec-card-actions .find-doc-btn:hover {
+    background: var(--navy-deep);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 56, 104, 0.2);
+  }
+  .spec-card-actions .view-details-btn {
+    background: #ffffff;
+    color: var(--navy);
+    border-color: rgba(11,31,61,0.15);
+  }
+  .spec-card-actions .view-details-btn:hover {
+    background: var(--paper);
+    border-color: var(--navy);
+    transform: translateY(-2px);
+  }
+
+  /* No results container */
+  .no-results-card {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 80px 40px;
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(11,31,61,0.08);
+    box-shadow: var(--shadow-sm);
+  }
+  .no-results-card h3 {
+    font-family: var(--serif);
+    font-size: 32px;
+    color: var(--navy-ink);
+    margin: 0 0 12px;
+  }
+  .no-results-card p {
+    color: var(--mute);
+    font-size: 16px;
+    margin: 0 0 24px;
+  }
+
+  /* Responsive breaks */
+  @media (max-width: 768px) {
+    .hide-mobile {
+      display: none !important;
+    }
+    .wrap { padding: 0 16px; }
+    .subpage-hero { padding: 50px 0 80px; }
+    .subpage-title { font-size: 32px; }
+    .filter-section { margin-top: -60px; margin-bottom: 24px; }
+    .filter-container { padding: 20px; gap: 16px; }
+    .filter-top-row { flex-direction: column; align-items: stretch; gap: 12px; }
+    .search-box-wrapper { max-width: none; }
+    .search-input { padding: 12px 16px 12px 40px; font-size: 14px; }
+    .search-box-wrapper svg { left: 14px; width: 18px; height: 18px; }
+    
+    .specialties-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .specialties-section { padding: 0 0 60px; }
+    
+    .spec-card { border-radius: var(--radius-md); }
+    .spec-card .card-body { padding: 12px; }
+    .spec-card .card-body h3 { font-size: 15px; margin-bottom: 8px; }
+    
+    .spec-branches-box { margin-bottom: 12px; }
+    .spec-branches-title { font-size: 9px; margin-bottom: 6px; }
+    .spec-branches-tags { gap: 4px; }
+    .branch-tag { font-size: 9px; padding: 2px 6px; }
+    
+    .spec-card-actions { padding-top: 12px; flex-direction: column; gap: 8px; }
+    .spec-card-actions a { padding: 8px 10px; font-size: 11px; }
+    
+    .nav .wrap { padding: 16px; grid-template-columns: auto 1fr; }
+    .nav-links { display: none; }
+    .nav.scrolled .wrap { padding: 12px 16px; }
+    
+    .no-results-card { padding: 40px 20px; }
+    .no-results-card h3 { font-size: 22px; }
+    .no-results-card p { font-size: 14px; }
+  }
+
+  /* Footer styles */
+  footer { background: #fff; border-top: 1px solid var(--line); padding: 100px 0 40px; }
+  .foot-grid { display: grid; grid-template-columns: 1.5fr repeat(4, 1fr); gap: 48px; margin-bottom: 80px; }
+  @media (max-width: 1024px) {
+    .foot-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  }
+  @media (max-width: 600px) {
+    .foot-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+  footer .logo { margin-bottom: 24px; }
+  footer .lede { color: var(--mute); font-size: 14.5px; line-height: 1.6; margin: 0 0 24px; max-width: 320px; }
+  footer .contact { font-size: 15px; color: var(--ink-2); line-height: 1.5; }
+  footer .contact strong { font-size: 19px; color: var(--navy); display: inline-block; margin-bottom: 4px; }
+  footer h5 { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); margin: 0 0 20px; font-weight: 700; }
+  footer ul { list-style: none; padding: 0; margin: 0; }
+  footer ul li { margin-bottom: 12px; font-size: 14.5px; }
+  footer ul li a { color: var(--mute); transition: color 0.2s ease; }
+  footer ul li a:hover { color: var(--navy); }
+  
+  .foot-bottom { border-top: 1px solid var(--line-cool); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; color: var(--mute); font-size: 13.5px; }
+  @media (max-width: 768px) {
+    .foot-bottom { flex-direction: column; gap: 16px; text-align: center; }
+  }
+  .foot-bottom .socials { display: flex; gap: 20px; }
+  .foot-bottom .socials a { transition: color 0.2s ease; }
+  .foot-bottom .socials a:hover { color: var(--navy); }
+
+  /* Sticky CTA */
+  .sticky-cta { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); z-index: 40; background: var(--navy-deep); color: #fff; padding: 12px 28px; border-radius: 999px; box-shadow: 0 20px 48px -10px rgba(0, 29, 56, 0.35); display: flex; align-items: center; gap: 24px; border: 1px solid rgba(255,255,255,0.08); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none; }
+  .sticky-cta.active { transform: translateX(-50%) translateY(0); pointer-events: auto; }
+  @media (max-width: 768px) {
+    .sticky-cta { width: calc(100% - 32px); justify-content: space-between; padding: 14px 20px; bottom: 16px; font-size: 13px; gap: 12px; }
+  }
+  .sticky-cta .text { font-size: 13.5px; color: rgba(255,255,255,.75); font-weight: 500; }
+  .sticky-cta a { font-size: 13.5px; font-weight: 600; padding: 9px 18px; background: #fff; color: var(--navy) !important; border-radius: 999px; white-space: nowrap; transition: background-color 0.2s ease, transform 0.2s ease; }
+  .sticky-cta a:hover { background: #e1e8f1; transform: translateY(-0.5px); }
+</style>
+</head>
+<body>
+
+<!-- ribbon -->
+<div class="ribbon">
+  <div class="wrap">
+    <div class="ribbon-left">
+      <span><span class="dot"></span> &nbsp;<b>Now open</b> · Sat–Thu 8 AM – 10 PM &nbsp;·&nbsp; Fri 5 PM – 9 PM</span>
+      <span>5 branches · Jeddah, Riyadh</span>
+    </div>
+    <div class="ribbon-right">
+      <a href="/index.html#contact">Contact Us</a>
+      <a href="#">Careers</a>
+      <a href="https://wa.me/966542228111" target="_blank">WhatsApp · 0542228111</a>
+      <a href="tel:920022811"><b>920022811</b></a>
+    </div>
+  </div>
+</div>
+
+<!-- nav -->
+<nav class="nav">
+  <div class="wrap">
+    <a href="/index.html" class="logo">
+      <img class="brand-logo" src="/logo.svg" alt="My Clinic">
+    </a>
+    <div class="nav-links">
+      <a href="/find-a-doctor.html">Find a Doctor</a>
+      <a href="/specialties.html" class="active">Specialties</a>
+      <a href="/programs.html">Programs</a>
+      <a href="/telemedicine.html">Telemedicine</a>
+      <a href="/home-healthcare.html">Home Healthcare</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-pill" role="group" aria-label="Language switcher">
+        <button type="button" class="active" aria-pressed="true">EN</button>
+        <button type="button" aria-pressed="false">AR</button>
+      </div>
+      <a href="/find-a-doctor.html" class="btn primary">Book Now</a>
+    </div>
+  </div>
+</nav>
+
+<!-- subpage hero banner -->
+<header class="subpage-hero">
+  <div class="wrap">
+    <div class="subpage-hero-inner">
+      <div class="subpage-eyebrow">Expert Medical Care</div>
+      <h1 class="subpage-title">Clinical <em>Specialties</em>.</h1>
+      <p class="subpage-desc">Connect with our team of board-certified clinical specialists. Combining world-class diagnostic expertise with advanced medical facilities to address all your healthcare needs.</p>
+    </div>
+  </div>
+</header>
+
+<!-- Filter section -->
+<section class="filter-section">
+  <div class="wrap">
+    <div class="filter-container">
+      <div class="filter-top-row">
+        <div class="search-box-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="text" id="specialtySearchInput" class="search-input" placeholder="Search specialty, keyword, or treatment...">
+        </div>
+        <div class="results-tally">
+          Showing <span id="matchTally">0</span> clinical specialties
+        </div>
+      </div>
+      
+      <div class="location-filters-row">
+        <div class="location-label">Select Your Location</div>
+        <div class="location-pills-list" id="locationPills">
+          <button type="button" class="pill-btn active" data-location="All">All Locations</button>
+          <button type="button" class="pill-btn" data-location="Jeddah Al Mohammadiyah">Jeddah Al Mohammadiyah</button>
+          <button type="button" class="pill-btn" data-location="Jeddah Al Safa">Jeddah Al Safa</button>
+          <button type="button" class="pill-btn" data-location="Jeddah Al Khalidiyyah Dental Center">Jeddah Al Khalidiyyah Dental Center</button>
+          <button type="button" class="pill-btn" data-location="Riyadh Al Sahafa">Riyadh Al Sahafa</button>
+          <button type="button" class="pill-btn" data-location="Jeddah Tahlia">Jeddah Tahlia</button>
+          <button type="button" class="pill-btn" data-location="Jeddah Obhour">Jeddah Obhour</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Specialties grid section -->
+<section class="specialties-section">
+  <div class="wrap">
+    <div class="specialties-grid" id="specialtiesGrid">
+      <!-- Injected dynamically by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">
+          <img class="brand-logo" src="/logo.svg" alt="My Clinic">
+        </div>
+        <p class="lede">My Clinic is your partner in health and wellness. With a focus on prevention and early intervention, our team of experts is committed to helping you stay healthy and live your best life.</p>
+        <div class="contact">
+          <strong>920022811</strong><br>
+          WhatsApp · 0542228111
+        </div>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul><li><a href="#">About My Clinic</a></li><li><a href="#">Our Sites</a></li><li><a href="#">Services</a></li></ul>
+        <h5 style="margin-top: 28px;">Useful Links</h5>
+        <ul><li><a href="#">Contact Us</a></li><li><a href="#">Careers</a></li><li><a href="#">Privacy Policy</a></li></ul>
+      </div>
+      <div>
+        <h5>Care</h5>
+        <ul><li><a href="/find-a-doctor.html">Find a Doctor</a></li><li><a href="/specialties.html">Specialties</a></li><li><a href="/programs.html">Programs</a></li><li><a href="/telemedicine.html">Telemedicine</a></li><li><a href="/home-healthcare.html">Home Healthcare</a></li></ul>
+      </div>
+      <div>
+        <h5>Call Center Working Hours</h5>
+        <ul><li>Saturday – Thursday · 8 AM – 10 PM</li><li>Friday · 5 PM – 9 PM</li></ul>
+        <h5 style="margin-top: 28px;">Our Branches</h5>
+        <ul>
+          <li>Jeddah · Al Mohammadiyah</li>
+          <li>Jeddah · Al Safa</li>
+          <li>Jeddah · Al Khalidiyyah Dental</li>
+          <li>Jeddah · Tahlia</li>
+          <li>Riyadh · Al Sahafa</li>
+        </ul>
+      </div>
+      <div>
+        <h5>Get the app</h5>
+        <ul><li><a href="#">App Store</a></li><li><a href="#">Google Play</a></li></ul>
+        <h5 style="margin-top: 28px;">Book Now</h5>
+        <ul><li><a href="/find-a-doctor.html">Book an appointment</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© My Clinic 2026 · All rights reserved · CBAHI Accredited</span>
+      <div class="socials"><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">X</a><a href="#">YouTube</a><a href="#">LinkedIn</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- sticky CTA -->
+<div class="sticky-cta" id="stickyCta">
+  <span class="text">Next available at <b style="color: #fff;">Jeddah Al Safa</b> · Today, 4:15 PM</span>
+  <a href="/find-a-doctor.html">Book in 60 seconds →</a>
+</div>
+
+<script>
+// Specialties Database
+const specialtiesData = [
+  {
+    id: "cardiology",
+    name: "Cardiology",
+    description: "Advanced cardiovascular diagnostic checks, electrocardiograms (ECG), blood pressure reviews, and chronic heart health management plans.",
+    image: "https://images.unsplash.com/photo-1628348068343-c6a848d2b6dd?auto=format&fit=crop&w=600&q=70",
+    branches: ["Jeddah Al Mohammadiyah", "Jeddah Al Safa", "Riyadh Al Sahafa"],
+    keywords: "heart chest pain pressure valve echo ecg cardiology cardiac blood pressure cardiologist"
+  },
+  {
+    id: "endocrinology",
+    name: "Endocrinology",
+    description: "Specialized clinical therapy pathways for diabetes mellitus (adult and pediatric), thyroid hormone disorders, and metabolic conditions.",
+    image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=600&q=70",
+    branches: ["Jeddah Al Mohammadiyah", "Jeddah Al Safa", "Jeddah Tahlia", "Riyadh Al Sahafa"],
+    keywords: "insulin diabetes glucose endocrine hormone glands thyroid goiter metabolic endocrinologist"
+  },
+  {
+    id: "internal-medicine",
+    name: "Internal Medicine",
+    description: "Expert diagnostics, health checkups, chronic disease management, and preventative screening for all complex adult medical illnesses.",
+    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=70",
+    branches: ["Jeddah Al Mohammadiyah", "Jeddah Al Safa", "Jeddah Tahlia", "Riyadh Al Sahafa", "Jeddah Obhour"],
+    keywords: "internist diagnostic preventative screening checkup physical exam adult health chronic care"
+  },
+  {
+    id: "obstetrics-gynecology",
+    name: "Obstetrics & Gynecology",
+    description: "Empathetic maternity pathway care, prenatal screenings, high-definition fetal ultrasounds, family planning, and women's health reviews.",
+    image: "https://images.unsplash.com/photo-1518152006812-edab29b069ac?auto=format&fit=crop&w=600&q=70",
+    branches: ["Jeddah Al Mohammadiyah", "Jeddah Al Safa", "Jeddah Tahlia", "Riyadh Al Sahafa", "Jeddah Obhour"],
+    keywords: "pregnancy baby birth maternal ultrasound fetal obgyn gynecology obstetrics newborn"
+  },
+  {
+    id: "orthopedic-surgery",
+    name: "Orthopedic Surgery",
+    description: "Comprehensive care for skeletal fractures, sports joint injuries, arthroscopic surgeries, spine disorders, and skeletal rehabilitation.",
+    image: "https://images.unsplash.com/photo-1582284729022-520556214f49?auto=format&fit=crop&w=600&q=70",
+    branches: ["Jeddah Al Mohammadiyah", "Jeddah Al Safa", "Riyadh Al Sahafa"],
+    keywords: "bones joints spine fracture orthopedic knee reconstruction sport ligament cartilage"
+  },
+  {
+    id: "pediatrics",
+    name: "Pediatrics",
+    description: "Caring child health assessments, childhood growth reviews, Ministry of Health mandatory immunizations, and child healthcare services.",
+    image: "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=600&q=70",
+    branches: ["Jeddah Al Mohammadiyah", "Jeddah Al Safa", "Jeddah Tahlia", "Riyadh Al Sahafa", "Jeddah Obhour"],
+    keywords: "children baby pediatrician vaccine immunization growth developmental checks child toddler"
+  },
+  {
+    id: "dermatology",
+    name: "Dermatology",
+    description: "Expert diagnostics for clinical skin pathology, aesthetic skin laser treatments, acne care, and anti-aging dermatology procedures.",
+    image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=600&q=70",
+    branches: ["Jeddah Al Mohammadiyah", "Jeddah Al Safa", "Jeddah Tahlia", "Riyadh Al Sahafa", "Jeddah Obhour"],
+    keywords: "skin laser hair acne facial dermatology cosmetic filler botox clinic eczema psoriasis"
+  },
+  {
+    id: "ophthalmology",
+    name: "Ophthalmology",
+    description: "Advanced eye diagnostic checks, visual acuity testing, glaucoma treatments, cataract removals, and laser vision corrections.",
+    image: "https://images.unsplash.com/photo-1579684389782-64d84b5e9056?auto=format&fit=crop&w=600&q=70",
+    branches: ["Jeddah Al Mohammadiyah", "Jeddah Al Safa", "Riyadh Al Sahafa"],
+    keywords: "eye vision ophthalmic cataracts retina lasik optics correction spectacle oculist optician"
+  },
+  {
+    id: "dentistry",
+    name: "Dentistry & Orthodontics",
+    description: "Modern dental implants, smile designs, cosmetic alignment, pediatric dentistry, teeth whitening, and preventive family oral hygiene.",
+    image: "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=600&q=70",
+    branches: ["Jeddah Al Khalidiyyah Dental Center", "Jeddah Al Mohammadiyah", "Riyadh Al Sahafa"],
+    keywords: "dental dentist teeth orthodondics braces implant extraction white root canal dental center"
+  },
+  {
+    id: "ent",
+    name: "ENT (Ear, Nose & Throat)",
+    description: "Comprehensive care for throat pathologies, clinical sinus infections, nasal septoplasty reviews, and custom hearing assessments.",
+    image: "https://images.unsplash.com/photo-1598252577519-74d11cfc6bdf?auto=format&fit=crop&w=600&q=70",
+    branches: ["Jeddah Al Mohammadiyah", "Jeddah Al Safa", "Jeddah Tahlia"],
+    keywords: "ear nose throat hearing sinus pathology larynx audiometry tonsil septum otolaryngology"
+  },
+  {
+    id: "rheumatology",
+    name: "Rheumatology",
+    description: "Expert diagnostic screening and medical management for osteoporotic bone loss, gout, rheumatoid arthritis, and autoimmune diseases.",
+    image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=600&q=70",
+    branches: ["Jeddah Al Mohammadiyah", "Jeddah Al Safa", "Riyadh Al Sahafa"],
+    keywords: "arthritis bones joints osteoporosis rheumatology autoimmune joint pain lupus gout"
+  }
+];
+
+const specialtyAr = {
+  cardiology: {
+    name: "أمراض القلب",
+    description: "فحوصات متقدمة لصحة القلب، تخطيط القلب، متابعة ضغط الدم، وخطط علاجية لإدارة أمراض القلب المزمنة.",
+    keywords: "قلب ألم صدر ضغط صمام تخطيط ايكو شرايين نبض"
+  },
+  endocrinology: {
+    name: "الغدد الصماء والسكري",
+    description: "مسارات علاجية متخصصة للسكري لدى البالغين والأطفال، اضطرابات الغدة الدرقية، والمشكلات الهرمونية والأيضية.",
+    keywords: "سكري انسولين غلوكوز غدد هرمونات درقية أيض"
+  },
+  "internal-medicine": {
+    name: "الطب الباطني",
+    description: "تشخيصات دقيقة، فحوصات صحية، إدارة الأمراض المزمنة، وبرامج وقائية لصحة البالغين والحالات الطبية المعقدة.",
+    keywords: "باطنية فحص تشخيص وقاية أمراض مزمنة صحة بالغين"
+  },
+  "obstetrics-gynecology": {
+    name: "النساء والولادة",
+    description: "رعاية حمل متكاملة، فحوصات ما قبل الولادة، أشعة جنين متقدمة، تنظيم الأسرة، ومتابعة صحة المرأة.",
+    keywords: "حمل ولادة نساء جنين سونار أمومة تنظيم الأسرة"
+  },
+  "orthopedic-surgery": {
+    name: "جراحة العظام",
+    description: "رعاية شاملة للكسور وإصابات المفاصل والرياضة وجراحات المناظير ومشكلات العمود الفقري والتأهيل الحركي.",
+    keywords: "عظام مفاصل ركبة كتف كسر رباط غضروف عمود فقري"
+  },
+  pediatrics: {
+    name: "طب الأطفال",
+    description: "تقييمات صحية للأطفال، متابعة النمو، تطعيمات وزارة الصحة، وخدمات طبية مخصصة للرضع والأطفال.",
+    keywords: "أطفال رضيع تطعيم نمو لقاحات طفل حرارة"
+  },
+  dermatology: {
+    name: "الجلدية والتجميل",
+    description: "تشخيص وعلاج أمراض الجلد، علاجات الليزر والتجميل، علاج حب الشباب، وإجراءات العناية بالبشرة ومكافحة علامات التقدم.",
+    keywords: "جلدية بشرة ليزر حب الشباب تجميل بوتوكس فيلر اكزيما"
+  },
+  ophthalmology: {
+    name: "طب العيون",
+    description: "فحوصات متقدمة للعين، قياس النظر، علاج المياه الزرقاء، إزالة المياه البيضاء، وتصحيح النظر بالليزر.",
+    keywords: "عيون نظر ليزك شبكية مياه بيضاء زرقاء عدسات"
+  },
+  dentistry: {
+    name: "الأسنان وتقويم الأسنان",
+    description: "زراعة الأسنان، تصميم الابتسامة، التقويم التجميلي، أسنان الأطفال، التبييض، والرعاية الوقائية لصحة الفم.",
+    keywords: "أسنان تقويم زراعة ابتسامة تبييض عصب حشو"
+  },
+  ent: {
+    name: "الأنف والأذن والحنجرة",
+    description: "رعاية شاملة لمشكلات الحلق والجيوب الأنفية وانحراف الحاجز الأنفي وتقييمات السمع المخصصة.",
+    keywords: "أنف أذن حنجرة سمع جيوب لوز تنفس شخير"
+  },
+  rheumatology: {
+    name: "الروماتيزم",
+    description: "تشخيص ومتابعة هشاشة العظام، النقرس، التهاب المفاصل الروماتويدي، وأمراض المناعة الذاتية.",
+    keywords: "روماتيزم مفاصل هشاشة نقرس مناعة ألم"
+  }
+};
+
+const branchAr = {
+  "All": "كل الفروع",
+  "Jeddah Al Mohammadiyah": "جدة المحمدية",
+  "Jeddah Al Safa": "جدة الصفا",
+  "Jeddah Al Khalidiyyah Dental Center": "جدة مركز الخالدية للأسنان",
+  "Riyadh Al Sahafa": "الرياض الصحافة",
+  "Jeddah Tahlia": "جدة التحلية",
+  "Jeddah Obhour": "جدة أبحر"
+};
+
+const pageText = {
+  en: {
+    eyebrow: "Expert Medical Care",
+    title: "Clinical <em>Specialties</em>.",
+    desc: "Connect with our team of board-certified clinical specialists. Combining world-class diagnostic expertise with advanced medical facilities to address all your healthcare needs.",
+    placeholder: "Search specialty, keyword, or treatment...",
+    tally: (n) => `Showing ${n} clinical specialties`,
+    location: "Select Your Location",
+    availableAt: "Available at:",
+    findDoctors: "Find Doctors",
+    viewDetails: "View Details",
+    noTitle: "No specialties match your filters",
+    noText: "Try refining your search keyword or selecting a different location branch.",
+    reset: "Reset Search Filters"
+  },
+  ar: {
+    eyebrow: "رعاية طبية متخصصة",
+    title: "التخصصات <em>الطبية</em>.",
+    desc: "تواصل مع فريقنا من الأطباء المعتمدين، حيث نجمع بين الخبرة التشخيصية العالمية والمرافق الطبية المتقدمة لتلبية احتياجاتك الصحية.",
+    placeholder: "ابحث عن تخصص أو كلمة أو خدمة علاجية...",
+    tally: (n) => `عرض ${n} تخصصاً طبياً`,
+    location: "اختر موقعك",
+    availableAt: "متوفر في:",
+    findDoctors: "اعرض الأطباء",
+    viewDetails: "عرض التفاصيل",
+    noTitle: "لا توجد تخصصات مطابقة للفلاتر",
+    noText: "جرّب تعديل كلمة البحث أو اختيار فرع مختلف.",
+    reset: "إعادة ضبط البحث"
+  }
+};
+
+function getLang() {
+  return localStorage.getItem('myclinicLang') === 'ar' ? 'ar' : 'en';
+}
+
+function isAr() {
+  return getLang() === 'ar';
+}
+
+function specName(item) {
+  return isAr() ? (specialtyAr[item.id]?.name || item.name) : item.name;
+}
+
+function specDescription(item) {
+  return isAr() ? (specialtyAr[item.id]?.description || item.description) : item.description;
+}
+
+function branchName(branch, short = false) {
+  const value = isAr() ? (branchAr[branch] || branch) : branch;
+  if (!short || isAr()) return value;
+  return value.replace('Jeddah ', '').replace('Riyadh ', '');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Navigation scrolling animation
+  const nav = document.querySelector('.nav');
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    }, { passive: true });
+  }
+
+  // Sticky CTA slide in
+  const stickyCta = document.getElementById('stickyCta');
+  if (stickyCta) {
+    setTimeout(() => {
+      stickyCta.classList.add('active');
+    }, 1500);
+  }
+
+  // Language switcher
+  const langPill = document.querySelector('.lang-pill');
+  if (langPill) {
+    langPill.addEventListener('click', (event) => {
+      const target = event.target.closest('button');
+      if (!target) return;
+      langPill.querySelectorAll('button').forEach((button) => {
+        const active = button === target;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+    });
+  }
+
+  // Specialties Filtering Engine
+  const searchInput = document.getElementById('specialtySearchInput');
+  const locationPills = document.getElementById('locationPills');
+  const specialtiesGrid = document.getElementById('specialtiesGrid');
+  const matchTally = document.getElementById('matchTally');
+
+  let activeLocation = 'All';
+  let searchQuery = '';
+
+  function applyStaticSpecialtyLanguage() {
+    const lang = getLang();
+    document.querySelector('.subpage-eyebrow').textContent = pageText[lang].eyebrow;
+    document.querySelector('.subpage-title').innerHTML = pageText[lang].title;
+    document.querySelector('.subpage-desc').textContent = pageText[lang].desc;
+    searchInput.placeholder = pageText[lang].placeholder;
+    document.querySelector('.location-label').textContent = pageText[lang].location;
+    locationPills.querySelectorAll('.pill-btn').forEach((btn) => {
+      btn.textContent = branchName(btn.getAttribute('data-location'));
+    });
+  }
+
+  function renderSpecialties() {
+    applyStaticSpecialtyLanguage();
+    specialtiesGrid.innerHTML = '';
+    
+    const filtered = specialtiesData.filter(item => {
+      const searchHaystack = [
+        item.name,
+        item.description,
+        item.keywords,
+        specialtyAr[item.id]?.name,
+        specialtyAr[item.id]?.description,
+        specialtyAr[item.id]?.keywords
+      ].filter(Boolean).join(' ').toLowerCase();
+      const matchesSearch = searchQuery === '' || 
+                            searchHaystack.includes(searchQuery);
+                            
+      const matchesLocation = activeLocation === 'All' || 
+                              item.branches.includes(activeLocation);
+                              
+      return matchesSearch && matchesLocation;
+    });
+
+    document.querySelector('.results-tally').innerHTML = pageText[getLang()].tally(filtered.length).replace(String(filtered.length), `<span id="matchTally">${filtered.length}</span>`);
+
+    if (filtered.length === 0) {
+      specialtiesGrid.innerHTML = `
+        <div class="no-results-card">
+          <h3>${pageText[getLang()].noTitle}</h3>
+          <p>${pageText[getLang()].noText}</p>
+          <button type="button" class="btn primary" id="resetFiltersBtn">${pageText[getLang()].reset}</button>
+        </div>
+      `;
+      document.getElementById('resetFiltersBtn').addEventListener('click', () => {
+        searchInput.value = '';
+        searchQuery = '';
+        activeLocation = 'All';
+        locationPills.querySelectorAll('.pill-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.getAttribute('data-location') === 'All');
+        });
+        renderSpecialties();
+      });
+      return;
+    }
+
+    filtered.forEach(item => {
+      // Build branch tags HTML, highlighting the currently selected branch if applicable
+      const tagsHtml = item.branches.map(branch => {
+        const isSelected = branch === activeLocation;
+        return `<span class="branch-tag ${isSelected ? 'highlighted-branch' : ''}">${branchName(branch, true)}</span>`;
+      }).join('');
+
+      // Encode parameters for dynamic search redirection
+      const specialtyParam = encodeURIComponent(item.name);
+      const branchParam = activeLocation !== 'All' ? `&branch=${encodeURIComponent(activeLocation)}` : '';
+      
+      const cardHtml = `
+        <div class="spec-card" data-id="${item.id}">
+          <a href="/specialty-details.html?id=${item.id}" class="spec-card-image-wrapper">
+            <img src="${item.image}" alt="${item.name}" onerror="this.style.display='none'">
+          </a>
+          <div class="card-body">
+            <h3><a href="/specialty-details.html?id=${item.id}" style="color: inherit; text-decoration: none;">${specName(item)}</a></h3>
+            <p class="hide-mobile">${specDescription(item)}</p>
+            <div class="spec-branches-box">
+              <div class="spec-branches-title">${pageText[getLang()].availableAt}</div>
+              <div class="spec-branches-tags">
+                ${tagsHtml}
+              </div>
+            </div>
+            <div class="spec-card-actions">
+              <a href="/find-a-doctor.html?specialty=${specialtyParam}${branchParam}" class="find-doc-btn">${pageText[getLang()].findDoctors}</a>
+              <a href="/specialty-details.html?id=${item.id}" class="view-details-btn hide-mobile">${pageText[getLang()].viewDetails}</a>
+            </div>
+          </div>
+        </div>
+      `;
+      const div = document.createElement('div');
+      div.innerHTML = cardHtml;
+      specialtiesGrid.appendChild(div.firstElementChild);
+    });
+
+    // Animate matching cards in
+    gsap.from(".spec-card", {
+      opacity: 0,
+      y: 20,
+      scale: 0.98,
+      duration: 0.45,
+      stagger: 0.05,
+      ease: "power2.out"
+    });
+  }
+
+  // Bind Search Input
+  searchInput.addEventListener('input', (e) => {
+    searchQuery = e.target.value.toLowerCase().trim();
+    renderSpecialties();
+  });
+
+  // Bind Location Pills
+  locationPills.addEventListener('click', (e) => {
+    const btn = e.target.closest('.pill-btn');
+    if (!btn) return;
+    
+    locationPills.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    activeLocation = btn.getAttribute('data-location');
+    renderSpecialties();
+  });
+
+  // Initial render
+  renderSpecialties();
+
+  document.addEventListener('myclinic:language-change', () => {
+    searchQuery = searchInput.value.toLowerCase().trim();
+    renderSpecialties();
+  });
+});
+</script>
+
+<script src="/assets/language-switcher.js"></script>
+</body>
+</html>

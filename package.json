@@ -1,0 +1,5 @@
+{
+  "name": "myclinic-websiteux",
+  "private": true,
+  "description": "Repo root marker so gpt-image-2 skill scripts locate .env.local."
+}

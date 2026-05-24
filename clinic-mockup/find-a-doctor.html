@@ -1,0 +1,2134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>My Clinic — Find a Doctor</title>
+<link rel="icon" type="image/png" href="/favclinic.png">
+<meta name="viewport" content="width=1440">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/shared.css">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<style>
+  :root {
+    --serif: 'Newsreader', Georgia, serif;
+    --sans: 'Gotham', 'Gotham SSm', 'Gotham A', 'Montserrat', system-ui, -apple-system, sans-serif;
+    --ar: 'Almarai', system-ui, sans-serif;
+    
+    /* Modern shadow systems */
+    --shadow-sm: 0 2px 8px rgba(11,31,61,.04), 0 1px 2px rgba(11,31,61,.02);
+    --shadow-md: 0 12px 36px -8px rgba(11,31,61,.12), 0 4px 12px -2px rgba(11,31,61,.04);
+    --shadow-lg: 0 32px 64px -16px rgba(11,31,61,.22), 0 16px 32px -12px rgba(11,31,61,.08);
+    
+    /* Elegant design tokens */
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  body { font-family: var(--sans); background: var(--cream); color: var(--ink); font-size: 16px; line-height: 1.6; letter-spacing: -0.005em; -webkit-font-smoothing: antialiased; }
+  body.lang-ar { font-family: var(--ar); direction: rtl; letter-spacing: 0; }
+  body.lang-ar .subpage-title,
+  body.lang-ar .doctor-ad-name,
+  body.lang-ar .modal-title { font-family: var(--ar); font-weight: 700; }
+  body.lang-ar .filter-console,
+  body.lang-ar .directory-header,
+  body.lang-ar .foot-grid { direction: rtl; }
+  body.lang-ar .nav .wrap { direction: rtl; }
+  body.lang-ar .nav-links { direction: rtl; gap: 36px; }
+  body.lang-ar .nav-right { direction: ltr; justify-content: flex-start; }
+  body.lang-ar .nav-links a { font-family: var(--ar); font-size: 15px; font-weight: 700; letter-spacing: 0; }
+  body.lang-ar .filter-input-wrapper svg,
+  body.lang-ar .cdd .cdd-icon { left: auto; right: 16px; }
+  body.lang-ar .filter-field input { padding: 13px 44px 13px 18px; font-family: var(--ar); }
+  body.lang-ar .filter-field select,
+  body.lang-ar .cdd,
+  body.lang-ar .modal-form-group input { font-family: var(--ar); }
+  body.lang-ar .cdd { padding: 13px 44px 13px 16px; }
+  body.lang-ar .cdd-item { text-align: right; }
+  body.lang-ar .cdd-item::before { left: auto; right: 0; }
+  body.lang-ar .cdd-item:hover,
+  body.lang-ar .cdd-item.is-active { padding-left: 12px; padding-right: 16px; }
+  body.lang-ar .cdd-item .cdd-check { margin-left: 0; margin-right: auto; }
+  body.lang-ar .doctor-ad-detail-item,
+  body.lang-ar .doctor-ad-avail-time,
+  body.lang-ar .success-row { direction: rtl; }
+  body.lang-ar .modal-close { right: auto; left: 20px; }
+  body.lang-ar .ribbon .wrap { direction: rtl; }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 0 40px; }
+  .ar { font-family: var(--ar); }
+
+  /* Announcement strip */
+  .ribbon { background: var(--navy-deep); color: #fff; font-size: 13px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .ribbon .wrap { display: flex; justify-content: space-between; align-items: center; }
+  .ribbon-left { display: flex; gap: 24px; align-items: center; color: rgba(255,255,255,.78); }
+  .ribbon-left b { color: #fff; font-weight: 500; }
+  .ribbon-right { display: flex; gap: 20px; align-items: center; color: rgba(255,255,255,.78); }
+  .ribbon a { transition: color 0.2s ease; }
+  .ribbon a:hover { color: #fff; text-decoration: underline; }
+  .dot { width: 6px; height: 6px; background: #fff; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #fff; }
+
+  /* Nav */
+  .nav { position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 1px solid rgba(11,31,61,.08); box-shadow: 0 12px 36px rgba(11,31,61,.05); transition: padding 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; }
+  .nav .wrap { display: grid; grid-template-columns: minmax(220px, 1fr) auto minmax(210px, 1fr); align-items: center; padding: 22px 40px; transition: padding 0.3s ease; }
+  .nav.scrolled { background: #fff; box-shadow: 0 10px 30px rgba(11,31,61,0.07); }
+  .nav.scrolled .wrap { padding: 14px 40px; }
+  
+  .logo { display: flex; align-items: center; gap: 14px; cursor: pointer; }
+  .logo-mark { width: 36px; height: 36px; transition: transform 0.3s ease; }
+  .logo:hover .logo-mark { transform: rotate(15deg) scale(1.05); }
+  .logo-txt { line-height: 1.1; }
+  .logo-txt .en { font-family: var(--serif); font-size: 23px; font-weight: 500; letter-spacing: -0.02em; color: var(--navy); }
+  .logo-txt .ar { font-size: 11px; color: var(--mute); letter-spacing: 0.05em; margin-top: 3px; font-weight: 500; }
+  
+  .nav-links { display: flex; gap: 36px; justify-content: center; }
+  .nav-links a { font-size: 14px; color: var(--ink-2); font-weight: 500; position: relative; padding: 8px 0; transition: color 0.25s ease; }
+  .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background: var(--navy); transition: width 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), left 0.25s cubic-bezier(0.25, 0.8, 0.25, 1); }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-links a:hover::after { width: 100%; left: 0; }
+  .nav-links a.active { color: var(--navy); }
+  .nav-links a.active::after { width: 100%; left: 0; }
+  
+  .nav-right { display: flex; gap: 14px; justify-content: flex-end; align-items: center; }
+  
+  .btn { font-size: 14px; font-weight: 600; padding: 11px 24px; border-radius: 999px; transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease; border: 1px solid transparent; display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; }
+  .btn.primary { background: var(--navy); color: #fff; box-shadow: 0 4px 14px rgba(0, 56, 104, 0.15); }
+  .btn.primary:hover { background: var(--navy-deep); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0, 56, 104, 0.2); }
+  .btn.primary:active { transform: translateY(0); }
+  
+  .lang-pill { font-size: 12px; color: var(--mute); padding: 4px; border-radius: 999px; background: #f4f7fb; border: 1px solid rgba(11,31,61,.1); display: inline-flex; align-items: center; gap: 3px; box-shadow: inset 0 1px 0 rgba(255,255,255,.75); }
+  .lang-pill::before { content: ''; width: 16px; height: 16px; margin: 0 5px 0 6px; background: currentColor; opacity: .68; -webkit-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.93 9h-3.02a15.7 15.7 0 0 0-1.16-5.04A8.03 8.03 0 0 1 18.93 11ZM12 4.04c.83 1.2 1.62 3.38 1.86 6.96H10.14C10.38 7.42 11.17 5.24 12 4.04ZM4.26 13h3.79c.12 1.91.43 3.65.9 5.05A8.02 8.02 0 0 1 4.26 13Zm3.79-2H4.26a8.02 8.02 0 0 1 4.69-5.05A17.1 17.1 0 0 0 8.05 11ZM12 19.96c-.83-1.2-1.62-3.38-1.86-6.96h3.72c-.24 3.58-1.03 5.76-1.86 6.96Zm3.05-1.91c.47-1.4.78-3.14.9-5.05h3.79a8.02 8.02 0 0 1-4.69 5.05ZM15.95 11a17.1 17.1 0 0 0-.9-5.05A8.02 8.02 0 0 1 19.74 11h-3.79Z'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.93 9h-3.02a15.7 15.7 0 0 0-1.16-5.04A8.03 8.03 0 0 1 18.93 11ZM12 4.04c.83 1.2 1.62 3.38 1.86 6.96H10.14C10.38 7.42 11.17 5.24 12 4.04ZM4.26 13h3.79c.12 1.91.43 3.65.9 5.05A8.02 8.02 0 0 1 4.26 13Zm3.79-2H4.26a8.02 8.02 0 0 1 4.69-5.05A17.1 17.1 0 0 0 8.05 11ZM12 19.96c-.83-1.2-1.62-3.38-1.86-6.96h3.72c-.24 3.58-1.03 5.76-1.86 6.96Zm3.05-1.91c.47-1.4.78-3.14.9-5.05h3.79a8.02 8.02 0 0 1-4.69 5.05ZM15.95 11a17.1 17.1 0 0 0-.9-5.05A8.02 8.02 0 0 1 19.74 11h-3.79Z'/%3E%3C/svg%3E") center / contain no-repeat; }
+  .lang-pill button { min-width: 42px; border: 0; background: transparent; color: var(--mute); padding: 9px 10px; border-radius: 999px; font: inherit; font-weight: 600; cursor: pointer; transition: color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease; }
+  .lang-pill button:hover { color: var(--navy); }
+  .lang-pill button.active { color: var(--navy); background: #fff; box-shadow: 0 3px 12px rgba(11,31,61,.1); }
+
+  /* Subpage Hero */
+  .subpage-hero {
+    background: var(--navy-ink);
+    color: #fff;
+    padding: 90px 0 100px;
+    position: relative;
+    overflow: hidden;
+  }
+  .subpage-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0, 29, 56, 0.92) 0%, rgba(0, 56, 104, 0.88) 100%),
+                url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
+    opacity: 0.2;
+    z-index: 1;
+  }
+  .subpage-hero-inner {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .subpage-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #fff;
+    opacity: 0.85;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .subpage-eyebrow::before, .subpage-eyebrow::after {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: #fff;
+    opacity: 0.6;
+  }
+  .subpage-title {
+    font-family: var(--serif);
+    font-size: 52px;
+    line-height: 1.1;
+    font-weight: 400;
+    margin: 0 0 16px;
+    letter-spacing: -0.02em;
+  }
+  .subpage-title em {
+    font-style: italic;
+    color: rgba(255,255,255,0.8);
+    font-weight: 300;
+  }
+  .subpage-desc {
+    font-size: 17px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.75);
+    font-weight: 300;
+    margin: 0;
+  }
+
+  /* Filter Console */
+  .filter-section {
+    position: relative;
+    z-index: 10;
+    margin-top: -36px;
+    margin-bottom: 50px;
+  }
+  .filter-console {
+    background: #fff;
+    border: 1px solid var(--line-cool);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    padding: 24px 30px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 20px;
+    align-items: center;
+  }
+  @media (max-width: 768px) {
+    .filter-console {
+      grid-template-columns: 1fr;
+      padding: 20px;
+      gap: 16px;
+    }
+  }
+  .filter-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .filter-field label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--mute);
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .filter-field label svg {
+    width: 12px;
+    height: 12px;
+    color: var(--navy);
+  }
+  .filter-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .filter-input-wrapper svg {
+    position: absolute;
+    left: 16px;
+    width: 16px;
+    height: 16px;
+    color: var(--mute);
+    pointer-events: none;
+  }
+  .filter-field input {
+    width: 100%;
+    padding: 13px 18px 13px 44px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--line-cool);
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--ink);
+    outline: none;
+    background-color: var(--cream);
+    transition: border-color 0.25s ease, background-color 0.25s ease;
+  }
+  .filter-field select {
+    width: 100%;
+    padding: 13px 18px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--line-cool);
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--ink);
+    outline: none;
+    background-color: var(--cream);
+    cursor: pointer;
+    transition: border-color 0.25s ease, background-color 0.25s ease;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%236E7585' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 16px;
+  }
+  .filter-field input:focus, .filter-field select:focus {
+    border-color: var(--navy);
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(0, 56, 104, 0.06);
+  }
+
+  /* Custom branded dropdown (cdd) */
+  .cdd {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 13px 16px 13px 44px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--line-cool);
+    background-color: var(--cream);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+    transition: border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .cdd:hover { border-color: rgba(0, 56, 104, 0.35); }
+  .cdd:focus, .cdd[aria-expanded="true"] {
+    border-color: var(--navy);
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(0, 56, 104, 0.06);
+  }
+  .cdd .cdd-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px; height: 16px;
+    color: var(--mute);
+    display: inline-flex;
+    pointer-events: none;
+  }
+  .cdd .cdd-icon svg { width: 16px; height: 16px; }
+  .cdd .cdd-text {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .cdd .cdd-text.is-placeholder { color: var(--mute); font-weight: 500; }
+  .cdd .cdd-caret {
+    width: 16px; height: 16px;
+    color: var(--mute);
+    display: inline-flex;
+    transition: transform 0.2s ease, color 0.2s ease;
+    flex-shrink: 0;
+  }
+  .cdd .cdd-caret svg { width: 16px; height: 16px; }
+  .cdd[aria-expanded="true"] .cdd-caret { transform: rotate(180deg); color: var(--navy); }
+
+  .cdd-panel {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid var(--line-cool);
+    border-radius: var(--radius-md);
+    box-shadow: 0 24px 60px rgba(11, 31, 61, 0.16);
+    padding: 8px;
+    z-index: 60;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+    pointer-events: none;
+  }
+  .cdd[aria-expanded="true"] .cdd-panel {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .cdd-panel-head {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mute);
+    font-weight: 700;
+    padding: 8px 12px 6px;
+    border-bottom: 1px solid var(--line-cool);
+    margin-bottom: 6px;
+  }
+  .cdd-list {
+    max-height: 320px;
+    overflow-y: auto;
+    padding: 4px 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line-cool) transparent;
+  }
+  .cdd-list::-webkit-scrollbar { width: 6px; }
+  .cdd-list::-webkit-scrollbar-thumb { background: var(--line-cool); border-radius: 3px; }
+
+  .cdd-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: 0;
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    font: inherit;
+    font-size: 14px;
+    color: var(--navy-ink, var(--ink));
+    cursor: pointer;
+    transition: background 0.15s ease, padding 0.15s ease;
+    position: relative;
+  }
+  .cdd-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 50%;
+    width: 3px;
+    height: 0;
+    background: var(--navy);
+    border-radius: 3px;
+    transform: translateY(-50%);
+    transition: height 0.18s ease;
+  }
+  .cdd-item:hover { background: var(--cream); padding-left: 16px; }
+  .cdd-item:hover::before { height: 20px; }
+  .cdd-item.is-active {
+    background: var(--cream);
+    color: var(--navy);
+    font-weight: 600;
+    padding-left: 16px;
+  }
+  .cdd-item.is-active::before { height: 20px; }
+  .cdd-item .cdd-check {
+    margin-left: auto;
+    width: 14px; height: 14px;
+    color: var(--navy);
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+  .cdd-item.is-active .cdd-check { opacity: 1; }
+
+  /* Page Grid layout */
+  .directory-container {
+    padding: 0 0 120px;
+  }
+  .directory-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--line-cool);
+    padding-bottom: 16px;
+  }
+  .results-count {
+    font-size: 14px;
+    color: var(--ink-2);
+    font-weight: 500;
+  }
+  .results-count b {
+    color: var(--navy);
+    font-size: 16px;
+  }
+
+  /* Doctor listing cards ("modern vertical cards") */
+  .doctor-results-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 32px;
+  }
+  @media (max-width: 768px) {
+    .doctor-results-list {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+  }
+  
+  .doctor-ad-card {
+    background: #fff;
+    border: 1px solid rgba(11,31,61,.08);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  .doctor-ad-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(0, 56, 104, 0.15);
+  }
+  
+  .doctor-ad-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .doctor-ad-photo-link {
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #fff;
+    background: linear-gradient(165deg, #DCE3EE, #B9C7D9);
+    box-shadow: 0 8px 16px -4px rgba(11,31,61,.12);
+    transition: transform 0.4s ease;
+    margin: 0 auto;
+  }
+  .doctor-ad-photo-link:hover {
+    transform: scale(1.05);
+  }
+  .doctor-ad-photo-link img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .doctor-ad-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(245, 158, 11, 0.08);
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #B45309;
+    margin-top: -4px;
+  }
+  .doctor-ad-rating .stars {
+    color: #F59E0B;
+    font-size: 13px;
+  }
+  .doctor-ad-rating .review-count {
+    color: #B45309;
+    opacity: 0.8;
+  }
+
+  .doctor-ad-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    flex: 1;
+  }
+  
+  .doctor-ad-specialty-badge {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--navy);
+    background: rgba(0, 56, 104, 0.06);
+    padding: 4px 12px;
+    border-radius: 999px;
+  }
+  
+  .doctor-ad-name {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--navy-ink);
+    margin: 4px 0 0;
+    line-height: 1.2;
+  }
+  .doctor-ad-name a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.25s ease;
+  }
+  .doctor-ad-name a:hover {
+    color: var(--navy);
+  }
+  
+  .doctor-ad-subtext {
+    font-size: 13px;
+    color: var(--mute);
+    font-weight: 500;
+  }
+  
+  .doctor-ad-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    background: var(--cream);
+    padding: 14px;
+    border-radius: var(--radius-sm);
+    margin-top: auto;
+  }
+  .doctor-ad-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--ink-2);
+  }
+  .doctor-ad-detail-item svg {
+    width: 14px;
+    height: 14px;
+    color: var(--navy);
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
+  .truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .doctor-ad-tags {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .doctor-ad-tag {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--ink-2);
+    background: #fff;
+    border: 1px solid rgba(11,31,61,.08);
+    border-radius: 999px;
+    padding: 3px 10px;
+  }
+
+  .doctor-ad-right {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .doctor-ad-avail-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(16, 185, 129, 0.05);
+    border: 1px solid rgba(16, 185, 129, 0.15);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+  }
+  .doctor-ad-avail-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    letter-spacing: 0.02em;
+    margin-bottom: 0;
+  }
+  .doctor-ad-avail-time {
+    font-size: 12px;
+    font-weight: 600;
+    color: #10B981;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .doctor-ad-btn {
+    width: 100%;
+    padding: 11px 16px;
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 999px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid transparent;
+  }
+  .doctor-ad-btn.primary {
+    background: var(--navy);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 56, 104, 0.12);
+  }
+  .doctor-ad-btn.primary:hover {
+    background: var(--navy-deep);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 56, 104, 0.2);
+  }
+  .doctor-ad-btn.secondary {
+    border-color: rgba(11,31,61,.1);
+    color: var(--ink-2);
+    background: #fff;
+  }
+  .doctor-ad-btn.secondary:hover {
+    background: var(--paper);
+    border-color: var(--navy);
+    color: var(--navy);
+    transform: translateY(-2px);
+  }
+
+  @keyframes adPulse {
+    0% { transform: scale(0.95); opacity: 0.5; }
+    50% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(0.95); opacity: 0.5; }
+  }
+
+  @media (max-width: 768px) {
+    .hide-mobile {
+      display: none !important;
+    }
+    .doctor-ad-card {
+      padding: 14px;
+      gap: 12px;
+    }
+    .doctor-ad-photo-link {
+      width: 72px;
+      height: 72px;
+    }
+    .doctor-ad-name {
+      font-size: 16px;
+    }
+    .doctor-ad-subtext {
+      font-size: 11px;
+    }
+    .doctor-ad-specialty-badge {
+      font-size: 9px;
+      padding: 3px 8px;
+    }
+    .doctor-ad-details {
+      padding: 10px;
+    }
+    .doctor-ad-detail-item {
+      font-size: 11px;
+    }
+    .doctor-ad-avail-box {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      padding: 8px 10px;
+    }
+    .doctor-ad-btn {
+      padding: 10px 14px;
+      font-size: 12px;
+    }
+    .doctor-ad-rating {
+      font-size: 9px;
+      padding: 3px 8px;
+    }
+    .doctor-ad-rating .stars {
+      font-size: 10px;
+    }
+  }
+
+  /* Booking Modal CSS */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(14, 19, 32, 0.6);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+  .modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .modal-box {
+    background: #fff;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--line-cool);
+    box-shadow: var(--shadow-lg);
+    width: 90%;
+    max-width: 500px;
+    padding: 32px;
+    position: relative;
+    transform: translateY(20px);
+    transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+  .modal-overlay.active .modal-box {
+    transform: translateY(0);
+  }
+  .modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--mute);
+    cursor: pointer;
+    transition: var(--transition);
+    border: 0;
+  }
+  .modal-close:hover {
+    background: var(--line-cool);
+    color: var(--ink);
+  }
+  .modal-title {
+    font-family: var(--serif);
+    font-size: 24px;
+    color: var(--navy-ink);
+    margin: 0 0 6px;
+    font-weight: 500;
+  }
+  .modal-subtitle {
+    font-size: 13px;
+    color: var(--mute);
+    margin-bottom: 20px;
+  }
+  .modal-step {
+    display: none;
+  }
+  .modal-step.active {
+    display: block;
+  }
+  
+  /* Date selectors */
+  .date-chips-list {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    margin-bottom: 18px;
+  }
+  .date-chip {
+    flex: 0 0 72px;
+    background: var(--paper);
+    border: 1px solid var(--line-cool);
+    border-radius: var(--radius-sm);
+    padding: 10px 4px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 1px solid var(--line-cool);
+  }
+  .date-chip:hover {
+    border-color: var(--navy);
+  }
+  .date-chip.active {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: #fff;
+  }
+  .date-chip .day-name {
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+  .date-chip .day-num {
+    font-size: 15px;
+    font-weight: 700;
+    margin-top: 1px;
+  }
+
+  /* Time selection slots */
+  .time-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .time-chip {
+    background: var(--paper);
+    border: 1px solid var(--line-cool);
+    border-radius: var(--radius-sm);
+    padding: 10px 4px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-2);
+    transition: var(--transition);
+  }
+  .time-chip:hover {
+    border-color: var(--navy);
+  }
+  .time-chip.active {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: #fff;
+  }
+
+  /* Form controls inside modal */
+  .modal-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  .modal-form-group label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink-2);
+    text-transform: uppercase;
+  }
+  .modal-form-group input {
+    padding: 11px 14px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--line-cool);
+    font-family: var(--sans);
+    font-size: 13px;
+    outline: none;
+    background-color: var(--cream);
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+  .modal-form-group input:focus {
+    border-color: var(--navy);
+    background-color: #fff;
+  }
+  
+  /* Success screen booking card */
+  .success-card {
+    background: var(--cream);
+    border: 1px solid var(--line-cool);
+    border-radius: var(--radius-sm);
+    padding: 18px;
+    margin-bottom: 20px;
+  }
+  .success-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+  .success-row:last-child {
+    margin-bottom: 0;
+  }
+  .success-label {
+    color: var(--mute);
+  }
+  .success-val {
+    font-weight: 600;
+    color: var(--navy-ink);
+  }
+  
+  /* Footer */
+  footer { background: var(--navy-deep); color: rgba(255,255,255,.75); padding: 80px 0 40px; font-size: 14px; border-top: 1px solid rgba(255,255,255,.05); }
+  .foot-grid { display: grid; grid-template-columns: 2fr repeat(4, 1fr); gap: 40px; margin-bottom: 60px; }
+  @media (max-width: 991px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 575px) { .foot-grid { grid-template-columns: 1fr; } }
+  footer h5 { font-family: var(--sans); color: #fff; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; margin: 0 0 20px; }
+  footer ul { list-style: none; padding: 0; margin: 0; }
+  footer ul li { margin-bottom: 12px; }
+  footer ul li a { transition: color 0.2s ease; }
+  footer ul li a:hover { color: #fff; }
+  footer .logo { margin-bottom: 24px; color: #fff; }
+  footer .brand-logo { filter: brightness(0) invert(1); }
+  footer .logo-mark g { fill: #fff; }
+  footer .logo-txt .en { color: #fff; }
+  footer p.lede { font-size: 13px; line-height: 1.6; max-width: 320px; color: rgba(255,255,255,.6); margin-bottom: 24px; }
+  footer .contact { font-size: 14px; color: #fff; line-height: 1.5; }
+  footer .contact strong { font-size: 20px; color: #fff; display: block; margin-bottom: 4px; font-weight: 600; }
+  .foot-bottom { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,.05); padding-top: 30px; font-size: 12px; color: rgba(255,255,255,.5); }
+  @media (max-width: 768px) { .foot-bottom { flex-direction: column; gap: 16px; align-items: flex-start; } }
+  .foot-bottom .socials { display: flex; gap: 20px; }
+  .foot-bottom .socials a { transition: color 0.2s ease; }
+  .foot-bottom .socials a:hover { color: #fff; }
+</style>
+</head>
+<body>
+
+<!-- ribbon -->
+<div class="ribbon">
+  <div class="wrap">
+    <div class="ribbon-left">
+      <span><span class="dot"></span> &nbsp;<b>Now open</b> · Sat–Thu 8 AM – 10 PM &nbsp;·&nbsp; Fri 5 PM – 9 PM</span>
+      <span>5 branches · Jeddah, Riyadh</span>
+    </div>
+    <div class="ribbon-right">
+      <a href="/index.html#contact">Contact Us</a>
+      <a href="#">Careers</a>
+      <a href="https://wa.me/966542228111" target="_blank">WhatsApp · 0542228111</a>
+      <a href="tel:920022811"><b>920022811</b></a>
+    </div>
+  </div>
+</div>
+
+<!-- nav -->
+<nav class="nav">
+  <div class="wrap">
+    <a href="/index.html" class="logo">
+      <img class="brand-logo" src="/logo.svg" alt="My Clinic">
+    </a>
+    <div class="nav-links">
+      <a href="/find-a-doctor.html" class="active">Find a Doctor</a>
+      <a href="/specialties.html">Specialties</a>
+      <a href="/programs.html">Programs</a>
+      <a href="/telemedicine.html">Telemedicine</a>
+      <a href="/home-healthcare.html">Home Healthcare</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-pill" role="group" aria-label="Language switcher">
+        <button type="button" class="active" aria-pressed="true">EN</button>
+        <button type="button" aria-pressed="false">AR</button>
+      </div>
+      <a href="/find-a-doctor.html" class="btn primary">Book Now</a>
+    </div>
+  </div>
+</nav>
+
+<!-- subpage hero banner -->
+<header class="subpage-hero">
+  <div class="wrap">
+    <div class="subpage-hero-inner">
+      <div class="subpage-eyebrow">Aurora Medical Directory</div>
+      <h1 class="subpage-title">Find Your <em>Doctor</em>.</h1>
+      <p class="subpage-desc">Search profiles and book clinical consultation sessions instantly. Connect with our network of experienced healthcare specialists.</p>
+    </div>
+  </div>
+</header>
+
+<!-- search filter bar -->
+<section class="filter-section">
+  <div class="wrap">
+    <div class="filter-console">
+      <div class="filter-field">
+        <label>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          Search Doctor
+        </label>
+        <div class="filter-input-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="text" id="searchInput" placeholder="Search by name, specialty, education...">
+        </div>
+      </div>
+      <div class="filter-field">
+        <label>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Branch Location
+        </label>
+        <input type="hidden" id="branchSelect" value="All">
+        <div class="cdd" data-cdd="branch" tabindex="0" role="button" aria-haspopup="listbox" aria-expanded="false">
+          <span class="cdd-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          </span>
+          <span class="cdd-text" id="cddBranchLabel">All Locations</span>
+          <span class="cdd-caret">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </span>
+          <div class="cdd-panel" id="cddBranchPanel" role="listbox" aria-label="Branch Location">
+            <div class="cdd-panel-head">Choose a branch</div>
+            <div class="cdd-list" id="cddBranchList"></div>
+          </div>
+        </div>
+      </div>
+      <div class="filter-field">
+        <label>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+          Clinical Specialty
+        </label>
+        <input type="hidden" id="specialtySelect" value="All">
+        <div class="cdd" data-cdd="specialty" tabindex="0" role="button" aria-haspopup="listbox" aria-expanded="false">
+          <span class="cdd-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+          </span>
+          <span class="cdd-text" id="cddSpecialtyLabel">All Specialties</span>
+          <span class="cdd-caret">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </span>
+          <div class="cdd-panel" id="cddSpecialtyPanel" role="listbox" aria-label="Clinical Specialty">
+            <div class="cdd-panel-head">Choose a specialty</div>
+            <div class="cdd-list" id="cddSpecialtyList"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- directory content listing -->
+<section class="directory-container">
+  <div class="wrap">
+    <div class="directory-header">
+      <div class="results-count">Showing <b id="matchCount">0</b> doctors matching your filters</div>
+    </div>
+    
+    <div class="doctor-results-list" id="doctorContainer">
+      <!-- Generated dynamically by script -->
+    </div>
+  </div>
+</section>
+
+<!-- footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">
+          <img class="brand-logo" src="/logo.svg" alt="My Clinic">
+        </div>
+        <p class="lede">My Clinic is your partner in health and wellness. With a focus on prevention and early intervention, our team of experts is committed to helping you stay healthy and live your best life.</p>
+        <div class="contact">
+          <strong>920022811</strong><br>
+          WhatsApp · 0542228111
+        </div>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul><li><a href="#">About My Clinic</a></li><li><a href="#">Our Sites</a></li><li><a href="#">Services</a></li></ul>
+        <h5 style="margin-top: 28px;">Useful Links</h5>
+        <ul><li><a href="#">Contact Us</a></li><li><a href="#">Careers</a></li><li><a href="#">Privacy Policy</a></li></ul>
+      </div>
+      <div>
+        <h5>Care</h5>
+        <ul><li><a href="/find-a-doctor.html">Find a Doctor</a></li><li><a href="/specialties.html">Specialties</a></li><li><a href="/programs.html">Programs</a></li><li><a href="/telemedicine.html">Telemedicine</a></li><li><a href="/home-healthcare.html">Home Healthcare</a></li></ul>
+      </div>
+      <div>
+        <h5>Call Center Working Hours</h5>
+        <ul><li>Saturday – Thursday · 8 AM – 10 PM</li><li>Friday · 5 PM – 9 PM</li></ul>
+        <h5 style="margin-top: 28px;">Our Branches</h5>
+        <ul><li>Jeddah · Al Mohammadiyah</li><li>Jeddah · Al Safa</li><li>Jeddah · Al Khalidiyyah Dental</li><li>Jeddah · Tahlia</li><li>Riyadh · Al Sahafa</li></ul>
+      </div>
+      <div>
+        <h5>Get the app</h5>
+        <ul><li><a href="#">App Store</a></li><li><a href="#">Google Play</a></li></ul>
+        <h5 style="margin-top: 28px;">Book Now</h5>
+        <ul><li><a href="/find-a-doctor.html">Book an appointment</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© My Clinic 2026 · All rights reserved · CBAHI Accredited</span>
+      <div class="socials"><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">X</a><a href="#">YouTube</a><a href="#">LinkedIn</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- Booking Appointment Modal Overlay -->
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal-box">
+    <button class="modal-close" id="modalCloseBtn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    
+    <!-- Step 1: Select Slot -->
+    <div class="modal-step active" id="modalStep1">
+      <h3 class="modal-title">Book Consultation</h3>
+      <p class="modal-subtitle" id="bookingDocDetails">Schedule a slot with your physician</p>
+      
+      <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--mute); margin-bottom: 8px; letter-spacing: 0.05em;">Select Appointment Date</div>
+      <div class="date-chips-list" id="datePicker">
+        <!-- dates dynamically rendered -->
+      </div>
+      
+      <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--mute); margin-bottom: 8px; letter-spacing: 0.05em;">Select Time Slot</div>
+      <div class="time-grid" id="timeGrid">
+        <!-- slots dynamically rendered -->
+      </div>
+      
+      <button class="doctor-ad-btn primary" id="continueToFormBtn" style="margin-top: 10px;" disabled>Continue to Details</button>
+    </div>
+    
+    <!-- Step 2: Patient Form -->
+    <div class="modal-step" id="modalStep2">
+      <h3 class="modal-title">Patient Information</h3>
+      <p class="modal-subtitle">Provide details to secure your reservation slot</p>
+      
+      <div class="modal-form-group">
+        <label for="patientName">Full Name</label>
+        <input type="text" id="patientName" placeholder="Enter your full name">
+      </div>
+      <div class="modal-form-group">
+        <label for="patientPhone">Mobile Number</label>
+        <input type="tel" id="patientPhone" placeholder="05XXXXXXXX">
+      </div>
+      
+      <div style="display: flex; gap: 12px; margin-top: 24px;">
+        <button class="doctor-ad-btn whatsapp" id="backToSlotsBtn" style="flex: 1; border-color: var(--line-cool); color: var(--ink-2);">Back</button>
+        <button class="doctor-ad-btn primary" id="confirmBookingBtn" style="flex: 2;">Confirm Appointment</button>
+      </div>
+    </div>
+    
+    <!-- Step 3: Success Confirmation -->
+    <div class="modal-step text-center" id="modalStep3" style="text-align: center;">
+      <div style="margin: 0 auto 20px; width: 56px; height: 56px; background: rgba(16, 185, 129, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #10B981;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+      </div>
+      <h3 class="modal-title" style="margin-bottom: 10px;">Booking Confirmed!</h3>
+      <p class="modal-subtitle" style="margin-bottom: 24px; max-width: 360px; margin-left: auto; margin-right: auto;">Your consultation slot has been reserved. Please show this confirmation at the front desk upon arrival.</p>
+      
+      <div class="success-card">
+        <div class="success-row">
+          <span class="success-label">Doctor</span>
+          <span class="success-val" id="summaryDoc">Dr. Hisham Al-Otaibi</span>
+        </div>
+        <div class="success-row">
+          <span class="success-label">Date &amp; Time</span>
+          <span class="success-val" id="summaryTime">May 24 · 10:30 AM</span>
+        </div>
+        <div class="success-row">
+          <span class="success-label">Location</span>
+          <span class="success-val" id="summaryBranch">Jeddah Al Safa</span>
+        </div>
+        <div class="success-row" style="border-top: 1px solid var(--line-cool); padding-top: 8px; margin-top: 8px;">
+          <span class="success-label">Booking Reference</span>
+          <span class="success-val" id="summaryCode" style="color: var(--navy); font-weight: 700;">MC-847291</span>
+        </div>
+      </div>
+      
+      <button class="doctor-ad-btn primary" id="successCloseBtn">Close Directory</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { doctorsData as rawDoctors } from "/src/doctors-data.js";
+
+// Map full dataset to the shape this page expects, with sensible defaults
+// for legacy fields (rating/reviews/experience/tags/availability) that the
+// new dataset doesn't include.
+const _slugify = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const doctors = rawDoctors.map((d, i) => ({
+  id: i + 1,
+  slug: _slugify(d.name),
+  name: d.name,
+  nameAr: d.nameAr,
+  specialty: d.spec,
+  specialtyAr: "",
+  title: d.title || "",
+  titleAr: d.titleAr || "",
+  experience: null,
+  branch: d.location,
+  rating: null,
+  reviews: null,
+  tags: [],
+  education: Array.isArray(d.education) ? (d.education[0] || "") : (d.education || ""),
+  educationAr: Array.isArray(d.educationAr) ? (d.educationAr[0] || "") : (d.educationAr || ""),
+  languages: d.languages || "",
+  availability: "",
+  img: d.img,
+  bio: "",
+  expertise: [],
+  educationTimeline: [],
+  memberships: [],
+}));
+
+const i18n = {
+  en: {
+    nav: ["Find a Doctor", "Specialties", "Programs", "Telemedicine", "Home Healthcare"],
+    bookNow: "Book Now",
+    eyebrow: "My Clinic Medical Directory",
+    titleHtml: "Find Your <em>Doctor</em>.",
+    desc: "Search profiles and book clinical consultation sessions instantly. Connect with our network of experienced healthcare specialists across My Clinic branches.",
+    searchLabel: "Search Doctor",
+    searchPlaceholder: "Search by name, specialty, education...",
+    branchLabel: "Branch Location",
+    specialtyLabel: "Clinical Specialty",
+    chooseBranch: "Choose a branch",
+    chooseSpecialty: "Choose a specialty",
+    allLocations: "All Locations",
+    allSpecialties: "All Specialties",
+    count: (n) => `Showing ${n} doctors matching your filters`,
+    noTitle: "No Doctors Found",
+    noText: "We couldn't find any physicians matching your search criteria. Try modifying your search filters or locations.",
+    speaks: "Speaks:",
+    book: "Book",
+    viewProfile: "View Profile",
+    consultation: "Book Consultation",
+    schedule: "Schedule a slot with your physician",
+    selectDate: "Select Appointment Date",
+    selectTime: "Select Time Slot",
+    continue: "Continue to Details",
+    patientInfo: "Patient Information",
+    patientSubtitle: "Provide details to secure your reservation slot",
+    fullName: "Full Name",
+    fullNamePlaceholder: "Enter your full name",
+    mobile: "Mobile Number",
+    back: "Back",
+    confirm: "Confirm Appointment",
+    fillAlert: "Please fill in your name and mobile number to complete the booking.",
+    confirmed: "Booking Confirmed!",
+    confirmedText: "Your consultation slot has been reserved. Please show this confirmation at the front desk upon arrival.",
+    doctor: "Doctor",
+    dateTime: "Date & Time",
+    location: "Location",
+    reference: "Booking Reference",
+    close: "Close Directory",
+    footerLede: "My Clinic is your partner in health and wellness. With prevention, early intervention, and expert teams, we help you stay healthy and live better.",
+  },
+  ar: {
+    nav: ["الأطباء", "التخصصات", "البرامج", "الاستشارة عن بعد", "الرعاية المنزلية"],
+    bookNow: "احجز الآن",
+    eyebrow: "دليل أطباء ماي كلينك",
+    titleHtml: "ابحث عن <em>طبيبك</em>.",
+    desc: "تصفح ملفات الأطباء واحجز موعدك بسهولة مع نخبة من الاستشاريين والأخصائيين في فروع ماي كلينك.",
+    searchLabel: "ابحث عن طبيب",
+    searchPlaceholder: "ابحث بالاسم أو التخصص أو المؤهل...",
+    branchLabel: "موقع الفرع",
+    specialtyLabel: "التخصص الطبي",
+    chooseBranch: "اختر الفرع",
+    chooseSpecialty: "اختر التخصص",
+    allLocations: "كل الفروع",
+    allSpecialties: "كل التخصصات",
+    count: (n) => `عرض ${n} طبيباً مطابقاً للفلاتر`,
+    noTitle: "لا توجد نتائج",
+    noText: "لم نتمكن من العثور على أطباء مطابقين لبحثك. جرّب تغيير الكلمات أو اختيار فرع أو تخصص مختلف.",
+    speaks: "اللغات:",
+    book: "احجز",
+    viewProfile: "عرض الملف",
+    consultation: "حجز استشارة",
+    schedule: "اختر موعداً مناسباً مع الطبيب",
+    selectDate: "اختر تاريخ الموعد",
+    selectTime: "اختر وقت الموعد",
+    continue: "متابعة البيانات",
+    patientInfo: "بيانات المريض",
+    patientSubtitle: "أدخل بياناتك لتأكيد حجز الموعد",
+    fullName: "الاسم الكامل",
+    fullNamePlaceholder: "أدخل الاسم الكامل",
+    mobile: "رقم الجوال",
+    back: "رجوع",
+    confirm: "تأكيد الموعد",
+    fillAlert: "يرجى إدخال الاسم ورقم الجوال لإكمال الحجز.",
+    confirmed: "تم تأكيد الحجز",
+    confirmedText: "تم حجز موعد الاستشارة. يرجى إبراز بيانات الحجز عند الوصول إلى الاستقبال.",
+    doctor: "الطبيب",
+    dateTime: "التاريخ والوقت",
+    location: "الفرع",
+    reference: "رقم الحجز",
+    close: "إغلاق الدليل",
+    footerLede: "ماي كلينك شريكك في الصحة والعافية، بخدمات وقائية وتشخيص مبكر وفريق طبي متخصص يساعدك على صحة أفضل.",
+  },
+};
+
+const specialtyAr = {
+  "Allergy & Immunology": "الحساسية والمناعة",
+  "Audio-vestibular & Speech": "السمع والتوازن والتخاطب",
+  "Cardiology": "القلب",
+  "Dental": "الأسنان",
+  "Dermatology & Cosmetics": "الأمراض الجلدية والتجميل",
+  "Emergency": "الطوارئ",
+  "Endocrinology & Diabetes": "الغدد الصماء والسكري",
+  "ENT": "الأنف والأذن والحنجرة",
+  "Family Medicine": "طب الأسرة",
+  "Gastroenterology & Hepatology": "الجهاز الهضمي والكبد",
+  "General & Bariatric Surgery": "الجراحة العامة وجراحة السمنة",
+  "General Surgery": "الجراحة العامة",
+  "Geriatric Medicine": "طب كبار السن",
+  "Hematology": "أمراض الدم",
+  "Internal Medicine": "الطب الباطني",
+  "Nephrology": "الكلى",
+  "Neurology": "الأعصاب",
+  "Nutrition": "التغذية",
+  "Obstetrics & Gynecology": "النساء والولادة",
+  "Occupational Medicine": "طب العمل",
+  "Ophthalmology": "العيون",
+  "Orthopedics": "العظام",
+  "Pediatrics": "الأطفال",
+  "Psychiatry & Psychology": "الطب النفسي وعلم النفس",
+  "Pulmonology & Sleep Medicine": "الصدرية وطب النوم",
+  "Rheumatology": "الروماتيزم",
+};
+
+const branchAr = {
+  "Jeddah Al Mohammadiyah": "جدة - المحمدية",
+  "Jeddah Al Mohammadiyah + Dental Center": "جدة - المحمدية + مركز الأسنان",
+  "Jeddah Al Mohammadiyah + Obhour": "جدة - المحمدية + أبحر",
+  "Jeddah Al Safa": "جدة - الصفا",
+  "Jeddah Al Khalidiyyah": "جدة - الخالدية",
+  "Jeddah Al Khalidiyyah Dental Center": "جدة - مركز الخالدية للأسنان",
+  "Riyadh Al Sahafa": "الرياض - الصحافة",
+};
+
+let currentLang = localStorage.getItem("myclinicLang") === "ar" ? "ar" : "en";
+const t = (key) => i18n[currentLang][key];
+const isAr = () => currentLang === "ar";
+const textOf = (value, dict) => (isAr() ? (dict[value] || value) : value);
+const doctorName = (doc) => isAr() ? (doc.nameAr || doc.name) : doc.name;
+const doctorTitle = (doc) => isAr() ? (doc.titleAr || doc.title) : doc.title;
+const doctorSpecialty = (doc) => textOf(doc.specialty, specialtyAr);
+const doctorBranch = (doc) => textOf(doc.branch, branchAr);
+const doctorEducation = (doc) => isAr() ? (doc.educationAr || doc.education) : doc.education;
+const doctorLanguages = (doc) => isAr()
+  ? doc.languages.replace("English", "الإنجليزية").replace("Arabic", "العربية").replace("French", "الفرنسية")
+  : doc.languages;
+
+// Populate custom dropdowns from data
+const _allSpecialties = Array.from(new Set(doctors.map((d) => d.specialty))).sort();
+const _allBranches = Array.from(new Set(doctors.map((d) => d.branch))).sort();
+
+// Hidden inputs keep the existing `branchSelect.value` / `specialtySelect.value` contract
+const _branchHidden = document.getElementById("branchSelect");
+const _specialtyHidden = document.getElementById("specialtySelect");
+
+const _checkSvg = '<svg class="cdd-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+
+function _buildCdd({ items, allLabelKey, listEl, labelEl, hiddenInput, formatter }) {
+  function render() {
+    listEl.innerHTML = "";
+    const current = hiddenInput.value || "All";
+    const mkItem = (value, text) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "cdd-item" + (current === value ? " is-active" : "");
+      b.dataset.value = value;
+      b.innerHTML = `<span>${text}</span>${_checkSvg}`;
+      b.addEventListener("click", (e) => {
+        e.stopPropagation();
+        hiddenInput.value = value;
+        labelEl.textContent = text;
+        labelEl.classList.toggle("is-placeholder", value === "All");
+        hiddenInput.dispatchEvent(new Event("change", { bubbles: true }));
+        // Close panel
+        const trigger = labelEl.closest(".cdd");
+        if (trigger) trigger.setAttribute("aria-expanded", "false");
+        render();
+      });
+      return b;
+    };
+    listEl.appendChild(mkItem("All", t(allLabelKey)));
+    items.forEach((v) => listEl.appendChild(mkItem(v, formatter(v))));
+    labelEl.textContent = current === "All" ? t(allLabelKey) : formatter(current);
+    labelEl.classList.toggle("is-placeholder", current === "All");
+  }
+  render();
+  return { render };
+}
+
+const _branchCdd = _buildCdd({
+  items: _allBranches,
+  allLabelKey: "allLocations",
+  listEl: document.getElementById("cddBranchList"),
+  labelEl: document.getElementById("cddBranchLabel"),
+  hiddenInput: _branchHidden,
+  formatter: (v) => textOf(v, branchAr),
+});
+const _specialtyCdd = _buildCdd({
+  items: _allSpecialties,
+  allLabelKey: "allSpecialties",
+  listEl: document.getElementById("cddSpecialtyList"),
+  labelEl: document.getElementById("cddSpecialtyLabel"),
+  hiddenInput: _specialtyHidden,
+  formatter: (v) => textOf(v, specialtyAr),
+});
+
+// Open/close behaviour + outside-click
+{
+  const triggers = document.querySelectorAll(".cdd");
+  function closeAll() {
+    triggers.forEach((t) => t.setAttribute("aria-expanded", "false"));
+  }
+  triggers.forEach((t) => {
+    t.addEventListener("click", (e) => {
+      if (e.target.closest(".cdd-panel")) return;
+      const isOpen = t.getAttribute("aria-expanded") === "true";
+      closeAll();
+      t.setAttribute("aria-expanded", isOpen ? "false" : "true");
+    });
+    t.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeAll();
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        t.click();
+      }
+    });
+  });
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".cdd")) closeAll();
+  });
+}
+
+// --- legacy mock kept below for reference but unused ---
+const _legacyMockDoctors = [
+  {
+    id: 1,
+    name: "Dr. Hisham Al-Otaibi",
+    specialty: "Cardiology",
+    title: "Consultant Cardiologist",
+    experience: 22,
+    branch: "Jeddah Al Safa",
+    rating: 4.9,
+    reviews: 142,
+    tags: ["Heart Failure", "Interventional"],
+    education: "MD, FACC - Harvard Medical School",
+    languages: "English, Arabic",
+    availability: "Tomorrow, 9:30 AM",
+    img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=500&q=70",
+    bio: "Dr. Hisham Al-Otaibi is a highly accomplished Consultant Cardiologist with over two decades of clinical experience in advanced cardiovascular medicine. He specializes in interventional cardiology, coronary artery disease management, and heart failure treatments. Dr. Hisham is passionate about preventative cardiology, helping patients develop lifelong heart-healthy habits to prevent cardiac events.",
+    expertise: ["Coronary Angioplasty & Stenting", "Heart Failure Management", "Valvular Heart Disease", "Hypertension & Lipid Disorders", "Preventative Cardiac Care"],
+    educationTimeline: [
+      { year: "2004", title: "Fellowship in Interventional Cardiology", school: "Harvard Medical School / MGH" },
+      { year: "2001", title: "Residency in Internal Medicine & Cardiology", school: "Johns Hopkins University Hospital" },
+      { year: "1998", title: "Doctor of Medicine (MD)", school: "King Saud University" }
+    ],
+    memberships: ["Fellow of the American College of Cardiology (FACC)", "Member of the Saudi Heart Association", "Board Certified in Cardiovascular Disease"]
+  },
+  {
+    id: 2,
+    name: "Dr. Reem Al-Qahtani",
+    specialty: "Endocrinology",
+    title: "Consultant Endocrinology & Diabetes",
+    experience: 14,
+    branch: "Riyadh Al Sahafa",
+    rating: 4.8,
+    reviews: 98,
+    tags: ["Diabetes", "Thyroid"],
+    education: "MD - Johns Hopkins University School of Medicine",
+    languages: "English, Arabic",
+    availability: "Today, 4:15 PM",
+    img: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=500&q=70",
+    bio: "Dr. Reem Al-Qahtani is a dedicated Endocrinologist specializing in complex diabetes management, thyroid disorders, and metabolic health. With 14 years of clinical experience, Dr. Reem combines the latest evidence-based therapies with personalized care plans to help patients achieve hormonal balance and metabolic control.",
+    expertise: ["Type 1 & Type 2 Diabetes Care", "Thyroid Nodules & Goiter Management", "Adrenal & Pituitary Disorders", "Metabolic Syndrome & Weight Care", "Gestational Diabetes Treatment"],
+    educationTimeline: [
+      { year: "2012", title: "Fellowship in Endocrinology & Metabolism", school: "Johns Hopkins University School of Medicine" },
+      { year: "2009", title: "Residency in Internal Medicine", school: "University of Maryland Medical Center" },
+      { year: "2006", title: "Doctor of Medicine (MD)", school: "King Abdulaziz University" }
+    ],
+    memberships: ["Member of the American Association of Clinical Endocrinologists (AACE)", "Saudi Society of Endocrinology and Metabolism", "Endocrine Society Board Certified"]
+  },
+  {
+    id: 3,
+    name: "Dr. Khalid Al-Subaie",
+    specialty: "Internal Medicine",
+    title: "Consultant Internal Medicine",
+    experience: 18,
+    branch: "Jeddah Tahlia",
+    rating: 4.7,
+    reviews: 114,
+    tags: ["Primary care", "Hypertension"],
+    education: "MD - Stanford School of Medicine",
+    languages: "English, Arabic",
+    availability: "Wed, 11:00 AM",
+    img: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=500&q=70",
+    bio: "Dr. Khalid Al-Subaie is an experienced Consultant in Internal Medicine, focusing on comprehensive adult primary care, hypertension management, and preventative health screenings. He is dedicated to diagnosing and treating complex chronic diseases, promoting patient education, and providing holistic wellness advice.",
+    expertise: ["Chronic Disease Management", "Hypertension & Cardiovascular Risk Assessment", "Preventative Health Screenings", "Geriatric Medicine", "Infectious Disease Care"],
+    educationTimeline: [
+      { year: "2008", title: "Residency in Internal Medicine", school: "Stanford University School of Medicine" },
+      { year: "2005", title: "Clinical Internship", school: "San Francisco General Hospital" },
+      { year: "2004", title: "Doctor of Medicine (MD)", school: "King Saud University" }
+    ],
+    memberships: ["Fellow of the American College of Physicians (FACP)", "Saudi Commission for Health Specialties (SCFHS) Consultant", "Member of the Society of General Internal Medicine"]
+  },
+  {
+    id: 4,
+    name: "Dr. Noor Bakhsh",
+    specialty: "Obstetrics & Gynecology",
+    title: "Consultant Obstetrics & Gynecology",
+    experience: 11,
+    branch: "Jeddah Al Khalidiyyah Dental Center",
+    rating: 4.9,
+    reviews: 182,
+    tags: ["Antenatal", "High-risk"],
+    education: "MD - King Abdulaziz University",
+    languages: "English, Arabic",
+    availability: "Tomorrow, 2:00 PM",
+    img: "https://images.unsplash.com/photo-1638202993928-7267aad84c31?auto=format&fit=crop&w=500&q=70",
+    bio: "Dr. Noor Bakhsh is a highly sought-after Consultant in Obstetrics & Gynecology with a specialization in high-risk pregnancies, prenatal care, and minimally invasive laparoscopic surgery. With 11 years of experience, Dr. Noor is committed to providing compassionate, supportive, and top-tier healthcare for women at every stage of life.",
+    expertise: ["High-Risk Pregnancy Management", "Minimally Invasive Gynecologic Surgery", "Antenatal & Postnatal Care", "Polycystic Ovary Syndrome (PCOS)", "Menopause & Hormonal Support"],
+    educationTimeline: [
+      { year: "2015", title: "Fellowship in Maternal-Fetal Medicine", school: "King Faisal Specialist Hospital" },
+      { year: "2012", title: "Residency in Obstetrics & Gynecology", school: "King Abdulaziz University Hospital" },
+      { year: "2009", title: "Doctor of Medicine (MD)", school: "King Abdulaziz University" }
+    ],
+    memberships: ["Member of the Royal College of Obstetricians and Gynaecologists (MRCOG)", "Saudi Obstetrics & Gynecological Society (SOGS)", "Certified in Advanced Gynecologic Laparoscopy"]
+  },
+  {
+    id: 5,
+    name: "Dr. Yousef Al-Harbi",
+    specialty: "Orthopedic Surgery",
+    title: "Consultant Orthopedic Surgeon",
+    experience: 19,
+    branch: "Jeddah Al Mohammadiyah",
+    rating: 4.8,
+    reviews: 87,
+    tags: ["Knee", "Sports Medicine"],
+    education: "MD - McGill University",
+    languages: "English, Arabic",
+    availability: "Thu, 10:30 AM",
+    img: "https://images.unsplash.com/photo-1612531822380-fc73a39a4bbe?auto=format&fit=crop&w=500&q=70",
+    bio: "Dr. Yousef Al-Harbi is a prominent Consultant Orthopedic Surgeon who specializes in joint replacement surgery, sports medicine, and arthroscopic knee and shoulder reconstructions. Over his 19-year career, he has helped thousands of patients regain mobility, manage joint pain, and return to active, healthy lifestyles.",
+    expertise: ["Total Knee & Hip Replacement", "Arthroscopic Knee Reconstruction (ACL)", "Rotator Cuff Repair & Shoulder Arthroscopy", "Sports Injuries & Rehabilitation", "Osteoarthritis Treatment"],
+    educationTimeline: [
+      { year: "2007", title: "Fellowship in Adult Joint Reconstruction", school: "McGill University Health Centre" },
+      { year: "2004", title: "Residency in Orthopedic Surgery", school: "University of Toronto Hospital" },
+      { year: "2001", title: "Doctor of Medicine (MD)", school: "King Saud University" }
+    ],
+    memberships: ["Fellow of the Royal College of Surgeons of Canada (FRCSC)", "Saudi Orthopaedic Association (SOA)", "International Society of Arthroscopy & Knee Surgery"]
+  },
+  {
+    id: 6,
+    name: "Dr. Sara Al-Faris",
+    specialty: "Pediatrics",
+    title: "Consultant Pediatrician",
+    experience: 9,
+    branch: "Riyadh Al Sahafa",
+    rating: 4.9,
+    reviews: 156,
+    tags: ["Newborn", "Vaccines"],
+    education: "MD - University of Toronto",
+    languages: "English, Arabic",
+    availability: "Today, 6:00 PM",
+    img: "https://images.unsplash.com/photo-1651008376811-b90baee60c1f?auto=format&fit=crop&w=500&q=70",
+    bio: "Dr. Sara Al-Faris is a passionate Consultant Pediatrician who provides complete developmental and medical care for infants, children, and adolescents. She specializes in pediatric asthma management, newborn care, childhood nutrition, and routine immunizations, ensuring a friendly and stress-free environment for young families.",
+    expertise: ["Newborn Care & Prematurity Follow-up", "Pediatric Asthma & Allergies", "Childhood Development & Growth Monitoring", "Immunizations & Preventative Care", "Pediatric Nutrition Counselling"],
+    educationTimeline: [
+      { year: "2017", title: "Fellowship in General Pediatrics", school: "Hospital for Sick Children (SickKids), Toronto" },
+      { year: "2014", title: "Residency in Pediatrics", school: "King Faisal Specialist Hospital" },
+      { year: "2011", title: "Doctor of Medicine (MD)", school: "King Saud University" }
+    ],
+    memberships: ["Fellow of the Canadian Paediatric Society (FCPS)", "Member of the American Academy of Pediatrics (AAP)", "Saudi Pediatric Association"]
+  },
+  {
+    id: 7,
+    name: "Dr. Layla Mansour",
+    specialty: "Dermatology",
+    title: "Consultant Dermatologist",
+    experience: 12,
+    branch: "Jeddah Tahlia",
+    rating: 4.9,
+    reviews: 104,
+    tags: ["Acne", "Laser Therapy"],
+    education: "MD - Boston University School of Medicine",
+    languages: "English, Arabic, French",
+    availability: "Tomorrow, 11:00 AM",
+    img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=500&q=70",
+    bio: "Dr. Layla Mansour is an expert Consultant Dermatologist specializing in clinical dermatology, acne treatments, skin cancer screenings, and advanced cosmetic/laser therapies. She is committed to delivering custom-tailored skin treatments to restore and maintain skin health and natural beauty.",
+    expertise: ["Advanced Acne & Scar Treatments", "Laser Skin Resurfacing & Therapy", "Eczema, Psoriasis & Rosacea Management", "Botox & Filler Aesthetics", "Skin Cancer Screening & Mole Removal"],
+    educationTimeline: [
+      { year: "2014", title: "Fellowship in Cosmetic Dermatology & Lasers", school: "Boston University School of Medicine" },
+      { year: "2011", title: "Residency in Dermatology", school: "Tufts Medical Center, Boston" },
+      { year: "2008", title: "Doctor of Medicine (MD)", school: "King Faisal University" }
+    ],
+    memberships: ["Diplomate of the American Board of Dermatology", "Fellow of the American Academy of Dermatology (FAAD)", "Saudi Society of Dermatology and Dermatologic Surgery"]
+  },
+  {
+    id: 8,
+    name: "Dr. Tariq Al-Masoud",
+    specialty: "Ophthalmology",
+    title: "Consultant Ophthalmologist",
+    experience: 16,
+    branch: "Riyadh Al Sahafa",
+    rating: 4.6,
+    reviews: 73,
+    tags: ["LASIK", "Cataract Surgery"],
+    education: "MD - University of London",
+    languages: "English, Arabic",
+    availability: "Mon, 9:00 AM",
+    img: "https://images.unsplash.com/photo-1607990283143-e81e7a2c93ab?auto=format&fit=crop&w=500&q=70",
+    bio: "Dr. Tariq Al-Masoud is an experienced Consultant Ophthalmologist who specializes in refractive surgery (LASIK/PRK), cataract extraction, and glaucoma management. Using state-of-the-art diagnostic and surgical technologies, Dr. Tariq ensures his patients receive the highest standard of vision correction care.",
+    expertise: ["LASIK & Refractive Vision Correction", "Cataract Surgery (Phacoemulsification)", "Glaucoma Diagnosis & Laser Treatment", "Corneal Diseases & Dry Eye Management", "Diabetic Retinopathy Screening"],
+    educationTimeline: [
+      { year: "2010", title: "Fellowship in Cornea & Refractive Surgery", school: "Moorfields Eye Hospital, London" },
+      { year: "2007", title: "Residency in Ophthalmology", school: "King Khaled Eye Specialist Hospital" },
+      { year: "2004", title: "Doctor of Medicine (MD)", school: "King Saud University" }
+    ],
+    memberships: ["Fellow of the Royal College of Ophthalmologists (FRCOphth, London)", "Saudi Ophthalmological Society (SOS)", "European Society of Cataract and Refractive Surgeons"]
+  },
+  {
+    id: 9,
+    name: "Dr. Faisal Al-Mutairi",
+    specialty: "Dentistry",
+    title: "Consultant Orthodontist & Dental Implants",
+    experience: 15,
+    branch: "Jeddah Al Khalidiyyah Dental Center",
+    rating: 4.9,
+    reviews: 132,
+    tags: ["Invisalign", "Dental Implants"],
+    education: "DDS, MS - Boston University",
+    languages: "English, Arabic",
+    availability: "Tomorrow, 10:00 AM",
+    img: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=500&q=70",
+    bio: "Dr. Faisal Al-Mutairi is a distinguished Consultant Orthodontist and Implantologist at our premium Al Khalidiyyah Dental Center. With 15 years of experience in aesthetic smile designs, invisible braces (Invisalign), and advanced dental implantology, Dr. Faisal is dedicated to restoring confidence and outstanding oral health.",
+    expertise: ["Invisalign & Clear Aligners", "Advanced Dental Implantology", "Cosmetic Smile Makeovers", "Root Canal Therapy", "Pediatric Dental Care"],
+    educationTimeline: [
+      { year: "2013", title: "Master of Science in Orthodontics", school: "Boston University Henry M. Goldman School of Dental Medicine" },
+      { year: "2011", title: "Residency in General Dentistry", school: "Tufts University School of Dental Medicine" },
+      { year: "2008", title: "Doctor of Dental Surgery (DDS)", school: "King Saud University" }
+    ],
+    memberships: ["Member of the American Association of Orthodontists", "Fellow of the International Congress of Oral Implantologists (ICOI)", "Saudi Dental Society"]
+  },
+  {
+    id: 10,
+    name: "Dr. Mona Al-Ahmad",
+    specialty: "ENT",
+    title: "Consultant Otolaryngologist",
+    experience: 12,
+    branch: "Jeddah Tahlia",
+    rating: 4.8,
+    reviews: 84,
+    tags: ["Sinus Surgery", "Hearing Loss"],
+    education: "MD - University of Paris",
+    languages: "English, Arabic, French",
+    availability: "Wed, 2:30 PM",
+    img: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=500&q=70",
+    bio: "Dr. Mona Al-Ahmad is a leading Consultant Ear, Nose, and Throat (ENT) specialist with extensive training in micro-ear surgeries, endoscopic sinus procedures, and advanced treatment for hearing and balance disorders. She delivers personalized care for both adult and pediatric patients.",
+    expertise: ["Functional Endoscopic Sinus Surgery (FESS)", "Tympanoplasty & Ear Micro-surgery", "Hearing & Balance Assessments", "Snoring & Sleep Apnea Therapy", "Pediatric ENT Care (Tonsillectomy)"],
+    educationTimeline: [
+      { year: "2016", title: "Fellowship in Rhinology & Sinus Surgery", school: "Sorbonne University, Paris" },
+      { year: "2013", title: "Residency in Otolaryngology", school: "Paris Descartes University Hospital" },
+      { year: "2010", title: "Doctor of Medicine (MD)", school: "King Abdulaziz University" }
+    ],
+    memberships: ["Member of the French Society of ENT (SFORL)", "Saudi Otorhinolaryngology Society", "Board Certified in Otolaryngology - Head and Neck Surgery"]
+  },
+  {
+    id: 11,
+    name: "Dr. Waleed Al-Saeed",
+    specialty: "Rheumatology",
+    title: "Consultant Rheumatologist",
+    experience: 16,
+    branch: "Jeddah Al Safa",
+    rating: 4.7,
+    reviews: 90,
+    tags: ["Arthritis", "Osteoporosis"],
+    education: "MD - McGill University",
+    languages: "English, Arabic",
+    availability: "Tomorrow, 11:30 AM",
+    img: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=500&q=70",
+    bio: "Dr. Waleed Al-Saeed is a highly regarded Consultant Rheumatologist specializing in the diagnosis and management of systemic autoimmune diseases, arthritis, and osteoporosis. Dr. Waleed focuses on early diagnostic screening and utilizing the latest biological therapies to improve patient mobility and lifestyle.",
+    expertise: ["Rheumatoid & Psoriatic Arthritis", "Osteoporosis Prevention & Management", "Systemic Lupus Erythematosus (SLE)", "Gout & Pseudogout Treatment", "Intra-articular Joint Injections"],
+    educationTimeline: [
+      { year: "2012", title: "Fellowship in Rheumatology", school: "McGill University Health Centre" },
+      { year: "2009", title: "Residency in Internal Medicine", school: "University of Toronto Hospital" },
+      { year: "2006", title: "Doctor of Medicine (MD)", school: "King Saud University" }
+    ],
+    memberships: ["Fellow of the American College of Rheumatology (FACR)", "Saudi Society for Rheumatology", "Royal College of Physicians and Surgeons of Canada Certified"]
+  }
+];
+
+// App State
+let selectedDoctor = null;
+let selectedDate = null;
+let selectedTime = null;
+
+// DOM Elements
+const searchInput = document.getElementById('searchInput');
+const branchSelect = document.getElementById('branchSelect');
+const specialtySelect = document.getElementById('specialtySelect');
+const resultsCount = document.querySelector('.results-count');
+const doctorContainer = document.getElementById('doctorContainer');
+
+const bookingModal = document.getElementById('bookingModal');
+const modalCloseBtn = document.getElementById('modalCloseBtn');
+const bookingDocDetails = document.getElementById('bookingDocDetails');
+
+const modalStep1 = document.getElementById('modalStep1');
+const modalStep2 = document.getElementById('modalStep2');
+const modalStep3 = document.getElementById('modalStep3');
+
+const datePicker = document.getElementById('datePicker');
+const timeGrid = document.getElementById('timeGrid');
+const continueToFormBtn = document.getElementById('continueToFormBtn');
+const backToSlotsBtn = document.getElementById('backToSlotsBtn');
+const confirmBookingBtn = document.getElementById('confirmBookingBtn');
+const successCloseBtn = document.getElementById('successCloseBtn');
+
+const patientNameInput = document.getElementById('patientName');
+const patientPhoneInput = document.getElementById('patientPhone');
+
+const summaryDoc = document.getElementById('summaryDoc');
+const summaryTime = document.getElementById('summaryTime');
+const summaryBranch = document.getElementById('summaryBranch');
+const summaryCode = document.getElementById('summaryCode');
+
+// Generate Next 5 Days for picker
+function generateDatePicker() {
+  datePicker.innerHTML = '';
+  const days = isAr()
+    ? ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت']
+    : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const months = isAr()
+    ? ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر']
+    : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  
+  for (let i = 1; i <= 5; i++) {
+    const d = new Date();
+    d.setDate(d.getDate() + i);
+    
+    // Skip Fridays (typical weekend in Saudi Arabia, or just mock active days)
+    if (d.getDay() === 5) {
+      d.setDate(d.getDate() + 1);
+    }
+    
+    const chip = document.createElement('div');
+    chip.className = 'date-chip';
+    chip.dataset.date = `${months[d.getMonth()]} ${d.getDate()}`;
+    chip.innerHTML = `
+      <div class="day-name">${days[d.getDay()]}</div>
+      <div class="day-num">${d.getDate()}</div>
+    `;
+    
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.date-chip').forEach(el => el.classList.remove('active'));
+      chip.classList.add('active');
+      selectedDate = chip.dataset.date;
+      validateSlotSelection();
+    });
+    
+    datePicker.appendChild(chip);
+  }
+}
+
+// Generate morning & afternoon slots
+const timeSlots = ["09:00 AM", "09:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "01:30 PM", "02:00 PM", "02:30 PM", "03:00 PM"];
+function generateTimeSlots() {
+  timeGrid.innerHTML = '';
+  timeSlots.forEach(slot => {
+    const chip = document.createElement('div');
+    chip.className = 'time-chip';
+    chip.textContent = slot;
+    
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.time-chip').forEach(el => el.classList.remove('active'));
+      chip.classList.add('active');
+      selectedTime = slot;
+      validateSlotSelection();
+    });
+    
+    timeGrid.appendChild(chip);
+  });
+}
+
+function validateSlotSelection() {
+  if (selectedDate && selectedTime) {
+    continueToFormBtn.removeAttribute('disabled');
+  } else {
+    continueToFormBtn.setAttribute('disabled', 'true');
+  }
+}
+
+// Filter and Render Doctors
+function renderDoctors() {
+  const query = searchInput.value.toLowerCase().trim();
+  const selectedBranch = branchSelect.value;
+  const selectedSpecialty = specialtySelect.value;
+  
+  const filtered = doctors.filter(doc => {
+    const haystack = [
+      doc.name,
+      doc.nameAr,
+      doc.specialty,
+      specialtyAr[doc.specialty],
+      doc.title,
+      doc.titleAr,
+      doc.education,
+      doc.educationAr,
+      doc.branch,
+      branchAr[doc.branch],
+      doc.languages,
+      ...doc.tags,
+    ].filter(Boolean).join(" ").toLowerCase();
+    const matchesQuery = !query || haystack.includes(query);
+                         
+    const matchesBranch = selectedBranch === 'All' || doc.branch === selectedBranch;
+    const matchesSpecialty = selectedSpecialty === 'All' || doc.specialty === selectedSpecialty;
+    
+    return matchesQuery && matchesBranch && matchesSpecialty;
+  });
+  
+  resultsCount.innerHTML = t("count")(filtered.length).replace(String(filtered.length), `<b id="matchCount">${filtered.length}</b>`);
+  doctorContainer.innerHTML = '';
+  
+  if (filtered.length === 0) {
+    doctorContainer.innerHTML = `
+      <div style="text-align: center; padding: 60px 20px; background: #fff; border-radius: var(--radius-md); border: 1px solid var(--line-cool); color: var(--mute);">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-bottom: 16px; opacity: 0.5;"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6M9 9l6 6"/></svg>
+        <h3 style="font-family: ${isAr() ? "var(--ar)" : "var(--serif)"}; font-size: 24px; color: var(--navy-ink); margin-bottom: 8px;">${t("noTitle")}</h3>
+        <p style="font-size: 14px; max-width: 380px; margin: 0 auto;">${t("noText")}</p>
+      </div>
+    `;
+    return;
+  }
+  
+  filtered.forEach(doc => {
+    const card = document.createElement('div');
+    card.className = 'doctor-ad-card';
+    
+    // Build tags string
+    const tagsHtml = doc.tags.map(t => `<span class="doctor-ad-tag">${t}</span>`).join('');
+    
+    const ratingHtml = doc.rating
+      ? `<div class="doctor-ad-rating">
+          <span class="stars">★★★★★</span>
+          <span class="review-count">${doc.rating} (${doc.reviews})</span>
+        </div>`
+      : "";
+    const experienceHtml = doc.experience
+      ? `<div class="doctor-ad-detail-item hide-mobile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 2v18"/></svg>
+          <span class="truncate">${doc.experience} Years Experience</span>
+        </div>`
+      : (doctorEducation(doc) ? `<div class="doctor-ad-detail-item hide-mobile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 2v18"/></svg>
+          <span class="truncate">${doctorEducation(doc)}</span>
+        </div>` : "");
+    const availabilityHtml = doc.availability
+      ? `<div class="doctor-ad-avail-box">
+          <div class="doctor-ad-avail-label">Next Slot</div>
+          <div class="doctor-ad-avail-time">
+            <span class="doctor-ad-pulse"></span>
+            ${doc.availability.split(',')[0]}
+          </div>
+        </div>`
+      : "";
+
+    card.innerHTML = `
+      <div class="doctor-ad-header">
+        <a href="/doctor-details.html?slug=${doc.slug}" class="doctor-ad-photo-link">
+          <img src="${doc.img}" alt="${doc.name}">
+        </a>
+        ${ratingHtml}
+      </div>
+
+      <div class="doctor-ad-center">
+        <span class="doctor-ad-specialty-badge">${doctorSpecialty(doc)}</span>
+        <h4 class="doctor-ad-name"><a href="/doctor-details.html?slug=${doc.slug}">${doctorName(doc)}</a></h4>
+        <div class="doctor-ad-subtext">${doctorTitle(doc)}</div>
+
+        <div class="doctor-ad-tags hide-mobile">
+          ${tagsHtml}
+        </div>
+      </div>
+
+      <div class="doctor-ad-details">
+        <div class="doctor-ad-detail-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span class="truncate">${doctorBranch(doc)}</span>
+        </div>
+        ${experienceHtml}
+        <div class="doctor-ad-detail-item hide-mobile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6 6-6"/><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2Z"/></svg>
+          <span class="truncate">${t("speaks")} ${doctorLanguages(doc)}</span>
+        </div>
+      </div>
+
+      <div class="doctor-ad-right">
+        ${availabilityHtml}
+        <button class="doctor-ad-btn primary book-btn-trigger" data-id="${doc.id}">${t("book")}</button>
+        <a href="/doctor-details.html?slug=${doc.slug}" class="doctor-ad-btn secondary hide-mobile">${t("viewProfile")}</a>
+      </div>
+    `;
+    
+    // Add event listener to Book button
+    card.querySelector('.book-btn-trigger').addEventListener('click', () => {
+      openBookingModal(doc);
+    });
+    
+    doctorContainer.appendChild(card);
+  });
+}
+
+// Modal open/close controls
+function openBookingModal(doc) {
+  selectedDoctor = doc;
+  selectedDate = null;
+  selectedTime = null;
+  
+  // Set values
+  bookingDocDetails.innerHTML = `<b>${doctorName(doc)}</b> · ${doctorSpecialty(doc)} · ${doctorBranch(doc)}`;
+  generateDatePicker();
+  generateTimeSlots();
+  
+  // Reset buttons & states
+  continueToFormBtn.setAttribute('disabled', 'true');
+  patientNameInput.value = '';
+  patientPhoneInput.value = '';
+  
+  // Switch to Step 1
+  modalStep1.classList.add('active');
+  modalStep2.classList.remove('active');
+  modalStep3.classList.remove('active');
+  
+  bookingModal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeBookingModal() {
+  bookingModal.classList.remove('active');
+  document.body.style.overflow = 'auto';
+  selectedDoctor = null;
+}
+
+// Modal step transitions
+continueToFormBtn.addEventListener('click', () => {
+  modalStep1.classList.remove('active');
+  modalStep2.classList.add('active');
+});
+
+backToSlotsBtn.addEventListener('click', () => {
+  modalStep2.classList.remove('active');
+  modalStep1.classList.add('active');
+});
+
+confirmBookingBtn.addEventListener('click', () => {
+  const name = patientNameInput.value.trim();
+  const phone = patientPhoneInput.value.trim();
+  
+  if (!name || !phone) {
+    alert(t("fillAlert"));
+    return;
+  }
+  
+  // Mock booking reference code
+  const refCode = "MC-" + Math.floor(100000 + Math.random() * 900000);
+  
+  // Set summary values
+  summaryDoc.textContent = doctorName(selectedDoctor);
+  summaryTime.textContent = `${selectedDate} · ${selectedTime}`;
+  summaryBranch.textContent = doctorBranch(selectedDoctor);
+  summaryCode.textContent = refCode;
+  
+  modalStep2.classList.remove('active');
+  modalStep3.classList.add('active');
+});
+
+// Event Listeners for Filters
+searchInput.addEventListener('input', renderDoctors);
+branchSelect.addEventListener('change', renderDoctors);
+specialtySelect.addEventListener('change', renderDoctors);
+
+modalCloseBtn.addEventListener('click', closeBookingModal);
+successCloseBtn.addEventListener('click', closeBookingModal);
+
+// Close modal when clicking outside box
+bookingModal.addEventListener('click', (e) => {
+  if (e.target === bookingModal) {
+    closeBookingModal();
+  }
+});
+
+function setFieldLabel(fieldIndex, text) {
+  const label = document.querySelectorAll(".filter-field label")[fieldIndex];
+  if (!label) return;
+  const svg = label.querySelector("svg");
+  label.textContent = "";
+  if (svg) label.appendChild(svg);
+  label.append(document.createTextNode(` ${text}`));
+}
+
+function applyLanguage(lang) {
+  currentLang = lang === "ar" ? "ar" : "en";
+  localStorage.setItem("myclinicLang", currentLang);
+  document.documentElement.lang = currentLang;
+  document.documentElement.dir = isAr() ? "rtl" : "ltr";
+  document.body.classList.toggle("lang-ar", isAr());
+
+  document.querySelectorAll(".lang-pill button").forEach((button) => {
+    const active = button.textContent.trim().toLowerCase() === currentLang;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+
+  document.querySelectorAll(".nav-links a").forEach((link, index) => {
+    if (i18n[currentLang].nav[index]) link.textContent = i18n[currentLang].nav[index];
+  });
+  document.querySelector(".nav-right .btn.primary").textContent = t("bookNow");
+  document.querySelector(".subpage-eyebrow").textContent = t("eyebrow");
+  document.querySelector(".subpage-title").innerHTML = t("titleHtml");
+  document.querySelector(".subpage-desc").textContent = t("desc");
+  searchInput.placeholder = t("searchPlaceholder");
+  setFieldLabel(0, t("searchLabel"));
+  setFieldLabel(1, t("branchLabel"));
+  setFieldLabel(2, t("specialtyLabel"));
+  document.querySelector("#cddBranchPanel .cdd-panel-head").textContent = t("chooseBranch");
+  document.querySelector("#cddSpecialtyPanel .cdd-panel-head").textContent = t("chooseSpecialty");
+  _branchCdd.render();
+  _specialtyCdd.render();
+
+  document.querySelector("footer p.lede").textContent = t("footerLede");
+  document.querySelector("#modalStep1 .modal-title").textContent = t("consultation");
+  if (!selectedDoctor) bookingDocDetails.textContent = t("schedule");
+  document.querySelector("#modalStep1 [style*='text-transform']").textContent = t("selectDate");
+  document.querySelectorAll("#modalStep1 [style*='text-transform']")[1].textContent = t("selectTime");
+  continueToFormBtn.textContent = t("continue");
+  document.querySelector("#modalStep2 .modal-title").textContent = t("patientInfo");
+  document.querySelector("#modalStep2 .modal-subtitle").textContent = t("patientSubtitle");
+  document.querySelector("label[for='patientName']").textContent = t("fullName");
+  patientNameInput.placeholder = t("fullNamePlaceholder");
+  document.querySelector("label[for='patientPhone']").textContent = t("mobile");
+  backToSlotsBtn.textContent = t("back");
+  confirmBookingBtn.textContent = t("confirm");
+  document.querySelector("#modalStep3 .modal-title").textContent = t("confirmed");
+  document.querySelector("#modalStep3 .modal-subtitle").textContent = t("confirmedText");
+  const successLabels = document.querySelectorAll(".success-label");
+  [t("doctor"), t("dateTime"), t("location"), t("reference")].forEach((label, index) => {
+    if (successLabels[index]) successLabels[index].textContent = label;
+  });
+  successCloseBtn.textContent = t("close");
+  if (selectedDoctor) {
+    bookingDocDetails.innerHTML = `<b>${doctorName(selectedDoctor)}</b> · ${doctorSpecialty(selectedDoctor)} · ${doctorBranch(selectedDoctor)}`;
+    summaryDoc.textContent = doctorName(selectedDoctor);
+    summaryBranch.textContent = doctorBranch(selectedDoctor);
+    generateDatePicker();
+    generateTimeSlots();
+  }
+  renderDoctors();
+}
+
+// Init on Load
+document.addEventListener('DOMContentLoaded', () => {
+  // Parse URL parameters for pre-filtering
+  const urlParams = new URLSearchParams(window.location.search);
+  const specialtyParam = urlParams.get('specialty');
+  const branchParam = urlParams.get('branch');
+  const searchParam = urlParams.get('search');
+
+  if (searchParam) {
+    searchInput.value = searchParam;
+  }
+
+  function _matchFromList(param, list) {
+    if (!param) return 'All';
+    const p = param.toLowerCase();
+    for (const v of list) {
+      const vl = v.toLowerCase();
+      if (vl === p || p.includes(vl) || vl.includes(p)) return v;
+    }
+    return 'All';
+  }
+
+  if (specialtyParam) {
+    const matched = _matchFromList(specialtyParam, _allSpecialties);
+    specialtySelect.value = matched;
+    document.getElementById('cddSpecialtyLabel').textContent = matched === 'All' ? t('allSpecialties') : textOf(matched, specialtyAr);
+    document.getElementById('cddSpecialtyLabel').classList.toggle('is-placeholder', matched === 'All');
+    _specialtyCdd.render();
+  }
+
+  if (branchParam) {
+    const matched = _matchFromList(branchParam, _allBranches);
+    branchSelect.value = matched;
+    document.getElementById('cddBranchLabel').textContent = matched === 'All' ? t('allLocations') : textOf(matched, branchAr);
+    document.getElementById('cddBranchLabel').classList.toggle('is-placeholder', matched === 'All');
+    _branchCdd.render();
+  }
+
+  applyLanguage(currentLang);
+  
+  // Shrink Nav scroll listener
+  const nav = document.querySelector('.nav');
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    }, { passive: true });
+  }
+
+  // Language switcher pill
+  const langPill = document.querySelector('.lang-pill');
+  if (langPill) {
+    langPill.addEventListener('click', (event) => {
+      const target = event.target.closest('button');
+      if (!target) return;
+      applyLanguage(target.textContent.trim().toLowerCase());
+    });
+  }
+});
+</script>
+
+</body>
+</html>
