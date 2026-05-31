@@ -94,16 +94,28 @@
       { id: 'sahafa', name: 'Riyadh · Al Sahafa', addr: 'Anas Bin Malik Rd, Al Sahafa District', hours: 'Open until 10 PM', specialties: 16, doctors: 54, lat: 24.8246, lng: 46.6516 },
       { id: 'tahlia', name: 'Jeddah · Tahlia', addr: 'Prince Mohammed Bin Abdulaziz St, Tahlia', hours: 'Open until 10 PM', specialties: 11, doctors: 32, lat: 21.5780, lng: 39.1325 }
     ];
-    var specWord = function (b) { return b.specialties === 1 ? 'specialty' : 'specialties'; };
-    var docWord = function (b) { return b.id === 'khalidiyyah' ? 'dentists' : 'doctors'; };
+    var isArabic = document.documentElement.lang === 'ar' || document.documentElement.dir === 'rtl' || document.body.classList.contains('lang-ar');
+    function localize(value) {
+      var dict = window.MyClinicTranslations && window.MyClinicTranslations.ar;
+      if (isArabic && dict && dict[value]) return dict[value];
+      return value;
+    }
+    var specWord = function (b) {
+      if (!isArabic) return b.specialties === 1 ? 'specialty' : 'specialties';
+      return b.specialties === 1 ? 'تخصص واحد' : 'تخصصاً';
+    };
+    var docWord = function (b) {
+      if (!isArabic) return b.id === 'khalidiyyah' ? 'dentists' : 'doctors';
+      return b.id === 'khalidiyyah' ? 'طبيب أسنان' : 'طبيباً';
+    };
 
     // Render list
     listEl.innerHTML = branches.map(function (b, i) {
       return '<button class="m-loc' + (i === 0 ? ' active' : '') + '" data-branch="' + b.id + '">' +
-        '<div class="name">' + b.name + '</div>' +
-        '<div class="addr">' + b.addr + '</div>' +
-        '<div class="meta"><span class="open">● ' + b.hours + '</span>' +
-        '<span><b>' + b.specialties + '</b> ' + specWord(b) + '</span>' +
+        '<div class="name">' + localize(b.name) + '</div>' +
+        '<div class="addr">' + localize(b.addr) + '</div>' +
+        '<div class="meta"><span class="open">● ' + localize(b.hours) + '</span>' +
+        '<span>' + (b.specialties === 1 && isArabic ? specWord(b) : '<b>' + b.specialties + '</b> ' + specWord(b)) + '</span>' +
         '<span><b>' + b.doctors + '</b> ' + docWord(b) + '</span></div></button>';
     }).join('');
 
@@ -124,9 +136,10 @@
       }
     }
 
-    listEl.querySelectorAll('.m-loc').forEach(function (btn) {
+    listEl.querySelectorAll('.m-loc').forEach(function (btn, index) {
       btn.addEventListener('click', function () {
         var id = btn.dataset.branch;
+        locIndex = index;
         selectBranch(id, 'list');
         if (mapReady && markers) {
           var entry = markers.find(function (m) { return m.branch.id === id; });
@@ -134,6 +147,25 @@
         }
       });
     });
+
+    var locButtons = Array.prototype.slice.call(listEl.querySelectorAll('.m-loc'));
+    var locIndex = 0;
+    var locPaused = false;
+    function startLocCarousel() {
+      if (locButtons.length < 2) return;
+      setInterval(function () {
+        if (locPaused || window.matchMedia('(min-width: 901px)').matches) return;
+        locIndex = (locIndex + 1) % locButtons.length;
+        var btn = locButtons[locIndex];
+        selectBranch(btn.dataset.branch, 'auto');
+        btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }, 3600);
+    }
+    listEl.addEventListener('touchstart', function () { locPaused = true; }, { passive: true });
+    listEl.addEventListener('touchend', function () { setTimeout(function () { locPaused = false; }, 2500); }, { passive: true });
+    listEl.addEventListener('pointerenter', function () { locPaused = true; });
+    listEl.addEventListener('pointerleave', function () { locPaused = false; });
+    startLocCarousel();
 
     function buildMap() {
       if (mapReady || !mapEl || typeof L === 'undefined') return;
@@ -156,7 +188,7 @@
           iconSize: [28, 28], iconAnchor: [14, 14], popupAnchor: [0, -16]
         });
         var marker = L.marker([b.lat, b.lng], { icon: icon }).addTo(map);
-        marker.bindPopup('<div class="pop-name">' + b.name + '</div><div class="pop-addr">' + b.addr + '</div>' +
+        marker.bindPopup('<div class="pop-name">' + localize(b.name) + '</div><div class="pop-addr">' + localize(b.addr) + '</div>' +
           '<div class="pop-meta"><span><b>' + b.specialties + '</b> ' + specWord(b) + '</span><span><b>' + b.doctors + '</b> ' + docWord(b) + '</span></div>',
           { closeButton: true, autoPan: true, offset: [0, -4] });
         marker.on('click', function () { selectBranch(b.id, 'marker'); });
