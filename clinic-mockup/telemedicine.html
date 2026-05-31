@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/shared.css">
+<link rel="stylesheet" href="/assets/telemedicine.css">
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <style>
   :root {
@@ -661,178 +662,350 @@
 </nav>
 
 <main>
-  <!-- Hero Section -->
-  <header class="subpage-hero">
-    <div class="wrap">
-      <div class="subpage-hero-inner">
-        <div class="subpage-eyebrow">Digital Healthcare Delivery</div>
-        <h1 class="subpage-title">Virtual Care. <em>Real doctors.</em></h1>
-        <p class="subpage-desc">Connect with our board-certified medical and surgical consultants from the comfort of your home, office, or while traveling. High-definition video consultations, digital prescriptions, and continuous care coordination in just a few taps.</p>
-        <div class="hero-buttons">
-          <a href="/find-a-doctor.html?telemedicine=true" class="btn white">Book Virtual Consultation</a>
-          <a href="#howItWorks" class="btn outline">See How It Works</a>
+
+<!-- ════════════════ DESKTOP LAYOUT ════════════════ -->
+<div class="td">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="twrap">
+      <div class="hero-grid">
+        <div class="hero-l fade in">
+          <div class="h-eyebrow">Telemedicine · Virtual Care</div>
+          <h1 class="h-title">See a doctor<br><em>in minutes,</em> <span class="nb">anywhere.</span></h1>
+          <p class="h-sub">Connect by secure video with SCFHS-licensed My Clinic physicians — diagnosis, e-prescriptions, sick notes and specialist referrals, all from your phone. No commute, no waiting room.</p>
+          <p class="h-trans">Connect by video with certified physicians in minutes — diagnosis, e-prescriptions and medical reports, all from your phone.</p>
+          <div class="h-ctas">
+            <a href="/find-a-doctor.html?telemedicine=true" class="tbtn primary">Start a video consult
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a href="https://wa.me/966542228111" target="_blank" class="tbtn wa">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24z"/></svg>WhatsApp us</a>
+          </div>
+          <div class="h-trust">
+            <div class="stat"><span class="n">12<sup>min</sup></span><div class="l">Avg. wait time</div></div>
+            <div class="stat"><span class="n">98<sup>%</sup></span><div class="l">Patient satisfaction</div></div>
+            <div class="stat"><span class="n">24/7</span><div class="l">Doctors available</div></div>
+            <div class="stat"><span class="n">SCFHS</span><div class="l">Licensed &amp; PDPL-secure</div></div>
+          </div>
+        </div>
+        <div class="hero-r">
+          <div class="consult-stage fade in">
+            <div class="consult">
+              <div class="feed" style="background-image:url('/doctors/wail-yar.webp');"></div>
+              <div class="topbar"><span class="live"><span class="d"></span>Live</span><span class="timer">04:18</span></div>
+              <div class="doclabel">
+                <div class="dn">Dr. Wail Yar</div>
+                <div class="dt">Family &amp; Preventive Medicine <span class="vf"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Verified</span></div>
+              </div>
+              <div class="pip" style="background-image:linear-gradient(160deg,#33506f,#16263d);"><span class="you">You</span></div>
+              <div class="controls">
+                <button class="ctl" aria-label="Mute"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4"/></svg></button>
+                <button class="ctl" aria-label="Camera"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m23 7-7 5 7 5V7Z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></button>
+                <button class="ctl" aria-label="Chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg></button>
+                <button class="ctl end" aria-label="End"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 15.46l-5.27-.61-2.52 2.52a15.05 15.05 0 0 1-6.59-6.59l2.53-2.53L8.54 3H3.03C2.45 13.18 10.82 21.55 21 20.97v-5.51z"/></svg></button>
+              </div>
+            </div>
+            <div class="consult-float">
+              <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg></div>
+              <div><div class="l1">Connected in 38 seconds</div><div class="l2">No appointment needed</div></div>
+            </div>
+            <div class="consult-rx">
+              <div class="h"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg>e-Prescription</div>
+              <div class="row"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Sent to your pharmacy</div>
+              <div class="row"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Visit notes in your portal</div>
+            </div>
+          </div>
         </div>
       </div>
+      <div class="booking-strip">
+        <div class="field"><span class="l">Specialty</span><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><select class="req-select" id="teleSpecialty" aria-label="Specialty"><option value="">Any specialty</option><option value="Family Medicine">Family Medicine</option><option value="Internal Medicine">Internal Medicine</option><option value="Pediatrics">Pediatrics</option><option value="Orthopedic Surgery">Orthopedic Surgery</option><option value="Rheumatology">Rheumatology</option><option value="Cardiology">Cardiology</option><option value="Dermatology">Dermatology</option></select></span></div>
+        <div class="field"><span class="l">City</span><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><select class="req-select" id="teleCity" aria-label="City"><option value="">Any location</option><option value="Al Mohammadiyah">Jeddah — Al Mohammadiyah</option><option value="Al Safa">Jeddah — Al Safa</option><option value="Al Khalidiyyah">Jeddah — Al Khalidiyyah</option><option value="Tahlia">Jeddah — Tahlia</option><option value="Al Sahafa">Riyadh — Al Sahafa</option></select></span></div>
+        <div class="field"><span class="l">When</span><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><select class="req-select" id="teleWhen" aria-label="When"><option value="">As soon as possible</option><option value="this-week">This week</option><option value="next-week">Next week</option><option value="browsing">Just browsing</option></select></span></div>
+        <a class="go" id="teleGo" href="/find-a-doctor.html">Find a doctor<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services"><div class="twrap">
+    <div class="s-head fade">
+      <div><span class="s-eye">What you can do online</span><h2 class="s-title">A clinic visit,<br><em>without the trip.</em></h2></div>
+      <p class="s-desc">Four ways to get care over a secure connection — each handled by a credentialed My Clinic physician with full access to your chart, prescriptions and labs.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-menu">
+        <div class="svc-item active" data-svc="0"><span class="svc-num">01</span><span class="svc-name">Video Consultations<span class="ar-sub">Live, face-to-face video visits</span></span><svg class="svc-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        <div class="svc-item" data-svc="1"><span class="svc-num">02</span><span class="svc-name">e-Prescriptions &amp; Sick Notes<span class="ar-sub">Digitally signed, issued in-call</span></span><svg class="svc-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        <div class="svc-item" data-svc="2"><span class="svc-num">03</span><span class="svc-name">Specialist Referrals<span class="ar-sub">Across 40+ specialties</span></span><svg class="svc-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        <div class="svc-item" data-svc="3"><span class="svc-num">04</span><span class="svc-name">Follow-up &amp; Secure Chat<span class="ar-sub">48-hour messaging after every visit</span></span><svg class="svc-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      </div>
+      <div class="svc-detail">
+        <div class="svc-panel active">
+          <div class="top"><span class="num">01 — Video consultation</span><span class="tag">15–25 min</span></div>
+          <h3>A face-to-face visit, <em>over video.</em></h3>
+          <p class="desc">Speak live with a GP or specialist for assessment, diagnosis and a care plan. Share photos and history in-call — the doctor sees your full chart, just like a clinic visit.</p>
+          <ul class="inc"><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>HD video &amp; secure voice</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Share photos &amp; documents</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Arabic &amp; English doctors</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Notes saved to your portal</li></ul>
+          <div class="img-strip"><div style="background-image:url('/clinic/lobby.jpg');"></div><div style="background-image:url('/clinic/ophthalmology.webp');"></div></div>
+          <div class="foot"><div class="price">From<b>120 <span>SAR / consult</span></b></div><a href="/find-a-doctor.html?telemedicine=true" class="tbtn white">Start a consult</a></div>
+        </div>
+        <div class="svc-panel">
+          <div class="top"><span class="num">02 — Prescriptions &amp; notes</span><span class="tag">Issued in-call</span></div>
+          <h3>Prescriptions &amp; sick notes,<br><em>issued instantly.</em></h3>
+          <p class="desc">When clinically appropriate, your doctor issues an e-prescription routed straight to your pharmacy, plus medical sick notes and refill renewals — all digitally signed and verifiable.</p>
+          <ul class="inc"><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>e-Prescription to any pharmacy</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Medical &amp; sick-leave notes</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Chronic-med refills</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Digitally signed &amp; verifiable</li></ul>
+          <div class="img-strip"><div style="background-image:url('/clinic/ct-scanner.jpg');"></div><div style="background-image:url('/clinic/physiotherapy.jpg');"></div></div>
+          <div class="foot"><div class="price">Included<b>with every consult</b></div><a href="/find-a-doctor.html?telemedicine=true" class="tbtn white">Renew a prescription</a></div>
+        </div>
+        <div class="svc-panel">
+          <div class="top"><span class="num">03 — Specialist referrals</span><span class="tag">40+ specialties</span></div>
+          <h3>Straight to the right<br><em>specialist.</em></h3>
+          <p class="desc">Need more than a GP? Book a video consult directly with consultants in dermatology, pediatrics, psychiatry, cardiology and more — or get a coordinated referral into our clinics for in-person care.</p>
+          <ul class="inc"><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Dermatology &amp; skin</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Pediatrics &amp; child health</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Mental health &amp; therapy</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>In-clinic referral coordination</li></ul>
+          <div class="img-strip"><div style="background-image:url('/clinic/pediatric.jpg');"></div><div style="background-image:url('/clinic/branch-tahlia.webp');"></div></div>
+          <div class="foot"><div class="price">From<b>200 <span>SAR / specialist</span></b></div><a href="/find-a-doctor.html?telemedicine=true" class="tbtn white">See a specialist</a></div>
+        </div>
+        <div class="svc-panel">
+          <div class="top"><span class="num">04 — Follow-up &amp; chat</span><span class="tag">48h messaging</span></div>
+          <h3>Care that continues<br><em>after the call.</em></h3>
+          <p class="desc">Message your doctor for 48 hours after each consult, share test results, and keep chronic conditions on track with scheduled follow-up check-ins — no need to re-explain your story.</p>
+          <ul class="inc"><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>48-hour secure messaging</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Lab &amp; result review</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Chronic-care check-ins</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>One continuous record</li></ul>
+          <div class="img-strip"><div style="background-image:url('/clinic/home.webp');"></div><div style="background-image:url('/clinic/homecare-portrait.jpg');"></div></div>
+          <div class="foot"><div class="price">From<b>49 <span>SAR / month</span></b></div><a href="#tdPlans" class="tbtn white">See membership</a></div>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- PROCESS -->
+  <section class="process"><div class="twrap">
+    <div class="s-head fade">
+      <div><span class="s-eye">How it works</span><h2 class="s-title">Three taps<br><em>to a doctor.</em></h2></div>
+      <p class="s-desc">No app stores to wade through, no forms to print. Open the link, describe your symptoms, and you're connected — usually in under fifteen minutes.</p>
+    </div>
+    <div class="steps">
+      <div class="step fade"><div class="num">1</div><h4>Tell us what's <em>wrong</em></h4><p>Choose a symptom or specialty and who the visit is for. We match you with the right available doctor in seconds.</p><div class="meta"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Takes under a minute</div></div>
+      <div class="step fade"><div class="num">2</div><h4>Join the <em>video call</em></h4><p>Connect live by secure video. Share photos, describe symptoms, and get assessed — with full access to your medical history.</p><div class="meta"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Avg. wait under 12 min</div></div>
+      <div class="step fade"><div class="num">3</div><h4>Get your <em>plan</em></h4><p>Receive prescriptions, sick notes and referrals digitally — sent to your pharmacy and saved to your patient portal.</p><div class="meta"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Delivered before you hang up</div></div>
+    </div>
+  </div></section>
+
+  <!-- CONDITIONS -->
+  <section class="conditions"><div class="twrap">
+    <div class="s-head fade">
+      <div><span class="s-eye">What we treat online</span><h2 class="s-title">Right for a great<br><em>many things.</em></h2></div>
+      <p class="s-desc">Telemedicine handles a wide range of everyday and ongoing care. If a condition needs hands-on examination, your doctor will arrange the right in-person or home visit.</p>
+    </div>
+    <div class="cond-grid">
+      <div class="cond fade"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12h.01M15 12h.01M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5"/><path d="M12 2a9 9 0 0 0-9 9c0 1.6.5 3 1 4l-1 5 5-1c1 .5 2.4 1 4 1a9 9 0 0 0 0-18Z"/></svg></div><h4>Cold, flu &amp; fever</h4><p>Coughs, sore throats, sinus and seasonal infections.</p></div>
+      <div class="cond fade"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M8 9.5c1-1 2.5-1 3.5 0M12.5 9.5c1-1 2.5-1 3.5 0M8 15c1 1.2 2.5 1.8 4 1.8s3-.6 4-1.8"/></svg></div><h4>Skin conditions</h4><p>Rashes, acne, eczema and allergic reactions, reviewed by photo.</p></div>
+      <div class="cond fade"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10Z"/></svg></div><h4>Mental health</h4><p>Anxiety, stress, low mood and sleep — with licensed therapists.</p></div>
+      <div class="cond fade"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h4l2 5 4-12 2 7h6"/></svg></div><h4>Chronic care</h4><p>Diabetes, blood-pressure and thyroid follow-ups and monitoring.</p></div>
+      <div class="cond fade"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 2h4M12 2v4M5 10a7 7 0 0 1 14 0v6a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3Z"/><path d="M9 14h6"/></svg></div><h4>Prescription refills</h4><p>Renew regular medications without a clinic trip.</p></div>
+      <div class="cond fade"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M5 21a7 7 0 0 1 14 0"/></svg></div><h4>Children's health</h4><p>Pediatric advice for fevers, rashes and common childhood illness.</p></div>
+      <div class="cond fade"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v6M9 5h6"/><circle cx="12" cy="14" r="6"/></svg></div><h4>Digestive issues</h4><p>Stomach upset, reflux, nausea and general GI concerns.</p></div>
+      <div class="cond fade"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12h4l3-9 6 18 3-9h4"/></svg></div><h4>Lab &amp; result review</h4><p>Order tests and walk through results with your doctor.</p></div>
+    </div>
+    <div class="cond-note fade"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span><b>Not for emergencies.</b> For chest pain, breathing difficulty, severe bleeding or any life-threatening symptom, call Saudi Red Crescent <b>997</b> or go to the nearest ER.</span></div>
+  </div></section>
+
+  <!-- PLANS -->
+  <section class="plans" id="tdPlans"><div class="twrap">
+    <div class="s-head fade">
+      <div><span class="s-eye">Simple pricing</span><h2 class="s-title">Pay once, or<br><em>join the clinic.</em></h2></div>
+      <p class="s-desc">Use it when you need it, or join a membership for unlimited consults and round-the-clock messaging. Most plans are reimbursable through your insurer.</p>
+    </div>
+    <div class="plan-grid">
+      <div class="plan fade"><div class="tag">Pay per visit</div><h3>Single <em>consult</em></h3><p class="blurb">One-off video visit with a GP, prescription and notes included.</p>
+        <ul><li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>15–25 min video visit</li><li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>e-Prescription &amp; sick note</li><li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>48-hour follow-up chat</li><li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Notes saved to portal</li></ul>
+        <a href="/find-a-doctor.html?telemedicine=true" class="cta">Start a consult</a></div>
+      <div class="plan feat fade"><div class="tag">Membership</div><h3>My Clinic <em>Plus</em></h3><p class="blurb">Unlimited GP video consults and anytime messaging for one person.</p>
+        <ul><li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Unlimited GP consults</li><li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Priority queue · skip the wait</li><li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>24/7 secure messaging</li><li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>20% off specialist visits</li></ul>
+        <a href="/find-a-doctor.html?telemedicine=true" class="cta">Join My Clinic Plus</a></div>
+      <div class="plan fade"><div class="tag">For the household</div><h3>Family <em>plan</em></h3><p class="blurb">Cover up to six family members under one shared membership.</p>
+        <ul><li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Up to 6 members</li><li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Unlimited GP &amp; pediatric consults</li><li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Shared family health record</li><li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Priority queue for all</li></ul>
+        <a href="/find-a-doctor.html?telemedicine=true" class="cta">Choose family plan</a></div>
+    </div>
+  </div></section>
+
+  <!-- TEAM -->
+  <section class="team"><div class="twrap">
+    <div class="s-head fade">
+      <div><span class="s-eye">Online now</span><h2 class="s-title">Real doctors,<br><em>a tap away.</em></h2></div>
+      <p class="s-desc">Every physician on the platform is SCFHS-licensed, credentialed by My Clinic, and rated by the patients they've seen. Many speak both Arabic and English.</p>
+    </div>
+    <div class="team-grid">
+      <div class="doc"><div class="photo"><img src="/doctors/wail-yar.webp" alt="Dr. Wail Yar" loading="lazy"><span class="on"><span class="d"></span>Online</span></div><div class="body"><h4>Dr. Wail Yar</h4><div class="t">Family &amp; Preventive Medicine</div><div class="meta"><span class="star">4.9</span><span>1,240 consults</span></div></div></div>
+      <div class="doc"><div class="photo"><img src="/doctors/walaa-aldabbagh.webp" alt="Dr. Walaa Aldabbagh" loading="lazy"><span class="on"><span class="d"></span>Online</span></div><div class="body"><h4>Dr. Walaa Aldabbagh</h4><div class="t">Internal Medicine</div><div class="meta"><span class="star">4.8</span><span>980 consults</span></div></div></div>
+      <div class="doc"><div class="photo"><img src="/doctors/taha-habibullah.webp" alt="Dr. Taha Habibullah" loading="lazy"><span class="on"><span class="d"></span>Online</span></div><div class="body"><h4>Dr. Taha Habibullah</h4><div class="t">Dermatology &amp; Aesthetics</div><div class="meta"><span class="star">4.9</span><span>1,510 consults</span></div></div></div>
+      <div class="doc"><div class="photo"><img src="/doctors/turki-alahmadi.webp" alt="Dr. Turki Alahmadi" loading="lazy"><span class="on"><span class="d"></span>Online</span></div><div class="body"><h4>Dr. Turki Alahmadi</h4><div class="t">Pediatrics</div><div class="meta"><span class="star">4.9</span><span>2,030 consults</span></div></div></div>
+    </div>
+    <div style="text-align:center; margin-top: 40px;"><a href="/find-a-doctor.html" class="tbtn ghost" style="padding:14px 24px;">Browse all online doctors<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  </div></section>
+
+  <!-- STORIES -->
+  <section class="stories"><div class="twrap">
+    <div class="s-head fade">
+      <div><span class="s-eye">Patient stories</span><h2 class="s-title">What patients<br><em>tell us.</em></h2></div>
+      <p class="s-desc">From late-night fevers to chronic-care check-ins — real consults, real outcomes. Pulled from 18,000+ telemedicine reviews.</p>
+    </div>
+    <div class="story-grid">
+      <div class="story"><div class="stars">★★★★★</div><p class="q">"My son spiked a fever at 11 PM. I was connected to a pediatrician in nine minutes, got a prescription on my phone, and the pharmacy delivered by midnight. Unbelievable."</p><div class="who"><div class="av-fb">NA</div><div><div class="n">Noura Al-Amri</div><div class="meta">Riyadh · Family plan</div></div></div></div>
+      <div class="story"><div class="stars">★★★★★</div><p class="q">"I manage my diabetes through monthly video check-ins. Same doctor every time, my whole history on screen, refills sent straight to my pharmacy. It saves me a clinic trip every month."</p><div class="who"><div class="av-fb">FT</div><div><div class="n">Faisal Al-Turki</div><div class="meta">Jeddah · My Clinic Plus</div></div></div></div>
+      <div class="story"><div class="stars">★★★★★</div><p class="q">"I needed a sick note and a quick consult before a flight. Booked from the airport lounge, spoke to a GP for fifteen minutes, and had everything in my portal before boarding."</p><div class="who"><div class="av-fb">LS</div><div><div class="n">Layla Al-Sayed</div><div class="meta">Jeddah · Single consult</div></div></div></div>
+    </div>
+  </div></section>
+
+  <!-- FAQ -->
+  <section class="faq"><div class="twrap"><div class="faq-grid">
+    <div class="faq-side">
+      <span class="s-eye">FAQ</span><h2>Questions, <em>answered.</em></h2>
+      <p>If your question isn't here, our coordinators are reachable around the clock — most queries are answered within minutes.</p>
+      <div class="help"><div class="lab">Speak to a coordinator</div><div class="num">920022811</div><div class="lin"><span>Doctors online · 24 / 7</span><span>Coordinators · Sat–Thu 8 AM – 10 PM</span><a href="https://wa.me/966542228111" target="_blank">WhatsApp · 0542228111</a></div></div>
+    </div>
+    <div class="faq-list">
+      <div class="qa open"><button class="qa-q"><span class="t">How quickly can I see a doctor?</span><span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="qa-a"><div class="inner">For general consultations, our average wait is under twelve minutes, day or night. Specialist video appointments are usually scheduled within the same day. Members on Plus and Family plans get a priority queue.</div></div></div>
+      <div class="qa"><button class="qa-q"><span class="t">Can the doctor prescribe medication online?</span><span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="qa-a"><div class="inner">Yes. When clinically appropriate, your doctor issues a digitally signed e-prescription routed to the pharmacy of your choice, along with sick notes and chronic-medication refills. Certain controlled substances cannot be prescribed remotely under Saudi regulations — your doctor will advise.</div></div></div>
+      <div class="qa"><button class="qa-q"><span class="t">Is telemedicine covered by my insurance?</span><span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="qa-a"><div class="inner">Most major insurers — Tawuniya, Bupa Arabia, MedGulf, Allianz and AXA — now reimburse virtual consultations. We'll verify your eligibility before the call, and issue an itemised digital invoice you can submit if you pay upfront.</div></div></div>
+      <div class="qa"><button class="qa-q"><span class="t">What can't be handled over video?</span><span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="qa-a"><div class="inner">Anything requiring hands-on examination, imaging, or in-person procedures. Telemedicine is not for emergencies — for chest pain, difficulty breathing, severe bleeding or other urgent symptoms, call 997 or go to the nearest ER. When needed, your doctor will refer you to one of our clinics or a home visit.</div></div></div>
+      <div class="qa"><button class="qa-q"><span class="t">Is the video call private and secure?</span><span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="qa-a"><div class="inner">Every consultation is end-to-end encrypted and never recorded. Visit notes, prescriptions and results are stored on PDPL-compliant infrastructure in your patient portal, and you control who in your family can access them.</div></div></div>
+      <div class="qa"><button class="qa-q"><span class="t">Do I need to download an app?</span><span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="qa-a"><div class="inner">No download is required — consults run securely in your browser from any phone, tablet or computer with a camera. The My Clinic app is available for members who want appointment reminders, refill tracking and their full record in one place.</div></div></div>
+    </div>
+  </div></div></section>
+
+  <!-- FINAL CTA -->
+  <section class="final"><div class="twrap"><div class="final-card fade">
+    <div class="img" style="background-image:url('/clinic/lobby.jpg');"></div>
+    <div class="body">
+      <div class="eye">A doctor is online now</div>
+      <h2>Feel better,<br><em>starting now.</em></h2>
+      <p>Describe your symptoms and we'll connect you with the right physician — usually in under fifteen minutes, day or night.</p>
+      <div class="ctas"><a href="/find-a-doctor.html?telemedicine=true" class="tbtn white">Start a video consult</a><a href="tel:920022811" class="tbtn outline"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92Z"/></svg>Call 920022811</a></div>
+      <div class="signoff"><div>Doctors online<b>24 hours · 7 days</b></div><div>Avg. wait<b>Under 12 minutes</b></div><div>WhatsApp anytime<b>0542228111</b></div></div>
+    </div>
+  </div></div></section>
+
+</div><!-- /.td -->
+
+<!-- ════════════════ MOBILE LAYOUT ════════════════ -->
+<div class="tm">
+
+  <header class="hero app-hero">
+    <div class="app-card">
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="app-card-body">
+        <div class="h-eyebrow">Telemedicine · Virtual Care</div>
+        <h1 class="h-display">Real doctors, <em>a tap away.</em></h1>
+        <p class="h-sub">Connect by secure video with SCFHS-licensed physicians in minutes — diagnosis, e-prescriptions &amp; reports, all from your phone.</p>
+        <div class="app-cta">
+          <a href="https://wa.me/966542228111?text=Hi%2C%20I'd%20like%20to%20start%20a%20telemedicine%20video%20consult." target="_blank" class="app-btn">Start a consult
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="app-photo">
+        <img src="/clinic/telemedicine-doctor-cutout.png" alt="My Clinic online doctor" loading="eager">
+      </div>
+      <div class="app-badge"><span class="lv"></span> 34 doctors online</div>
     </div>
   </header>
 
-  <div class="telemed-container">
-    
-    <!-- Benefits Grid -->
-    <section>
-      <div class="section-title-wrap">
-        <span class="section-eyebrow">Virtual Benefits</span>
-        <h2 class="section-header-title">Clinical Care Redefined for <em>Modern Life</em></h2>
-      </div>
-      
-      <div class="benefits-grid">
-        <div class="benefit-card">
-          <div class="benefit-icon-box">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
-          </div>
-          <h3>Skip the Commute &amp; Waiting</h3>
-          <p>No traffic, no parking hassles, and no clinic waiting rooms. Complete your regular specialist follow-ups and diagnostic reviews online in a peaceful environment.</p>
-        </div>
-
-        <div class="benefit-card">
-          <div class="benefit-icon-box">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          </div>
-          <h3>Secure &amp; Encrypted</h3>
-          <p>Your privacy is absolute. Our telemedicine platform runs on end-to-end encrypted video architecture and complies with strict local regulatory guidelines for digital health records.</p>
-        </div>
-
-        <div class="benefit-card">
-          <div class="benefit-icon-box">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.5 22a9 9 0 1 1 9-9h-9v9z"/><path d="M22 10.5A9 9 0 0 0 13.5 2V10.5H22z"/></svg>
-          </div>
-          <h3>Digital Prescriptions</h3>
-          <p>Get electronic prescriptions (e-prescriptions) sent straight to your phone and shared with our pharmacy partners instantly for delivery or nearby pick-up.</p>
-        </div>
-
-        <div class="benefit-card">
-          <div class="benefit-icon-box">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-          </div>
-          <h3>Seamless Diagnostics Continuity</h3>
-          <p>If your virtual consultation requires a physical laboratory assessment or diagnostic scan, your doctor instantly places the referral order. Visit any of our branches anytime for swift tests.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- How It Works Section -->
-    <section id="howItWorks" class="workflow-section">
-      <div class="section-title-wrap">
-        <span class="section-eyebrow">Three Simple Steps</span>
-        <h2 class="section-header-title">How Your Virtual <em>Visit Works</em></h2>
-      </div>
-
-      <div class="workflow-grid">
-        <div class="workflow-step">
-          <div class="step-num">1</div>
-          <h4>Choose Specialist</h4>
-          <p>Browse our directory of board-certified consultants. Filter for specialties that offer telemedicine video calls.</p>
-        </div>
-
-        <div class="workflow-step">
-          <div class="step-num">2</div>
-          <h4>Confirm Your Slot</h4>
-          <p>Pick a convenient virtual consultation hour, complete the registration, and confirm your booking online.</p>
-        </div>
-
-        <div class="workflow-step">
-          <div class="step-num">3</div>
-          <h4>Connect via Video</h4>
-          <p>Tap the secure video consultation link in your SMS confirmation on any device to instantly join your doctor.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Dynamic Care Specialists Section -->
-    <section class="specialists-section">
-      <div class="section-title-wrap">
-        <span class="section-eyebrow">Virtual Specialists</span>
-        <h2 class="section-header-title">Meet Our <em>Telemedicine</em> Doctors</h2>
-        <p style="color: var(--mute); max-width: 600px; margin: 8px auto 0; font-size: 15px;">Book a remote consultation with our experienced clinical department consultants.</p>
-      </div>
-
-      <div class="doctors-grid" id="telemedDoctorsGrid">
-        <!-- Dynically loaded from JS doctors array -->
-      </div>
-    </section>
-
-    <!-- Interactive FAQ Section -->
-    <section class="faq-section">
-      <div class="section-title-wrap">
-        <span class="section-eyebrow">FAQ</span>
-        <h2 class="section-header-title">Common Questions About <em>Virtual Consultations</em></h2>
-      </div>
-
-      <div class="faq-list">
-        <div class="faq-item">
-          <button class="faq-trigger">
-            <span>What technical devices do I need?</span>
-            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="faq-content">
-            <div class="faq-content-inner">
-              Any standard smartphone, tablet, or computer equipped with a functional camera, microphone, and stable internet connection is fully supported. No application downloads are required; the secure session launches directly inside your web browser.
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-trigger">
-            <span>Are virtual consults covered by medical insurance?</span>
-            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="faq-content">
-            <div class="faq-content-inner">
-              Yes, many corporate and private medical insurance policies within the Kingdom cover virtual telemedicine consultations identically to standard physical clinic consults. You can verify your specific insurance coverage network during checkout or by contacting our 24/7 billing support line.
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-trigger">
-            <span>How do I receive prescribed medications?</span>
-            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="faq-content">
-            <div class="faq-content-inner">
-              Following your session, the consultant will generate a digital prescription sent straight to your phone via SMS. You can redeem this electronic barcode at any major pharmacy branch across Saudi Arabia, or coordinate home delivery via our clinical pharmacy team.
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-trigger">
-            <span>What if the doctor requests a physical lab or blood test?</span>
-            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="faq-content">
-            <div class="faq-content-inner">
-              If diagnostic laboratory or imaging tests are required, your physician will issue an electronic order. You can walk into any of our 5 physical branches in Jeddah or Riyadh without requiring an additional scheduling delay to complete your laboratory screens. The results will upload automatically to your doctor.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Bottom CTA Banner -->
-    <div class="wide-cta-banner">
-      <h3>Ready to Meet Your Doctor Online?</h3>
-      <p>Schedule a secure digital consultation in under a minute. Connect with our leading board-certified specialists, review diagnostic reports, and manage your health seamlessly from anywhere.</p>
-      <div class="wide-cta-buttons">
-        <a href="/find-a-doctor.html?telemedicine=true" class="btn primary-wide">Book Video Appointment</a>
-        <a href="https://wa.me/966542228111?text=Hi%2C%20I'm%20inquiring%20about%20booking%20a%20Telemedicine%20consultation." target="_blank" class="btn whatsapp-wide">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px; display: inline-block; vertical-align: middle;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          Inquire via WhatsApp
-        </a>
-      </div>
+  <section class="booking" id="tmBooking">
+    <div class="book-card">
+      <div class="book-head"><div class="t">Find a doctor</div><div class="tag"><span class="d"></span>Online now</div></div>
+      <label class="book-field"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></span><span class="book-field-body"><span class="lab">Specialty</span><select class="book-select" id="mTeleSpecialty" aria-label="Specialty"><option value="">Any specialty</option><option value="Family Medicine">Family Medicine</option><option value="Internal Medicine">Internal Medicine</option><option value="Pediatrics">Pediatrics</option><option value="Orthopedic Surgery">Orthopedic Surgery</option><option value="Rheumatology">Rheumatology</option><option value="Cardiology">Cardiology</option><option value="Dermatology">Dermatology</option></select></span></label>
+      <label class="book-field"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span class="book-field-body"><span class="lab">City</span><select class="book-select" id="mTeleCity" aria-label="City"><option value="">Any location</option><option value="Al Mohammadiyah">Jeddah — Al Mohammadiyah</option><option value="Al Safa">Jeddah — Al Safa</option><option value="Al Khalidiyyah">Jeddah — Al Khalidiyyah</option><option value="Tahlia">Jeddah — Tahlia</option><option value="Al Sahafa">Riyadh — Al Sahafa</option></select></span></label>
+      <label class="book-field"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="book-field-body"><span class="lab">When</span><select class="book-select" id="mTeleWhen" aria-label="When"><option value="">As soon as possible</option><option value="this-week">This week</option><option value="next-week">Next week</option><option value="browsing">Just browsing</option></select></span></label>
+      <a class="book-go" id="mTeleGo" href="/find-a-doctor.html">Find a doctor<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a>
     </div>
+  </section>
 
-  </div>
+  <section class="sec svcs rev">
+    <div class="eyebrow">What you can do online</div><h2 class="s-title">A clinic visit, <em>without the trip</em>.</h2>
+    <div class="svc-list">
+      <div class="svc dark"><div class="top"><span class="num">01 — Video consult</span><span class="tag">15–25 min</span></div><h3>A face-to-face visit, <em>over video</em>.</h3><p>Speak live with a GP or specialist. Share photos and history in-call — the doctor sees your full chart.</p><div class="inc"><span>HD video &amp; voice</span><span>Share photos</span><span>AR &amp; EN doctors</span></div><div class="foot"><div class="price">From<b>120 SAR</b></div><a class="go" href="/find-a-doctor.html?telemedicine=true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a></div></div>
+      <div class="svc"><div class="top"><span class="num">02 — Prescriptions</span><span class="tag">In-call</span></div><h3>Scripts &amp; sick notes, <em>instantly</em>.</h3><p>Digitally signed e-prescriptions routed to your pharmacy, plus medical sick notes and refill renewals.</p><div class="inc"><span>e-Prescription</span><span>Sick notes</span><span>Refills</span></div><div class="foot"><div class="price">Included<b>every consult</b></div><a class="go" href="/find-a-doctor.html?telemedicine=true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a></div></div>
+      <div class="svc"><div class="top"><span class="num">03 — Specialists</span><span class="tag">40+ specialties</span></div><h3>Straight to the <em>right specialist</em>.</h3><p>Video consults with consultants in dermatology, pediatrics, psychiatry and more — or a coordinated in-clinic referral.</p><div class="inc"><span>Dermatology</span><span>Pediatrics</span><span>Mental health</span></div><div class="foot"><div class="price">From<b>200 SAR</b></div><a class="go" href="/find-a-doctor.html?telemedicine=true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a></div></div>
+      <div class="svc"><div class="top"><span class="num">04 — Follow-up</span><span class="tag">48h chat</span></div><h3>Care that <em>continues</em> after the call.</h3><p>Message your doctor for 48 hours, share results, and keep chronic conditions on track with scheduled check-ins.</p><div class="inc"><span>Secure messaging</span><span>Result review</span><span>Check-ins</span></div><div class="foot"><div class="price">From<b>49 SAR / mo</b></div><a class="go" href="/find-a-doctor.html?telemedicine=true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a></div></div>
+    </div>
+  </section>
+
+  <section class="sec steps-sec rev">
+    <div class="eyebrow">How it works</div><h2 class="s-title">Three taps to a <em>doctor</em>.</h2>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><div><h4>Tell us what's <em>wrong</em></h4><p>Choose a symptom and who it's for. We match you with the right available doctor in seconds.</p><div class="meta"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Under a minute</div></div></div>
+      <div class="step"><div class="num">2</div><div><h4>Join the <em>video call</em></h4><p>Connect by secure video. Share photos, describe symptoms, get assessed — with your full history on screen.</p><div class="meta"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Avg. wait under 12 min</div></div></div>
+      <div class="step"><div class="num">3</div><div><h4>Get your <em>plan</em></h4><p>Prescriptions, sick notes and referrals — sent to your pharmacy and saved to your patient portal.</p><div class="meta"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Before you hang up</div></div></div>
+    </div>
+  </section>
+
+  <section class="sec cond-sec rev">
+    <div class="eyebrow">What we treat online</div><h2 class="s-title">Right for a great <em>many things</em>.</h2>
+    <p class="s-desc">If a condition needs hands-on examination, your doctor arranges the right in-clinic or home visit.</p>
+    <div class="cond-grid">
+      <div class="cond"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a9 9 0 0 0-9 9c0 1.6.5 3 1 4l-1 5 5-1c1 .5 2.4 1 4 1a9 9 0 0 0 0-18Z"/><path d="M9 12h.01M15 12h.01"/></svg></div><h4>Cold, flu &amp; fever</h4><p>Coughs, sore throats, seasonal infections.</p></div>
+      <div class="cond"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M8 15c1 1.2 2.5 1.8 4 1.8s3-.6 4-1.8"/></svg></div><h4>Skin conditions</h4><p>Rashes, acne and eczema, by photo.</p></div>
+      <div class="cond"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10Z"/></svg></div><h4>Mental health</h4><p>Anxiety, stress and sleep support.</p></div>
+      <div class="cond"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h4l2 5 4-12 2 7h6"/></svg></div><h4>Chronic care</h4><p>Diabetes &amp; blood-pressure follow-ups.</p></div>
+      <div class="cond"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 2h4M12 2v4M5 10a7 7 0 0 1 14 0v6a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3Z"/></svg></div><h4>Prescription refills</h4><p>Renew regular medication, no trip.</p></div>
+      <div class="cond"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M5 21a7 7 0 0 1 14 0"/></svg></div><h4>Children's health</h4><p>Pediatric advice for common illness.</p></div>
+    </div>
+    <div class="cond-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span><b>Not for emergencies.</b> For chest pain, breathing difficulty or severe bleeding, call Saudi Red Crescent <b>997</b> or go to the nearest ER.</span></div>
+  </section>
+
+  <section class="sec plans-sec rev">
+    <div class="eyebrow">Simple pricing</div><h2 class="s-title">Pay once, or <em>join the clinic</em>.</h2>
+    <div class="plan-scroll">
+      <div class="plan"><div class="ptag">Pay per visit</div><h3>Single <em>consult</em></h3><p class="blurb">One-off video visit with a GP, prescription included.</p><ul><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>15–25 min video visit</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>e-Prescription &amp; sick note</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>48-hour follow-up chat</li></ul><a href="/find-a-doctor.html?telemedicine=true" class="pcta">Start a consult</a></div>
+      <div class="plan feat"><div class="ptag">Membership</div><h3>My Clinic <em>Plus</em></h3><p class="blurb">Unlimited GP video consults and anytime messaging.</p><ul><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Unlimited GP consults</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Priority queue · skip the wait</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>24/7 secure messaging</li></ul><a href="/find-a-doctor.html?telemedicine=true" class="pcta">Join Plus</a></div>
+      <div class="plan"><div class="ptag">Household</div><h3>Family <em>plan</em></h3><p class="blurb">Cover up to six members under one membership.</p><ul><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Up to 6 members</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>GP &amp; pediatric consults</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Shared family record</li></ul><a href="/find-a-doctor.html?telemedicine=true" class="pcta">Choose family</a></div>
+    </div>
+  </section>
+
+  <section class="sec docs rev">
+    <div class="eyebrow">Online now</div><h2 class="s-title">Real doctors, <em>a tap away</em>.</h2>
+    <div class="doc-scroll">
+      <a class="doc" href="/find-a-doctor.html"><div class="photo"><img src="/doctors/wail-yar.webp" loading="lazy"><span class="on"><span class="d"></span>Online</span></div><div class="body"><h4>Dr. Wail Yar</h4><p>Family &amp; Preventive Medicine · 12 yrs</p><div class="rate"><span class="st">4.9</span><b>1,240 consults</b></div></div></a>
+      <a class="doc" href="/find-a-doctor.html"><div class="photo"><img src="/doctors/walaa-aldabbagh.webp" loading="lazy"><span class="on"><span class="d"></span>Online</span></div><div class="body"><h4>Dr. Walaa Aldabbagh</h4><p>Internal Medicine · 9 yrs</p><div class="rate"><span class="st">4.8</span><b>980 consults</b></div></div></a>
+      <a class="doc" href="/find-a-doctor.html"><div class="photo"><img src="/doctors/taha-habibullah.webp" loading="lazy"><span class="on"><span class="d"></span>Online</span></div><div class="body"><h4>Dr. Taha Habibullah</h4><p>Dermatology · 14 yrs</p><div class="rate"><span class="st">4.9</span><b>1,510 consults</b></div></div></a>
+      <a class="doc" href="/find-a-doctor.html"><div class="photo"><img src="/doctors/turki-alahmadi.webp" loading="lazy"><span class="on"><span class="d"></span>Online</span></div><div class="body"><h4>Dr. Turki Alahmadi</h4><p>Pediatrics · 11 yrs</p><div class="rate"><span class="st">4.9</span><b>2,030 consults</b></div></div></a>
+    </div>
+    <a class="doc-search" href="/find-a-doctor.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg>Doctor, specialty, symptom…<span class="go"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></span></a>
+  </section>
+
+  <section class="sec stories rev">
+    <div class="eyebrow">Patient stories</div><h2 class="s-title">What patients <em>tell us</em>.</h2>
+    <div class="story-big"><blockquote class="qt">My son spiked a fever at 11 PM. I was connected to a pediatrician in nine minutes, got a prescription on my phone, and the pharmacy delivered by midnight.</blockquote><div class="who"><div class="av">N</div><div><div class="n">Noura Al-Amri</div><div class="r">Riyadh · Family plan</div></div></div></div>
+    <div class="mini-scroll">
+      <div class="mini"><div class="stars">★★★★★</div><p>I manage my diabetes through monthly video check-ins. Same doctor, my whole history on screen.</p><small>Faisal · My Clinic Plus</small></div>
+      <div class="mini"><div class="stars">★★★★★</div><p>Needed a sick note before a flight. Spoke to a GP from the lounge, had everything before boarding.</p><small>Layla · Single consult</small></div>
+      <div class="mini"><div class="stars">★★★★★</div><p>The dermatologist reviewed my photos and prescribed in minutes. So much easier than a clinic trip.</p><small>Maha · Jeddah</small></div>
+    </div>
+  </section>
+
+  <section class="sec faq-sec rev">
+    <div class="eyebrow">FAQ</div><h2 class="s-title">Questions, <em>answered</em>.</h2>
+    <div class="faq">
+      <div class="qa open"><button class="qa-q"><span class="t">How quickly can I see a doctor?</span><span class="ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="qa-a"><div class="inner">For general consultations our average wait is under twelve minutes, day or night. Specialist video appointments are usually same-day. Plus and Family members get a priority queue.</div></div></div>
+      <div class="qa"><button class="qa-q"><span class="t">Can the doctor prescribe online?</span><span class="ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="qa-a"><div class="inner">Yes. When clinically appropriate, your doctor issues a digitally signed e-prescription to the pharmacy of your choice, along with sick notes and refills. Certain controlled medications can't be prescribed remotely under Saudi regulations.</div></div></div>
+      <div class="qa"><button class="qa-q"><span class="t">Is it covered by insurance?</span><span class="ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="qa-a"><div class="inner">Most major insurers — Tawuniya, Bupa Arabia, MedGulf, Allianz and AXA — reimburse virtual consultations. We verify eligibility before the call and issue a digital invoice if you pay upfront.</div></div></div>
+      <div class="qa"><button class="qa-q"><span class="t">Is the call private and secure?</span><span class="ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="qa-a"><div class="inner">Every consultation is end-to-end encrypted and never recorded. Notes, prescriptions and results are stored on PDPL-compliant infrastructure in your portal, and you control family access.</div></div></div>
+      <div class="qa"><button class="qa-q"><span class="t">Do I need to download an app?</span><span class="ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="qa-a"><div class="inner">No download required — consults run securely in your browser on any phone or computer with a camera. The My Clinic app is available for members who want reminders and their full record in one place.</div></div></div>
+    </div>
+  </section>
+
+  <section class="sec final-sec rev">
+    <div class="eyebrow">A doctor is online now</div>
+    <h2>Feel better, <em>starting now</em>.</h2>
+    <p>Describe your symptoms and we'll connect you with the right physician — usually in under fifteen minutes, day or night.</p>
+    <div class="final-ctas">
+      <a href="/find-a-doctor.html?telemedicine=true" class="b white">Start a video consult<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a>
+      <a href="tel:920022811" class="b ghost"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call 920022811</a>
+    </div>
+    <div class="final-sign"><div class="r"><span>Doctors online</span><b>24 hours · 7 days</b></div><div class="r"><span>Avg. wait</span><b>Under 12 minutes</b></div><div class="r"><span>WhatsApp anytime</span><b>0542228111</b></div></div>
+  </section>
+
+</div><!-- /.tm -->
+
 </main>
 
 <!-- footer -->
@@ -879,192 +1052,19 @@
   </div>
 </footer>
 
-<!-- sticky CTA -->
-<div class="sticky-cta" id="stickyCta">
-  <span class="text">Next virtual consult available <b style="color: #fff;">Today, 3:30 PM</b></span>
-  <a href="/find-a-doctor.html?telemedicine=true">Book Video Call →</a>
+<!-- ───── STICKY BARS ───── -->
+<div class="td-sticky" id="tdSticky">
+  <span class="t"><b>34 doctors online</b> · Avg. wait under 12 min</span>
+  <a href="/find-a-doctor.html?telemedicine=true" class="b">Start a consult →</a>
 </div>
-
-<script>
-// Mock Doctor Database (for virtual doctor filter highlights)
-const doctors = [
-  {
-    id: 1,
-    name: "Dr. Hisham Al-Otaibi",
-    specialty: "Cardiology",
-    title: "Consultant Cardiologist",
-    experience: 22,
-    branch: "Jeddah Al Safa",
-    rating: 4.9,
-    reviews: 142,
-    telemed: true,
-    img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=500&q=70"
-  },
-  {
-    id: 2,
-    name: "Dr. Reem Al-Qahtani",
-    specialty: "Endocrinology",
-    title: "Consultant Endocrinology & Diabetes",
-    experience: 14,
-    branch: "Riyadh Al Sahafa",
-    rating: 4.8,
-    reviews: 98,
-    telemed: true,
-    img: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=500&q=70"
-  },
-  {
-    id: 6,
-    name: "Dr. Sara Al-Faris",
-    specialty: "Pediatrics",
-    title: "Consultant Pediatrician",
-    experience: 9,
-    branch: "Riyadh Al Sahafa",
-    rating: 4.9,
-    reviews: 156,
-    telemed: true,
-    img: "https://images.unsplash.com/photo-1651008376811-b90baee60c1f?auto=format&fit=crop&w=500&q=70"
-  },
-  {
-    id: 7,
-    name: "Dr. Layla Mansour",
-    specialty: "Dermatology",
-    title: "Consultant Dermatologist",
-    experience: 12,
-    branch: "Jeddah Tahlia",
-    rating: 4.9,
-    reviews: 104,
-    telemed: true,
-    img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=500&q=70"
-  }
-];
-
-document.addEventListener('DOMContentLoaded', () => {
-  // Navigation scrolling animation
-  const nav = document.querySelector('.nav');
-  if (nav) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        nav.classList.add('scrolled');
-      } else {
-        nav.classList.remove('scrolled');
-      }
-    }, { passive: true });
-  }
-
-  // Sticky CTA slide in
-  const stickyCta = document.getElementById('stickyCta');
-  if (stickyCta) {
-    setTimeout(() => {
-      stickyCta.classList.add('active');
-    }, 1500);
-  }
-
-  // Language switcher
-  const langPill = document.querySelector('.lang-pill');
-  if (langPill) {
-    langPill.addEventListener('click', (event) => {
-      const target = event.target.closest('button');
-      if (!target) return;
-      langPill.querySelectorAll('button').forEach((button) => {
-        const active = button === target;
-        button.classList.toggle('active', active);
-        button.setAttribute('aria-pressed', String(active));
-      });
-    });
-  }
-
-  // Hydrate Doctors Grid
-  const telemedDoctorsGrid = document.getElementById('telemedDoctorsGrid');
-  if (telemedDoctorsGrid) {
-    telemedDoctorsGrid.innerHTML = '';
-    doctors.forEach(doc => {
-      const cardHtml = `
-        <div class="doc-card">
-          <div class="doc-img-wrapper">
-            <span class="experience-badge">${doc.experience} Years Exp</span>
-            <img src="${doc.img}" alt="${doc.name}" onerror="this.style.display='none'">
-          </div>
-          <div class="doc-body">
-            <h4>${doc.name}</h4>
-            <div class="doc-title-row">${doc.title}</div>
-            <div class="doc-rating-row">
-              <span class="star-badge">★ ${doc.rating}</span>
-              <span>(${doc.reviews} reviews)</span>
-            </div>
-            <div class="doc-video-badge">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-              Available for Video Consult
-            </div>
-            <div class="doc-actions">
-              <a href="/doctor-details.html?id=${doc.id}" class="profile-btn">View Profile</a>
-              <a href="/find-a-doctor.html?specialty=${encodeURIComponent(doc.specialty)}&telemed=true" class="book-btn">Book Video Call</a>
-            </div>
-          </div>
-        </div>
-      `;
-      const div = document.createElement('div');
-      div.innerHTML = cardHtml;
-      telemedDoctorsGrid.appendChild(div.firstElementChild);
-    });
-  }
-
-  // FAQ Accordion Toggle Logic
-  const faqItems = document.querySelectorAll('.faq-item');
-  faqItems.forEach(item => {
-    const trigger = item.querySelector('.faq-trigger');
-    const content = item.querySelector('.faq-content');
-    
-    trigger.addEventListener('click', () => {
-      const isActive = item.classList.contains('active');
-      
-      // Close other items
-      faqItems.forEach(otherItem => {
-        otherItem.classList.remove('active');
-        otherItem.querySelector('.faq-content').style.maxHeight = null;
-      });
-      
-      if (!isActive) {
-        item.classList.add('active');
-        content.style.maxHeight = content.scrollHeight + 'px';
-      }
-    });
-  });
-
-  // GSAP Entrance Animations
-  gsap.from(".subpage-hero-inner", {
-    opacity: 0,
-    y: 30,
-    duration: 0.7,
-    ease: "power2.out"
-  });
-  
-  gsap.from(".benefit-card", {
-    opacity: 0,
-    y: 30,
-    duration: 0.6,
-    stagger: 0.15,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: ".benefits-grid",
-      start: "top 80%"
-    }
-  });
-
-  gsap.from(".workflow-step", {
-    opacity: 0,
-    y: 20,
-    duration: 0.6,
-    stagger: 0.15,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: ".workflow-grid",
-      start: "top 85%"
-    }
-  });
-});
-</script>
+<div class="tm-sticky" id="tmSticky">
+  <div class="tx"><div class="a">Start a video consult</div><div class="b">34 doctors online · wait under 12 min</div></div>
+  <a href="tel:920022811" class="call" aria-label="Call"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></a>
+  <a href="/find-a-doctor.html?telemedicine=true" class="bk">Consult</a>
+</div>
 
 <script src="/assets/language-switcher.js"></script>
 <script src="/assets/mobile-nav.js"></script>
+<script src="/assets/telemedicine.js"></script>
 </body>
 </html>

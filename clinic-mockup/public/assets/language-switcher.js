@@ -1,6 +1,40 @@
 (function () {
   const STORAGE_KEY = "myclinicLang";
   const dictionary = {
+    "over video": "عبر الفيديو",
+    "Straight to the": "مباشرة إلى",
+    "40+ specialties": "أكثر من 40 تخصصًا",
+    "120 SAR": "120 ريال",
+    "Issued in-call": "تصدر أثناء المكالمة",
+    "48h messaging": "مراسلة 48 ساعة",
+    "Notes saved to portal": "تُحفظ الملاحظات في بوابتك",
+    "20% off specialist visits": "خصم 20٪ على زيارات الأخصائيين",
+    "For the household": "للعائلة",
+    "Priority queue for all": "أولوية في الدور للجميع",
+    "Online": "متصل الآن",
+    "Internal Medicine": "الطب الباطني",
+    "Dermatology & Aesthetics": "الجلدية والتجميل",
+    "Family & Preventive Medicine": "طب الأسرة والوقاية",
+    "Pediatrics": "طب الأطفال",
+    "Noura Al-Amri": "نورة العمري",
+    "Faisal Al-Turki": "فيصل التركي",
+    "Layla Al-Sayed": "ليلى السيد",
+    "Maha · Jeddah": "مها · جدة",
+    "Jeddah · My Clinic Plus": "جدة · باقة بلس",
+    "Jeddah · Single consult": "جدة · استشارة واحدة",
+    "Riyadh · Family plan": "الرياض · باقة العائلة",
+    "FAQ": "الأسئلة الشائعة",
+    "Coordinators · Sat–Thu 8 AM – 10 PM": "المنسقون · السبت–الخميس ٨ ص – ١٠ م",
+    "Doctors online · 24 / 7": "أطباء متاحون · ٢٤/٧",
+    "many things": "أمور كثيرة",
+    "Unlimited GP video consults and anytime messaging.": "استشارات فيديو غير محدودة مع طبيب عام ومراسلة في أي وقت.",
+    "a tap away": "على بُعد نقرة",
+    "tell us": "يقوله مرضانا",
+    "answered": "إجابات",
+    "starting now": "من الآن",
+    "min": "دقيقة",
+    "For general consultations our average wait is under twelve minutes, day or night. Specialist video appointments are usually same-day. Plus and Family members get a priority queue.": "في الاستشارات العامة متوسط الانتظار أقل من اثنتي عشرة دقيقة، ليلاً ونهارًا. وتُجدول استشارات الأخصائيين بالفيديو عادةً في اليوم نفسه. ويحصل أعضاء بلس والعائلة على أولوية في الدور.",
+    "Every physician on the platform is SCFHS-licensed, credentialed by My Clinic, and rated by the patients they've seen. Many speak both Arabic and English.": "كل طبيب على المنصة مرخّص من هيئة التخصصات الصحية ومعتمد من ماي كلينك ومُقيَّم من مرضاه، وكثير منهم يتحدث العربية والإنجليزية.",
     "Find a Doctor": "الأطباء",
     "Specialties": "التخصصات",
     "Programs": "البرامج",
@@ -258,6 +292,280 @@
     "How do I receive prescribed medications?": "كيف أستلم الأدوية الموصوفة؟",
     "Following your session, the consultant will generate a digital prescription sent straight to your phone via SMS. You can redeem this electronic barcode at any major pharmacy branch across Saudi Arabia, or coordinate home delivery via our clinical pharmacy team.": "بعد الجلسة، يصدر الاستشاري وصفة رقمية تصلك برسالة نصية. يمكنك صرفها من الصيدليات أو تنسيق التوصيل المنزلي.",
     "What if the doctor requests a physical lab or blood test?": "ماذا لو طلب الطبيب تحاليل أو فحوصات؟",
+    "Telemedicine · Virtual Care": "استشارات عن بُعد",
+    "See a doctor": "استشر طبيباً",
+    "in minutes,": "خلال دقائق،",
+    "anywhere.": "من أي مكان.",
+    "Connect by secure video with SCFHS-licensed My Clinic physicians — diagnosis, e-prescriptions, sick notes and specialist referrals, all from your phone. No commute, no waiting room.": "تواصل عبر فيديو آمن مع أطباء ماي كلينك المرخصين من الهيئة السعودية للتخصصات الصحية: تشخيص، وصفات إلكترونية، تقارير طبية وإحالات للمتخصصين، كلها من هاتفك. بلا تنقل ولا انتظار.",
+    "Connect by video with certified physicians in minutes — diagnosis, e-prescriptions and medical reports, all from your phone.": "تواصل بالفيديو مع أطباء معتمدين خلال دقائق: تشخيص، وصفات إلكترونية وتقارير طبية، كلها من هاتفك.",
+    "Start a video consult": "ابدأ استشارة فيديو",
+    "WhatsApp us": "تواصل عبر واتساب",
+    "Avg. wait time": "متوسط الانتظار",
+    "Patient satisfaction": "رضا المرضى",
+    "Doctors available": "أطباء متاحون",
+    "Licensed & PDPL-secure": "مرخص وآمن وفق نظام حماية البيانات",
+    "Live": "مباشر",
+    "Family & Preventive Medicine": "طب الأسرة والطب الوقائي",
+    "Verified": "موثق",
+    "You": "أنت",
+    "Connected in 38 seconds": "تم الاتصال خلال 38 ثانية",
+    "No appointment needed": "لا تحتاج إلى موعد مسبق",
+    "e-Prescription": "وصفة إلكترونية",
+    "Sent to your pharmacy": "أُرسلت إلى صيدليتك",
+    "Visit notes in your portal": "ملاحظات الزيارة في ملفك",
+    "I need help with": "أحتاج مساعدة في",
+    "General consultation": "استشارة عامة",
+    "When": "الوقت",
+    "Now — connect live": "الآن - اتصال مباشر",
+    "For": "لـ",
+    "Myself": "نفسي",
+    "Match me with a doctor": "اختر لي الطبيب المناسب",
+    "What you can do online": "ما يمكنك إنجازه عن بُعد",
+    "A clinic visit,": "زيارة عيادة،",
+    "without the trip": "من دون مشوار",
+    "without the trip.": "من دون مشوار.",
+    "Four ways to get care over a secure connection — each handled by a credentialed My Clinic physician with full access to your chart, prescriptions and labs.": "أربع طرق للحصول على الرعاية عبر اتصال آمن، يقدمها أطباء ماي كلينك المعتمدون مع اطلاع كامل على ملفك الطبي ووصفاتك ونتائجك.",
+    "Video Consultations": "استشارات فيديو",
+    "Live, face-to-face video visits": "زيارات فيديو مباشرة وجهاً لوجه",
+    "e-Prescriptions & Sick Notes": "وصفات إلكترونية وتقارير مرضية",
+    "Digitally signed, issued in-call": "توقيع رقمي وإصدار أثناء المكالمة",
+    "Specialist Referrals": "إحالات للمتخصصين",
+    "Across 40+ specialties": "ضمن أكثر من 40 تخصصاً",
+    "Follow-up & Secure Chat": "متابعة ومحادثة آمنة",
+    "48-hour messaging after every visit": "مراسلة لمدة 48 ساعة بعد كل زيارة",
+    "01 — Video consultation": "01 - استشارة فيديو",
+    "A face-to-face visit,": "زيارة مباشرة،",
+    "over video.": "عبر الفيديو.",
+    "Speak live with a GP or specialist for assessment, diagnosis and a care plan. Share photos and history in-call — the doctor sees your full chart, just like a clinic visit.": "تحدث مباشرة مع طبيب عام أو متخصص للتقييم والتشخيص وخطة الرعاية. شارك الصور والتاريخ المرضي أثناء المكالمة، ويطلع الطبيب على ملفك بالكامل كما في زيارة العيادة.",
+    "HD video & secure voice": "فيديو عالي الدقة وصوت آمن",
+    "Share photos & documents": "مشاركة الصور والمستندات",
+    "Arabic & English doctors": "أطباء بالعربية والإنجليزية",
+    "Notes saved to your portal": "حفظ الملاحظات في ملفك",
+    "From": "ابتداءً من",
+    "SAR / consult": "ريال / استشارة",
+    "Start a consult": "ابدأ الاستشارة",
+    "02 — Prescriptions & notes": "02 - الوصفات والتقارير",
+    "Prescriptions & sick notes,": "وصفات وتقارير مرضية،",
+    "issued instantly.": "تصدر فوراً.",
+    "When clinically appropriate, your doctor issues an e-prescription routed straight to your pharmacy, plus medical sick notes and refill renewals — all digitally signed and verifiable.": "عندما تكون مناسبة طبياً، يصدر الطبيب وصفة إلكترونية تصل مباشرة إلى صيدليتك، مع تقارير مرضية وتجديدات للأدوية، وكلها موقعة رقمياً وقابلة للتحقق.",
+    "e-Prescription to any pharmacy": "وصفة إلكترونية لأي صيدلية",
+    "Medical & sick-leave notes": "تقارير طبية وإجازات مرضية",
+    "Chronic-med refills": "تجديد أدوية الأمراض المزمنة",
+    "Digitally signed & verifiable": "موقعة رقمياً وقابلة للتحقق",
+    "Included": "مشمول",
+    "with every consult": "مع كل استشارة",
+    "Renew a prescription": "جدّد وصفة طبية",
+    "03 — Specialist referrals": "03 - إحالات للمتخصصين",
+    "Straight to the right": "مباشرة إلى",
+    "specialist.": "المتخصص المناسب.",
+    "Need more than a GP? Book a video consult directly with consultants in dermatology, pediatrics, psychiatry, cardiology and more — or get a coordinated referral into our clinics for in-person care.": "هل تحتاج أكثر من طبيب عام؟ احجز استشارة فيديو مباشرة مع استشاريين في الجلدية، الأطفال، الطب النفسي، القلب وغيرها، أو احصل على إحالة منسقة إلى عياداتنا للرعاية الحضورية.",
+    "Dermatology & skin": "الجلدية والبشرة",
+    "Pediatrics & child health": "الأطفال وصحة الطفل",
+    "Mental health & therapy": "الصحة النفسية والعلاج",
+    "In-clinic referral coordination": "تنسيق إحالة داخل العيادة",
+    "SAR / specialist": "ريال / متخصص",
+    "See a specialist": "قابل متخصصاً",
+    "04 — Follow-up & chat": "04 - المتابعة والمحادثة",
+    "Care that continues": "رعاية تستمر",
+    "after the call.": "بعد المكالمة.",
+    "Message your doctor for 48 hours after each consult, share test results, and keep chronic conditions on track with scheduled follow-up check-ins — no need to re-explain your story.": "راسل طبيبك لمدة 48 ساعة بعد كل استشارة، وشارك نتائج الفحوصات، وتابع الحالات المزمنة بمراجعات مجدولة من دون إعادة شرح حالتك من البداية.",
+    "48-hour secure messaging": "مراسلة آمنة لمدة 48 ساعة",
+    "Lab & result review": "مراجعة التحاليل والنتائج",
+    "Chronic-care check-ins": "متابعات للأمراض المزمنة",
+    "One continuous record": "سجل طبي متصل",
+    "SAR / month": "ريال / شهر",
+    "See membership": "عرض العضوية",
+    "How it works": "كيف تعمل الخدمة",
+    "Three taps": "ثلاث خطوات",
+    "to a doctor.": "إلى الطبيب.",
+    "Three taps to a": "ثلاث خطوات إلى",
+    "doctor": "الطبيب",
+    "No app stores to wade through, no forms to print. Open the link, describe your symptoms, and you're connected — usually in under fifteen minutes.": "لا حاجة للبحث في متاجر التطبيقات ولا لطباعة النماذج. افتح الرابط، صف الأعراض، وسيتم توصيلك غالباً خلال أقل من خمس عشرة دقيقة.",
+    "Tell us what's": "أخبرنا بما",
+    "wrong": "يؤلمك",
+    "Choose a symptom or specialty and who the visit is for. We match you with the right available doctor in seconds.": "اختر العرض أو التخصص ومن يحتاج الزيارة. نوصلك بالطبيب المناسب والمتاح خلال ثوانٍ.",
+    "Takes under a minute": "يستغرق أقل من دقيقة",
+    "Join the": "انضم إلى",
+    "video call": "مكالمة الفيديو",
+    "Connect live by secure video. Share photos, describe symptoms, and get assessed — with full access to your medical history.": "تواصل مباشرة عبر فيديو آمن. شارك الصور، وصف الأعراض، واحصل على تقييم مع اطلاع الطبيب على تاريخك الطبي.",
+    "Avg. wait under 12 min": "متوسط الانتظار أقل من 12 دقيقة",
+    "Get your": "احصل على",
+    "plan": "خطتك",
+    "Receive prescriptions, sick notes and referrals digitally — sent to your pharmacy and saved to your patient portal.": "استلم الوصفات والتقارير والإحالات رقمياً، تُرسل إلى صيدليتك وتُحفظ في بوابة المريض.",
+    "Delivered before you hang up": "تصلك قبل إنهاء المكالمة",
+    "What we treat online": "ما نعالجه عن بُعد",
+    "Right for a great": "مناسب لكثير",
+    "many things.": "من الحالات.",
+    "Telemedicine handles a wide range of everyday and ongoing care. If a condition needs hands-on examination, your doctor will arrange the right in-person or home visit.": "تغطي الاستشارات عن بُعد مجموعة واسعة من الرعاية اليومية والمستمرة. وإذا احتاجت الحالة إلى فحص حضوري، يرتب الطبيب الزيارة المناسبة في العيادة أو المنزل.",
+    "Cold, flu & fever": "الزكام والإنفلونزا والحمى",
+    "Coughs, sore throats, sinus and seasonal infections.": "السعال، التهاب الحلق، الجيوب الأنفية والالتهابات الموسمية.",
+    "Skin conditions": "مشكلات الجلد",
+    "Rashes, acne, eczema and allergic reactions, reviewed by photo.": "الطفح، حب الشباب، الإكزيما والحساسية عبر مراجعة الصور.",
+    "Mental health": "الصحة النفسية",
+    "Anxiety, stress, low mood and sleep — with licensed therapists.": "القلق، التوتر، المزاج المنخفض والنوم مع معالجين مرخصين.",
+    "Chronic care": "رعاية الأمراض المزمنة",
+    "Diabetes, blood-pressure and thyroid follow-ups and monitoring.": "متابعة ومراقبة السكري وضغط الدم والغدة الدرقية.",
+    "Prescription refills": "تجديد الوصفات",
+    "Renew regular medications without a clinic trip.": "جدّد أدويتك المنتظمة من دون زيارة العيادة.",
+    "Children's health": "صحة الأطفال",
+    "Pediatric advice for fevers, rashes and common childhood illness.": "استشارات أطفال للحمى والطفح والأمراض الشائعة.",
+    "Digestive issues": "مشكلات الجهاز الهضمي",
+    "Stomach upset, reflux, nausea and general GI concerns.": "اضطرابات المعدة والارتجاع والغثيان ومشكلات الهضم العامة.",
+    "Lab follow-ups": "متابعة التحاليل",
+    "Order tests and walk through results with your doctor.": "اطلب الفحوصات وراجع النتائج مع طبيبك.",
+    "Not for emergencies.": "ليست للحالات الطارئة.",
+    "For chest pain, breathing difficulty, severe bleeding or any life-threatening symptom, call Saudi Red Crescent": "لألم الصدر أو صعوبة التنفس أو النزيف الشديد أو أي عرض يهدد الحياة، اتصل بالهلال الأحمر السعودي",
+    "or go to the nearest ER.": "أو توجه إلى أقرب طوارئ.",
+    "Simple pricing": "أسعار واضحة",
+    "Pay once, or": "ادفع لمرة واحدة، أو",
+    "join the clinic.": "انضم إلى العيادة.",
+    "Use it when you need it, or join a membership for unlimited consults and round-the-clock messaging. Most plans are reimbursable through your insurer.": "استخدم الخدمة عند الحاجة، أو انضم إلى عضوية للاستشارات غير المحدودة والمراسلة على مدار الساعة. يمكن استرداد معظم الخطط عبر التأمين.",
+    "Pay per visit": "الدفع لكل زيارة",
+    "Single": "استشارة",
+    "consult": "مفردة",
+    "One-off video visit with a GP, prescription and notes included.": "زيارة فيديو واحدة مع طبيب عام تشمل الوصفة والتقرير.",
+    "15–25 min video visit": "زيارة فيديو 15-25 دقيقة",
+    "e-Prescription & sick note": "وصفة إلكترونية وتقرير مرضي",
+    "48-hour follow-up chat": "محادثة متابعة لمدة 48 ساعة",
+    "Membership": "العضوية",
+    "Plus": "بلس",
+    "Unlimited GP video consults and anytime messaging for one person.": "استشارات فيديو غير محدودة مع طبيب عام ومراسلة في أي وقت لشخص واحد.",
+    "Unlimited GP consults": "استشارات طبيب عام غير محدودة",
+    "Priority queue · skip the wait": "أولوية في الدور · انتظار أقل",
+    "24/7 secure messaging": "مراسلة آمنة 24/7",
+    "Join My Clinic Plus": "انضم إلى ماي كلينك بلس",
+    "Household": "العائلة",
+    "Family": "خطة",
+    "Cover up to six family members under one shared membership.": "غطِّ حتى ستة أفراد من العائلة ضمن عضوية واحدة.",
+    "Up to 6 members": "حتى 6 أفراد",
+    "Unlimited GP & pediatric consults": "استشارات طبيب عام وأطفال غير محدودة",
+    "Shared family health record": "سجل صحي عائلي مشترك",
+    "Choose family plan": "اختر خطة العائلة",
+    "Online now": "متاحون الآن",
+    "Real doctors,": "أطباء حقيقيون،",
+    "a tap away.": "بنقرة واحدة.",
+    "Connect by secure video with SCFHS-licensed physicians in minutes — diagnosis, e-prescriptions & reports, all from your phone.": "تواصل عبر فيديو آمن مع أطباء مرخّصين من الهيئة خلال دقائق: تشخيص، وصفات إلكترونية وتقارير، كلها من هاتفك.",
+    "Family & Preventive Medicine · 12 yrs": "طب الأسرة والطب الوقائي · 12 سنة",
+    "Internal Medicine · 9 yrs": "الباطنية · 9 سنوات",
+    "Dermatology · 14 yrs": "الجلدية · 14 سنة",
+    "Pediatrics · 11 yrs": "الأطفال · 11 سنة",
+    "1,240 consults": "1,240 استشارة",
+    "980 consults": "980 استشارة",
+    "1,510 consults": "1,510 استشارة",
+    "2,030 consults": "2,030 استشارة",
+    "Browse all online doctors": "تصفح كل الأطباء المتاحين عن بُعد",
+    "Doctor, specialty, symptom…": "طبيب، تخصص، عرض...",
+    "Patient stories": "تجارب المرضى",
+    "What patients": "ما يقوله",
+    "tell us.": "مرضانا.",
+    "From late-night fevers to chronic-care check-ins — real consults, real outcomes. Pulled from 18,000+ telemedicine reviews.": "من حمى آخر الليل إلى متابعة الأمراض المزمنة: استشارات حقيقية ونتائج ملموسة من أكثر من 18,000 تقييم للاستشارة عن بُعد.",
+    "\"My son spiked a fever at 11 PM. I was connected to a pediatrician in nine minutes, got a prescription on my phone, and the pharmacy delivered by midnight. Unbelievable.\"": "\"ارتفعت حرارة ابني الساعة 11 مساءً. تواصلت مع طبيب أطفال خلال تسع دقائق، وصلت الوصفة إلى هاتفي، ووصل الدواء من الصيدلية قبل منتصف الليل. تجربة مدهشة.\"",
+    "Riyadh · Family plan": "الرياض · خطة العائلة",
+    "\"I manage my diabetes through monthly video check-ins. Same doctor every time, my whole history on screen, refills sent straight to my pharmacy. It saves me a clinic trip every month.\"": "\"أتابع السكري عبر مراجعات فيديو شهرية. الطبيب نفسه كل مرة، وتاريخي الطبي أمامه، وتجديد الوصفات يصل إلى صيدليتي مباشرة. توفر علي زيارة شهرية للعيادة.\"",
+    "Faisal · My Clinic Plus": "فيصل · ماي كلينك بلس",
+    "\"I needed a sick note and a quick consult before a flight. Booked from the airport lounge, spoke to a GP for fifteen minutes, and had everything in my portal before boarding.\"": "\"احتجت تقريراً مرضياً واستشارة سريعة قبل رحلة. حجزت من صالة المطار، تحدثت مع طبيب عام لخمس عشرة دقيقة، وكان كل شيء في ملفي قبل الصعود للطائرة.\"",
+    "Layla · Single consult": "ليلى · استشارة واحدة",
+    "The dermatologist reviewed my photos and prescribed in minutes. So much easier than a clinic trip.": "راجع طبيب الجلدية صوري ووصف العلاج خلال دقائق. أسهل بكثير من زيارة العيادة.",
+    "Maha · Jeddah": "مها · جدة",
+    "Questions,": "أسئلتك،",
+    "answered.": "مجاب عنها.",
+    "If your question isn't here, our coordinators are reachable around the clock — most queries are answered within minutes.": "إذا لم تجد سؤالك هنا، فإن منسقي الرعاية متاحون على مدار الساعة، وتُجاب معظم الاستفسارات خلال دقائق.",
+    "How quickly can I see a doctor?": "كم يستغرق الوصول إلى طبيب؟",
+    "For general consultations, our average wait is under twelve minutes, day or night. Specialist video appointments are usually scheduled within the same day. Members on Plus and Family plans get a priority queue.": "في الاستشارات العامة، متوسط الانتظار أقل من 12 دقيقة ليلاً أو نهاراً. غالباً تُجدول مواعيد المتخصصين بالفيديو في اليوم نفسه، ويحصل أعضاء بلس والعائلة على أولوية.",
+    "Can the doctor prescribe medication online?": "هل يستطيع الطبيب وصف الدواء عن بُعد؟",
+    "Yes. When clinically appropriate, your doctor issues a digitally signed e-prescription routed to the pharmacy of your choice, along with sick notes and chronic-medication refills. Certain controlled substances cannot be prescribed remotely under Saudi regulations — your doctor will advise.": "نعم. عندما تكون مناسبة طبياً، يصدر الطبيب وصفة إلكترونية موقعة رقمياً إلى الصيدلية التي تختارها، مع التقارير المرضية وتجديد أدوية الأمراض المزمنة. بعض الأدوية المقيدة لا يمكن وصفها عن بُعد وفق الأنظمة السعودية، وسيشرح لك الطبيب ذلك.",
+    "Is telemedicine covered by my insurance?": "هل يغطي التأمين خدمة الطب عن بُعد؟",
+    "Most major insurers — Tawuniya, Bupa Arabia, MedGulf, Allianz and AXA — now reimburse virtual consultations. We'll verify your eligibility before the call, and issue an itemised digital invoice you can submit if you pay upfront.": "تعوض معظم شركات التأمين الكبرى مثل التعاونية وبوبا العربية وميدغلف وأليانز وأكسا الاستشارات الافتراضية. نتحقق من أهليتك قبل المكالمة ونصدر فاتورة رقمية مفصلة لتقديمها عند الدفع المسبق.",
+    "Is the video call private and secure?": "هل مكالمة الفيديو خاصة وآمنة؟",
+    "Every consultation is end-to-end encrypted and never recorded. Visit notes, prescriptions and results are stored on PDPL-compliant infrastructure in your patient portal, and you control who in your family can access them.": "كل استشارة مشفرة من الطرف إلى الطرف ولا يتم تسجيلها. تُحفظ ملاحظات الزيارة والوصفات والنتائج في بوابتك ضمن بنية متوافقة مع نظام حماية البيانات، وأنت تتحكم في صلاحيات وصول أفراد العائلة.",
+    "Do I need to download an app?": "هل أحتاج إلى تحميل تطبيق؟",
+    "No download is required — consults run securely in your browser from any phone, tablet or computer with a camera. The My Clinic app is available for members who want appointment reminders, refill tracking and their full record in one place.": "لا تحتاج إلى تحميل أي تطبيق، فالاستشارات تعمل بأمان عبر المتصفح من أي هاتف أو جهاز لوحي أو كمبيوتر مزود بكاميرا. تطبيق ماي كلينك متاح للأعضاء الذين يريدون تذكيرات المواعيد وتتبع التجديدات والسجل الكامل في مكان واحد.",
+    "What can't be handled over video?": "ما الحالات التي لا تناسب الفيديو؟",
+    "Anything requiring hands-on examination, imaging, or in-person procedures. Telemedicine is not for emergencies — for chest pain, difficulty breathing, severe bleeding or other urgent symptoms, call 997 or go to the nearest ER. When needed, your doctor will refer you to one of our clinics or a home visit.": "أي حالة تتطلب فحصاً مباشراً أو تصويراً أو إجراءً حضورياً. الطب عن بُعد ليس للطوارئ. عند ألم الصدر أو صعوبة التنفس أو النزيف الشديد أو أي أعراض عاجلة، اتصل على 997 أو توجه لأقرب طوارئ. وعند الحاجة، يحيلك الطبيب إلى أحد فروعنا أو إلى زيارة منزلية.",
+    "Speak to a coordinator": "تحدث مع منسق رعاية",
+    "A doctor is online now": "طبيب متاح الآن",
+    "Feel better,": "ابدأ التحسن،",
+    "starting now.": "من الآن.",
+    "Describe your symptoms and we'll connect you with the right physician — usually in under fifteen minutes, day or night.": "صف أعراضك وسنوصلك بالطبيب المناسب، غالباً خلال أقل من خمس عشرة دقيقة ليلاً أو نهاراً.",
+    "Doctors online": "أطباء متاحون",
+    "24 hours · 7 days": "24 ساعة · 7 أيام",
+    "Avg. wait": "متوسط الانتظار",
+    "Under 12 minutes": "أقل من 12 دقيقة",
+    "WhatsApp anytime": "واتساب في أي وقت",
+    "34 doctors online": "34 طبيباً متاحاً",
+    "34 doctors online · wait under 12 min": "34 طبيباً متاحاً · انتظار أقل من 12 دقيقة",
+    "Start a consult →": "ابدأ الاستشارة ←",
+    "Consult": "استشارة",
+    "See a doctor in": "استشر طبيبك",
+    "minutes": "خلال دقائق",
+    ", anywhere.": " ",
+    "Family Medicine": "طب الأسرة",
+    "Dr. Wail Yar": "د. وائل يار",
+    "Dr. Walaa Aldabbagh": "د. ولاء الدباغ",
+    "Dr. Taha Habibullah": "د. طه حبيب الله",
+    "Dr. Turki Alahmadi": "د. تركي الأحمدي",
+    "Secure video visits with SCFHS-licensed My Clinic physicians — diagnosis, e-prescriptions and referrals from your phone.": "تواصل مع أطباء ماي كلينك المرخصين عبر فيديو آمن، واحصل على تشخيص ووصفة إلكترونية من هاتفك.",
+    "No appointment needed · prescription sent to your pharmacy": "لا تحتاج إلى موعد · الوصفة تصل إلى صيدليتك",
+    "Doctors online · 24 / 7": "أطباء متاحون · 24 / 7",
+    "15–25 min": "15-25 دقيقة",
+    "01 — Video consult": "01 - استشارة فيديو",
+    "Speak live with a GP or specialist. Share photos and history in-call — the doctor sees your full chart.": "تحدث مباشرة مع طبيب عام أو متخصص. شارك الصور والتاريخ المرضي أثناء المكالمة، ويطلع الطبيب على ملفك بالكامل.",
+    "HD video & voice": "فيديو وصوت بجودة عالية",
+    "Share photos": "مشاركة الصور",
+    "AR & EN doctors": "أطباء بالعربية والإنجليزية",
+    "02 — Prescriptions": "02 - الوصفات",
+    "Scripts & sick notes,": "وصفات وتقارير مرضية،",
+    "instantly": "فوراً",
+    "Digitally signed e-prescriptions routed to your pharmacy, plus medical sick notes and refill renewals.": "وصفات إلكترونية موقعة رقمياً تصل إلى صيدليتك، مع تقارير مرضية وتجديدات للأدوية.",
+    "In-call": "أثناء المكالمة",
+    "Sick notes": "تقارير مرضية",
+    "Refills": "تجديدات",
+    "every consult": "كل استشارة",
+    "03 — Specialists": "03 - المتخصصون",
+    "right specialist": "المتخصص المناسب",
+    "Video consults with consultants in dermatology, pediatrics, psychiatry and more — or a coordinated in-clinic referral.": "استشارات فيديو مع استشاريين في الجلدية والأطفال والطب النفسي وغيرها، أو إحالة منسقة داخل العيادة.",
+    "Dermatology": "الجلدية",
+    "Pediatrics": "الأطفال",
+    "200 SAR": "200 ريال",
+    "04 — Follow-up": "04 - المتابعة",
+    "48h chat": "محادثة 48 ساعة",
+    "Care that": "رعاية",
+    "continues": "تستمر",
+    "Message your doctor for 48 hours, share results, and keep chronic conditions on track with scheduled check-ins.": "راسل طبيبك لمدة 48 ساعة، وشارك النتائج، وحافظ على متابعة الأمراض المزمنة بمراجعات مجدولة.",
+    "Secure messaging": "مراسلة آمنة",
+    "Result review": "مراجعة النتائج",
+    "Check-ins": "متابعات",
+    "49 SAR / mo": "49 ريال / شهر",
+    "Choose a symptom and who it's for. We match you with the right available doctor in seconds.": "اختر العرض ومن يحتاج الزيارة. نوصلك بالطبيب المناسب والمتاح خلال ثوانٍ.",
+    "Under a minute": "أقل من دقيقة",
+    "Connect by secure video. Share photos, describe symptoms, get assessed — with your full history on screen.": "تواصل عبر فيديو آمن. شارك الصور، وصف الأعراض، واحصل على التقييم مع ظهور تاريخك الطبي للطبيب.",
+    "Prescriptions, sick notes and referrals — sent to your pharmacy and saved to your patient portal.": "وصفات وتقارير وإحالات تُرسل إلى صيدليتك وتُحفظ في بوابة المريض.",
+    "Before you hang up": "قبل إنهاء المكالمة",
+    "If a condition needs hands-on examination, your doctor arranges the right in-clinic or home visit.": "إذا احتاجت الحالة إلى فحص مباشر، يرتب الطبيب الزيارة المناسبة في العيادة أو المنزل.",
+    "Coughs, sore throats, seasonal infections.": "السعال، التهاب الحلق والالتهابات الموسمية.",
+    "Rashes, acne and eczema, by photo.": "الطفح، حب الشباب والإكزيما عبر الصور.",
+    "Anxiety, stress and sleep support.": "دعم القلق والتوتر والنوم.",
+    "Diabetes & blood-pressure follow-ups.": "متابعة السكري وضغط الدم.",
+    "Renew regular medication, no trip.": "تجديد أدويتك المنتظمة بلا مشوار.",
+    "Pediatric advice for common illness.": "استشارة أطفال للأمراض الشائعة.",
+    "For chest pain, breathing difficulty or severe bleeding, call Saudi Red Crescent": "لألم الصدر أو صعوبة التنفس أو النزيف الشديد، اتصل بالهلال الأحمر السعودي",
+    "join the clinic": "انضم إلى العيادة",
+    "One-off video visit with a GP, prescription included.": "زيارة فيديو واحدة مع طبيب عام تشمل الوصفة.",
+    "Join Plus": "انضم إلى بلس",
+    "Cover up to six members under one membership.": "غطِّ حتى ستة أفراد ضمن عضوية واحدة.",
+    "GP & pediatric consults": "استشارات طبيب عام وأطفال",
+    "Shared family record": "سجل عائلي مشترك",
+    "Choose family": "اختر العائلة",
+    "I manage my diabetes through monthly video check-ins. Same doctor, my whole history on screen.": "أتابع السكري عبر مراجعات فيديو شهرية. الطبيب نفسه وتاريخي الطبي أمامه.",
+    "Needed a sick note before a flight. Spoke to a GP from the lounge, had everything before boarding.": "احتجت تقريراً مرضياً قبل رحلة. تحدثت مع طبيب عام من الصالة وكان كل شيء جاهزاً قبل الصعود.",
+    "My son spiked a fever at 11 PM. I was connected to a pediatrician in nine minutes, got a prescription on my phone, and the pharmacy delivered by midnight.": "ارتفعت حرارة ابني الساعة 11 مساءً. تواصلت مع طبيب أطفال خلال تسع دقائق، وصلت الوصفة إلى هاتفي، ووصل الدواء قبل منتصف الليل.",
+    "Can the doctor prescribe online?": "هل يستطيع الطبيب وصف الدواء عن بُعد؟",
+    "Yes. When clinically appropriate, your doctor issues a digitally signed e-prescription to the pharmacy of your choice, along with sick notes and refills. Certain controlled medications can't be prescribed remotely under Saudi regulations.": "نعم. عندما تكون مناسبة طبياً، يصدر الطبيب وصفة إلكترونية موقعة رقمياً إلى الصيدلية التي تختارها، مع التقارير المرضية وتجديدات الأدوية. بعض الأدوية المقيدة لا يمكن وصفها عن بُعد وفق الأنظمة السعودية.",
+    "Is it covered by insurance?": "هل يغطيها التأمين؟",
+    "Most major insurers — Tawuniya, Bupa Arabia, MedGulf, Allianz and AXA — reimburse virtual consultations. We verify eligibility before the call and issue a digital invoice if you pay upfront.": "تعوض معظم شركات التأمين الكبرى مثل التعاونية وبوبا العربية وميدغلف وأليانز وأكسا الاستشارات الافتراضية. نتحقق من الأهلية قبل المكالمة ونصدر فاتورة رقمية عند الدفع المسبق.",
+    "Is the call private and secure?": "هل المكالمة خاصة وآمنة؟",
+    "Every consultation is end-to-end encrypted and never recorded. Notes, prescriptions and results are stored on PDPL-compliant infrastructure in your portal, and you control family access.": "كل استشارة مشفرة من الطرف إلى الطرف ولا تُسجل. تُحفظ الملاحظات والوصفات والنتائج في بوابتك ضمن بنية متوافقة مع نظام حماية البيانات، وأنت تتحكم بوصول أفراد العائلة.",
+    "No download required — consults run securely in your browser on any phone or computer with a camera. The My Clinic app is available for members who want reminders and their full record in one place.": "لا تحتاج إلى تحميل تطبيق. تعمل الاستشارات بأمان عبر المتصفح من أي هاتف أو كمبيوتر مزود بكاميرا. تطبيق ماي كلينك متاح للأعضاء الذين يريدون التذكيرات وسجلهم الكامل في مكان واحد.",
     "Ready to Meet Your Doctor Online?": "جاهز لمقابلة طبيبك عن بعد؟",
     "Schedule a secure digital consultation in under a minute. Connect with our leading board-certified specialists, review diagnostic reports, and manage your health seamlessly from anywhere.": "احجز استشارة رقمية آمنة خلال أقل من دقيقة، وتواصل مع أطبائنا المعتمدين لإدارة صحتك من أي مكان.",
     "Book Video Appointment": "احجز موعد فيديو",
@@ -310,6 +618,286 @@
     "Need home testing? Phlebotomists available": "تحتاج فحوصات منزلية؟ مختصو سحب العينات متاحون",
     "Tomorrow Morning": "غداً صباحاً",
     "Book Lab Visit →": "احجز زيارة مختبرية ←",
+    "Medical Care At Your Doorstep": "رعاية طبية حتى باب منزلك",
+    "Hospital-grade care, at your home.": "رعاية بمستوى المستشفى في منزلك.",
+    "Professional, compassionate clinical attention without travelling. From doctor home visits and skilled nursing to physiotherapy and rapid lab sampling, our certified mobile teams bring the hospital directly to you.": "رعاية طبية احترافية وإنسانية من دون تنقل. من زيارات الأطباء والتمريض المؤهل إلى العلاج الطبيعي وسحب العينات السريع، تصل فرقنا المتنقلة المعتمدة بالخدمة الطبية إليك مباشرة.",
+    "CBAHI Accredited care": "رعاية معتمدة من سباهي",
+    "SCFHS Licensed clinicians": "كوادر مرخصة من الهيئة",
+    "5 branches Jeddah & Riyadh": "5 فروع في جدة والرياض",
+    "Mobile teams on call": "فرق متنقلة جاهزة",
+    "Fully equipped · SCFHS-licensed": "مجهزة بالكامل · مرخصة من الهيئة",
+    "“The hospital, brought to your living room — calm, thorough, and on your schedule.”": "المستشفى يصل إلى غرفة معيشتك - بهدوء ودقة وفي الوقت المناسب لك.",
+    "Service": "الخدمة",
+    "Physician home visit": "زيارة طبيب منزلية",
+    "City": "المدينة",
+    "Jeddah — Al Mohammadiyah": "جدة - المحمدية",
+    "As soon as possible": "في أقرب وقت ممكن",
+    "Request on WhatsApp": "اطلب عبر واتساب",
+    "Accredited & insurance-friendly": "معتمد ومناسب للتأمين",
+    "Our comprehensive home services.": "خدماتنا المنزلية الشاملة.",
+    "Four core service lines, each delivered by a credentialed clinical team with hospital-grade equipment and digital records — the same standard of care, in your own room.": "أربع خدمات أساسية يقدمها فريق طبي معتمد بمعدات بمستوى المستشفى وسجلات رقمية، بنفس معيار الرعاية داخل غرفتك.",
+    "01 — Physician visit": "01 - زيارة طبيب",
+    "02 — Skilled nursing": "02 - تمريض مؤهل",
+    "03 — Physiotherapy": "03 - علاج طبيعي",
+    "04 — Lab sampling": "04 - سحب عينات",
+    "Doctors & consultants": "أطباء واستشاريون",
+    "Doctors at your bedside.": "أطباء بجانب سريرك.",
+    "General medicine doctors and specialty consultants visit your home for clinical consults, physical checkups, prescription renewals and care guidance — with the same chart and history as our clinics.": "يزورك أطباء الطب العام والاستشاريون في المنزل للاستشارة والفحص وتجديد الوصفات وإرشادات الرعاية، مع الاطلاع على نفس ملفك وتاريخك الطبي في عياداتنا.",
+    "Clinical consults & checkups": "استشارات وفحوصات طبية",
+    "Prescription renewals": "تجديد الوصفات",
+    "Specialty consultants": "استشاريون متخصصون",
+    "Records to your portal": "السجلات في بوابتك",
+    "Same-day where available": "في نفس اليوم عند التوفر",
+    "Request this service": "اطلب هذه الخدمة",
+    "Licensed nurses": "ممرضون مرخصون",
+    "Nursing care, at home.": "رعاية تمريضية في المنزل.",
+    "Licensed nurses providing wound dressing, vital-signs monitoring, injections, IV therapy and post-operative recovery support — hour by hour or day by day.": "ممرضون مرخصون يقدمون تغيير الضمادات ومراقبة العلامات الحيوية والحقن والعلاج الوريدي ودعم التعافي بعد العمليات، بالساعة أو باليوم.",
+    "Wound dressing & care": "تغيير الضمادات والعناية بالجروح",
+    "IV therapy & injections": "علاج وريدي وحقن",
+    "Vital-signs monitoring": "متابعة العلامات الحيوية",
+    "Post-operative recovery": "تعافٍ بعد العمليات",
+    "Hourly & daily plans": "خطط بالساعة واليوم",
+    "Certified physiotherapists": "أخصائيو علاج طبيعي معتمدون",
+    "Rehab built around your room.": "تأهيل مصمم حول غرفتك.",
+    "Customized home rehabilitation directed by certified physiotherapists — ideal for orthopedic recovery, neurological rehab, elderly mobility and pain relief, using the same protocols as our clinics.": "تأهيل منزلي مخصص بإشراف أخصائيي علاج طبيعي معتمدين، مناسب للتعافي العظمي والتأهيل العصبي وحركة كبار السن وتخفيف الألم، وفق بروتوكولات عياداتنا نفسها.",
+    "Orthopedic recovery": "تعافٍ عظمي",
+    "Neurological rehab": "تأهيل عصبي",
+    "Elderly mobility": "حركة كبار السن",
+    "Pain relief programs": "برامج تخفيف الألم",
+    "Structured session plans": "خطط جلسات منظمة",
+    "Certified phlebotomists": "مختصو سحب عينات معتمدون",
+    "Lab samples, collected at home.": "عينات المختبر تُسحب في المنزل.",
+    "Certified phlebotomists visit your home to safely collect blood, urine or other clinical samples. Specimens are analyzed at our accredited central labs, with digital results uploaded straight to your portal.": "يزورك مختصو سحب العينات المعتمدون لجمع الدم أو البول أو العينات الطبية الأخرى بأمان. تُحلل العينات في مختبراتنا المركزية المعتمدة وتُرفع النتائج رقمياً إلى بوابتك.",
+    "Blood, urine & swab samples": "عينات دم وبول ومسحات",
+    "Accredited central labs": "مختبرات مركزية معتمدة",
+    "Safe at-home collection": "سحب آمن في المنزل",
+    "Digital results in portal": "نتائج رقمية في البوابة",
+    "Phlebotomists available tomorrow": "مختصو السحب متاحون غداً",
+    "How to request home care.": "كيف تطلب الرعاية المنزلية.",
+    "A real human triage, not a chatbot. Our nurse supervisors review every request and match the right clinical team — so the visit fits your case, not the other way around.": "فرز طبي بشري حقيقي، وليس روبوت محادثة. يراجع مشرفو التمريض كل طلب ويطابقون الحالة مع الفريق الطبي المناسب حتى تناسب الزيارة حالتك.",
+    "Submit a request.": "أرسل طلباً.",
+    "Clinical triage.": "فرز طبي.",
+    "Care at your home.": "الرعاية في منزلك.",
+    "Our nurse supervisor reviews your case, confirms the details, and matches the correct medical team.": "يراجع مشرف التمريض حالتك ويؤكد التفاصيل ويختار الفريق الطبي المناسب.",
+    "Meet our mobile care team.": "تعرّف على فريق الرعاية المتنقلة.",
+    "A few of our accredited clinicians who deliver care at home — every one SCFHS-licensed and trained on our home-visit protocols.": "نخبة من كوادرنا المعتمدة التي تقدم الرعاية في المنزل، وجميعهم مرخصون من الهيئة ومدربون على بروتوكولات الزيارات المنزلية.",
+    "Home visits": "زيارات منزلية",
+    "Family, Sleep & Preventive Medicine": "طب الأسرة والنوم والوقاية",
+    "Consultant, Orthopedic Surgery": "استشاري جراحة العظام",
+    "Orthopedic Surgery": "جراحة العظام",
+    "Internal Medicine & Rheumatology": "الطب الباطني والروماتيزم",
+    "Pediatric Pulmonology": "صدرية الأطفال",
+    "SCFHS licensed": "مرخص من الهيئة",
+    "Home care questions.": "أسئلة الرعاية المنزلية.",
+    "If your question isn't here, our coordinators are reachable during call-center hours — most queries are answered within minutes.": "إذا لم تجد سؤالك هنا، يمكن الوصول إلى منسقينا خلال ساعات مركز الاتصال، وتُجاب معظم الاستفسارات خلال دقائق.",
+    "Sat–Thu · 8 AM – 10 PM": "السبت - الخميس · 8 صباحاً - 10 مساءً",
+    "Fri · 5 PM – 9 PM": "الجمعة · 5 مساءً - 9 مساءً",
+    "What areas do your home care teams cover?": "ما المناطق التي تغطيها فرق الرعاية المنزلية؟",
+    "Our mobile units operate out of our Jeddah and Riyadh branches, providing complete coverage across the municipal city limits of both cities. We can coordinate care for nearby outlying suburbs upon special review.": "تعمل وحداتنا المتنقلة من فروع جدة والرياض، وتوفر تغطية كاملة داخل النطاق البلدي للمدينتين. ويمكن تنسيق الرعاية للضواحي القريبة بعد مراجعة خاصة.",
+    "Coverage varies. Certain home nursing, physician and physiotherapy plans are covered under premium networks or post-surgical recovery policies. Our billing coordinators verify pre-authorization with your provider.": "تختلف التغطية حسب الوثيقة. بعض خطط التمريض المنزلي وزيارات الأطباء والعلاج الطبيعي مشمولة ضمن الشبكات المميزة أو وثائق التعافي بعد الجراحة. يتحقق منسقو الفوترة من الموافقة المسبقة مع مزود التأمين.",
+    "Can home care treat urgent or emergency events?": "هل تعالج الرعاية المنزلية الحالات العاجلة أو الطارئة؟",
+    "No. Home healthcare is for scheduled, non-emergency clinical visits, chronic-disease follow-ups and rehabilitation plans. For acute emergencies, call Saudi Red Crescent (997) or visit the nearest emergency department.": "لا. الرعاية المنزلية مخصصة للزيارات الطبية المجدولة وغير الطارئة ومتابعة الأمراض المزمنة وخطط التأهيل. للحالات الطارئة اتصل بالهلال الأحمر السعودي 997 أو توجه إلى أقرب طوارئ.",
+    "Are your visiting staff fully accredited?": "هل فريق الزيارات المنزلية معتمد بالكامل؟",
+    "Yes. All visiting physicians, nurses and physical therapists are licensed by the Saudi Commission for Health Specialties (SCFHS), certified by My Clinic, and follow CBAHI-verified international standards.": "نعم. جميع الأطباء والممرضين وأخصائيي العلاج الطبيعي الزائرين مرخصون من الهيئة السعودية للتخصصات الصحية ومعتمدون من ماي كلينك ويتبعون معايير دولية موثقة من سباهي.",
+    "Arrange clinical care at home.": "رتّب رعاية طبية في المنزل.",
+    "Home Healthcare · At Your Doorstep": "الرعاية المنزلية · حتى باب منزلك",
+    "Exceptional care,": "رعاية استثنائية،",
+    "close to you.": "قريبة منك.",
+    "Say yes to your good health. Hospital-grade doctors, nurses & physios arrive at your door — fully equipped and on your schedule.": "قل نعم لصحتك. أطباء وممرضون وأخصائيو علاج طبيعي بمستوى المستشفى يصلون إلى بابك، مجهزون بالكامل وفي الوقت المناسب لك.",
+    "Get started": "ابدأ الآن",
+    "12 teams on rounds": "12 فريقاً في جولات",
+    "Care that comes home to you.": "رعاية تصل إلى منزلك.",
+    "Hospital-grade physicians, nurses and physiotherapists arrive at your door — fully equipped, SCFHS-licensed, and on your schedule. No commute, no waiting room.": "أطباء وممرضون وأخصائيو علاج طبيعي بمستوى المستشفى يصلون إلى بابك، مجهزون بالكامل ومرخصون من الهيئة وفي الوقت المناسب لك. بلا تنقل ولا انتظار.",
+    "12 teams on rounds now": "12 فريقاً في جولات الآن",
+    "Visit today": "زيارة اليوم",
+    "“The team arrived within the hour. Calm, kind, completely thorough.”": "وصل الفريق خلال ساعة. هادئ، لطيف، ودقيق للغاية.",
+    "Home visits / year": "زيارة منزلية سنوياً",
+    "Request a home visit": "اطلب زيارة منزلية",
+    "2 min": "دقيقتان",
+    "Tomorrow, 9:30 AM": "غداً، 9:30 صباحاً",
+    "Find a team": "اعثر على فريق",
+    "Insurance accepted · In-network with": "نقبل التأمين · ضمن شبكة",
+    "What we bring home": "ما نقدمه في المنزل",
+    "A full clinic, without the clinic.": "عيادة كاملة من دون زيارة العيادة.",
+    "45–60 min": "45-60 دقيقة",
+    "Consultants & GPs at your bedside.": "استشاريون وأطباء عامون بجانب سريرك.",
+    "Full assessment, exam, prescription and follow-up — with the same chart, history and lab access as our hospitals.": "تقييم وفحص ووصفة ومتابعة كاملة، مع نفس الملف والتاريخ الطبي والوصول للمختبرات كما في مستشفياتنا.",
+    "Full exam & vitals": "فحص كامل وعلامات حيوية",
+    "E-prescription": "وصفة إلكترونية",
+    "Referrals": "إحالات",
+    "450 SAR / visit": "450 ريال / زيارة",
+    "Hourly & daily": "بالساعة واليوم",
+    "Licensed nurses for care & recovery.": "ممرضون مرخصون للرعاية والتعافي.",
+    "Wound dressing, IV therapy, injections, vitals monitoring and post-operative recovery — hourly or on multi-day plans.": "تغيير الضمادات والعلاج الوريدي والحقن ومتابعة العلامات الحيوية والتعافي بعد العمليات، بالساعة أو ضمن خطط متعددة الأيام.",
+    "IV therapy": "علاج وريدي",
+    "Wound & surgical care": "عناية بالجروح والجراحة",
+    "Vitals": "علامات حيوية",
+    "180 SAR / hour": "180 ريال / ساعة",
+    "60 min sessions": "جلسات 60 دقيقة",
+    "Structured plans for orthopedic recovery, post-stroke rehab, sports injuries and geriatric mobility — same protocols as our clinics.": "خطط منظمة للتعافي العظمي وتأهيل ما بعد السكتة وإصابات الرياضة وحركة كبار السن، وفق بروتوكولات عياداتنا نفسها.",
+    "Orthopedic & post-op": "عظام وما بعد العمليات",
+    "Neuro rehab": "تأهيل عصبي",
+    "Geriatric": "كبار السن",
+    "250 SAR / session": "250 ريال / جلسة",
+    "15 min · 24h results": "15 دقيقة · نتائج خلال 24 ساعة",
+    "Bloods, urines, swabs — collected at home.": "دم وبول ومسحات تُسحب في المنزل.",
+    "Certified phlebotomists collect samples safely at home. Specimens go to our central lab and results land in your portal within 24 hours.": "يجمع مختصو سحب العينات العينات بأمان في المنزل. تُرسل العينات إلى مختبرنا المركزي وتصل النتائج إلى بوابتك خلال 24 ساعة.",
+    "Blood & metabolic": "دم وأيض",
+    "Diabetes & lipid": "سكري ودهون",
+    "Thyroid": "الغدة الدرقية",
+    "120 SAR / visit": "120 ريال / زيارة",
+    "From request to care — in hours.": "من الطلب إلى الرعاية خلال ساعات.",
+    "Tell us what you need": "أخبرنا بما تحتاجه",
+    "Call, WhatsApp or use the form. Briefly describe the patient, the situation, and the kind of care needed.": "اتصل أو تواصل عبر واتساب أو استخدم النموذج. صف المريض والحالة ونوع الرعاية المطلوبة بإيجاز.",
+    "2-minute intake": "تسجيل خلال دقيقتين",
+    "We triage & match": "نفرز الحالة ونختار الفريق",
+    "A senior nurse reviews your case, confirms what's clinically appropriate, and assigns a credentialed team.": "تراجع ممرضة مسؤولة حالتك وتؤكد ما يناسبها طبياً وتكلف فريقاً معتمداً.",
+    "Within 30 minutes": "خلال 30 دقيقة",
+    "Care arrives at your door": "تصل الرعاية إلى بابك",
+    "A fully equipped mobile unit arrives at the agreed hour. Records sync to your portal automatically afterwards.": "تصل وحدة متنقلة مجهزة بالكامل في الموعد المتفق عليه، ثم تُزامن السجلات تلقائياً في بوابتك.",
+    "Same day, on average": "في نفس اليوم غالباً",
+    "Coverage": "التغطية",
+    "Where our teams reach you.": "أين تصل فرقنا إليك.",
+    "Five operating branches, two cities, full municipal coverage. Outer suburbs can be coordinated with advance review.": "خمسة فروع عاملة في مدينتين مع تغطية بلدية كاملة. يمكن تنسيق الضواحي الخارجية بمراجعة مسبقة.",
+    "4 branches · ~45 min avg": "4 فروع · متوسط 45 دقيقة تقريباً",
+    "1 branch · ~50 min avg": "فرع واحد · متوسط 50 دقيقة تقريباً",
+    "Outer suburbs": "الضواحي الخارجية",
+    "By advance arrangement": "بترتيب مسبق",
+    "Other cities": "مدن أخرى",
+    "Coming 2026": "قريباً في 2026",
+    "Care plans": "خطط الرعاية",
+    "Transparent pricing. No surprises.": "أسعار واضحة بلا مفاجآت.",
+    "Per visit": "لكل زيارة",
+    "Single Visit": "زيارة واحدة",
+    "One-off care when you need it — physician, nurse, physio or lab.": "رعاية لمرة واحدة عند الحاجة، طبيب أو تمريض أو علاج طبيعي أو مختبر.",
+    "Any single service": "أي خدمة منفردة",
+    "Records in patient portal": "السجلات في بوابة المريض",
+    "Same-day if before 2 PM": "في نفس اليوم إذا كان الطلب قبل 2 ظهراً",
+    "E-prescription & referrals": "وصفة إلكترونية وإحالات",
+    "Request a visit": "اطلب زيارة",
+    "Most popular": "الأكثر طلباً",
+    "Wellness Monthly": "العناية الشهرية",
+    "For older adults & busy households — a monthly bundle of routine and on-demand care.": "لكبار السن والعائلات المشغولة، باقة شهرية للرعاية الروتينية وعند الطلب.",
+    "2 physician & 4 nurse visits": "زيارتا طبيب و4 زيارات تمريض",
+    "Quarterly home lab panel": "تحاليل منزلية ربع سنوية",
+    "Priority booking, 4-hr response": "أولوية حجز واستجابة خلال 4 ساعات",
+    "24/7 nurse-on-call line": "خط تمريض مناوب 24/7",
+    "Start the plan": "ابدأ الخطة",
+    "Chronic & post-op": "مزمن وما بعد العمليات",
+    "Recovery Continuum": "استمرارية التعافي",
+    "Daily nursing and rehab for post-surgical or long-term conditions — built around the case.": "تمريض وتأهيل يومي لحالات ما بعد الجراحة أو الحالات طويلة الأمد، مصمم حسب الحالة.",
+    "Daily nursing visits": "زيارات تمريض يومية",
+    "3× weekly physiotherapy": "علاج طبيعي 3 مرات أسبوعياً",
+    "Specialist consultant reviews": "مراجعات استشاري متخصص",
+    "Family briefings & reports": "إحاطات وتقارير للعائلة",
+    "Talk to a coordinator": "تحدث إلى منسق",
+    "Insurance accepted with most major networks · Pre-authorization handled by our billing team.": "نقبل التأمين مع معظم الشبكات الكبرى · يتولى فريق الفوترة الموافقات المسبقة.",
+    "Your home-care team": "فريق رعايتك المنزلية",
+    "Senior clinicians. At your door.": "كوادر طبية خبيرة عند بابك.",
+    "Find a doctor for a home visit…": "ابحث عن طبيب لزيارة منزلية...",
+    "What patients tell us.": "ما يقوله مرضانا.",
+    "My father had hip surgery and we dreaded the recovery commute. The physio team came three times a week and treated him with such patience.": "أجرى والدي عملية في الورك وكنا نقلق من مشوار التعافي. جاء فريق العلاج الطبيعي ثلاث مرات أسبوعياً وتعامل معه بصبر كبير.",
+    "Reem Al-Anazi": "ريم العنزي",
+    "Jeddah · Recovery Continuum": "جدة · استمرارية التعافي",
+    "Booked a home lab on Friday morning. The phlebotomist arrived within two hours and results were in the portal before dinner.": "حجزت فحصاً منزلياً صباح الجمعة. وصل مختص سحب العينات خلال ساعتين وكانت النتائج في البوابة قبل العشاء.",
+    "Mohammed K. · Riyadh": "محمد ك. · الرياض",
+    "The home doctor visits my mother every fortnight. She remembers everything — medications, family details, what worried us.": "يزور الطبيب المنزلي والدتي كل أسبوعين. يتذكر كل شيء: الأدوية وتفاصيل العائلة وما كان يقلقنا.",
+    "Sara Al-Shehri · Jeddah": "سارة الشهري · جدة",
+    "Abdullah M. · Jeddah": "عبدالله م. · جدة",
+    "What areas do your mobile teams cover?": "ما المناطق التي تغطيها فرقكم المتنقلة؟",
+    "Our teams operate from our Jeddah (4 branches) and Riyadh (1 branch) facilities, with full coverage across the municipal limits of both cities. Outer suburbs can be coordinated with advance review.": "تعمل فرقنا من مرافق جدة (4 فروع) والرياض (فرع واحد)، مع تغطية كاملة داخل النطاق البلدي للمدينتين. يمكن تنسيق الضواحي الخارجية بمراجعة مسبقة.",
+    "Is home care covered by my insurance?": "هل يغطي التأمين الرعاية المنزلية؟",
+    "Coverage varies by policy. We're in-network with most major insurers (Tawuniya, Bupa Arabia, MedGulf, Allianz, AXA). Our billing team verifies pre-authorization before any visit.": "تختلف التغطية حسب الوثيقة. نحن ضمن شبكة معظم شركات التأمين الكبرى (التعاونية، بوبا العربية، ميدغلف، أليانز، أكسا). يتحقق فريق الفوترة من الموافقة المسبقة قبل أي زيارة.",
+    "How quickly can a team arrive?": "كم يستغرق وصول الفريق؟",
+    "For non-urgent visits, our average response is under four hours. Same-day visits are typically available when requested before 2 PM. Specialty appointments are usually scheduled 24–48 hours in advance.": "للزيارات غير العاجلة، متوسط الاستجابة أقل من أربع ساعات. تتوفر الزيارات في نفس اليوم غالباً عند الطلب قبل 2 ظهراً. تُجدول مواعيد التخصصات عادة قبل 24-48 ساعة.",
+    "Can home care treat emergencies?": "هل تعالج الرعاية المنزلية الطوارئ؟",
+    "No. Home care is for scheduled, non-emergency visits, chronic-disease follow-ups and rehabilitation. For acute emergencies, call Saudi Red Crescent (997) or go to the nearest ER.": "لا. الرعاية المنزلية مخصصة للزيارات المجدولة وغير الطارئة ومتابعة الأمراض المزمنة والتأهيل. للحالات الطارئة، اتصل بالهلال الأحمر السعودي 997 أو توجه إلى أقرب طوارئ.",
+    "The next visit could be tomorrow.": "قد تكون الزيارة التالية غداً.",
+    "Tell us about the patient and what's needed. A nurse coordinator will be on the line within minutes — and a team at your door, usually the same day.": "أخبرنا عن المريض وما يحتاجه. سيتواصل معك منسق تمريض خلال دقائق، ويصل الفريق إلى بابك غالباً في نفس اليوم.",
+    "Now booking": "الحجز متاح الآن",
+    "Sat–Thu · 8 AM–10 PM": "السبت - الخميس · 8 صباحاً - 10 مساءً",
+    "Avg. response": "متوسط الاستجابة",
+    "Under 4 hours": "أقل من 4 ساعات",
+    "Mobile teams on call · Avg. response under 4 hours": "فرق متنقلة جاهزة · متوسط الاستجابة أقل من 4 ساعات",
+    "Request a visit →": "اطلب زيارة ←",
+    "Mobile teams on call · response < 4 hrs": "فرق متنقلة جاهزة · استجابة أقل من 4 ساعات",
+    "Request": "اطلب",
+    "Book": "احجز",
+    "Call us": "اتصل بنا",
+    "Toll-free · 24/7": "الرقم الموحد · 24/7",
+    "Language": "اللغة",
+    "Hospital-grade care,": "رعاية بمستوى المستشفى،",
+    "Accredited care": "رعاية معتمدة",
+    "Licensed clinicians": "كوادر مرخصة",
+    "5 branches": "5 فروع",
+    "Jeddah & Riyadh": "جدة والرياض",
+    "Our comprehensive": "خدماتنا",
+    "home services.": "المنزلية الشاملة.",
+    "Doctors at": "أطباء عند",
+    "your bedside.": "سريرك.",
+    "Nursing care,": "رعاية تمريضية،",
+    "at home.": "في المنزل.",
+    "Rehab built around": "تأهيل مصمم حول",
+    "your room.": "غرفتك.",
+    "Lab samples,": "عينات المختبر،",
+    "collected at home.": "تُسحب في المنزل.",
+    "How to request": "كيف تطلب",
+    "home care.": "الرعاية المنزلية.",
+    "Submit a": "أرسل",
+    "request.": "طلباً.",
+    "Clinical": "فرز",
+    "triage.": "طبي.",
+    "Care at": "الرعاية في",
+    "your home.": "منزلك.",
+    "Meet our": "تعرّف على",
+    "mobile care team.": "فريق الرعاية المتنقلة.",
+    "Home care": "الرعاية المنزلية",
+    "questions.": "أسئلة.",
+    "Arrange clinical care": "رتّب رعاية طبية",
+    "Care that": "رعاية",
+    "comes home": "منزلية تصل",
+    "to you.": "إليك.",
+    "A full clinic,": "عيادة كاملة،",
+    "without the clinic": "من دون زيارة العيادة",
+    "Consultants & GPs at": "استشاريون وأطباء عامون عند",
+    "your bedside": "سريرك",
+    "Licensed nurses for": "ممرضون مرخصون لـ",
+    "care & recovery": "الرعاية والتعافي",
+    "Bloods, urines, swabs —": "دم وبول ومسحات -",
+    "From request to care —": "من الطلب إلى الرعاية -",
+    "in hours": "خلال ساعات",
+    "Tell us what you": "أخبرنا بما",
+    "need": "تحتاجه",
+    "We triage &": "نفرز الحالة و",
+    "match": "نطابق الفريق",
+    "Care arrives at": "تصل الرعاية إلى",
+    "your door": "بابك",
+    "Where our teams": "أين تصل",
+    "reach you": "فرقنا إليك",
+    "branches · ~45 min avg": "فروع · متوسط 45 دقيقة تقريباً",
+    "branch · ~50 min avg": "فرع · متوسط 50 دقيقة تقريباً",
+    "Transparent pricing.": "أسعار واضحة.",
+    "No surprises": "بلا مفاجآت",
+    "Single": "زيارة",
+    "Visit": "واحدة",
+    "Wellness": "العناية",
+    "Monthly": "الشهرية",
+    "Recovery": "استمرارية",
+    "Continuum": "التعافي",
+    "Senior clinicians.": "كوادر طبية خبيرة.",
+    "At your door": "عند بابك",
+    "What patients": "ما يقوله",
+    "tell us": "مرضانا",
+    "Questions,": "أسئلة،",
+    "answered": "مجاب عنها",
+    "The next visit could be": "قد تكون الزيارة التالية",
+    "tomorrow": "غداً",
+    "· Avg. response under 4 hours": "· متوسط الاستجابة أقل من 4 ساعات",
+    "Social": "التواصل الاجتماعي",
+    "Facebook": "فيسبوك",
+    "Instagram": "إنستغرام",
+    "YouTube": "يوتيوب",
+    "LinkedIn": "لينكدإن",
     "Allergy & Immunology": "الحساسية والمناعة",
     "Audio-vestibular & Speech": "السمع والتوازن والتخاطب",
     "Dental": "الأسنان",
@@ -332,6 +920,10 @@
   }
 
   function currentLang() {
+    const param = new URLSearchParams(window.location.search).get("lang");
+    if (param === "ar" || param === "en") return param;
+    const pageDefault = document.body && document.body.dataset.defaultLang;
+    if ((pageDefault === "ar" || pageDefault === "en") && document.body.dataset.langTouched !== "1") return pageDefault;
     return localStorage.getItem(STORAGE_KEY) === "ar" ? "ar" : "en";
   }
 
@@ -343,29 +935,43 @@
     });
   }
 
-  function translateTextNodes(lang) {
-    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
-      acceptNode(node) {
-        const parent = node.parentElement;
-        if (!parent || ["SCRIPT", "STYLE", "NOSCRIPT"].includes(parent.tagName)) {
-          return NodeFilter.FILTER_REJECT;
-        }
-        return normalize(node.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
-      },
-    });
-
+  // Translate every qualifying text node inside `root` (defaults to <body>).
+  // Scoping to a subtree lets us cheaply translate only freshly-injected DOM
+  // instead of re-walking the whole page on every mutation.
+  function translateTextNodes(lang, root) {
+    root = root || document.body;
     const nodes = [];
-    while (walker.nextNode()) nodes.push(walker.currentNode);
+
+    if (root.nodeType === Node.TEXT_NODE) {
+      const parent = root.parentElement;
+      if (parent && !["SCRIPT", "STYLE", "NOSCRIPT"].includes(parent.tagName) && normalize(root.nodeValue)) {
+        nodes.push(root);
+      }
+    } else if (root.nodeType === Node.ELEMENT_NODE) {
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+        acceptNode(node) {
+          const parent = node.parentElement;
+          if (!parent || ["SCRIPT", "STYLE", "NOSCRIPT"].includes(parent.tagName)) {
+            return NodeFilter.FILTER_REJECT;
+          }
+          return normalize(node.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+        },
+      });
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+    } else {
+      return;
+    }
 
     nodes.forEach((node) => {
       if (!originals.has(node)) originals.set(node, node.nodeValue);
       const original = originals.get(node);
       const key = normalize(original);
+      let next = original;
       if (lang === "ar" && dictionary[key]) {
-        node.nodeValue = original.replace(key, dictionary[key]);
-      } else if (lang === "en") {
-        node.nodeValue = original;
+        next = original.replace(key, dictionary[key]);
       }
+      // Only write when the value actually changes — avoids redundant edits.
+      if (node.nodeValue !== next) node.nodeValue = next;
     });
   }
 
@@ -375,7 +981,8 @@
         el.dataset.i18nPlaceholderOriginal = el.getAttribute("placeholder") || "";
       }
       const original = el.dataset.i18nPlaceholderOriginal;
-      el.setAttribute("placeholder", lang === "ar" && dictionary[original] ? dictionary[original] : original);
+      const next = lang === "ar" && dictionary[original] ? dictionary[original] : original;
+      if (el.getAttribute("placeholder") !== next) el.setAttribute("placeholder", next);
     });
     document.querySelectorAll("[data-eyebrow], [data-title], [data-sub], [data-quote], [data-primary-label], [data-secondary-label]").forEach((el) => {
       ["eyebrow", "title", "sub", "quote", "primaryLabel", "secondaryLabel"].forEach((name) => {
@@ -395,14 +1002,29 @@
         el.dataset.i18nArrowOriginal = el.textContent;
       }
       const original = el.dataset.i18nArrowOriginal;
-      el.textContent = lang === "ar" ? original.replace(/→/g, "←") : original;
+      const next = lang === "ar" ? original.replace(/→/g, "←") : original;
+      if (el.textContent !== next) el.textContent = next;
     });
   }
 
   let translating = false;
+  let observer = null;
+
+  function startObserver() {
+    if (!observer) return;
+    // childList + subtree only — deliberately NOT characterData. Observing
+    // characterData while we rewrite text nodes below would feed our own edits
+    // straight back in as new mutations, which is what caused the runaway
+    // re-translation loop (constant lag / frozen tab).
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+
   function applyLanguage(lang) {
     translating = true;
+    if (observer) observer.disconnect();
+
     localStorage.setItem(STORAGE_KEY, lang);
+    document.body.dataset.langTouched = "1";
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
     document.body.classList.toggle("lang-ar", lang === "ar");
@@ -410,7 +1032,9 @@
     translateTextNodes(lang);
     translateAttributes(lang);
     flipTextArrows(lang);
+
     translating = false;
+    startObserver();
     document.dispatchEvent(new CustomEvent("myclinic:language-change", { detail: { lang } }));
   }
 
@@ -424,14 +1048,29 @@
   }, true);
 
   document.addEventListener("DOMContentLoaded", () => {
-    applyLanguage(currentLang());
-    let timer = 0;
-    const observer = new MutationObserver(() => {
+    observer = new MutationObserver((mutations) => {
+      // Only Arabic needs follow-up translation of freshly-injected DOM
+      // (e.g. specialty / doctor cards rendered by page scripts). In English
+      // the original markup is already correct.
       if (translating || currentLang() !== "ar") return;
-      clearTimeout(timer);
-      timer = setTimeout(() => applyLanguage("ar"), 30);
+
+      // Disconnect while we translate so our own text/textContent edits cannot
+      // retrigger the observer — this is what guarantees no feedback loop.
+      observer.disconnect();
+      translating = true;
+      try {
+        mutations.forEach((mutation) => {
+          mutation.addedNodes.forEach((node) => translateTextNodes("ar", node));
+        });
+        translateAttributes("ar");
+        flipTextArrows("ar");
+      } finally {
+        translating = false;
+        startObserver();
+      }
     });
-    observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+
+    applyLanguage(currentLang());
   });
 
   window.MyClinicLanguage = { apply: applyLanguage, current: currentLang };

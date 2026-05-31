@@ -938,6 +938,58 @@
   .foot-bottom .socials { display: flex; gap: 20px; }
   .foot-bottom .socials a { transition: color 0.2s ease; }
   .foot-bottom .socials a:hover { color: #fff; }
+
+  /* ═══════════════════════════════════════════════════════════
+     MOBILE FIND-A-DOCTOR (≤900px) — Claude design alignment
+     Compact navy hero · search + filter chips · 2-column grid
+     ═══════════════════════════════════════════════════════════ */
+  @media (max-width: 900px) {
+    /* Hero */
+    .subpage-hero { padding: 48px 0 60px; }
+    .subpage-eyebrow { font-size: 10px; letter-spacing: .14em; margin-bottom: 14px; gap: 8px; }
+    .subpage-eyebrow::before, .subpage-eyebrow::after { width: 16px; }
+    .subpage-title { font-size: 40px; }
+    .subpage-desc { font-size: 14.5px; line-height: 1.55; max-width: 360px; }
+
+    /* Filter console → compact search + 2 filter chips */
+    .filter-section { margin-top: -26px; margin-bottom: 26px; }
+    .filter-console {
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 14px;
+    }
+    .filter-field { gap: 0; }
+    .filter-field:first-child { grid-column: 1 / -1; }
+    .filter-field > label { display: none; }
+    .filter-input-wrapper { border-radius: 999px; }
+    .filter-input-wrapper input { font-size: 15px; }
+    .cdd { padding: 12px 14px 12px 40px; font-size: 13px; border-radius: 999px; }
+    .cdd .cdd-icon { left: 14px; }
+    /* dropdown panels: usable width, anchored so they never overflow the viewport */
+    .cdd-panel { min-width: min(82vw, 320px); }
+    .filter-field:nth-child(2) .cdd-panel { left: 0; right: auto; }
+    .filter-field:nth-child(3) .cdd-panel { left: auto; right: 0; }
+
+    /* Results header */
+    .directory-container { padding: 0 0 130px; }
+    .directory-header { margin-bottom: 18px; padding-bottom: 14px; }
+    .results-count { font-size: 13px; }
+    .results-count b { font-size: 15px; }
+
+    /* Two-column doctor grid (locked across all mobile/tablet widths) */
+    .doctor-results-list { grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    /* Compact card for narrow columns */
+    .doctor-ad-card { padding: 16px 12px; gap: 10px; }
+    .doctor-ad-photo-link { width: 80px; height: 80px; }
+    .doctor-ad-name { font-size: 15.5px; }
+    .doctor-ad-details { padding: 10px 12px; }
+  }
+  @media (max-width: 380px) {
+    .doctor-results-list { gap: 10px; }
+    .doctor-ad-name { font-size: 14.5px; }
+    .doctor-ad-card { padding: 14px 10px; }
+  }
 </style>
 </head>
 <body>

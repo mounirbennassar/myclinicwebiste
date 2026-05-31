@@ -1,14 +1,15 @@
 <!doctype html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<title>My Clinic — Home Healthcare Services</title>
+<title>ماي كلينك — خدمات الرعاية المنزلية</title>
 <link rel="icon" type="image/png" href="/favclinic.png">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/shared.css">
+<link rel="stylesheet" href="/assets/homecare.css">
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <style>
   :root {
@@ -618,7 +619,7 @@
   }
 </style>
 </head>
-<body>
+<body class="lang-ar" data-default-lang="ar">
 
 <!-- ribbon -->
 <div class="ribbon">
@@ -660,175 +661,274 @@
 </nav>
 
 <main>
-  <!-- Hero Section -->
-  <header class="subpage-hero">
-    <div class="wrap">
-      <div class="subpage-hero-inner">
-        <div class="subpage-eyebrow">Medical Care At Doorstep</div>
-        <h1 class="subpage-title">Hospital-grade care, <em>at your home.</em></h1>
-        <p class="subpage-desc">Experience professional, compassionate clinical attention without traveling. From expert doctor home visits and nursing care to physical therapy and rapid laboratory sampling, our fully certified mobile clinical teams bring the hospital directly to you.</p>
-        <div class="hero-buttons">
-          <a href="https://wa.me/966542228111?text=Hi%2C%20I'm%20inquiring%20about%20booking%20a%20Home%20Healthcare%20visit." target="_blank" class="btn white">Request Home Visit</a>
-          <a href="#services" class="btn outline">Explore Home Services</a>
+
+<!-- ════════════════ DESKTOP LAYOUT ════════════════ -->
+<div class="td">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="aurora" aria-hidden="true"></div>
+    <div class="twrap">
+      <div class="hero-grid">
+        <div class="hero-l fade in">
+          <div class="h-eyebrow">Medical Care At Your Doorstep</div>
+          <h1 class="h-title">Hospital-grade care, <em>at your home.</em></h1>
+          <p class="h-sub">Professional, compassionate clinical attention without travelling. From doctor home visits and skilled nursing to physiotherapy and rapid lab sampling, our certified mobile teams bring the hospital directly to you.</p>
+          <div class="h-ctas">
+            <a href="https://wa.me/966542228111?text=Hi%2C%20I'm%20inquiring%20about%20booking%20a%20Home%20Healthcare%20visit." target="_blank" class="tbtn wa">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24z"/></svg>Request Home Visit</a>
+            <a href="#services" class="tbtn ghost">Explore Home Services<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+          <div class="h-trust">
+            <div class="ti"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg><span class="l"><b>CBAHI</b>Accredited care</span></div>
+            <div class="ti"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span class="l"><b>SCFHS</b>Licensed clinicians</span></div>
+            <div class="ti"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 7-8 12-8 12s-8-5-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span class="l"><b>5 branches</b>Jeddah &amp; Riyadh</span></div>
+          </div>
+        </div>
+        <div class="hero-r">
+          <div class="h-portrait fade in">
+            <img src="/clinic/homecare-hero.jpg" alt="Home care visit" onerror="this.style.display='none'">
+            <div class="h-badge"><span class="lv"></span> Mobile teams on call</div>
+            <div class="p-cap">
+              <div class="l">Fully equipped · SCFHS-licensed</div>
+              <div class="q">“The hospital, brought to your living room — calm, thorough, and on your schedule.”</div>
+            </div>
+          </div>
         </div>
       </div>
+
+      <!-- Request strip -->
+      <div class="req-strip">
+        <div class="field"><span class="l">Specialty</span><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><select class="req-select" id="reqSpecialty" aria-label="Specialty"><option value="">Any specialty</option><option>Family Medicine</option><option>Internal Medicine</option><option>Pediatrics</option><option>Orthopedic Surgery</option><option>Rheumatology</option><option>Cardiology</option><option>Dermatology</option></select></span></div>
+        <div class="field"><span class="l">City</span><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 7-8 12-8 12s-8-5-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><select class="req-select" id="reqCity" aria-label="City"><option value="">Any location</option><option value="Al Mohammadiyah">Jeddah — Al Mohammadiyah</option><option value="Al Safa">Jeddah — Al Safa</option><option value="Al Khalidiyyah">Jeddah — Al Khalidiyyah</option><option value="Tahlia">Jeddah — Tahlia</option><option value="Al Sahafa">Riyadh — Al Sahafa</option></select></span></div>
+        <div class="field"><span class="l">When</span><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><select class="req-select" id="reqWhen" aria-label="When"><option>As soon as possible</option><option>This week</option><option>Next week</option><option>Just browsing</option></select></span></div>
+        <a class="go" id="reqGo" href="/find-a-doctor.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg>Find a doctor</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services"><div class="twrap">
+    <div class="s-head fade">
+      <div><span class="s-eye">Mobile Care Capabilities</span><h2 class="s-title">Our comprehensive<br><em>home services.</em></h2></div>
+      <p class="s-desc">Four core service lines, each delivered by a credentialed clinical team with hospital-grade equipment and digital records — the same standard of care, in your own room.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-menu">
+        <div class="svc-item active" data-svc="0"><span class="svc-num">01</span><span class="svc-name">Physician Home Visits</span><svg class="svc-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        <div class="svc-item" data-svc="1"><span class="svc-num">02</span><span class="svc-name">Skilled Nursing Care</span><svg class="svc-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        <div class="svc-item" data-svc="2"><span class="svc-num">03</span><span class="svc-name">Home Physiotherapy</span><svg class="svc-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        <div class="svc-item" data-svc="3"><span class="svc-num">04</span><span class="svc-name">Home Laboratory Sampling</span><svg class="svc-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      </div>
+      <div class="svc-detail">
+        <div class="svc-panel active">
+          <div class="top"><span class="num">01 — Physician visit</span><span class="tag">Doctors &amp; consultants</span></div>
+          <h3>Doctors at <em>your bedside.</em></h3>
+          <p class="desc">General medicine doctors and specialty consultants visit your home for clinical consults, physical checkups, prescription renewals and care guidance — with the same chart and history as our clinics.</p>
+          <ul class="inc"><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Clinical consults &amp; checkups</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Prescription renewals</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Specialty consultants</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Records to your portal</li></ul>
+          <div class="img-strip"><div style="background-image:url('/clinic/homecare-portrait.jpg');"></div><div style="background-image:url('/clinic/lobby.jpg');"></div></div>
+          <div class="foot"><div class="note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Same-day where available</div><a href="https://wa.me/966542228111?text=Hi%2C%20I'd%20like%20to%20book%20a%20Physician%20Home%20Visit." target="_blank" class="tbtn white">Request this service</a></div>
+        </div>
+        <div class="svc-panel">
+          <div class="top"><span class="num">02 — Skilled nursing</span><span class="tag">Licensed nurses</span></div>
+          <h3>Nursing care, <em>at home.</em></h3>
+          <p class="desc">Licensed nurses providing wound dressing, vital-signs monitoring, injections, IV therapy and post-operative recovery support — hour by hour or day by day.</p>
+          <ul class="inc"><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Wound dressing &amp; care</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>IV therapy &amp; injections</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Vital-signs monitoring</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Post-operative recovery</li></ul>
+          <div class="img-strip"><div style="background-image:url('/clinic/physiotherapy.jpg');"></div><div style="background-image:url('/clinic/ct-scanner.jpg');"></div></div>
+          <div class="foot"><div class="note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Hourly &amp; daily plans</div><a href="https://wa.me/966542228111?text=Hi%2C%20I'd%20like%20to%20book%20Skilled%20Nursing%20Care%20at%20home." target="_blank" class="tbtn white">Request this service</a></div>
+        </div>
+        <div class="svc-panel">
+          <div class="top"><span class="num">03 — Physiotherapy</span><span class="tag">Certified physiotherapists</span></div>
+          <h3>Rehab built around<br><em>your room.</em></h3>
+          <p class="desc">Customized home rehabilitation directed by certified physiotherapists — ideal for orthopedic recovery, neurological rehab, elderly mobility and pain relief, using the same protocols as our clinics.</p>
+          <ul class="inc"><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Orthopedic recovery</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Neurological rehab</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Elderly mobility</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Pain relief programs</li></ul>
+          <div class="img-strip"><div style="background-image:url('/clinic/physiotherapy.jpg');"></div><div style="background-image:url('/clinic/home.webp');"></div></div>
+          <div class="foot"><div class="note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Structured session plans</div><a href="https://wa.me/966542228111?text=Hi%2C%20I'd%20like%20to%20book%20Home%20Physiotherapy." target="_blank" class="tbtn white">Request this service</a></div>
+        </div>
+        <div class="svc-panel">
+          <div class="top"><span class="num">04 — Lab sampling</span><span class="tag">Certified phlebotomists</span></div>
+          <h3>Lab samples, <em>collected at home.</em></h3>
+          <p class="desc">Certified phlebotomists visit your home to safely collect blood, urine or other clinical samples. Specimens are analyzed at our accredited central labs, with digital results uploaded straight to your portal.</p>
+          <ul class="inc"><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Blood, urine &amp; swab samples</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Accredited central labs</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Safe at-home collection</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Digital results in portal</li></ul>
+          <div class="img-strip"><div style="background-image:url('/clinic/ct-scanner.jpg');"></div><div style="background-image:url('/clinic/lobby.jpg');"></div></div>
+          <div class="foot"><div class="note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Phlebotomists available tomorrow</div><a href="https://wa.me/966542228111?text=Hi%2C%20I'd%20like%20to%20book%20a%20Home%20Lab%20Test%20sample%20collection." target="_blank" class="tbtn white">Request this service</a></div>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- PROCESS -->
+  <section class="process"><div class="twrap">
+    <div class="s-head fade">
+      <div><span class="s-eye">Patient Journey</span><h2 class="s-title">How to request<br><em>home care.</em></h2></div>
+      <p class="s-desc">A real human triage, not a chatbot. Our nurse supervisors review every request and match the right clinical team — so the visit fits your case, not the other way around.</p>
+    </div>
+    <div class="steps">
+      <div class="step fade"><div class="num">1</div><h4>Submit a <em>request.</em></h4><p>Contact our center by phone, WhatsApp or the web form to select your desired home service category.</p></div>
+      <div class="step fade"><div class="num">2</div><h4>Clinical <em>triage.</em></h4><p>Our nurse supervisor reviews your case, confirms the details, and matches the correct medical team.</p></div>
+      <div class="step fade"><div class="num">3</div><h4>Care at <em>your home.</em></h4><p>Our fully equipped mobile medical unit arrives at your home at the scheduled hour to deliver care.</p></div>
+    </div>
+  </div></section>
+
+  <!-- TEAM -->
+  <section class="team"><div class="twrap">
+    <div class="s-head fade">
+      <div><span class="s-eye">Home Care Experts</span><h2 class="s-title">Meet our<br><em>mobile care team.</em></h2></div>
+      <p class="s-desc">A few of our accredited clinicians who deliver care at home — every one SCFHS-licensed and trained on our home-visit protocols.</p>
+    </div>
+    <div class="team-grid fade">
+      <div class="doc"><div class="photo"><img src="/doctors/wail-yar.webp" alt="Dr. Wail Yar" loading="lazy"><span class="yrs">Home visits</span></div><div class="body"><h4>Dr. Wail Yar</h4><div class="t">Family, Sleep &amp; Preventive Medicine</div><div class="meta"><span class="star">4.9</span><span>SCFHS licensed</span></div></div></div>
+      <div class="doc"><div class="photo"><img src="/doctors/taha-samman.webp" alt="Dr. Taha Samman" loading="lazy"><span class="yrs">Home visits</span></div><div class="body"><h4>Dr. Taha Samman</h4><div class="t">Consultant, Orthopedic Surgery</div><div class="meta"><span class="star">4.8</span><span>SCFHS licensed</span></div></div></div>
+      <div class="doc"><div class="photo"><img src="/doctors/walaa-aldabbagh.webp" alt="Dr. Walaa Aldabbagh" loading="lazy"><span class="yrs">Home visits</span></div><div class="body"><h4>Dr. Walaa Aldabbagh</h4><div class="t">Internal Medicine &amp; Rheumatology</div><div class="meta"><span class="star">4.9</span><span>SCFHS licensed</span></div></div></div>
+      <div class="doc"><div class="photo"><img src="/doctors/turki-alahmadi.webp" alt="Dr. Turki Alahmadi" loading="lazy"><span class="yrs">Home visits</span></div><div class="body"><h4>Dr. Turki Alahmadi</h4><div class="t">Pediatric Pulmonology</div><div class="meta"><span class="star">4.9</span><span>SCFHS licensed</span></div></div></div>
+    </div>
+  </div></section>
+
+  <!-- FAQ -->
+  <section class="faq"><div class="twrap"><div class="faq-grid">
+    <div class="faq-side">
+      <span class="s-eye">FAQ</span><h2>Home care<br><em>questions.</em></h2>
+      <p>If your question isn't here, our coordinators are reachable during call-center hours — most queries are answered within minutes.</p>
+      <div class="help"><div class="lab">Speak to a coordinator</div><div class="num">920022811</div><div class="lin"><span>Sat–Thu · 8 AM – 10 PM</span><span>Fri · 5 PM – 9 PM</span><a href="https://wa.me/966542228111" target="_blank">WhatsApp · 0542228111</a></div></div>
+    </div>
+    <div class="faq-list">
+      <div class="qa open"><button class="qa-q"><span class="t">What areas do your home care teams cover?</span><span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="qa-a"><div class="inner">Our mobile units operate out of our Jeddah and Riyadh branches, providing complete coverage across the municipal city limits of both cities. We can coordinate care for nearby outlying suburbs upon special review.</div></div></div>
+      <div class="qa"><button class="qa-q"><span class="t">Are home healthcare services covered by insurance?</span><span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="qa-a"><div class="inner">Coverage varies. Certain home nursing, physician and physiotherapy plans are covered under premium networks or post-surgical recovery policies. Our billing coordinators verify pre-authorization with your provider.</div></div></div>
+      <div class="qa"><button class="qa-q"><span class="t">Can home care treat urgent or emergency events?</span><span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="qa-a"><div class="inner">No. Home healthcare is for scheduled, non-emergency clinical visits, chronic-disease follow-ups and rehabilitation plans. For acute emergencies, call Saudi Red Crescent (997) or visit the nearest emergency department.</div></div></div>
+      <div class="qa"><button class="qa-q"><span class="t">Are your visiting staff fully accredited?</span><span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="qa-a"><div class="inner">Yes. All visiting physicians, nurses and physical therapists are licensed by the Saudi Commission for Health Specialties (SCFHS), certified by My Clinic, and follow CBAHI-verified international standards.</div></div></div>
+    </div>
+  </div></div></section>
+
+  <!-- FINAL CTA -->
+  <section class="final"><div class="twrap"><div class="final-card fade">
+    <div class="img" style="background-image:url('/clinic/homecare-hero.jpg');"></div>
+    <div class="body">
+      <div class="eye">Ready when you are</div>
+      <h2>Arrange clinical care <em>at home.</em></h2>
+      <p>Schedule a professional medical team or certified physiotherapist to visit you. Coordinate nursing plans, arrange post-surgery dressings, or order comfortable home lab tests today.</p>
+      <div class="ctas"><a href="https://wa.me/966542228111?text=Hi%2C%20I'd%20like%20to%20book%20a%20Home%20Healthcare%20service." target="_blank" class="tbtn wa"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24z"/></svg>Schedule Home Visit</a><a href="tel:920022811" class="tbtn outline"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92Z"/></svg>Call 920022811</a></div>
+    </div>
+  </div></div></section>
+
+</div><!-- /.td -->
+
+<!-- ════════════════ MOBILE LAYOUT ════════════════ -->
+<div class="tm">
+
+  <header class="hero app-hero">
+    <div class="app-card">
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="app-card-body">
+        <div class="h-eyebrow">Home Healthcare · At Your Doorstep</div>
+        <h1 class="h-display">Exceptional care, <em>close to you.</em></h1>
+        <p class="h-sub">Say yes to your good health. Hospital-grade doctors, nurses &amp; physios arrive at your door — fully equipped and on your schedule.</p>
+        <div class="app-cta">
+          <a href="https://wa.me/966542228111?text=Hi%2C%20I'd%20like%20to%20book%20a%20Home%20Healthcare%20visit." target="_blank" class="app-btn">Get started
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="app-photo">
+        <img src="/clinic/homecare-doctor-cutout.png" alt="My Clinic home-care doctor" loading="eager">
+      </div>
+      <div class="app-badge"><span class="lv"></span> 12 teams on rounds</div>
     </div>
   </header>
 
-  <div class="homecare-container">
-    
-    <!-- Services Grid -->
-    <section id="services">
-      <div class="section-title-wrap">
-        <span class="section-eyebrow">Mobile Care Capabilities</span>
-        <h2 class="section-header-title">Our Comprehensive <em>Home Services</em></h2>
-      </div>
-      
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-icon-box">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          </div>
-          <h3>Physician Home Visits</h3>
-          <p>Schedule general medicine doctors and specialty consultants to visit your home for clinical consults, physical checkups, prescription renewals, and care guidance.</p>
-        </div>
-
-        <div class="service-card">
-          <div class="service-icon-box">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-          </div>
-          <h3>Skilled Nursing Care</h3>
-          <p>Licensed nurses providing standard home nursing including wound dressing, vital signs monitoring, injections, intravenous (IV) therapy, and post-operative recovery support.</p>
-        </div>
-
-        <div class="service-card">
-          <div class="service-icon-box">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.5 22a9 9 0 1 1 9-9h-9v9z"/><path d="M22 10.5A9 9 0 0 0 13.5 2V10.5H22z"/></svg>
-          </div>
-          <h3>Home Physiotherapy</h3>
-          <p>Customized home rehabilitation sessions directed by certified physiotherapists. Ideal for orthopedic recovery, neurological rehab, elderly mobility improvement, and pain relief.</p>
-        </div>
-
-        <div class="service-card">
-          <div class="service-icon-box">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-          </div>
-          <h3>Home Laboratory Sampling</h3>
-          <p>Certified phlebotomists visiting your home to safely collect blood, urine, or other clinical samples. Samples are analyzed at our accredited central labs with digital results uploaded to your portal.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- How It Works Section -->
-    <section class="workflow-section">
-      <div class="section-title-wrap">
-        <span class="section-eyebrow">Patient Journey</span>
-        <h2 class="section-header-title">How To Request <em>Home Care</em></h2>
-      </div>
-
-      <div class="workflow-grid">
-        <div class="workflow-step">
-          <div class="step-num">1</div>
-          <h4>Submit Request</h4>
-          <p>Contact our center by phone, WhatsApp, or the web form to select your desired home service category.</p>
-        </div>
-
-        <div class="workflow-step">
-          <div class="step-num">2</div>
-          <h4>Clinical Triage</h4>
-          <p>Our nurse supervisor reviews your case, confirms details, and matches the correct medical team.</p>
-        </div>
-
-        <div class="workflow-step">
-          <div class="step-num">3</div>
-          <h4>At-Home Care</h4>
-          <p>Our fully equipped mobile medical unit arrives at your home at the scheduled hour to deliver care.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Dynamic Home Care Team Highlights -->
-    <section class="specialists-section">
-      <div class="section-title-wrap">
-        <span class="section-eyebrow">Home Care Experts</span>
-        <h2 class="section-header-title">Meet Our <em>Mobile Care</em> Team</h2>
-        <p style="color: var(--mute); max-width: 600px; margin: 8px auto 0; font-size: 15px;">Meet some of our accredited doctors and physical therapists who deliver care at home.</p>
-      </div>
-
-      <div class="doctors-grid" id="homeCareDoctorsGrid">
-        <!-- Dynically loaded from JS doctors array -->
-      </div>
-    </section>
-
-    <!-- Interactive FAQ Section -->
-    <section class="faq-section">
-      <div class="section-title-wrap">
-        <span class="section-eyebrow">FAQ</span>
-        <h2 class="section-header-title">Frequently Asked <em>Home Care Questions</em></h2>
-      </div>
-
-      <div class="faq-list">
-        <div class="faq-item">
-          <button class="faq-trigger">
-            <span>What geographic areas do your home care teams cover?</span>
-            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="faq-content">
-            <div class="faq-content-inner">
-              Our mobile units operate out of our Jeddah and Riyadh branches, providing complete coverage across the municipal city limits of both Jeddah and Riyadh. We can coordinate care for nearby outlying suburbs upon special review.
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-trigger">
-            <span>Are home healthcare services covered by insurance?</span>
-            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="faq-content">
-            <div class="faq-content-inner">
-              Insurance coverage varies. Certain home nursing, physician, and physiotherapy care plans are covered under premium networks or post-surgical recovery policies. Our billing coordinators will verify pre-authorization requirements with your provider.
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-trigger">
-            <span>Can home care treat urgent or emergency medical events?</span>
-            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="faq-content">
-            <div class="faq-content-inner">
-              No. Our home healthcare services are structured solely for scheduled, non-emergency clinical visits, chronic disease follow-ups, and rehabilitation plans. For acute emergencies, call Red Crescent (997) or visit the nearest emergency department.
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-trigger">
-            <span>Are your visiting home care staff fully accredited?</span>
-            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="faq-content">
-            <div class="faq-content-inner">
-              Yes, all visiting physicians, registered nurses, and physical therapists are licensed by the Saudi Commission for Health Specialties (SCFHS), fully certified by My Clinic, and follow international standards verified by CBAHI guidelines.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Bottom CTA Banner -->
-    <div class="wide-cta-banner">
-      <h3>Ready to Arrange Clinical Care at Home?</h3>
-      <p>Schedule a professional medical team or certified physiotherapist to visit you. Coordinate nursing plans, arrange post-surgery dressings, or order comfortable home lab tests today.</p>
-      <div class="wide-cta-buttons">
-        <a href="https://wa.me/966542228111?text=Hi%2C%20I'd%20like%20to%20book%20a%20Home%20Healthcare%20service." target="_blank" class="btn primary-wide">Schedule Home Visit</a>
-        <a href="tel:920022811" class="btn outline">Call 920022811</a>
-      </div>
+  <section class="booking" id="tmBooking">
+    <div class="book-card">
+      <div class="book-head"><div class="t">Find a doctor</div><div class="tag">2 min</div></div>
+      <label class="book-field"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></span><span class="book-field-body"><span class="lab">Specialty</span><select class="book-select" id="mReqSpecialty" aria-label="Specialty"><option value="">Any specialty</option><option>Family Medicine</option><option>Internal Medicine</option><option>Pediatrics</option><option>Orthopedic Surgery</option><option>Rheumatology</option><option>Cardiology</option><option>Dermatology</option></select></span></label>
+      <label class="book-field"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 10c0 7-8 12-8 12s-8-5-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span><span class="book-field-body"><span class="lab">City</span><select class="book-select" id="mReqCity" aria-label="City"><option value="">Any location</option><option value="Al Mohammadiyah">Jeddah — Al Mohammadiyah</option><option value="Al Safa">Jeddah — Al Safa</option><option value="Al Khalidiyyah">Jeddah — Al Khalidiyyah</option><option value="Tahlia">Jeddah — Tahlia</option><option value="Al Sahafa">Riyadh — Al Sahafa</option></select></span></label>
+      <label class="book-field"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span><span class="book-field-body"><span class="lab">When</span><select class="book-select" id="mReqWhen" aria-label="When"><option>As soon as possible</option><option>This week</option><option>Next week</option><option>Just browsing</option></select></span></label>
+      <a class="book-go" id="mReqGo" href="/find-a-doctor.html">Find a doctor<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a>
     </div>
+  </section>
 
-  </div>
+  <section class="sec svcs rev">
+    <div class="eyebrow">What we bring home</div><h2 class="s-title">A full clinic, <em>without the clinic</em>.</h2>
+    <div class="svc-list">
+      <div class="svc dark"><div class="top"><span class="num">01 — Physician visit</span><span class="tag">45–60 min</span></div><h3>Consultants &amp; GPs at <em>your bedside</em>.</h3><p>Full assessment, exam, prescription and follow-up — with the same chart, history and lab access as our hospitals.</p><div class="inc"><span>Full exam &amp; vitals</span><span>E-prescription</span><span>Referrals</span></div><div class="foot"><a class="go" href="https://wa.me/966542228111" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a></div></div>
+      <div class="svc"><div class="top"><span class="num">02 — Skilled nursing</span><span class="tag">Hourly &amp; daily</span></div><h3>Licensed nurses for <em>care &amp; recovery</em>.</h3><p>Wound dressing, IV therapy, injections, vitals monitoring and post-operative recovery — hourly or on multi-day plans.</p><div class="inc"><span>IV therapy</span><span>Wound &amp; surgical care</span><span>Vitals</span></div><div class="foot"><a class="go" href="https://wa.me/966542228111" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a></div></div>
+      <div class="svc"><div class="top"><span class="num">03 — Physiotherapy</span><span class="tag">60 min sessions</span></div><h3>Rehab built around <em>your room</em>.</h3><p>Structured plans for orthopedic recovery, post-stroke rehab, sports injuries and geriatric mobility — same protocols as our clinics.</p><div class="inc"><span>Orthopedic &amp; post-op</span><span>Neuro rehab</span><span>Geriatric</span></div><div class="foot"><a class="go" href="https://wa.me/966542228111" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a></div></div>
+      <div class="svc"><div class="top"><span class="num">04 — Lab sampling</span><span class="tag">15 min · 24h results</span></div><h3>Bloods, urines, swabs — <em>collected at home</em>.</h3><p>Certified phlebotomists collect samples safely at home. Specimens go to our central lab and results land in your portal within 24 hours.</p><div class="inc"><span>Blood &amp; metabolic</span><span>Diabetes &amp; lipid</span><span>Thyroid</span></div><div class="foot"><a class="go" href="https://wa.me/966542228111" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a></div></div>
+    </div>
+  </section>
+
+  <section class="sec steps-sec rev">
+    <div class="eyebrow">How it works</div><h2 class="s-title">From request to care — <em>in hours</em>.</h2>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><div><h4>Tell us what you <em>need</em></h4><p>Call, WhatsApp or use the form. Briefly describe the patient, the situation, and the kind of care needed.</p><div class="meta"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>2-minute intake</div></div></div>
+      <div class="step"><div class="num">2</div><div><h4>We triage &amp; <em>match</em></h4><p>A senior nurse reviews your case, confirms what's clinically appropriate, and assigns a credentialed team.</p><div class="meta"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Within 30 minutes</div></div></div>
+      <div class="step"><div class="num">3</div><div><h4>Care arrives at <em>your door</em></h4><p>A fully equipped mobile unit arrives at the agreed hour. Records sync to your portal automatically afterwards.</p><div class="meta"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Same day, on average</div></div></div>
+    </div>
+  </section>
+
+  <section class="sec cov-sec rev">
+    <div class="eyebrow">Coverage</div><h2 class="s-title">Where our teams <em>reach you</em>.</h2>
+    <p class="s-desc">Five operating branches, two cities, full municipal coverage. Outer suburbs can be coordinated with advance review.</p>
+    <div class="cov-list">
+      <div class="cov"><div class="nm">Jeddah</div><div class="b"><b>4</b> branches · ~45 min avg</div></div>
+      <div class="cov"><div class="nm">Riyadh</div><div class="b"><b>1</b> branch · ~50 min avg</div></div>
+      <div class="cov"><div class="nm">Outer suburbs</div><div class="b">By advance arrangement</div></div>
+      <div class="cov"><div class="nm">Other cities</div><div class="b soon">Coming 2026</div></div>
+    </div>
+  </section>
+
+  <section class="sec plans-sec rev">
+    <div class="eyebrow">Care plans</div><h2 class="s-title">Transparent pricing. <em>No surprises</em>.</h2>
+    <div class="plan-scroll">
+      <div class="plan"><div class="ptag">Per visit</div><h3>Single <em>Visit</em></h3><p class="blurb">One-off care when you need it — physician, nurse, physio or lab.</p><ul><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Any single service</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Records in patient portal</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Same-day if before 2 PM</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>E-prescription &amp; referrals</li></ul><a href="#tmBooking" class="pcta" data-bookjump="tmBooking">Request a visit</a></div>
+      <div class="plan feat"><div class="ptag">Most popular</div><h3>Wellness <em>Monthly</em></h3><p class="blurb">For older adults &amp; busy households — a monthly bundle of routine and on-demand care.</p><ul><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>2 physician &amp; 4 nurse visits</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Quarterly home lab panel</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Priority booking, 4-hr response</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>24/7 nurse-on-call line</li></ul><a href="#tmBooking" class="pcta" data-bookjump="tmBooking">Start the plan</a></div>
+      <div class="plan"><div class="ptag">Chronic &amp; post-op</div><h3>Recovery <em>Continuum</em></h3><p class="blurb">Daily nursing and rehab for post-surgical or long-term conditions — built around the case.</p><ul><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Daily nursing visits</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>3× weekly physiotherapy</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Specialist consultant reviews</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Family briefings &amp; reports</li></ul><a href="#tmBooking" class="pcta" data-bookjump="tmBooking">Talk to a coordinator</a></div>
+    </div>
+    <p class="plan-note">Insurance accepted with most major networks · Pre-authorization handled by our billing team.</p>
+  </section>
+
+  <section class="sec docs rev">
+    <div class="eyebrow">Your home-care team</div><h2 class="s-title">Senior clinicians. <em>At your door</em>.</h2>
+    <div class="doc-scroll">
+      <a class="doc" href="/find-a-doctor.html"><div class="photo"><img src="/doctors/wail-yar.webp" loading="lazy"><span class="yrs">Home visits</span></div><div class="body"><h4>Dr. Wail Yar</h4><p>Family, Sleep &amp; Preventive Medicine</p><div class="rate"><span class="st">4.9</span><b>SCFHS licensed</b></div></div></a>
+      <a class="doc" href="/find-a-doctor.html"><div class="photo"><img src="/doctors/taha-samman.webp" loading="lazy"><span class="yrs">Home visits</span></div><div class="body"><h4>Dr. Taha Samman</h4><p>Orthopedic Surgery</p><div class="rate"><span class="st">4.8</span><b>SCFHS licensed</b></div></div></a>
+      <a class="doc" href="/find-a-doctor.html"><div class="photo"><img src="/doctors/walaa-aldabbagh.webp" loading="lazy"><span class="yrs">Home visits</span></div><div class="body"><h4>Dr. Walaa Aldabbagh</h4><p>Internal Medicine &amp; Rheumatology</p><div class="rate"><span class="st">4.9</span><b>SCFHS licensed</b></div></div></a>
+      <a class="doc" href="/find-a-doctor.html"><div class="photo"><img src="/doctors/turki-alahmadi.webp" loading="lazy"><span class="yrs">Home visits</span></div><div class="body"><h4>Dr. Turki Alahmadi</h4><p>Pediatric Pulmonology</p><div class="rate"><span class="st">4.9</span><b>SCFHS licensed</b></div></div></a>
+    </div>
+    <a class="doc-search" href="/find-a-doctor.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg>Find a doctor for a home visit…<span class="go"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></span></a>
+  </section>
+
+  <section class="sec stories rev">
+    <div class="eyebrow">Patient stories</div><h2 class="s-title">What patients <em>tell us</em>.</h2>
+    <div class="story-big"><blockquote class="qt">My father had hip surgery and we dreaded the recovery commute. The physio team came three times a week and treated him with such patience.</blockquote><div class="who"><div class="av">R</div><div><div class="n">Reem Al-Anazi</div><div class="r">Jeddah · Recovery Continuum</div></div></div></div>
+    <div class="mini-scroll">
+      <div class="mini"><div class="stars">★★★★★</div><p>Booked a home lab on Friday morning. The phlebotomist arrived within two hours and results were in the portal before dinner.</p><small>Mohammed K. · Riyadh</small></div>
+      <div class="mini"><div class="stars">★★★★★</div><p>The home doctor visits my mother every fortnight. She remembers everything — medications, family details, what worried us.</p><small>Sara Al-Shehri · Jeddah</small></div>
+      <div class="mini"><div class="stars">★★★★★</div><p>The home nurse came on time, professional and warm. Made my recovery so much easier.</p><small>Abdullah M. · Jeddah</small></div>
+    </div>
+  </section>
+
+  <section class="sec faq-sec rev">
+    <div class="eyebrow">FAQ</div><h2 class="s-title">Questions, <em>answered</em>.</h2>
+    <div class="faq">
+      <div class="qa open"><button class="qa-q"><span class="t">What areas do your mobile teams cover?</span><span class="ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="qa-a"><div class="inner">Our teams operate from our Jeddah (4 branches) and Riyadh (1 branch) facilities, with full coverage across the municipal limits of both cities. Outer suburbs can be coordinated with advance review.</div></div></div>
+      <div class="qa"><button class="qa-q"><span class="t">Is home care covered by my insurance?</span><span class="ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="qa-a"><div class="inner">Coverage varies by policy. We're in-network with most major insurers (Tawuniya, Bupa Arabia, MedGulf, Allianz, AXA). Our billing team verifies pre-authorization before any visit.</div></div></div>
+      <div class="qa"><button class="qa-q"><span class="t">How quickly can a team arrive?</span><span class="ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="qa-a"><div class="inner">For non-urgent visits, our average response is under four hours. Same-day visits are typically available when requested before 2 PM. Specialty appointments are usually scheduled 24–48 hours in advance.</div></div></div>
+      <div class="qa"><button class="qa-q"><span class="t">Can home care treat emergencies?</span><span class="ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="qa-a"><div class="inner">No. Home care is for scheduled, non-emergency visits, chronic-disease follow-ups and rehabilitation. For acute emergencies, call Saudi Red Crescent (997) or go to the nearest ER.</div></div></div>
+    </div>
+  </section>
+
+  <section class="sec final-sec rev">
+    <div class="eyebrow">Ready when you are</div>
+    <h2>The next visit could be <em>tomorrow</em>.</h2>
+    <p>Tell us about the patient and what's needed. A nurse coordinator will be on the line within minutes — and a team at your door, usually the same day.</p>
+    <div class="final-ctas">
+      <a href="https://wa.me/966542228111?text=Hi%2C%20I'd%20like%20to%20book%20a%20Home%20Healthcare%20visit." target="_blank" class="b white">Request a home visit<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a>
+      <a href="tel:920022811" class="b ghost"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call 920022811</a>
+    </div>
+    <div class="final-sign"><div class="r"><span>Now booking</span><b>Sat–Thu · 8 AM–10 PM</b></div><div class="r"><span>Avg. response</span><b>Under 4 hours</b></div><div class="r"><span>WhatsApp anytime</span><b>0542228111</b></div></div>
+  </section>
+
+</div><!-- /.tm -->
+
 </main>
 
 <!-- footer -->
@@ -875,167 +975,19 @@
   </div>
 </footer>
 
-<!-- sticky CTA -->
-<div class="sticky-cta" id="stickyCta">
-  <span class="text">Need home testing? Phlebotomists available <b style="color: #fff;">Tomorrow Morning</b></span>
-  <a href="https://wa.me/966542228111?text=Hi%2C%20I'd%20like%20to%20book%20a%20Home%20Lab%20Test%20sample%20collection.">Book Lab Visit →</a>
+<!-- ───── STICKY BARS ───── -->
+<div class="td-sticky" id="tdSticky">
+  <span class="t"><b>Mobile teams on call</b> · Avg. response under 4 hours</span>
+  <a href="https://wa.me/966542228111?text=Hi%2C%20I'd%20like%20to%20book%20a%20Home%20Healthcare%20visit." target="_blank" class="b">Request a visit →</a>
+</div>
+<div class="tm-sticky" id="tmSticky">
+  <div class="tx"><div class="a">Request a home visit</div><div class="b">Mobile teams on call · response &lt; 4 hrs</div></div>
+  <a href="tel:920022811" class="call" aria-label="Call"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></a>
+  <a href="https://wa.me/966542228111" target="_blank" class="bk">Request</a>
 </div>
 
-<script>
-// Mock Doctor Database (for Home care highlights)
-const doctors = [
-  {
-    id: 3,
-    name: "Dr. Khalid Al-Subaie",
-    specialty: "Internal Medicine",
-    title: "Consultant Internal Medicine",
-    experience: 18,
-    branch: "Jeddah Tahlia",
-    rating: 4.7,
-    reviews: 114,
-    homecare: true,
-    img: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=500&q=70"
-  },
-  {
-    id: 5,
-    name: "Dr. Yousef Al-Harbi",
-    specialty: "Orthopedic Surgery",
-    title: "Consultant Orthopedic Surgeon",
-    experience: 19,
-    branch: "Jeddah Al Mohammadiyah",
-    rating: 4.8,
-    reviews: 87,
-    homecare: true,
-    img: "https://images.unsplash.com/photo-1612531822380-fc73a39a4bbe?auto=format&fit=crop&w=500&q=70"
-  }
-];
-
-document.addEventListener('DOMContentLoaded', () => {
-  // Navigation scrolling animation
-  const nav = document.querySelector('.nav');
-  if (nav) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        nav.classList.add('scrolled');
-      } else {
-        nav.classList.remove('scrolled');
-      }
-    }, { passive: true });
-  }
-
-  // Sticky CTA slide in
-  const stickyCta = document.getElementById('stickyCta');
-  if (stickyCta) {
-    setTimeout(() => {
-      stickyCta.classList.add('active');
-    }, 1500);
-  }
-
-  // Language switcher
-  const langPill = document.querySelector('.lang-pill');
-  if (langPill) {
-    langPill.addEventListener('click', (event) => {
-      const target = event.target.closest('button');
-      if (!target) return;
-      langPill.querySelectorAll('button').forEach((button) => {
-        const active = button === target;
-        button.classList.toggle('active', active);
-        button.setAttribute('aria-pressed', String(active));
-      });
-    });
-  }
-
-  // Hydrate Doctors Grid
-  const homeCareDoctorsGrid = document.getElementById('homeCareDoctorsGrid');
-  if (homeCareDoctorsGrid) {
-    homeCareDoctorsGrid.innerHTML = '';
-    doctors.forEach(doc => {
-      const cardHtml = `
-        <div class="doc-card">
-          <div class="doc-img-wrapper">
-            <span class="experience-badge">${doc.experience} Years Exp</span>
-            <img src="${doc.img}" alt="${doc.name}" onerror="this.style.display='none'">
-          </div>
-          <div class="doc-body">
-            <h4>${doc.name}</h4>
-            <div class="doc-title-row">${doc.title}</div>
-            <div class="doc-rating-row">
-              <span class="star-badge">★ ${doc.rating}</span>
-              <span>(${doc.reviews} reviews)</span>
-            </div>
-            <div class="doc-homecare-badge">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-              Available for Home Visit
-            </div>
-            <div class="doc-actions">
-              <a href="/doctor-details.html?id=${doc.id}" class="profile-btn">View Profile</a>
-              <a href="https://wa.me/966542228111?text=Hi%2C%20I'd%20like%20to%20book%20a%20home%20visit%20with%20${encodeURIComponent(doc.name)}." target="_blank" class="book-btn">Request Home Visit</a>
-            </div>
-          </div>
-        </div>
-      `;
-      const div = document.createElement('div');
-      div.innerHTML = cardHtml;
-      homeCareDoctorsGrid.appendChild(div.firstElementChild);
-    });
-  }
-
-  // FAQ Accordion Toggle Logic
-  const faqItems = document.querySelectorAll('.faq-item');
-  faqItems.forEach(item => {
-    const trigger = item.querySelector('.faq-trigger');
-    const content = item.querySelector('.faq-content');
-    
-    trigger.addEventListener('click', () => {
-      const isActive = item.classList.contains('active');
-      
-      // Close other items
-      faqItems.forEach(otherItem => {
-        otherItem.classList.remove('active');
-        otherItem.querySelector('.faq-content').style.maxHeight = null;
-      });
-      
-      if (!isActive) {
-        item.classList.add('active');
-        content.style.maxHeight = content.scrollHeight + 'px';
-      }
-    });
-  });
-
-  // GSAP Entrance Animations
-  gsap.from(".subpage-hero-inner", {
-    opacity: 0,
-    y: 30,
-    duration: 0.7,
-    ease: "power2.out"
-  });
-  
-  gsap.from(".service-card", {
-    opacity: 0,
-    y: 30,
-    duration: 0.6,
-    stagger: 0.15,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: ".services-grid",
-      start: "top 80%"
-    }
-  });
-
-  gsap.from(".workflow-step", {
-    opacity: 0,
-    y: 20,
-    duration: 0.6,
-    stagger: 0.15,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: ".workflow-grid",
-      start: "top 85%"
-    }
-  });
-});
-</script>
-
 <script src="/assets/language-switcher.js"></script>
+<script src="/assets/mobile-nav.js"></script>
+<script src="/assets/homecare.js"></script>
 </body>
 </html>

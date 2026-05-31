@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/shared.css">
+<link rel="stylesheet" href="/assets/home-mobile.css">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
@@ -603,9 +604,6 @@
       <a href="/telemedicine.html">Telemedicine</a>
       <a href="/home-healthcare.html">Home Healthcare</a>
     </div>
-    <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
     <div class="nav-right">
       <div class="lang-pill" role="group" aria-label="Language switcher">
         <button type="button" class="active" aria-pressed="true">EN</button>
@@ -614,22 +612,313 @@
       <a href="/find-a-doctor.html" class="btn primary">Book Now</a>
     </div>
   </div>
-  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-    <div class="mobile-menu-inner">
-      <div class="mobile-links">
-        <a href="/find-a-doctor.html">Find a Doctor <span>01</span></a>
-        <a href="/specialties.html">Specialties <span>02</span></a>
-        <a href="/programs.html">Programs <span>03</span></a>
-        <a href="/telemedicine.html">Telemedicine <span>04</span></a>
-        <a href="/home-healthcare.html">Home Healthcare <span>05</span></a>
-      </div>
-      <div class="mobile-menu-actions">
-        <a class="mobile-call" href="tel:920022811">Call 920022811</a>
-        <a class="btn primary" href="/find-a-doctor.html">Book an appointment</a>
-      </div>
-    </div>
-  </div>
 </nav>
+
+<!-- ═══════════ MOBILE HOME (≤900px) ═══════════ -->
+<div class="m-home">
+
+  <!-- HERO SLIDER -->
+  <section class="m-hero">
+    <div class="m-hero-track" id="mHeroTrack">
+      <article class="m-slide is-active">
+        <div class="bg" style="background-image:url('/clinic/lobby.jpg')"></div>
+        <div class="veil"></div>
+        <div class="content">
+          <div class="s-eyebrow">Now open · Extended hours</div>
+          <h1>Our team is <em>ready</em> to serve you.</h1>
+          <p>Saturday–Thursday, 8 AM to 10 PM across five branches in Jeddah &amp; Riyadh.</p>
+          <div class="ctas">
+            <a class="pri" href="/find-a-doctor.html">Book a visit <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a>
+            <a class="gho" href="tel:920022811">Call 920022811</a>
+          </div>
+        </div>
+      </article>
+      <article class="m-slide">
+        <div class="bg" style="background-image:url('/clinic/branch-tahlia.webp')"></div>
+        <div class="veil"></div>
+        <div class="content">
+          <div class="s-eyebrow">Find your doctor</div>
+          <h1>The right physician for <em>your question</em>.</h1>
+          <p>180+ specialists across 24 specialties — book a consultation in two minutes.</p>
+          <div class="ctas">
+            <a class="pri" href="/find-a-doctor.html">Find a doctor <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a>
+            <a class="gho" href="/specialties.html">View specialties</a>
+          </div>
+        </div>
+      </article>
+      <article class="m-slide">
+        <div class="bg" style="background-image:url('/clinic/home.webp')"></div>
+        <div class="veil"></div>
+        <div class="content">
+          <div class="s-eyebrow">Home Healthcare</div>
+          <h1>Clinical care, <em>in your home</em>.</h1>
+          <p>Doctor visits, nursing, physiotherapy and follow-up care — wherever you are.</p>
+          <div class="ctas">
+            <a class="pri" href="/home-healthcare.html">Request home care <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a>
+            <a class="gho" href="tel:920022811">Call us</a>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="m-hero-dots" id="mHeroDots">
+      <button class="active" aria-label="Slide 1"></button>
+      <button aria-label="Slide 2"></button>
+      <button aria-label="Slide 3"></button>
+    </div>
+  </section>
+
+  <!-- BOOKING CARD -->
+  <section class="m-booking">
+    <div class="m-book-card">
+      <div class="m-book-head">
+        <div class="t">Book a visit</div>
+        <div class="tag">2 min</div>
+      </div>
+      <a class="m-book-field" href="/find-a-doctor.html">
+        <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-7.5-7-12a7 7 0 1 1 14 0c0 4.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></span>
+        <span><span class="lab">Branch</span><span class="val">Jeddah · Al Mohammadiyah</span></span>
+        <span class="chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></span>
+      </a>
+      <a class="m-book-field" href="/find-a-doctor.html">
+        <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3v12a4 4 0 0 0 8 0"/><circle cx="6" cy="3" r="1.5"/><circle cx="12" cy="3" r="1.5"/></svg></span>
+        <span><span class="lab">Specialty</span><span class="val">Internal Medicine</span></span>
+        <span class="chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></span>
+      </a>
+      <a class="m-book-field" href="/find-a-doctor.html">
+        <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg></span>
+        <span><span class="lab">Doctor</span><span class="val ph">Any available physician</span></span>
+        <span class="chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></span>
+      </a>
+      <a class="m-book-go" href="/find-a-doctor.html">Find appointment
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- SPECIALTIES -->
+  <section class="m-sec m-specs m-no-head m-rev">
+    <div class="m-spec-grid">
+      <a class="m-spec img" href="/specialties.html" style="background-image:url('/clinic/specialties/cardiology.jpg')">
+        <div class="top"><span class="num">01</span><span class="arr">→</span></div>
+        <div class="bot"><h3 class="name">Cardiology</h3><div class="meta">Heart care, diagnostics &amp; prevention</div></div>
+      </a>
+      <a class="m-spec img" href="/specialties.html" style="background-image:url('/clinic/specialties/internal-medicine.jpg')">
+        <div class="top"><span class="num">02</span><span class="arr">→</span></div>
+        <div class="bot"><h3 class="name">Internal Medicine</h3><div class="meta">Whole-body adult primary care</div></div>
+      </a>
+      <a class="m-spec img" href="/specialties.html" style="background-image:url('/clinic/specialties/endocrinology.jpg')">
+        <div class="top"><span class="num">03</span><span class="arr">→</span></div>
+        <div class="bot"><h3 class="name">Endocrinology &amp; Diabetes</h3><div class="meta">Comprehensive metabolic program</div></div>
+      </a>
+      <a class="m-spec img" href="/specialties.html" style="background-image:url('/clinic/specialties/ent.jpg')">
+        <div class="top"><span class="num">04</span><span class="arr">→</span></div>
+        <div class="bot"><h3 class="name">ENT</h3><div class="meta">Hearing, breathing, balance</div></div>
+      </a>
+      <a class="m-spec img" href="/specialties.html" style="background-image:url('/clinic/specialties/family-medicine.jpg')">
+        <div class="top"><span class="num">05</span><span class="arr">→</span></div>
+        <div class="bot"><h3 class="name">Family Medicine</h3><div class="meta">One doctor for the whole family</div></div>
+      </a>
+      <a class="m-spec img" href="/specialties.html" style="background-image:url('/clinic/specialties/ophthalmology.jpg')">
+        <div class="top"><span class="num">06</span><span class="arr">→</span></div>
+        <div class="bot"><h3 class="name">Ophthalmology</h3><div class="meta">Eye care &amp; full surgical suite</div></div>
+      </a>
+      <a class="m-spec img" href="/specialties.html" style="background-image:url('/clinic/specialties/orthopedics.jpg')">
+        <div class="top"><span class="num">07</span><span class="arr">→</span></div>
+        <div class="bot"><h3 class="name">Orthopedics</h3><div class="meta">Bones, joints &amp; mobility</div></div>
+      </a>
+      <a class="m-spec img" href="/specialties.html" style="background-image:url('/clinic/specialties/obgyn.jpg')">
+        <div class="top"><span class="num">08</span><span class="arr">→</span></div>
+        <div class="bot"><h3 class="name">OB &amp; Gynecology</h3><div class="meta">Women's health</div></div>
+      </a>
+      <a class="m-spec img wide" href="/specialties.html" style="background-image:url('/clinic/specialties/view-all.jpg')">
+        <div class="top"><span class="num">+ 16 more</span><span class="arr">→</span></div>
+        <div class="bot"><h3 class="name">View all <em>specialties</em></h3></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- DOCTORS -->
+  <section class="m-sec m-docs m-rev">
+    <div class="m-eyebrow">Find your doctor</div>
+    <h2 class="m-title">The right physician for the question <em>you're carrying</em>.</h2>
+    <div class="m-doc-scroll">
+      <a class="m-doc" href="/find-a-doctor.html">
+        <div class="photo"><img src="/doctors/yosra-turkistani.webp" alt="Dr. Yosra Turkistani" loading="lazy"><span class="yrs">Jeddah</span></div>
+        <div class="body"><h4>Dr. Yosra Turkistani</h4><p>Adult Cardiology Consultant · Al Mohammadiyah</p><div class="avail"><span class="pill"></span> Next available <b>Tomorrow 9:30</b></div></div>
+      </a>
+      <a class="m-doc" href="/find-a-doctor.html">
+        <div class="photo"><img src="/doctors/saud-alzahrani.webp" alt="Dr. Saud Alzahrani" loading="lazy"><span class="yrs">Jeddah</span></div>
+        <div class="body"><h4>Dr. Saud Alzahrani</h4><p>Endocrinology Consultant · Al Safa</p><div class="avail"><span class="pill"></span> Next available <b>Today 4:15</b></div></div>
+      </a>
+      <a class="m-doc" href="/find-a-doctor.html">
+        <div class="photo"><img src="/doctors/walaa-aldabbagh.webp" alt="Dr. Walaa Aldabbagh" loading="lazy"><span class="yrs">Jeddah</span></div>
+        <div class="body"><h4>Dr. Walaa Aldabbagh</h4><p>Internal Medicine &amp; Rheumatology · Al Mohammadiyah</p><div class="avail"><span class="pill"></span> Next available <b>Wed 11:00</b></div></div>
+      </a>
+      <a class="m-doc" href="/find-a-doctor.html">
+        <div class="photo"><img src="/doctors/turki-alahmadi.webp" alt="Dr. Turki Alahmadi" loading="lazy"><span class="yrs">Jeddah</span></div>
+        <div class="body"><h4>Dr. Turki Alahmadi</h4><p>Pediatric Pulmonology Consultant · Al Mohammadiyah</p><div class="avail"><span class="pill"></span> Next available <b>Tomorrow 2:00</b></div></div>
+      </a>
+      <a class="m-doc" href="/find-a-doctor.html">
+        <div class="photo"><img src="/doctors/taha-habibullah.webp" alt="Dr. Taha Habibullah" loading="lazy"><span class="yrs">Jeddah</span></div>
+        <div class="body"><h4>Dr. Taha Habibullah</h4><p>Dermatology &amp; Aesthetics Consultant · Al Mohammadiyah</p><div class="avail"><span class="pill"></span> Next available <b>Today 6:30</b></div></div>
+      </a>
+    </div>
+    <a class="m-doc-search" href="/find-a-doctor.html">
+      Find a doctor
+      <span class="go"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></span>
+    </a>
+  </section>
+
+  <!-- PROGRAMS -->
+  <section class="m-sec m-progs m-rev">
+    <div class="m-eyebrow">Care Programs</div>
+    <h2 class="m-title">Structured paths for the conditions that <em>need them most</em>.</h2>
+    <div class="m-prog-list">
+      <a class="m-prog" href="/programs.html">
+        <img src="/clinic/programs/diabetes.jpg" alt="Diabetes Management" loading="lazy">
+        <div class="top"><span>Program 01</span><span>12 weeks</span></div>
+        <div class="body"><h3>Diabetes Management</h3><span class="more">Learn more →</span></div>
+      </a>
+      <a class="m-prog" href="/programs.html">
+        <img src="/clinic/programs/pregnancy.jpg" alt="Pregnancy Care" loading="lazy">
+        <div class="top"><span>Program 02</span><span>40 weeks</span></div>
+        <div class="body"><h3>Pregnancy Care</h3><span class="more">Learn more →</span></div>
+      </a>
+      <a class="m-prog" href="/programs.html">
+        <img src="/clinic/programs/family-care.jpg" alt="Family Center Care" loading="lazy">
+        <div class="top"><span>Program 03</span><span>Ongoing</span></div>
+        <div class="body"><h3>Family Center Care</h3><span class="more">Learn more →</span></div>
+      </a>
+      <a class="m-prog" href="/programs.html">
+        <img src="/clinic/programs/hearing.jpg" alt="Hearing Aid Program" loading="lazy">
+        <div class="top"><span>Program 04</span><span>Lifelong</span></div>
+        <div class="body"><h3>Hearing Aid Program</h3><span class="more">Learn more →</span></div>
+      </a>
+      <a class="m-prog" href="/programs.html">
+        <img src="/clinic/programs/osteoporosis.jpg" alt="Osteoporosis Program" loading="lazy">
+        <div class="top"><span>Program 05</span><span>26 weeks</span></div>
+        <div class="body"><h3>Osteoporosis Program</h3><span class="more">Learn more →</span></div>
+      </a>
+      <a class="m-prog" href="/programs.html">
+        <img src="/clinic/programs/pediatric-vax.jpg" alt="Pediatric Vaccination" loading="lazy">
+        <div class="top"><span>Program 06</span><span>0–6 years</span></div>
+        <div class="body"><h3>Pediatric Vaccination</h3><span class="more">Learn more →</span></div>
+      </a>
+    </div>
+    <a class="m-link" href="/programs.html">All programs</a>
+  </section>
+
+  <!-- SPLIT -->
+  <section class="m-sec m-split m-rev">
+    <div class="m-eyebrow">Beyond the clinic walls</div>
+    <h2 class="m-title">Care that finds you, <em>wherever you are</em>.</h2>
+    <div class="m-split-cards">
+      <a class="m-split-card dark" href="/telemedicine.html">
+        <div class="lab">Telemedicine</div>
+        <h3>The clinic in<br>your pocket.</h3>
+        <p>Video consultations with the same physicians who'd see you in-clinic — prescriptions and follow-up from home.</p>
+        <span class="cta">Start a video visit →</span>
+        <div class="glyph"><svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="m22 8-6 4 6 4z"/></svg></div>
+      </a>
+      <a class="m-split-card" href="/home-healthcare.html">
+        <div class="lab">Home Healthcare</div>
+        <h3>When the visit<br>comes to you.</h3>
+        <p>Doctor and nurse home visits, physiotherapy, IV therapy, and post-surgical care across Jeddah and Riyadh.</p>
+        <span class="cta">Request home care →</span>
+        <div class="glyph"><svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(0,56,104,.22)" stroke-width="1"><path d="M3 11l9-8 9 8v10a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1z"/></svg></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="m-sec m-cta m-rev">
+    <div class="m-eyebrow">Begin your care</div>
+    <h2 class="m-title">Ready to begin <em>your care journey</em>?</h2>
+    <p class="m-desc">Choose the service that fits your needs today. Book with a specialist, explore our clinical programs, or speak with our team for guidance.</p>
+    <div class="m-cta-actions">
+      <a class="pri" href="/find-a-doctor.html">Book an appointment
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+      </a>
+      <a class="gho" href="/programs.html">Explore programs</a>
+    </div>
+  </section>
+
+  <!-- LOCATIONS -->
+  <section class="m-sec m-locs m-rev">
+    <div class="m-eyebrow">Locations</div>
+    <h2 class="m-title">Five branches. One <em>standard of care</em>.</h2>
+    <div class="branch-map" id="mBranchMap"></div>
+    <div class="m-loc-list" id="mLocList"><!-- rendered by home-mobile.js --></div>
+    <a class="m-link" href="/find-a-doctor.html">All branches &amp; hours</a>
+  </section>
+
+  <!-- STORIES -->
+  <section class="m-sec m-stories m-rev">
+    <div class="m-eyebrow">Patient stories</div>
+    <h2 class="m-title">What it <em>feels</em> like, in our patients' words.</h2>
+    <div class="m-story-big">
+      <blockquote class="qt">The booking was easy, the nurse was courteous, the waiting time was short, and I entered my appointment on time.</blockquote>
+      <div class="who"><div class="av">F</div><div><div class="n">Fatimah A.</div><div class="r">Patient · Jeddah Al Safa</div></div></div>
+    </div>
+    <div class="m-mini-scroll">
+      <div class="m-mini"><div class="stars">★★★★★</div><p>Classy treatment, fast service, spotless cleanliness. May God grant you success.</p><small>Mohammed K. · Riyadh</small></div>
+      <div class="m-mini"><div class="stars">★★★★★</div><p>Dr. Saud explained every step of my diabetes plan. I'm grateful.</p><small>Norah S. · Al Sahafa</small></div>
+      <div class="m-mini"><div class="stars">★★★★★</div><p>The home nurse came on time, professional and warm. Made recovery easier.</p><small>Abdullah M. · Jeddah</small></div>
+    </div>
+  </section>
+
+  <!-- APP -->
+  <section class="m-sec m-appsec m-rev">
+    <div class="m-eyebrow">My Clinic App</div>
+    <h2>Download <em>our app</em>.</h2>
+    <p>A doctor, a clinic, a record — in one place. Book, video-consult, view lab results, and message your care team.</p>
+    <div class="m-app-shot"><img src="/appmock.png" alt="My Clinic mobile app" loading="lazy"></div>
+    <div class="m-stores">
+      <a class="m-store" href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg><span><small>Download on the</small><b>App Store</b></span></a>
+      <a class="m-store" href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M3.6 2.4l11.3 9.6L3.6 21.6c-.4-.2-.6-.6-.6-1V3.4c0-.4.2-.8.6-1zm12.8 8.2l2.9 2.5c.7.6.7 1.6 0 2.2l-2.9 2.5-3.2-2.7 3.2-2.5zm-1.4-1.1L5.4 2.1l9.6 5.6-1.4 1.8zm0 6.2l1.4 1.8-9.6 5.6 8.2-7.4z"/></svg><span><small>Get it on</small><b>Google Play</b></span></a>
+    </div>
+    <div class="m-app-note">Free on iOS &amp; Android · Arabic &amp; English</div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="m-foot">
+    <a href="/index.html"><img class="brand-logo" src="/logo.svg" alt="My Clinic"></a>
+    <div class="lede">Healthcare that moves with you — across the Kingdom.</div>
+    <div class="contact"><b>920 022 811</b><br>hello@myclinic.sa<br>Jeddah · Riyadh, Saudi Arabia</div>
+    <div class="m-foot-cols">
+      <div><h5>Care</h5><ul>
+        <li><a href="/find-a-doctor.html">Find a doctor</a></li>
+        <li><a href="/specialties.html">Specialties</a></li>
+        <li><a href="/programs.html">Programs</a></li>
+        <li><a href="/telemedicine.html">Telemedicine</a></li>
+        <li><a href="/home-healthcare.html">Home care</a></li>
+      </ul></div>
+      <div><h5>Clinic</h5><ul>
+        <li><a href="/index.html">About us</a></li>
+        <li><a href="/find-a-doctor.html">Locations</a></li>
+        <li><a href="/index.html">Careers</a></li>
+        <li><a href="/index.html">Insurance</a></li>
+        <li><a href="/index.html">Patient portal</a></li>
+      </ul></div>
+    </div>
+    <div class="m-foot-b">
+      <div class="soc">
+        <a aria-label="Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a aria-label="X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h3l-7 8 8 12h-6l-5-7-5 7H3l8-10L3 2h6l4 6 5-6z"/></svg></a>
+        <a aria-label="WhatsApp"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24z"/></svg></a>
+      </div>
+      <div class="cp">© 2026 My Clinic · عيادتي. CBAHI accredited.</div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- STICKY BOOK BAR (mobile) -->
+<div class="m-sticky" id="mSticky">
+  <div class="tx"><div class="a">Book an appointment</div><div class="b">Next slot tomorrow, 9:30 AM</div></div>
+  <a href="tel:920022811" class="call" aria-label="Call"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></a>
+  <a href="/find-a-doctor.html" class="bk">Book</a>
+</div>
 
 <!-- hero slider -->
 <header class="hero" id="hero">
@@ -2570,5 +2859,6 @@ docFinderSpecialty.addEventListener("change", renderDocTiles);
 
 <script src="/assets/language-switcher.js"></script>
 <script src="/assets/mobile-nav.js"></script>
+<script src="/assets/home-mobile.js"></script>
 </body>
 </html>

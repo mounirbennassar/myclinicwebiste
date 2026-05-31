@@ -521,6 +521,77 @@
   .sticky-cta .text { font-size: 13.5px; color: rgba(255,255,255,.75); font-weight: 500; }
   .sticky-cta a { font-size: 13.5px; font-weight: 600; padding: 9px 18px; background: #fff; color: var(--navy) !important; border-radius: 999px; white-space: nowrap; transition: background-color 0.2s ease, transform 0.2s ease; }
   .sticky-cta a:hover { background: #e1e8f1; transform: translateY(-0.5px); }
+
+  /* ═══════════════════════════════════════════════════════════
+     MOBILE SPECIALTIES (≤900px) — Claude design alignment
+     Unified header (shared) · 2-col image-background tiles
+     ═══════════════════════════════════════════════════════════ */
+  @media (max-width: 900px) {
+    /* Hero */
+    .subpage-hero { padding: 48px 0 58px; }
+    .subpage-eyebrow { font-size: 10px; letter-spacing: .14em; margin-bottom: 14px; gap: 8px; }
+    .subpage-eyebrow::before, .subpage-eyebrow::after { width: 16px; }
+    .subpage-title { font-size: 40px; }
+    .subpage-desc { font-size: 14.5px; line-height: 1.55; max-width: 360px; }
+
+    /* Filter */
+    .filter-section { margin-top: -26px; margin-bottom: 24px; }
+
+    /* Two-column grid */
+    .specialties-grid { grid-template-columns: 1fr 1fr; gap: 13px; }
+
+    /* Every card → image-background tile with overlaid name */
+    .spec-card {
+      position: relative;
+      aspect-ratio: 1/1.16;
+      border: 0 !important;
+      border-radius: 16px;
+      box-shadow: 0 1px 2px rgba(11,31,61,.06);
+      overflow: hidden;
+    }
+    .spec-card:hover { transform: none; box-shadow: 0 1px 2px rgba(11,31,61,.06); }
+    .spec-card:active { transform: scale(.985); }
+
+    .spec-card-image-wrapper {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      aspect-ratio: auto;
+      border-radius: 16px;
+    }
+    .spec-card:hover img { transform: none; }
+    .spec-card-image-wrapper::after {
+      background: linear-gradient(180deg, rgba(0,29,56,.10) 16%, rgba(0,29,56,.52) 60%, rgba(0,29,56,.9)) !important;
+    }
+
+    /* Body overlaid at the bottom; taps fall through to the full-card link */
+    .spec-card .card-body {
+      position: relative; z-index: 2;
+      margin-top: auto;
+      padding: 14px;
+      background: none;
+      pointer-events: none;
+    }
+    .spec-card .card-body h3 { font-size: 19px; margin: 0; line-height: 1.08; color: #fff !important; }
+    .spec-card .card-body h3 a { color: #fff !important; }
+    .spec-card .card-body p { display: none; }
+    .spec-branches-box { display: none; }
+    .spec-card-actions { display: none; }
+
+    /* Decorative tap affordance, matching the design's arrow chip */
+    .spec-card::after {
+      content: '→';
+      position: absolute; top: 12px; right: 12px; z-index: 3;
+      width: 30px; height: 30px; border-radius: 50%;
+      display: grid; place-items: center;
+      background: rgba(255,255,255,.16); color: #fff;
+      border: 1px solid rgba(255,255,255,.34);
+      font-size: 13px; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+    }
+  }
+  @media (max-width: 380px) {
+    .specialties-grid { gap: 10px; }
+    .spec-card .card-body h3 { font-size: 17px; }
+  }
 </style>
 </head>
 <body>
@@ -677,7 +748,7 @@ const specialtiesData = [
     id: "cardiology",
     name: "Cardiology",
     description: "Advanced cardiovascular diagnostic checks, electrocardiograms (ECG), blood pressure reviews, and chronic heart health management plans.",
-    image: "https://images.unsplash.com/photo-1628348068343-c6a848d2b6dd?auto=format&fit=crop&w=600&q=70",
+    image: "/clinic/specialties/cardiology.jpg",
     branches: ["Jeddah Al Mohammadiyah", "Jeddah Al Safa", "Riyadh Al Sahafa"],
     keywords: "heart chest pain pressure valve echo ecg cardiology cardiac blood pressure cardiologist"
   },
@@ -685,7 +756,7 @@ const specialtiesData = [
     id: "endocrinology",
     name: "Endocrinology",
     description: "Specialized clinical therapy pathways for diabetes mellitus (adult and pediatric), thyroid hormone disorders, and metabolic conditions.",
-    image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=600&q=70",
+    image: "/clinic/specialties/endocrinology.jpg",
     branches: ["Jeddah Al Mohammadiyah", "Jeddah Al Safa", "Jeddah Tahlia", "Riyadh Al Sahafa"],
     keywords: "insulin diabetes glucose endocrine hormone glands thyroid goiter metabolic endocrinologist"
   },
@@ -693,7 +764,7 @@ const specialtiesData = [
     id: "internal-medicine",
     name: "Internal Medicine",
     description: "Expert diagnostics, health checkups, chronic disease management, and preventative screening for all complex adult medical illnesses.",
-    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=70",
+    image: "/clinic/specialties/internal-medicine.jpg",
     branches: ["Jeddah Al Mohammadiyah", "Jeddah Al Safa", "Jeddah Tahlia", "Riyadh Al Sahafa", "Jeddah Obhour"],
     keywords: "internist diagnostic preventative screening checkup physical exam adult health chronic care"
   },
@@ -701,7 +772,7 @@ const specialtiesData = [
     id: "obstetrics-gynecology",
     name: "Obstetrics & Gynecology",
     description: "Empathetic maternity pathway care, prenatal screenings, high-definition fetal ultrasounds, family planning, and women's health reviews.",
-    image: "https://images.unsplash.com/photo-1518152006812-edab29b069ac?auto=format&fit=crop&w=600&q=70",
+    image: "/clinic/specialties/obstetrics-gynecology.jpg",
     branches: ["Jeddah Al Mohammadiyah", "Jeddah Al Safa", "Jeddah Tahlia", "Riyadh Al Sahafa", "Jeddah Obhour"],
     keywords: "pregnancy baby birth maternal ultrasound fetal obgyn gynecology obstetrics newborn"
   },
@@ -709,7 +780,7 @@ const specialtiesData = [
     id: "orthopedic-surgery",
     name: "Orthopedic Surgery",
     description: "Comprehensive care for skeletal fractures, sports joint injuries, arthroscopic surgeries, spine disorders, and skeletal rehabilitation.",
-    image: "https://images.unsplash.com/photo-1582284729022-520556214f49?auto=format&fit=crop&w=600&q=70",
+    image: "/clinic/specialties/orthopedic-surgery.jpg",
     branches: ["Jeddah Al Mohammadiyah", "Jeddah Al Safa", "Riyadh Al Sahafa"],
     keywords: "bones joints spine fracture orthopedic knee reconstruction sport ligament cartilage"
   },
@@ -717,7 +788,7 @@ const specialtiesData = [
     id: "pediatrics",
     name: "Pediatrics",
     description: "Caring child health assessments, childhood growth reviews, Ministry of Health mandatory immunizations, and child healthcare services.",
-    image: "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=600&q=70",
+    image: "/clinic/specialties/pediatrics.jpg",
     branches: ["Jeddah Al Mohammadiyah", "Jeddah Al Safa", "Jeddah Tahlia", "Riyadh Al Sahafa", "Jeddah Obhour"],
     keywords: "children baby pediatrician vaccine immunization growth developmental checks child toddler"
   },
@@ -725,7 +796,7 @@ const specialtiesData = [
     id: "dermatology",
     name: "Dermatology",
     description: "Expert diagnostics for clinical skin pathology, aesthetic skin laser treatments, acne care, and anti-aging dermatology procedures.",
-    image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=600&q=70",
+    image: "/clinic/specialties/dermatology.jpg",
     branches: ["Jeddah Al Mohammadiyah", "Jeddah Al Safa", "Jeddah Tahlia", "Riyadh Al Sahafa", "Jeddah Obhour"],
     keywords: "skin laser hair acne facial dermatology cosmetic filler botox clinic eczema psoriasis"
   },
@@ -733,7 +804,7 @@ const specialtiesData = [
     id: "ophthalmology",
     name: "Ophthalmology",
     description: "Advanced eye diagnostic checks, visual acuity testing, glaucoma treatments, cataract removals, and laser vision corrections.",
-    image: "https://images.unsplash.com/photo-1579684389782-64d84b5e9056?auto=format&fit=crop&w=600&q=70",
+    image: "/clinic/specialties/ophthalmology.jpg",
     branches: ["Jeddah Al Mohammadiyah", "Jeddah Al Safa", "Riyadh Al Sahafa"],
     keywords: "eye vision ophthalmic cataracts retina lasik optics correction spectacle oculist optician"
   },
@@ -741,7 +812,7 @@ const specialtiesData = [
     id: "dentistry",
     name: "Dentistry & Orthodontics",
     description: "Modern dental implants, smile designs, cosmetic alignment, pediatric dentistry, teeth whitening, and preventive family oral hygiene.",
-    image: "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=600&q=70",
+    image: "/clinic/specialties/dentistry.jpg",
     branches: ["Jeddah Al Khalidiyyah Dental Center", "Jeddah Al Mohammadiyah", "Riyadh Al Sahafa"],
     keywords: "dental dentist teeth orthodondics braces implant extraction white root canal dental center"
   },
@@ -749,7 +820,7 @@ const specialtiesData = [
     id: "ent",
     name: "ENT (Ear, Nose & Throat)",
     description: "Comprehensive care for throat pathologies, clinical sinus infections, nasal septoplasty reviews, and custom hearing assessments.",
-    image: "https://images.unsplash.com/photo-1598252577519-74d11cfc6bdf?auto=format&fit=crop&w=600&q=70",
+    image: "/clinic/specialties/ent.jpg",
     branches: ["Jeddah Al Mohammadiyah", "Jeddah Al Safa", "Jeddah Tahlia"],
     keywords: "ear nose throat hearing sinus pathology larynx audiometry tonsil septum otolaryngology"
   },
@@ -757,7 +828,7 @@ const specialtiesData = [
     id: "rheumatology",
     name: "Rheumatology",
     description: "Expert diagnostic screening and medical management for osteoporotic bone loss, gout, rheumatoid arthritis, and autoimmune diseases.",
-    image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=600&q=70",
+    image: "/clinic/specialties/rheumatology.jpg",
     branches: ["Jeddah Al Mohammadiyah", "Jeddah Al Safa", "Riyadh Al Sahafa"],
     keywords: "arthritis bones joints osteoporosis rheumatology autoimmune joint pain lupus gout"
   }
@@ -998,7 +1069,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const cardHtml = `
         <div class="spec-card" data-id="${item.id}">
           <a href="/specialty-details.html?id=${item.id}" class="spec-card-image-wrapper">
-            <img src="${item.image}" alt="${item.name}" onerror="this.style.display='none'">
+            <img src="${item.image}?v=3" alt="${item.name}" onerror="this.style.display='none'">
           </a>
           <div class="card-body">
             <h3><a href="/specialty-details.html?id=${item.id}" style="color: inherit; text-decoration: none;">${specName(item)}</a></h3>
@@ -1021,15 +1092,20 @@ document.addEventListener('DOMContentLoaded', () => {
       specialtiesGrid.appendChild(div.firstElementChild);
     });
 
-    // Animate matching cards in
-    gsap.from(".spec-card", {
-      opacity: 0,
-      y: 20,
-      scale: 0.98,
-      duration: 0.45,
-      stagger: 0.05,
-      ease: "power2.out"
-    });
+    // Subtle entrance: animate ONLY a slide (never opacity). Cards therefore
+    // stay fully visible even if the tween stalls — the previous opacity
+    // animation left below-the-fold cards stranded faded/white.
+    gsap.fromTo(".spec-card",
+      { y: 16 },
+      {
+        y: 0,
+        duration: 0.4,
+        stagger: 0.04,
+        ease: "power2.out",
+        lazy: false,
+        clearProps: "transform"
+      }
+    );
   }
 
   // Bind Search Input
